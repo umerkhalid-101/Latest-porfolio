@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect, useState } from 'react';
 
-const words = ["DESIGNER", "STRATEGIST", "ENGINEER", "CREATOR", "UMER"];
+const words = ["CREATIVE", "STRATEGIST", "DESIGNER", "CRAFTER", "UMER"];
 
 export function Loader({ onComplete }: { onComplete: () => void, key?: string | number }) {
   const [index, setIndex] = useState(0);
