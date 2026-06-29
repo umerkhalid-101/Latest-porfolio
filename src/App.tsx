@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
@@ -24,6 +24,44 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [activeCaseStudy, setActiveCaseStudy] = useState<string | null>(null);
 
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const path = window.location.pathname;
+      const hash = window.location.hash;
+      if (
+        path === '/salams-casestudy' || 
+        path === '/salams-casestudy/' ||
+        hash === '#/salams-casestudy' || 
+        hash === '#salams-casestudy'
+      ) {
+        setActiveCaseStudy('salams');
+      } else {
+        setActiveCaseStudy(null);
+      }
+    };
+
+    // Check immediately
+    handleLocationChange();
+
+    // Listen to history state changes
+    window.addEventListener('popstate', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+    };
+  }, []);
+
+  const openCaseStudy = (slug: string) => {
+    if (slug === 'salams') {
+      window.history.pushState(null, '', '/salams-casestudy');
+      setActiveCaseStudy('salams');
+    }
+  };
+
+  const closeCaseStudy = () => {
+    window.history.pushState(null, '', '/');
+    setActiveCaseStudy(null);
+  };
+
   return (
     <div className="relative min-h-screen selection:bg-[#FF6B35] selection:text-white">
       <AnimatePresence mode="wait">
@@ -43,7 +81,7 @@ export default function App() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
-                <SalamsCaseStudy onClose={() => setActiveCaseStudy(null)} />
+                <SalamsCaseStudy onClose={closeCaseStudy} />
               </motion.div>
             ) : (
               <motion.div
@@ -57,7 +95,7 @@ export default function App() {
                 <Hero />
                 <About />
                 <Process />
-                <FeaturedWork onOpenCaseStudy={(slug) => setActiveCaseStudy(slug)} />
+                <FeaturedWork onOpenCaseStudy={openCaseStudy} />
                 <TestimonialsSection />
                 <ExpertSolutions />
                 <SkillsMosaic />

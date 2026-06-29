@@ -37,20 +37,57 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
     <div className="bg-[#FAF8F5] text-[#121115] min-h-screen relative font-sans selection:bg-[#FF4D8D] selection:text-white">
       
       {/* Fixed Navigation Header */}
-      <div className="fixed top-0 left-0 right-0 z-50 px-6 py-4 bg-[#FAF8F5]/80 backdrop-blur-xl border-b border-[#121115]/5 flex justify-between items-center">
-        <button 
-          onClick={onClose}
-          className="flex items-center gap-2 text-[#121115]/70 hover:text-[#121115] transition-colors group cursor-pointer"
-          id="salams-back-btn"
-        >
-          <ArrowLeft size={18} className="transform group-hover:-translate-x-1 transition-transform" />
-          <span className="text-xs font-bold tracking-widest uppercase">BACK TO PORTFOLIO</span>
-        </button>
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#FF4D8D]" />
-          <span className="text-[10px] font-bold tracking-widest text-[#FF4D8D] uppercase">CASE STUDY</span>
+      <motion.header 
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 w-full z-50 px-4 md:px-10 bg-[#FAF8F5]/90 backdrop-blur-xl border-b border-[#121115]/5 py-4 flex items-center"
+      >
+        <div className="flex items-center w-full">
+          {/* Logo */}
+          <div className="flex items-center gap-4 min-w-max">
+            <button 
+              onClick={onClose}
+              className="font-display text-3xl tracking-tighter flex items-center gap-1 text-[#121115] hover:text-[#FF4D8D] transition-colors cursor-pointer"
+            >
+              <span>UMER</span>
+            </button>
+          </div>
+          
+          <div className="flex-1 flex items-center">
+            <div className="h-[1px] bg-[#121115]/20 w-full mx-4" />
+            
+            <nav className="hidden lg:flex items-center gap-0 flex-1">
+              {[
+                { label: 'CONTEXT', href: '#salams-context' },
+                { label: 'SOLUTION', href: '#salams-gap' },
+                { label: 'RESEARCH', href: '#salams-interviews' },
+                { label: 'ETHOS', href: '#salams-ethos' },
+              ].map((item, index) => (
+                <a key={index} href={item.href} className="flex flex-1 items-center gap-4 group cursor-pointer h-10 no-underline">
+                  <div className="w-1.5 h-1.5 rounded-full border-[1px] border-[#121115] group-hover:bg-[#FF4D8D] group-hover:border-[#FF4D8D] transition-colors" />
+                  <span className="text-[10px] font-bold tracking-[0.25em] text-[#121115]/80 group-hover:text-[#FF4D8D] transition-colors whitespace-nowrap">
+                    {item.label}
+                  </span>
+                  <div className="h-[1px] bg-[#121115]/20 flex-1" />
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          {/* Back Action */}
+          <div className="flex items-center pl-4 md:pl-12">
+            <button 
+              onClick={onClose}
+              className="flex items-center gap-2 text-[#121115]/70 hover:text-[#FF4D8D] transition-colors group cursor-pointer"
+              id="salams-back-btn"
+            >
+              <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform" />
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase">BACK</span>
+            </button>
+          </div>
         </div>
-      </div>
+      </motion.header>
 
       {/* 1. HERO SECTION (Vibrant Pink, Black Text) */}
       <section className="bg-[#FF4D8D] text-[#121115] pt-32 pb-24 md:pt-40 md:pb-32 px-6 relative overflow-hidden" id="salams-hero">
