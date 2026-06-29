@@ -40,7 +40,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
       <meta name="description" content="Sole designer for 5 years on Salams, a Muslim matchmaking app acquired by Match Group. Redesigned onboarding, trust, retention and monetization." />
       <meta property="og:title" content="Salams Case Study — Muhammad Umer" />
       <meta property="og:description" content="Sole designer for 5 years on Salams, a Muslim matchmaking app acquired by Match Group. Redesigned onboarding, trust, retention and monetization." />
+      <meta property="og:image" content="https://drive.google.com/thumbnail?id=1FD0Z0ZZBRTWTjdeqpWr2X1UXgNhXUCjb&sz=w1200" />
       <meta property="og:url" content="https://www.umerkhalid.co/salams-casestudy" />
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:image" content="https://drive.google.com/thumbnail?id=1FD0Z0ZZBRTWTjdeqpWr2X1UXgNhXUCjb&sz=w1200" />
       <link rel="canonical" href="https://www.umerkhalid.co/salams-casestudy" />
       
       {/* Fixed Navigation Header */}

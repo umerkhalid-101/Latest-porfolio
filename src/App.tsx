@@ -58,7 +58,7 @@ export default function App() {
   // Dynamically update document head metadata for Google Search Console & SEO
   useEffect(() => {
     if (activeCaseStudy === 'salams') {
-      document.title = "Salams Case Study — Muhammad Umer, Product Designer";
+      document.title = "Salams Case Study — Muhammad Umar, Product Designer";
       
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
@@ -67,15 +67,25 @@ export default function App() {
       
       const ogTitle = document.querySelector('meta[property="og:title"]');
       if (ogTitle) {
-        ogTitle.setAttribute('content', "Salams Case Study — Muhammad Umer, Product Designer");
+        ogTitle.setAttribute('content', "Salams Case Study — Muhammad Umar, Product Designer");
       }
 
       const ogDesc = document.querySelector('meta[property="og:description"]');
       if (ogDesc) {
         ogDesc.setAttribute('content', "How I redesigned Salams, a Muslim matchmaking app, across onboarding, trust, retention and monetization. Acquired by Match Group.");
       }
+
+      const ogImage = document.querySelector('meta[property="og:image"]');
+      if (ogImage) {
+        ogImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1FD0Z0ZZBRTWTjdeqpWr2X1UXgNhXUCjb&sz=w1200");
+      }
+
+      const twitterImage = document.querySelector('meta[property="twitter:image"]');
+      if (twitterImage) {
+        twitterImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1FD0Z0ZZBRTWTjdeqpWr2X1UXgNhXUCjb&sz=w1200");
+      }
     } else {
-      document.title = "Umer Khalid | Product Designer";
+      document.title = "Umar Khalid | Product Designer";
       
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
@@ -84,12 +94,22 @@ export default function App() {
       
       const ogTitle = document.querySelector('meta[property="og:title"]');
       if (ogTitle) {
-        ogTitle.setAttribute('content', "Umer Khalid | Product Designer");
+        ogTitle.setAttribute('content', "Umar Khalid | Product Designer");
       }
 
       const ogDesc = document.querySelector('meta[property="og:description"]');
       if (ogDesc) {
-        ogDesc.setAttribute('content', "Product Designer who's shipped across SaaS, fintech, and consumer apps for 7+ years.");
+        ogDesc.setAttribute('content', "Product Designer who shipped across SaaS, fintech, and consumer apps for 7+ years.");
+      }
+
+      const ogImage = document.querySelector('meta[property="og:image"]');
+      if (ogImage) {
+        ogImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1FD0Z0ZZBRTWTjdeqpWr2X1UXgNhXUCjb&sz=w1200");
+      }
+
+      const twitterImage = document.querySelector('meta[property="twitter:image"]');
+      if (twitterImage) {
+        twitterImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1FD0Z0ZZBRTWTjdeqpWr2X1UXgNhXUCjb&sz=w1200");
       }
     }
   }, [activeCaseStudy]);
