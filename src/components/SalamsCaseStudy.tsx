@@ -40,10 +40,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
       <meta name="description" content="I designed and scaled Salams, a Muslim matchmaking app, as the sole product designer for 5 years—directly leading to its acquisition by Match Group." />
       <meta property="og:title" content="Salams Case Study — Designed by Umer" />
       <meta property="og:description" content="As the sole product designer for 5 years, I designed and scaled Salams from the ground up, leading to its acquisition by Match Group in 2023. Read the complete end-to-end design case study." />
-      <meta property="og:image" content="https://drive.google.com/thumbnail?id=1rEHrOHd-yhkUhr2qt3Lmwy0a3MS9NV5m&sz=w1200" />
+      <meta property="og:image" content="https://drive.google.com/thumbnail?id=1POHWBzcAJTVXUKs_B1HFJmbrn8EbJ8p1&sz=w1200" />
       <meta property="og:url" content="https://www.umerkhalid.co/salams-casestudy" />
       <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:image" content="https://drive.google.com/thumbnail?id=1rEHrOHd-yhkUhr2qt3Lmwy0a3MS9NV5m&sz=w1200" />
+      <meta property="twitter:image" content="https://drive.google.com/thumbnail?id=1POHWBzcAJTVXUKs_B1HFJmbrn8EbJ8p1&sz=w1200" />
       <link rel="canonical" href="https://www.umerkhalid.co/salams-casestudy" />
       
       {/* Fixed Navigation Header */}
@@ -99,8 +99,8 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
         </div>
       </motion.header>
 
-      {/* 1. HERO SECTION (Vibrant Pink, Black Text) */}
-      <section className="bg-[#FF4D8D] text-[#121115] pt-32 pb-24 md:pt-40 md:pb-32 px-6 relative overflow-hidden" id="salams-hero">
+      {/* 1. HERO SECTION (Vibrant Pink, White Text) */}
+      <section className="bg-[#FF4D8D] text-white pt-32 pb-24 md:pt-40 md:pb-32 px-6 relative overflow-hidden" id="salams-hero">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
@@ -112,10 +112,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               className="lg:col-span-7 space-y-8"
             >
               <div className="space-y-4">
-                <h1 className="text-6xl md:text-[110px] leading-none tracking-tight font-serif font-black text-[#121115]" id="salams-title">
+                <h1 className="text-6xl md:text-[110px] leading-none tracking-tight font-serif font-black text-white" id="salams-title">
                   Salams.
                 </h1>
-                <p className="text-xl md:text-[26px] text-[#121115]/90 font-medium tracking-tight leading-relaxed max-w-2xl">
+                <p className="text-xl md:text-[26px] text-white/95 font-medium tracking-tight leading-relaxed max-w-2xl">
                   Designing a marriage-focused matchmaking app from the ground up, across onboarding, trust, retention, and monetization, until Match Group came calling.
                 </p>
               </div>
@@ -124,19 +124,19 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               <div className="border border-white/30 rounded-2xl grid grid-cols-2 md:grid-cols-4 overflow-hidden mt-8 max-w-3xl">
                 <div className="p-5 md:p-6 border-r border-b md:border-b-0 border-white/20">
                   <p className="text-white/70 text-[10px] md:text-xs font-bold uppercase tracking-widest">Role</p>
-                  <p className="text-sm md:text-lg font-black uppercase mt-1.5 text-[#121115]">UX Designer</p>
+                  <p className="text-sm md:text-lg font-black uppercase mt-1.5 text-white">UX Designer</p>
                 </div>
                 <div className="p-5 md:p-6 border-b md:border-b-0 md:border-r border-white/20">
                   <p className="text-white/70 text-[10px] md:text-xs font-bold uppercase tracking-widest">Platform</p>
-                  <p className="text-sm md:text-lg font-black uppercase mt-1.5 text-[#121115]">iOS & Android</p>
+                  <p className="text-sm md:text-lg font-black uppercase mt-1.5 text-white">iOS & Android</p>
                 </div>
                 <div className="p-5 md:p-6 border-r border-white/20">
                   <p className="text-white/70 text-[10px] md:text-xs font-bold uppercase tracking-widest">Years</p>
-                  <p className="text-sm md:text-lg font-black uppercase mt-1.5 text-[#121115]">2018–2023</p>
+                  <p className="text-sm md:text-lg font-black uppercase mt-1.5 text-white">2018–2023</p>
                 </div>
                 <div className="p-5 md:p-6">
                   <p className="text-white/70 text-[10px] md:text-xs font-bold uppercase tracking-widest">Outcome</p>
-                  <p className="text-sm md:text-lg font-black uppercase mt-1.5 text-[#121115] flex items-center gap-1">
+                  <p className="text-sm md:text-lg font-black uppercase mt-1.5 text-white flex items-center gap-1">
                      Acquired <span className="font-sans text-sm md:text-xl leading-none">↗</span>
                   </p>
                 </div>
@@ -151,7 +151,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               className="lg:col-span-5 flex justify-center items-center"
             >
               <img 
-                src="https://drive.google.com/thumbnail?id=1XDQGUMSp2hRDLQlCqnv8PK2a8QPOBzBJ&sz=w1000" 
+                src="https://drive.google.com/thumbnail?id=1YLF5FBoPRUhiIj16V6NQn7h3mUZSbLyA&sz=w1200" 
                 alt="Salams Mobile Screens" 
                 referrerPolicy="no-referrer"
                 className="w-full h-auto object-contain max-h-[480px] drop-shadow-2xl select-none"

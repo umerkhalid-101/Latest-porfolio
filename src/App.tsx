@@ -32,7 +32,7 @@ export default function App() {
       const queryParam = params.get('p') || params.get('case-study') || params.get('project');
 
       if (
-        path === '/salams-casestudy' || 
+        path === '/salams-casestudy' ||
         path === '/salams-casestudy/' ||
         hash === '#/salams-casestudy' || 
         hash === '#salams-casestudy' ||
@@ -77,12 +77,12 @@ export default function App() {
 
       const ogImage = document.querySelector('meta[property="og:image"]');
       if (ogImage) {
-        ogImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1rEHrOHd-yhkUhr2qt3Lmwy0a3MS9NV5m&sz=w1200");
+        ogImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1POHWBzcAJTVXUKs_B1HFJmbrn8EbJ8p1&sz=w1200");
       }
 
       const twitterImage = document.querySelector('meta[property="twitter:image"]');
       if (twitterImage) {
-        twitterImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1rEHrOHd-yhkUhr2qt3Lmwy0a3MS9NV5m&sz=w1200");
+        twitterImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1POHWBzcAJTVXUKs_B1HFJmbrn8EbJ8p1&sz=w1200");
       }
     } else {
       document.title = "Umer Khalid | Product Designer";
