@@ -58,7 +58,7 @@ export default function App() {
   // Dynamically update document head metadata for Google Search Console & SEO
   useEffect(() => {
     if (activeCaseStudy === 'salams') {
-      document.title = "Salams Case Study — Muhammad Umar, Product Designer";
+      document.title = "Salams Case Study — Muhammad Umer, Product Designer";
       
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
@@ -67,7 +67,7 @@ export default function App() {
       
       const ogTitle = document.querySelector('meta[property="og:title"]');
       if (ogTitle) {
-        ogTitle.setAttribute('content', "Salams Case Study — Muhammad Umar, Product Designer");
+        ogTitle.setAttribute('content', "Salams Case Study — Muhammad Umer, Product Designer");
       }
 
       const ogDesc = document.querySelector('meta[property="og:description"]');
@@ -85,7 +85,7 @@ export default function App() {
         twitterImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1FD0Z0ZZBRTWTjdeqpWr2X1UXgNhXUCjb&sz=w1200");
       }
     } else {
-      document.title = "Umar Khalid | Product Designer";
+      document.title = "Umer Khalid | Product Designer";
       
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
@@ -94,7 +94,7 @@ export default function App() {
       
       const ogTitle = document.querySelector('meta[property="og:title"]');
       if (ogTitle) {
-        ogTitle.setAttribute('content', "Umar Khalid | Product Designer");
+        ogTitle.setAttribute('content', "Umer Khalid | Product Designer");
       }
 
       const ogDesc = document.querySelector('meta[property="og:description"]');
