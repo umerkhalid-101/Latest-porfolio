@@ -35,6 +35,13 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
 
   return (
     <div className="bg-[#FAF8F5] text-[#121115] min-h-screen relative font-sans selection:bg-[#FF4D8D] selection:text-white">
+      {/* Native React 19 document metadata hoisting */}
+      <title>Salams Case Study — Muhammad Umer, Product Designer</title>
+      <meta name="description" content="Sole designer for 5 years on Salams, a Muslim matchmaking app acquired by Match Group. Redesigned onboarding, trust, retention and monetization." />
+      <meta property="og:title" content="Salams Case Study — Muhammad Umer" />
+      <meta property="og:description" content="Sole designer for 5 years on Salams, a Muslim matchmaking app acquired by Match Group. Redesigned onboarding, trust, retention and monetization." />
+      <meta property="og:url" content="https://www.umerkhalid.co/salams-casestudy" />
+      <link rel="canonical" href="https://www.umerkhalid.co/salams-casestudy" />
       
       {/* Fixed Navigation Header */}
       <motion.header 

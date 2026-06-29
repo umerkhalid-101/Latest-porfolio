@@ -55,6 +55,45 @@ export default function App() {
     };
   }, []);
 
+  // Dynamically update document head metadata for Google Search Console & SEO
+  useEffect(() => {
+    if (activeCaseStudy === 'salams') {
+      document.title = "Salams Case Study — Muhammad Umer, Product Designer";
+      
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', "How I redesigned Salams, a Muslim matchmaking app, across onboarding, trust, retention and monetization. Acquired by Match Group.");
+      }
+      
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) {
+        ogTitle.setAttribute('content', "Salams Case Study — Muhammad Umer, Product Designer");
+      }
+
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) {
+        ogDesc.setAttribute('content', "How I redesigned Salams, a Muslim matchmaking app, across onboarding, trust, retention and monetization. Acquired by Match Group.");
+      }
+    } else {
+      document.title = "Umer Khalid | Product Designer";
+      
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', "Product Designer who shipped across SaaS, fintech, and consumer apps for 7+ years. Comfortable owning the full design process from discovery and research through to high-fidelity delivery and engineering handoff.");
+      }
+      
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) {
+        ogTitle.setAttribute('content', "Umer Khalid | Product Designer");
+      }
+
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) {
+        ogDesc.setAttribute('content', "Product Designer who's shipped across SaaS, fintech, and consumer apps for 7+ years.");
+      }
+    }
+  }, [activeCaseStudy]);
+
   const openCaseStudy = (slug: string) => {
     if (slug === 'salams') {
       window.history.pushState(null, '', '/salams-casestudy');
