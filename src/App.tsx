@@ -104,12 +104,12 @@ export default function App() {
 
       const ogImage = document.querySelector('meta[property="og:image"]');
       if (ogImage) {
-        ogImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1rEHrOHd-yhkUhr2qt3Lmwy0a3MS9NV5m&sz=w1200");
+        ogImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1FD0Z0ZZBRTWTjdeqpWr2X1UXgNhXUCjb&sz=w1200");
       }
 
       const twitterImage = document.querySelector('meta[property="twitter:image"]');
       if (twitterImage) {
-        twitterImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1rEHrOHd-yhkUhr2qt3Lmwy0a3MS9NV5m&sz=w1200");
+        twitterImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1FD0Z0ZZBRTWTjdeqpWr2X1UXgNhXUCjb&sz=w1200");
       }
     }
   }, [activeCaseStudy]);
