@@ -1,5 +1,8 @@
 {
+  "cleanUrls": true,
   "rewrites": [
+    { "source": "/salams-casestudy", "destination": "/salams-casestudy.html" },
+    { "source": "/salams-casestudy/", "destination": "/salams-casestudy.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

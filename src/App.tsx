@@ -58,7 +58,7 @@ export default function App() {
   // Dynamically update document head metadata for Google Search Console & SEO
   useEffect(() => {
     if (activeCaseStudy === 'salams') {
-      document.title = "Salams Case Study — Designed by Umer Khalid";
+      document.title = "Salams Case Study — Designed by Umer";
       
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
@@ -67,7 +67,7 @@ export default function App() {
       
       const ogTitle = document.querySelector('meta[property="og:title"]');
       if (ogTitle) {
-        ogTitle.setAttribute('content', "Salams Case Study - Designed by Umer Khalid");
+        ogTitle.setAttribute('content', "Salams Case Study — Designed by Umer");
       }
 
       const ogDesc = document.querySelector('meta[property="og:description"]');
