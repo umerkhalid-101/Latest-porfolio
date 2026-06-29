@@ -73,7 +73,7 @@ export function Footer() {
         {/* Copyright */}
         <div className="flex justify-end pt-10 border-t border-white/5">
           <p className="text-[10px] md:text-xs tracking-widest text-white/40 uppercase">
-            © 2026 Umert. ALL RIGHTS RESERVED.
+            © 2026 UMER. ALL RIGHTS RESERVED.
           </p>
         </div>
       </div>

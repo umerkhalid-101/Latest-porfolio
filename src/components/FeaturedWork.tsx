@@ -3,21 +3,21 @@ import { useRef } from 'react';
 
 const projects = [
   {
-    id: 1,
-    title: "Unita",
-    description: "B2B Marketplace for UAE/GCC Description: Sole designer on a pre-launch B2B platform. Built the design system from scratch with full token coverage and a dark teal and burnt orange visual language. Shipped 10+ modules across 30 to 50 screens.",
-    image: "https://drive.google.com/thumbnail?id=1nouxdrvItr_1p2vvVUTMSaWma_6SM_5R&sz=w1000",
-    color: "bg-[#0A2E2E]", // Dark Teal mood for Unita
-    accentColors: ["bg-[#FF6B35]", "bg-orange-600", "bg-teal-600"],
-    textColor: "text-white"
-  },
-  {
     id: 2,
     title: "Salams",
     description: "Consumer App Redesign (Match Group) Description: Led the full redesign covering home, explore, matches, chat, events, and a deep profile editing system. Designed onboarding across dozens of screens and the identity attribute system specific to Muslim dating.",
     image: "https://drive.google.com/thumbnail?id=1XDQGUMSp2hRDLQlCqnv8PK2a8QPOBzBJ&sz=w1000",
     color: "bg-[#FF4D8D]", // Iconic Salams Pink/Red
     accentColors: ["bg-white/20", "bg-white/40", "bg-white/60"],
+    textColor: "text-white"
+  },
+  {
+    id: 1,
+    title: "Unita",
+    description: "B2B Marketplace for UAE/GCC Description: Sole designer on a pre-launch B2B platform. Built the design system from scratch with full token coverage and a dark teal and burnt orange visual language. Shipped 10+ modules across 30 to 50 screens.",
+    image: "https://drive.google.com/thumbnail?id=1nouxdrvItr_1p2vvVUTMSaWma_6SM_5R&sz=w1000",
+    color: "bg-[#0A2E2E]", // Dark Teal mood for Unita
+    accentColors: ["bg-[#FF6B35]", "bg-orange-600", "bg-teal-600"],
     textColor: "text-white"
   },
   {
@@ -40,7 +40,11 @@ const projects = [
   }
 ];
 
-export function FeaturedWork() {
+interface FeaturedWorkProps {
+  onOpenCaseStudy?: (slug: string) => void;
+}
+
+export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
   return (
     <section id="work" className="relative z-30 bg-white pt-24 pb-48 px-6 md:px-20 overflow-hidden">
       
@@ -59,7 +63,14 @@ export function FeaturedWork() {
       <div className="max-w-[1200px] mx-auto flex flex-col gap-32 md:gap-48">
         {projects.map((project) => (
           <div key={project.id}>
-            <WorkCard project={project} />
+            <WorkCard 
+              project={project} 
+              onClick={() => {
+                if (project.title.toLowerCase() === 'salams') {
+                  onOpenCaseStudy?.('salams');
+                }
+              }} 
+            />
           </div>
         ))}
       </div>
@@ -77,8 +88,9 @@ interface Project {
   textColor: string;
 }
 
-function WorkCard({ project }: { project: Project }) {
+function WorkCard({ project, onClick }: { project: Project; onClick?: () => void }) {
   const cardRef = useRef(null);
+  const isSalams = project.title.toLowerCase() === 'salams';
   
   // Reveal on scroll animation
   const { scrollYProgress } = useScroll({
@@ -98,7 +110,8 @@ function WorkCard({ project }: { project: Project }) {
     <motion.div 
       ref={cardRef}
       style={{ opacity, y }}
-      className={`group relative w-full min-h-[550px] md:h-[700px] ${project.color} rounded-[30px] md:rounded-[60px] overflow-hidden flex flex-col md:flex-row shadow-2xl cursor-pointer py-12 md:py-0`}
+      onClick={isSalams ? onClick : undefined}
+      className={`group relative w-full min-h-[550px] md:h-[700px] ${project.color} rounded-[30px] md:rounded-[60px] overflow-hidden flex flex-col md:flex-row shadow-2xl ${isSalams ? 'cursor-pointer' : 'cursor-default'} py-12 md:py-0`}
     >
       {/* Layout Grid */}
       <div className="flex flex-col md:flex-row w-full h-full p-8 md:p-20 relative z-10">
@@ -112,15 +125,17 @@ function WorkCard({ project }: { project: Project }) {
             {project.description}
           </p>
 
-          <div className={`flex items-center gap-4 md:gap-6 px-6 md:px-10 py-3 md:py-5 rounded-full border-2 ${project.textColor === 'text-black' ? 'border-black' : 'border-white'} w-fit group/btn hover:bg-black transition-all duration-300`}>
-             <div className={`w-8 md:w-10 h-[2px] ${project.textColor === 'text-black' ? 'bg-black' : 'bg-white'} group-hover/btn:bg-white transition-colors`} />
-             <span className={`font-display text-base md:text-xl uppercase tracking-tight ${project.textColor === 'text-black' ? 'text-black' : 'text-white'} group-hover/btn:text-white transition-colors`}>Learn More</span>
+          <div className={`flex items-center gap-4 md:gap-6 px-6 md:px-10 py-3 md:py-5 rounded-full border-2 ${project.textColor === 'text-black' ? 'border-black' : 'border-white'} w-fit ${isSalams ? 'group/btn hover:bg-black transition-all duration-300' : 'opacity-60'}`}>
+             {isSalams && <div className={`w-8 md:w-10 h-[2px] ${project.textColor === 'text-black' ? 'bg-black' : 'bg-white'} group-hover/btn:bg-white transition-colors`} />}
+             <span className={`font-display text-base md:text-xl uppercase tracking-tight ${project.textColor === 'text-black' ? 'text-black' : 'text-white'} ${isSalams ? 'group-hover/btn:text-white' : ''} transition-colors`}>
+               {isSalams ? "View Case Study" : "Coming Soon"}
+             </span>
           </div>
         </div>
 
         {/* Visual Side */}
         <div className="w-full md:w-1/2 flex items-center justify-center md:justify-end mt-12 md:mt-0 relative">
-          <div className="relative w-full md:w-[130%] transform group-hover:scale-105 transition-transform duration-700 ease-out translate-x-0 md:translate-x-12">
+          <div className={`relative w-full md:w-[130%] transform ${isSalams ? 'group-hover:scale-105' : ''} transition-transform duration-700 ease-out translate-x-0 md:translate-x-12`}>
             <img 
               src={project.image} 
               alt={project.title}
@@ -140,7 +155,7 @@ function WorkCard({ project }: { project: Project }) {
       </div>
 
       {/* Hover Overlay Gradient */}
-      <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <div className={`absolute inset-0 bg-black/5 opacity-0 ${isSalams ? 'group-hover:opacity-100' : ''} transition-opacity duration-500 pointer-events-none`} />
     </motion.div>
   );
 }
