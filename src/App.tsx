@@ -28,11 +28,16 @@ export default function App() {
     const handleLocationChange = () => {
       const path = window.location.pathname;
       const hash = window.location.hash;
+      const params = new URLSearchParams(window.location.search);
+      const queryParam = params.get('p') || params.get('case-study') || params.get('project');
+
       if (
         path === '/salams-casestudy' || 
         path === '/salams-casestudy/' ||
         hash === '#/salams-casestudy' || 
-        hash === '#salams-casestudy'
+        hash === '#salams-casestudy' ||
+        queryParam === 'salams' ||
+        queryParam === 'salams-casestudy'
       ) {
         setActiveCaseStudy('salams');
       } else {
