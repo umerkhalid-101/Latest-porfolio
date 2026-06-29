@@ -36,14 +36,14 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
   return (
     <div className="bg-[#FAF8F5] text-[#121115] min-h-screen relative font-sans selection:bg-[#FF4D8D] selection:text-white">
       {/* Native React 19 document metadata hoisting */}
-      <title>Salams Case Study — Muhammad Umer, Product Designer</title>
-      <meta name="description" content="Sole designer for 5 years on Salams, a Muslim matchmaking app acquired by Match Group. Redesigned onboarding, trust, retention and monetization." />
-      <meta property="og:title" content="Salams Case Study — Muhammad Umer" />
-      <meta property="og:description" content="Sole designer for 5 years on Salams, a Muslim matchmaking app acquired by Match Group. Redesigned onboarding, trust, retention and monetization." />
-      <meta property="og:image" content="https://drive.google.com/thumbnail?id=1FD0Z0ZZBRTWTjdeqpWr2X1UXgNhXUCjb&sz=w1200" />
+      <title>Salams Case Study — Designed by Umer</title>
+      <meta name="description" content="I designed and scaled Salams, a Muslim matchmaking app, as the sole product designer for 5 years—directly leading to its acquisition by Match Group." />
+      <meta property="og:title" content="Salams Case Study — Designed by Umer" />
+      <meta property="og:description" content="As the sole product designer for 5 years, I designed and scaled Salams from the ground up, leading to its acquisition by Match Group in 2023. Read the complete end-to-end design case study." />
+      <meta property="og:image" content="https://drive.google.com/thumbnail?id=1rEHrOHd-yhkUhr2qt3Lmwy0a3MS9NV5m&sz=w1200" />
       <meta property="og:url" content="https://www.umerkhalid.co/salams-casestudy" />
       <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:image" content="https://drive.google.com/thumbnail?id=1FD0Z0ZZBRTWTjdeqpWr2X1UXgNhXUCjb&sz=w1200" />
+      <meta property="twitter:image" content="https://drive.google.com/thumbnail?id=1rEHrOHd-yhkUhr2qt3Lmwy0a3MS9NV5m&sz=w1200" />
       <link rel="canonical" href="https://www.umerkhalid.co/salams-casestudy" />
       
       {/* Fixed Navigation Header */}

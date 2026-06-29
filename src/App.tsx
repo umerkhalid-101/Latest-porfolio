@@ -58,31 +58,31 @@ export default function App() {
   // Dynamically update document head metadata for Google Search Console & SEO
   useEffect(() => {
     if (activeCaseStudy === 'salams') {
-      document.title = "Salams Case Study — Muhammad Umer, Product Designer";
+      document.title = "Salams Case Study — Designed by Umer Khalid";
       
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
-        metaDesc.setAttribute('content', "How I redesigned Salams, a Muslim matchmaking app, across onboarding, trust, retention and monetization. Acquired by Match Group.");
+        metaDesc.setAttribute('content', "I designed and scaled Salams, a Muslim matchmaking app, as the sole product designer for 5 years—directly leading to its acquisition by Match Group.");
       }
       
       const ogTitle = document.querySelector('meta[property="og:title"]');
       if (ogTitle) {
-        ogTitle.setAttribute('content', "Salams Case Study — Muhammad Umer, Product Designer");
+        ogTitle.setAttribute('content', "Salams Case Study - Designed by Umer Khalid");
       }
 
       const ogDesc = document.querySelector('meta[property="og:description"]');
       if (ogDesc) {
-        ogDesc.setAttribute('content', "How I redesigned Salams, a Muslim matchmaking app, across onboarding, trust, retention and monetization. Acquired by Match Group.");
+        ogDesc.setAttribute('content', "As the sole product designer for 5 years, I designed and scaled Salams from the ground up, leading to its acquisition by Match Group in 2023. Read the complete end-to-end design case study.");
       }
 
       const ogImage = document.querySelector('meta[property="og:image"]');
       if (ogImage) {
-        ogImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1FD0Z0ZZBRTWTjdeqpWr2X1UXgNhXUCjb&sz=w1200");
+        ogImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1rEHrOHd-yhkUhr2qt3Lmwy0a3MS9NV5m&sz=w1200");
       }
 
       const twitterImage = document.querySelector('meta[property="twitter:image"]');
       if (twitterImage) {
-        twitterImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1FD0Z0ZZBRTWTjdeqpWr2X1UXgNhXUCjb&sz=w1200");
+        twitterImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1rEHrOHd-yhkUhr2qt3Lmwy0a3MS9NV5m&sz=w1200");
       }
     } else {
       document.title = "Umer Khalid | Product Designer";
@@ -104,12 +104,12 @@ export default function App() {
 
       const ogImage = document.querySelector('meta[property="og:image"]');
       if (ogImage) {
-        ogImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1FD0Z0ZZBRTWTjdeqpWr2X1UXgNhXUCjb&sz=w1200");
+        ogImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1rEHrOHd-yhkUhr2qt3Lmwy0a3MS9NV5m&sz=w1200");
       }
 
       const twitterImage = document.querySelector('meta[property="twitter:image"]');
       if (twitterImage) {
-        twitterImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1FD0Z0ZZBRTWTjdeqpWr2X1UXgNhXUCjb&sz=w1200");
+        twitterImage.setAttribute('content', "https://drive.google.com/thumbnail?id=1rEHrOHd-yhkUhr2qt3Lmwy0a3MS9NV5m&sz=w1200");
       }
     }
   }, [activeCaseStudy]);
