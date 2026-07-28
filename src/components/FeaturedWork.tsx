@@ -12,22 +12,14 @@ const projects = [
     textColor: "text-white"
   },
   {
-    id: 1,
-    title: "Unita",
-    description: "B2B Marketplace for UAE/GCC Description: Sole designer on a pre-launch B2B platform. Built the design system from scratch with full token coverage and a dark teal and burnt orange visual language. Shipped 10+ modules across 30 to 50 screens.",
-    image: "https://drive.google.com/thumbnail?id=1nouxdrvItr_1p2vvVUTMSaWma_6SM_5R&sz=w1000",
-    color: "bg-[#0A2E2E]", // Dark Teal mood for Unita
-    accentColors: ["bg-[#FF6B35]", "bg-orange-600", "bg-teal-600"],
-    textColor: "text-white"
-  },
-  {
     id: 3,
     title: "Zewst",
     description: "Restaurant Operating System Description: Restaurant-grade POS scaled to 500+ merchants. Orders, inventory, real-time sales, staff clock-in, and comp items, paired with a BI dashboard for franchise performance and food waste analytics.",
     image: "https://drive.google.com/thumbnail?id=1PoCTLNPMa2fiyALYCay77uNKEhSgKVzR&sz=w1000",
     color: "bg-[#A3E635]", // Fresh Green for Restaurant OS
     accentColors: ["bg-green-600", "bg-green-700", "bg-green-800"],
-    textColor: "text-black"
+    textColor: "text-black",
+    externalLink: "https://portfolioold-rho.vercel.app/projects/zewards"
   },
   {
     id: 4,
@@ -36,7 +28,18 @@ const projects = [
     image: "https://drive.google.com/thumbnail?id=1_YA_eRt-nstKY2jroczQOcDdzxTsHQlI&sz=w1000",
     color: "bg-[#0D0D0D]", // Deep Dark Crypto mood
     accentColors: ["bg-blue-600", "bg-indigo-600", "bg-cyan-600"],
-    textColor: "text-white"
+    textColor: "text-white",
+    externalLink: "https://portfolioold-rho.vercel.app/projects/folionomics"
+  },
+  {
+    id: 1,
+    title: "Unita",
+    description: "B2B Marketplace for UAE/GCC Description: Sole designer on a pre-launch B2B platform. Built the design system from scratch with full token coverage and a dark teal and burnt orange visual language. Shipped 10+ modules across 30 to 50 screens.",
+    image: "https://drive.google.com/thumbnail?id=1nouxdrvItr_1p2vvVUTMSaWma_6SM_5R&sz=w1000",
+    color: "bg-[#0A2E2E]", // Dark Teal mood for Unita
+    accentColors: ["bg-[#FF6B35]", "bg-orange-600", "bg-teal-600"],
+    textColor: "text-white",
+    externalLink: "https://dev.unitaw.com/"
   }
 ];
 
@@ -86,11 +89,22 @@ interface Project {
   color: string;
   accentColors: string[];
   textColor: string;
+  externalLink?: string;
 }
 
 function WorkCard({ project, onClick }: { project: Project; onClick?: () => void }) {
   const cardRef = useRef(null);
   const isSalams = project.title.toLowerCase() === 'salams';
+  const hasExternalLink = Boolean(project.externalLink);
+  const isInteractive = isSalams || hasExternalLink;
+
+  const handleCardClick = () => {
+    if (isSalams) {
+      onClick?.();
+    } else if (project.externalLink) {
+      window.open(project.externalLink, '_blank', 'noopener,noreferrer');
+    }
+  };
   
   // Reveal on scroll animation
   const { scrollYProgress } = useScroll({
@@ -110,8 +124,8 @@ function WorkCard({ project, onClick }: { project: Project; onClick?: () => void
     <motion.div 
       ref={cardRef}
       style={{ opacity, y }}
-      onClick={isSalams ? onClick : undefined}
-      className={`group relative w-full min-h-[550px] md:h-[700px] ${project.color} rounded-[30px] md:rounded-[60px] overflow-hidden flex flex-col md:flex-row shadow-2xl ${isSalams ? 'cursor-pointer' : 'cursor-default'} py-12 md:py-0`}
+      onClick={isInteractive ? handleCardClick : undefined}
+      className={`group relative w-full min-h-[550px] md:h-[700px] ${project.color} rounded-[30px] md:rounded-[60px] overflow-hidden flex flex-col md:flex-row shadow-2xl ${isInteractive ? 'cursor-pointer' : 'cursor-default'} py-12 md:py-0`}
     >
       {/* Layout Grid */}
       <div className="flex flex-col md:flex-row w-full h-full p-8 md:p-20 relative z-10">
@@ -125,17 +139,40 @@ function WorkCard({ project, onClick }: { project: Project; onClick?: () => void
             {project.description}
           </p>
 
-          <div className={`flex items-center gap-4 md:gap-6 px-6 md:px-10 py-3 md:py-5 rounded-full border-2 ${project.textColor === 'text-black' ? 'border-black' : 'border-white'} w-fit ${isSalams ? 'group/btn hover:bg-black transition-all duration-300' : 'opacity-60'}`}>
-             {isSalams && <div className={`w-8 md:w-10 h-[2px] ${project.textColor === 'text-black' ? 'bg-black' : 'bg-white'} group-hover/btn:bg-white transition-colors`} />}
-             <span className={`font-display text-base md:text-xl uppercase tracking-tight ${project.textColor === 'text-black' ? 'text-black' : 'text-white'} ${isSalams ? 'group-hover/btn:text-white' : ''} transition-colors`}>
-               {isSalams ? "View Case Study" : "Coming Soon"}
-             </span>
-          </div>
+          {hasExternalLink ? (
+            <a 
+              href={project.externalLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+              className={`flex items-center gap-4 md:gap-6 px-6 md:px-10 py-3 md:py-5 rounded-full border-2 ${project.textColor === 'text-black' ? 'border-black' : 'border-white'} w-fit group/btn hover:bg-black transition-all duration-300`}
+            >
+              <div className={`w-8 md:w-10 h-[2px] ${project.textColor === 'text-black' ? 'bg-black' : 'bg-white'} group-hover/btn:bg-white transition-colors`} />
+              <span className={`font-display text-base md:text-xl uppercase tracking-tight ${project.textColor === 'text-black' ? 'text-black' : 'text-white'} group-hover/btn:text-white transition-colors flex items-center gap-1`}>
+                View Project <span className="text-sm md:text-xl leading-none">↗</span>
+              </span>
+            </a>
+          ) : isSalams ? (
+            <div className={`flex items-center gap-4 md:gap-6 px-6 md:px-10 py-3 md:py-5 rounded-full border-2 ${project.textColor === 'text-black' ? 'border-black' : 'border-white'} w-fit group/btn hover:bg-black transition-all duration-300`}>
+              <div className={`w-8 md:w-10 h-[2px] ${project.textColor === 'text-black' ? 'bg-black' : 'bg-white'} group-hover/btn:bg-white transition-colors`} />
+              <span className={`font-display text-base md:text-xl uppercase tracking-tight ${project.textColor === 'text-black' ? 'text-black' : 'text-white'} group-hover/btn:text-white transition-colors`}>
+                View Case Study
+              </span>
+            </div>
+          ) : (
+            <div className={`flex items-center gap-4 md:gap-6 px-6 md:px-10 py-3 md:py-5 rounded-full border-2 ${project.textColor === 'text-black' ? 'border-black' : 'border-white'} w-fit opacity-60`}>
+              <span className={`font-display text-base md:text-xl uppercase tracking-tight ${project.textColor === 'text-black' ? 'text-black' : 'text-white'}`}>
+                Coming Soon
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Visual Side */}
         <div className="w-full md:w-1/2 flex items-center justify-center md:justify-end mt-12 md:mt-0 relative">
-          <div className={`relative w-full md:w-[130%] transform ${isSalams ? 'group-hover:scale-105' : ''} transition-transform duration-700 ease-out translate-x-0 md:translate-x-12`}>
+          <div className={`relative w-full md:w-[130%] transform ${isInteractive ? 'group-hover:scale-105' : ''} transition-transform duration-700 ease-out translate-x-0 md:translate-x-12`}>
             <img 
               src={project.image} 
               alt={project.title}
@@ -155,7 +192,7 @@ function WorkCard({ project, onClick }: { project: Project; onClick?: () => void
       </div>
 
       {/* Hover Overlay Gradient */}
-      <div className={`absolute inset-0 bg-black/5 opacity-0 ${isSalams ? 'group-hover:opacity-100' : ''} transition-opacity duration-500 pointer-events-none`} />
+      <div className={`absolute inset-0 bg-black/5 opacity-0 ${isInteractive ? 'group-hover:opacity-100' : ''} transition-opacity duration-500 pointer-events-none`} />
     </motion.div>
   );
 }
