@@ -10,12 +10,11 @@ import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { HowILead } from './components/HowILead';
 import { FeaturedWork } from './components/FeaturedWork';
-import { TestimonialsSection } from './components/TestimonialsSection';
 import { WhatIDo } from './components/WhatIDo';
 import { Skills } from './components/Skills';
 import { Marquee } from './components/Marquee';
 import { startSmoothScroll, scrollToIdWhenReady } from './lib/smoothScroll';
-import { ClientFeedback } from './components/ClientFeedback';
+import { KindWords } from './components/KindWords';
 import { CTA } from './components/CTA';
 import { Footer } from './components/Footer';
 import { Process } from './components/Process';
@@ -166,10 +165,9 @@ export default function App() {
                 <HowILead />
                 <FeaturedWork onOpenCaseStudy={openCaseStudy} />
                 <Process />
-                <TestimonialsSection />
                 <WhatIDo />
                 <Skills />
-                <ClientFeedback />
+                <KindWords />
                 <CTA />
                 <Footer />
               </motion.div>
