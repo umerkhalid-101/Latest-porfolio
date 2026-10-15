@@ -12,7 +12,7 @@ import { HowILead } from './components/HowILead';
 import { FeaturedWork } from './components/FeaturedWork';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { WhatIDo } from './components/WhatIDo';
-import { SkillsSphere } from './components/SkillsSphere';
+import { Skills } from './components/Skills';
 import { Marquee } from './components/Marquee';
 import { startSmoothScroll, scrollToIdWhenReady } from './lib/smoothScroll';
 import { ClientFeedback } from './components/ClientFeedback';
@@ -168,7 +168,7 @@ export default function App() {
                 <Process />
                 <TestimonialsSection />
                 <WhatIDo />
-                <SkillsSphere />
+                <Skills />
                 <ClientFeedback />
                 <CTA />
                 <Footer />
