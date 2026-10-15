@@ -3,6 +3,10 @@
   "rewrites": [
     { "source": "/salams-casestudy", "destination": "/salams-casestudy.html" },
     { "source": "/salams-casestudy/", "destination": "/salams-casestudy.html" },
+    { "source": "/unita-casestudy", "destination": "/unita-casestudy.html" },
+    { "source": "/unita-casestudy/", "destination": "/unita-casestudy.html" },
+    { "source": "/vara-casestudy", "destination": "/vara-casestudy.html" },
+    { "source": "/vara-casestudy/", "destination": "/vara-casestudy.html" },
     { "source": "/zewards-casestudy", "destination": "/zewards-casestudy.html" },
     { "source": "/zewards-casestudy/", "destination": "/zewards-casestudy.html" },
     { "source": "/zewst-casestudy", "destination": "/zewards-casestudy.html" },

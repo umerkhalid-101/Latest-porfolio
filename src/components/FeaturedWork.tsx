@@ -10,7 +10,19 @@ const projects: Project[] = [
     image: "/images/work-04.webp",
     color: "bg-[#0A2E2E]",
     accentColors: ["bg-[#FF6B35]", "bg-orange-600", "bg-teal-600"],
-    textColor: "text-white"
+    textColor: "text-white",
+    href: "/unita-casestudy"
+  },
+  {
+    slug: "vara",
+    title: "VARA",
+    subtitle: "Regulator web portal, Dubai",
+    description: "Designed the web portal for Dubai's Virtual Assets Regulatory Authority at MBLM, from the homepage to a five-step licensing guide, backed by a reusable UI kit and a 12-column layout system.",
+    highlights: ["Five-step licensing guide", "Reusable UI kit", "12-column layout system", "Desktop and mobile"],
+    color: "bg-[#0B1F3A]",
+    accentColors: ["bg-[#1E3A5F]", "bg-[#2B5283]", "bg-[#3B6BA5]"],
+    textColor: "text-white",
+    href: "/vara-casestudy"
   },
   {
     slug: "salams",
@@ -81,7 +93,9 @@ interface Project {
   title: string;
   subtitle: string;
   description: string;
-  image: string;
+  /** Product screens; without one the card shows `highlights` instead */
+  image?: string;
+  highlights?: string[];
   color: string;
   accentColors: string[];
   textColor: "text-white" | "text-black";
@@ -157,16 +171,26 @@ function WorkCard({ project, onOpen }: { project: Project; onOpen?: (slug: strin
 
         {/* Visual Side */}
         <div className="w-full md:w-1/2 flex items-center justify-center md:justify-end mt-12 md:mt-0 relative">
-          <div className={`relative w-full md:w-[130%] transform ${isInteractive ? 'group-hover:scale-105' : ''} transition-transform duration-700 ease-out translate-x-0 md:translate-x-12`}>
-            <img
-              src={project.image}
-              alt={`${project.title} product screens`}
-              width={2000}
-              height={2000}
-              loading="lazy"
-              className="w-full h-auto drop-shadow-3xl rounded-xl"
-            />
-          </div>
+          {project.image ? (
+            <div className={`relative w-full md:w-[130%] transform ${isInteractive ? 'group-hover:scale-105' : ''} transition-transform duration-700 ease-out translate-x-0 md:translate-x-12`}>
+              <img
+                src={project.image}
+                alt={`${project.title} product screens`}
+                width={2000}
+                height={2000}
+                loading="lazy"
+                className="w-full h-auto drop-shadow-3xl rounded-xl"
+              />
+            </div>
+          ) : (
+            <ul className={`w-full md:max-w-[420px] flex flex-col border-t ${isDark ? 'border-white/30' : 'border-black/30'}`}>
+              {project.highlights?.map((item) => (
+                <li key={item} className={`font-display text-2xl md:text-4xl uppercase tracking-tight leading-tight py-4 md:py-6 border-b ${isDark ? 'border-white/30' : 'border-black/30'} ${project.textColor}`}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
 

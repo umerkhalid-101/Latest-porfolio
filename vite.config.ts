@@ -20,6 +20,8 @@ export default defineConfig(({mode}) => {
         input: {
           main: path.resolve(__dirname, 'index.html'),
           'salams-casestudy': path.resolve(__dirname, 'salams-casestudy.html'),
+          'unita-casestudy': path.resolve(__dirname, 'unita-casestudy.html'),
+          'vara-casestudy': path.resolve(__dirname, 'vara-casestudy.html'),
           'zewards-casestudy': path.resolve(__dirname, 'zewards-casestudy.html'),
           'folionomics-casestudy': path.resolve(__dirname, 'folionomics-casestudy.html'),
         },
