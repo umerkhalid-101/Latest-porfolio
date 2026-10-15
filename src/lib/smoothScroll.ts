@@ -35,3 +35,9 @@ export function scrollToIdWhenReady(id: string, timeout = 3000) {
   };
   tick();
 }
+
+/** Glide to a position (used by in-page controls like the timeline scrubber). */
+export function scrollToSmooth(top: number) {
+  if (lenis) lenis.scrollTo(top, { duration: 1.2 });
+  else window.scrollTo({ top, behavior: 'smooth' });
+}
