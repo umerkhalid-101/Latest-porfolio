@@ -2,12 +2,12 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 
 const logos = [
-  { name: "Salams", url: "https://drive.google.com/thumbnail?id=1dg7Y2OFMv9sPvrMzZkSQSdoPFtPQY3Pa&sz=w1000", className: "left-[10%] w-[150px]" },
-  { name: "Zwilt", url: "https://drive.google.com/thumbnail?id=1MeZeIq-tZc5thjjJfGteEyscqwlmqOgh&sz=w1000", className: "bottom-[20%] left-[8%] w-[120px]" },
-  { name: "AXD", url: "https://drive.google.com/thumbnail?id=1iMQo8Jd5Xj28z7n7PgeI3057cJH8twqI&sz=w1000", className: "top-[30%] right-[10%] w-[110px]" },
-  { name: "Mailmunch", url: "https://drive.google.com/thumbnail?id=1pSIF4fQyXrAOhLSenmh5oA0kj9z6-iwX&sz=w1000", className: "top-[45%] right-[20%] w-[130px]" },
-  { name: "Cayano", url: "https://drive.google.com/thumbnail?id=1qeG5LfijHLwwea-7ec95hDV53WC0Lj6n&sz=w1000", className: "bottom-[25%] right-[25%] w-[120px]" },
-  { name: "Break Thirty", url: "https://drive.google.com/thumbnail?id=1Xcb91nHknORf8FkwoORJSguizQw563Jm&sz=w1000", className: "bottom-[15%] right-[5%] w-[140px]" },
+  { name: "Salams", url: "/images/logo-01.webp", className: "left-[10%] w-[150px]" },
+  { name: "Zewst", url: "/images/logo-02.webp", className: "bottom-[20%] left-[8%] w-[120px]" },
+  { name: "Axion Dynamic", url: "/images/logo-03.webp", className: "top-[30%] right-[10%] w-[110px]" },
+  { name: "Mailmunch", url: "/images/logo-04.webp", className: "top-[45%] right-[20%] w-[130px]" },
+  { name: "Cayano", url: "/images/logo-05.webp", className: "bottom-[25%] right-[25%] w-[120px]" },
+  { name: "Break Thirty", url: "/images/logo-06.webp", className: "bottom-[15%] right-[5%] w-[140px]" },
 ];
 
 export function TestimonialsSection() {
@@ -47,9 +47,11 @@ export function TestimonialsSection() {
           >
             <img 
               src={logo.url} 
-              alt={logo.name} 
+              alt={`${logo.name} logo`}
+              width={164}
+              height={164}
+              loading="lazy"
               className="w-full opacity-60 hover:opacity-100 transition-opacity"
-              referrerPolicy="no-referrer"
             />
           </motion.div>
         ))}
@@ -66,20 +68,16 @@ export function TestimonialsSection() {
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
           >
-            <img src={logo.url} alt={logo.name} className="w-full opacity-40" />
+            <img src={logo.url} alt={`${logo.name} logo`} width={164} height={164} loading="lazy" className="w-full opacity-60" />
           </motion.div>
         ))}
       </div>
 
       {/* Top Right Ticker Line - Absolute positioned */}
-      <div className="absolute top-0 right-0 border-l border-b border-white/10 px-4 md:px-8 py-3 md:py-4 flex items-center gap-6 md:gap-12 overflow-hidden whitespace-nowrap opacity-40 z-30">
+      <div className="absolute top-0 right-0 border-l border-b border-white/10 px-4 md:px-8 py-3 md:py-4 flex items-center gap-6 md:gap-12 overflow-hidden whitespace-nowrap opacity-70 z-30">
          <div className="flex items-center gap-4">
-            <span className="text-[10px] md:text-[12px] uppercase tracking-[0.2em] font-medium">TRUSTED BY INNOVATORS</span>
-            <div className="w-1 h-1 rounded-full bg-white/40" />
-         </div>
-         <div className="hidden md:flex items-center gap-4">
-            <span className="text-[12px] uppercase tracking-[0.2em] font-medium">TRUSTED BY TEAMS THAT SHIP</span>
-            <div className="w-1 h-1 rounded-full bg-white/40" />
+            <span className="text-[10px] md:text-[12px] uppercase tracking-[0.2em] font-medium">TEAMS I'VE DESIGNED WITH</span>
+            <div className="w-1 h-1 rounded-full bg-white/40" aria-hidden="true" />
          </div>
       </div>
 
@@ -97,7 +95,7 @@ export function TestimonialsSection() {
           
           <div className="flex flex-col items-center md:items-start">
             <span className="text-[16px] md:text-[22px] font-bold uppercase tracking-tight">HEAD OF PRODUCT</span>
-            <span className="text-[14px] md:text-[18px] text-white/50 font-medium lowercase italic">SaaS Startup</span>
+            <span className="text-[14px] md:text-[18px] text-white/70 font-medium lowercase italic">SaaS Startup</span>
           </div>
         </motion.div>
       </div>

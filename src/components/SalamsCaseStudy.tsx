@@ -22,6 +22,33 @@ import {
   Phone 
 } from 'lucide-react';
 import { useEffect } from 'react';
+import { CaseStudyLeadership, type LeadershipContent } from './CaseStudyLeadership';
+
+const leadership: LeadershipContent = {
+  roleAndTeam: (
+    <>
+      <p>I joined in May 2018 as the first design hire and grew from Junior UX Designer to UX Designer (Sep 2019) to Senior Product Designer (Jan 2022 to Sep 2023).</p>
+      <p>I was the only designer for the whole run, working directly with the founders and the engineering team. I owned every part of the product experience: research, flows, UI, the design system, and usability testing.</p>
+    </>
+  ),
+  bet: (
+    <p>Salams was betting that a dating app built around marriage, not swiping, could win a serious audience the big apps were failing. That only works if people trust it. With 60 to 70% of new users dropping off in onboarding and fake profiles eroding trust, the product had to earn that trust before it could grow or charge for anything.</p>
+  ),
+  hardCall: { pending: 'One decision with tradeoffs, who disagreed, and how it was resolved. For example, a pricing model or feature rollout from the A/B tests (ghost mode, voice telegrams).' },
+  howILed: (
+    <ul>
+      <li>Ran pricing and feature experiments with the founders, including A/B tests on pricing models, ghost mode, and voice telegrams.</li>
+      <li>Ran usability tests on new features before launch and fed the findings back into the roadmap.</li>
+      <li>Built the first version of the design system so the app stayed consistent as the team grew.</li>
+      <li>Stayed on for 5 months after the acquisition to manage design continuity through the Match Group integration.</li>
+    </ul>
+  ),
+  howILedTitle: 'How I led the work',
+  outcome: (
+    <p>The app scaled past its first million users, and the activation redesigns improved early retention and first-session engagement. Match Group acquired Salams in 2023.</p>
+  ),
+  differently: { pending: "What you would do differently, looking back." },
+};
 
 interface SalamsCaseStudyProps {
   onClose: () => void;
@@ -35,16 +62,6 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
 
   return (
     <div className="bg-[#FAF8F5] text-[#121115] min-h-screen relative font-sans selection:bg-[#FF4D8D] selection:text-white">
-      {/* Native React 19 document metadata hoisting */}
-      <title>Salams Case Study — Designed by Umer</title>
-      <meta name="description" content="I designed and scaled Salams, a Muslim matchmaking app, as the sole product designer for 5 years—directly leading to its acquisition by Match Group." />
-      <meta property="og:title" content="Salams Case Study — Designed by Umer" />
-      <meta property="og:description" content="As the sole product designer for 5 years, I designed and scaled Salams from the ground up, leading to its acquisition by Match Group in 2023. Read the complete end-to-end design case study." />
-      <meta property="og:image" content="https://drive.google.com/thumbnail?id=1POHWBzcAJTVXUKs_B1HFJmbrn8EbJ8p1&sz=w1200" />
-      <meta property="og:url" content="https://www.umerkhalid.co/salams-casestudy" />
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:image" content="https://drive.google.com/thumbnail?id=1POHWBzcAJTVXUKs_B1HFJmbrn8EbJ8p1&sz=w1200" />
-      <link rel="canonical" href="https://www.umerkhalid.co/salams-casestudy" />
       
       {/* Fixed Navigation Header */}
       <motion.header 
@@ -58,7 +75,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
           <div className="flex items-center gap-4 min-w-max">
             <button 
               onClick={onClose}
-              className="font-display text-3xl tracking-tighter flex items-center gap-1 text-[#121115] hover:text-[#FF4D8D] transition-colors cursor-pointer"
+              className="font-display text-3xl tracking-tighter flex items-center gap-1 text-[#121115] hover:text-[#C2185B] transition-colors cursor-pointer"
             >
               <span>UMER</span>
             </button>
@@ -76,7 +93,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               ].map((item, index) => (
                 <a key={index} href={item.href} className="flex flex-1 items-center gap-4 group cursor-pointer h-10 no-underline">
                   <div className="w-1.5 h-1.5 rounded-full border-[1px] border-[#121115] group-hover:bg-[#FF4D8D] group-hover:border-[#FF4D8D] transition-colors" />
-                  <span className="text-[10px] font-bold tracking-[0.25em] text-[#121115]/80 group-hover:text-[#FF4D8D] transition-colors whitespace-nowrap">
+                  <span className="text-[10px] font-bold tracking-[0.25em] text-[#121115]/80 group-hover:text-[#C2185B] transition-colors whitespace-nowrap">
                     {item.label}
                   </span>
                   <div className="h-[1px] bg-[#121115]/20 flex-1" />
@@ -89,7 +106,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
           <div className="flex items-center pl-4 md:pl-12">
             <button 
               onClick={onClose}
-              className="flex items-center gap-2 text-[#121115]/70 hover:text-[#FF4D8D] transition-colors group cursor-pointer"
+              className="flex items-center gap-2 text-[#121115]/70 hover:text-[#C2185B] transition-colors group cursor-pointer"
               id="salams-back-btn"
             >
               <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform" />
@@ -100,7 +117,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
       </motion.header>
 
       {/* 1. HERO SECTION (Vibrant Pink, White Text) */}
-      <section className="bg-[#FF4D8D] text-white pt-32 pb-24 md:pt-40 md:pb-32 px-6 relative overflow-hidden" id="salams-hero">
+      <section className="bg-[#D81B60] text-white pt-32 pb-24 md:pt-40 md:pb-32 px-6 relative overflow-hidden" id="salams-hero">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
@@ -116,26 +133,26 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
                   Salams.
                 </h1>
                 <p className="text-xl md:text-[26px] text-white/95 font-medium tracking-tight leading-relaxed max-w-2xl">
-                  Designing a marriage-focused matchmaking app from the ground up, across onboarding, trust, retention, and monetization, until Match Group came calling.
+                  Designing a marriage-focused matchmaking app from the ground up, across onboarding, trust, retention, and monetization, through to the Match Group acquisition in 2023.
                 </p>
               </div>
  
               {/* Roles Table (Matches PDF layout precisely with unified border) */}
               <div className="border border-white/30 rounded-2xl grid grid-cols-2 md:grid-cols-4 overflow-hidden mt-8 max-w-3xl">
                 <div className="p-5 md:p-6 border-r border-b md:border-b-0 border-white/20">
-                  <p className="text-white/70 text-[10px] md:text-xs font-bold uppercase tracking-widest">Role</p>
-                  <p className="text-sm md:text-lg font-black uppercase mt-1.5 text-white">UX Designer</p>
+                  <p className="text-white text-[10px] md:text-xs font-bold uppercase tracking-widest">Role</p>
+                  <p className="text-sm md:text-lg font-black uppercase mt-1.5 text-white">Junior UX Designer to Senior Product Designer</p>
                 </div>
                 <div className="p-5 md:p-6 border-b md:border-b-0 md:border-r border-white/20">
-                  <p className="text-white/70 text-[10px] md:text-xs font-bold uppercase tracking-widest">Platform</p>
+                  <p className="text-white text-[10px] md:text-xs font-bold uppercase tracking-widest">Platform</p>
                   <p className="text-sm md:text-lg font-black uppercase mt-1.5 text-white">iOS & Android</p>
                 </div>
                 <div className="p-5 md:p-6 border-r border-white/20">
-                  <p className="text-white/70 text-[10px] md:text-xs font-bold uppercase tracking-widest">Years</p>
-                  <p className="text-sm md:text-lg font-black uppercase mt-1.5 text-white">2018–2023</p>
+                  <p className="text-white text-[10px] md:text-xs font-bold uppercase tracking-widest">Years</p>
+                  <p className="text-sm md:text-lg font-black uppercase mt-1.5 text-white">2018 to 2023</p>
                 </div>
                 <div className="p-5 md:p-6">
-                  <p className="text-white/70 text-[10px] md:text-xs font-bold uppercase tracking-widest">Outcome</p>
+                  <p className="text-white text-[10px] md:text-xs font-bold uppercase tracking-widest">Outcome</p>
                   <p className="text-sm md:text-lg font-black uppercase mt-1.5 text-white flex items-center gap-1">
                      Acquired <span className="font-sans text-sm md:text-xl leading-none">↗</span>
                   </p>
@@ -150,10 +167,9 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="lg:col-span-5 flex justify-center items-center"
             >
-              <img 
-                src="https://drive.google.com/thumbnail?id=1YLF5FBoPRUhiIj16V6NQn7h3mUZSbLyA&sz=w1200" 
+              <img width={704} height={524} fetchPriority="high" 
+                src="/images/salams-02.webp" 
                 alt="Salams Mobile Screens" 
-                referrerPolicy="no-referrer"
                 className="w-full h-auto object-contain max-h-[480px] drop-shadow-2xl select-none"
               />
             </motion.div>
@@ -174,19 +190,19 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             transition={{ duration: 0.6 }}
             className="lg:col-span-7 space-y-6"
           >
-            <span className="text-[#FF4D8D] text-xs font-bold uppercase tracking-widest block">// CONTEXT</span>
+            <span className="text-[#C2185B] text-xs font-bold uppercase tracking-widest block">// CONTEXT</span>
             <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight leading-none">
               A dating app built for people who are serious about marriage.
             </h2>
             <div className="space-y-6 text-[#121115]/80 text-base md:text-lg leading-relaxed">
               <p>
-                Muslim matchmaking sits at the intersection of modern app conventions and deeply held cultural values around marriage, family, and community. When I joined Salams in 2018, it already had an established user base, but the experience was letting people down at every stage.
+                Muslim matchmaking sits at the intersection of modern app conventions and deeply held cultural values around marriage, family, and community. I joined Salams in 2018 as the first design hire on a small team building the app from the ground up. As it scaled past its first million users, the experience was letting people down at every stage.
               </p>
               <p>
                 The app looked like every other dating app on the market. That was exactly the wrong signal for an audience that wasn't here to swipe casually. They were here to find a life partner. Users were dropping off during onboarding, fake profiles were eroding trust, ghosting was rampant, and the monetization felt awkward against the emotional weight of what people were trying to do.
               </p>
               <p>
-                I was the sole designer across all of these problems for <span className="font-bold">5 years</span>, until <span className="text-[#FF4D8D] font-bold">Match Group acquired Salams in 2023</span>.
+                I was the sole designer across all of these problems for <span className="font-bold">5 years</span>, until <span className="text-[#C2185B] font-bold">Match Group acquired Salams in 2023</span>.
               </p>
             </div>
           </motion.div>
@@ -236,8 +252,8 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h2 className="text-2xl md:text-4xl font-medium text-[#FF4D8D] tracking-tight">
-              What is the problem we are trying to solve?
+            <h2 className="text-2xl md:text-4xl font-medium text-[#C2185B] tracking-tight">
+              What problem was I solving?
             </h2>
           </motion.div>
 
@@ -250,10 +266,9 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               transition={{ duration: 0.7 }}
               className="lg:col-span-6 flex justify-center"
             >
-              <img 
-                src="https://drive.google.com/thumbnail?id=1jZIzyVreu9T6VJkRv9FLbaLDKvX0keU5&sz=w1000" 
+              <img width={1543} height={1377} loading="lazy" 
+                src="/images/salams-03.webp" 
                 alt="Matchmaking problem illustration" 
-                referrerPolicy="no-referrer"
                 className="w-full max-w-lg h-auto object-contain select-none"
               />
             </motion.div>
@@ -267,7 +282,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               className="lg:col-span-6 space-y-12"
             >
               <div className="space-y-4">
-                <h3 className="text-xl md:text-2xl font-semibold text-[#FF4D8D] leading-snug">
+                <h3 className="text-xl md:text-2xl font-semibold text-[#C2185B] leading-snug">
                   When was the last time a Muslim dating app felt like it understood you?
                 </h3>
                 <p className="text-base md:text-lg text-[#121115]/80 leading-relaxed font-normal">
@@ -276,7 +291,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-xl md:text-2xl font-semibold text-[#FF4D8D] leading-snug">
+                <h3 className="text-xl md:text-2xl font-semibold text-[#C2185B] leading-snug">
                   When was the last time you trusted every profile you saw on a matchmaking app?
                 </h3>
                 <p className="text-base md:text-lg text-[#121115]/80 leading-relaxed font-normal">
@@ -289,7 +304,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
       </section>
 
       {/* 4. WHY IT MATTERED & METRIC BANNER (Vibrant Brand Pink Editorial Columns) */}
-      <section className="py-24 md:py-32 px-6 bg-[#FF8FAB] text-white">
+      <section className="py-24 md:py-32 px-6 bg-[#FF8FAB] text-[#121115]">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             
@@ -301,13 +316,13 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               transition={{ duration: 0.6 }}
               className="space-y-6 md:space-y-8"
             >
-              <h3 className="text-white/90 text-xl md:text-2xl font-normal tracking-tight">
+              <h3 className="text-[#121115] text-xl md:text-2xl font-normal tracking-tight">
                 Why it mattered?
               </h3>
               <p className="text-3xl md:text-4xl lg:text-[44px] font-bold text-[#121115] tracking-tight leading-[1.2]">
-                60—70% of new users were dropping off during onboarding before ever seeing a single profile.
+                60 to 70% of new users were dropping off during onboarding before ever seeing a single profile.
               </p>
-              <p className="text-white/90 text-sm md:text-base font-normal tracking-wide flex items-center gap-1.5">
+              <p className="text-[#121115] text-sm md:text-base font-normal tracking-wide flex items-center gap-1.5">
                 <span>↓</span> Brought down to 40% after redesign
               </p>
             </motion.div>
@@ -320,13 +335,13 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="space-y-6 md:space-y-8"
             >
-              <h3 className="text-white/90 text-xl md:text-2xl font-normal tracking-tight">
+              <h3 className="text-[#121115] text-xl md:text-2xl font-normal tracking-tight">
                 The cultural reality
               </h3>
               <p className="text-3xl md:text-4xl lg:text-[44px] font-bold text-[#121115] tracking-tight leading-[1.2]">
                 Ghosting someone on a Muslim marriage app doesn't just hurt. In this community, it's disrespectful and it was destroying retention.
               </p>
-              <p className="text-white/90 text-sm md:text-base font-normal tracking-wide flex items-center gap-1.5">
+              <p className="text-[#121115] text-sm md:text-base font-normal tracking-wide flex items-center gap-1.5">
                 <span>→</span> Led to the anti-ghosting mechanic
               </p>
             </motion.div>
@@ -349,7 +364,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             <h4 className="text-[#121115] text-lg md:text-2xl font-normal tracking-tight">
               Why do these numbers matter?
             </h4>
-            <p className="text-[#FF8FAB] text-2xl md:text-4xl lg:text-[40px] font-medium tracking-tight leading-[1.4] max-w-5xl mx-auto">
+            <p className="text-[#C2185B] text-2xl md:text-4xl lg:text-[40px] font-medium tracking-tight leading-[1.4] max-w-5xl mx-auto">
               In a community built on trust and intention, every broken experience is a person who gave up on finding a life partner.
             </p>
           </motion.div>
@@ -395,20 +410,20 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
           className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center mb-16"
         >
           <div className="flex items-center gap-4 w-full">
-            <span className="text-[#FF8FAB] text-sm font-semibold tracking-wider uppercase whitespace-nowrap">
-              Problem Space — 01
+            <span className="text-[#C2185B] text-sm font-semibold tracking-wider uppercase whitespace-nowrap">
+              Problem space 01
             </span>
             <div className="h-[1px] bg-[#121115]/10 flex-grow hidden md:block"></div>
           </div>
           <div className="flex items-center gap-4 w-full">
-            <span className="text-[#FF8FAB] text-sm font-semibold tracking-wider uppercase whitespace-nowrap">
-              Problem Space — 02
+            <span className="text-[#C2185B] text-sm font-semibold tracking-wider uppercase whitespace-nowrap">
+              Problem space 02
             </span>
             <div className="h-[1px] bg-[#121115]/10 flex-grow hidden md:block"></div>
           </div>
           <div className="flex items-center gap-4 w-full">
-            <span className="text-[#FF8FAB] text-sm font-semibold tracking-wider uppercase whitespace-nowrap">
-              Problem Space — 03
+            <span className="text-[#C2185B] text-sm font-semibold tracking-wider uppercase whitespace-nowrap">
+              Problem space 03
             </span>
           </div>
         </motion.div>
@@ -427,17 +442,16 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             {/* Centered Illustration */}
             <div className="flex justify-center md:justify-start">
               <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center transition-transform hover:scale-105 duration-300">
-                <img 
-                  src="https://lh3.googleusercontent.com/d/18IEiXpNnQNmeg_uEQX_iyPJxOMrqSWZa" 
+                <img width={214} height={214} loading="lazy" 
+                  src="/images/salams-04.webp" 
                   alt="Getting in the door illustration" 
                   className="max-w-full max-h-full object-contain"
-                  referrerPolicy="no-referrer"
                 />
               </div>
             </div>
             {/* Column Header and Content */}
             <div className="space-y-6">
-              <h3 className="text-2xl md:text-[26px] font-medium text-[#FF8FAB] tracking-tight">
+              <h3 className="text-2xl md:text-[26px] font-medium text-[#C2185B] tracking-tight">
                 Getting in the door
               </h3>
               <ul className="space-y-4 text-[#121115]/90 text-lg font-light leading-relaxed">
@@ -472,17 +486,16 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             {/* Centered Illustration */}
             <div className="flex justify-center md:justify-start">
               <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center transition-transform hover:scale-105 duration-300">
-                <img 
-                  src="https://lh3.googleusercontent.com/d/1Ereolg7L_aGuCAWCeF8Fxnc3Jv4VP1cR" 
+                <img width={214} height={214} loading="lazy" 
+                  src="/images/salams-05.webp" 
                   alt="Building trust illustration" 
                   className="max-w-full max-h-full object-contain"
-                  referrerPolicy="no-referrer"
                 />
               </div>
             </div>
             {/* Column Header and Content */}
             <div className="space-y-6">
-              <h3 className="text-2xl md:text-[26px] font-medium text-[#FF8FAB] tracking-tight">
+              <h3 className="text-2xl md:text-[26px] font-medium text-[#C2185B] tracking-tight">
                 Building trust
               </h3>
               <ul className="space-y-4 text-[#121115]/90 text-lg font-light leading-relaxed">
@@ -517,17 +530,16 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             {/* Centered Illustration */}
             <div className="flex justify-center md:justify-start">
               <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center transition-transform hover:scale-105 duration-300">
-                <img 
-                  src="https://lh3.googleusercontent.com/d/1_h06vrRCtTw-aoFS8_ZiLxIqvNC8a2nc" 
+                <img width={214} height={214} loading="lazy" 
+                  src="/images/salams-06.webp" 
                   alt="Making matches meaningful illustration" 
                   className="max-w-full max-h-full object-contain"
-                  referrerPolicy="no-referrer"
                 />
               </div>
             </div>
              {/* Column Header and Content */}
             <div className="space-y-6">
-              <h3 className="text-2xl md:text-[26px] font-medium text-[#FF8FAB] tracking-tight">
+              <h3 className="text-2xl md:text-[26px] font-medium text-[#C2185B] tracking-tight">
                 Making matches meaningful
               </h3>
               <ul className="space-y-4 text-[#121115]/90 text-lg font-light leading-relaxed">
@@ -556,7 +568,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
     </section>
 
       {/* 6. IDENTIFYING THE GAP (Vibrant Pink Background, Full Graphic Image) */}
-      <section className="bg-[#FF4D8D] py-16 md:py-24 px-4 md:px-8 relative overflow-hidden text-center" id="salams-gap">
+      <section className="bg-[#D81B60] py-16 md:py-24 px-4 md:px-8 relative overflow-hidden text-center" id="salams-gap">
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -566,7 +578,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
         >
           <div className="space-y-6">
             <p className="text-white/90 font-light tracking-wide text-sm md:text-lg">
-              Identifying the gap, led to our solution;
+              Identifying the gap led to the solution:
             </p>
             <h2 className="text-xl md:text-3xl lg:text-[32px] text-white font-light leading-relaxed max-w-3xl mx-auto tracking-normal px-2">
               A matchmaking app built <span className="font-semibold text-white">specifically for Muslim users seeking marriage</span> with trust built in, not bolted on, and monetization that serves people rather than manipulates them.
@@ -583,11 +595,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="w-full max-w-5xl mt-12"
           >
-            <img 
-              src="https://lh3.googleusercontent.com/d/1w-O63A9n20Bn9vMZjmuODPKXUaAtyW6-" 
-              alt="Identifying the gap, led to our solution: A matchmaking app built specifically for Muslim users seeking marriage with trust built in, not bolted on, and monetization that serves people rather than manipulates them. Salams."
+            <img width={800} height={991} loading="lazy" 
+              src="/images/salams-07.webp" 
+              alt="Identifying the gap led to the solution: A matchmaking app built specifically for Muslim users seeking marriage with trust built in, not bolted on, and monetization that serves people rather than manipulates them. Salams."
               className="w-full h-auto max-w-4xl mx-auto object-contain select-none transition-transform duration-300 hover:scale-[1.01]"
-              referrerPolicy="no-referrer"
             />
           </motion.div>
         </motion.div>
@@ -603,8 +614,8 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             transition={{ duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <p className="text-2xl md:text-[34px] leading-relaxed font-normal tracking-tight text-[#FF4D8D]">
-              <span className="font-extrabold">Salams</span> aims to provide a <span className="font-extrabold text-[#FF4D8D]">holistic platform for Muslim matchmaking</span> by offering a tailored experience built on trust, depth, and genuine intention.
+            <p className="text-2xl md:text-[34px] leading-relaxed font-normal tracking-tight text-[#C2185B]">
+              <span className="font-extrabold">Salams</span> aims to provide a <span className="font-extrabold text-[#C2185B]">holistic platform for Muslim matchmaking</span> by offering a tailored experience built on trust, depth, and genuine intention.
             </p>
           </motion.div>
 
@@ -620,11 +631,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             >
               {/* Phone Mockup with direct image link */}
               <div className="relative group transition-transform duration-500 hover:scale-[1.03]">
-                <img
-                  src="https://lh3.googleusercontent.com/d/1RAnh77QIjb2qY-DCDbvioWYSf0_AGBsK"
+                <img width={800} height={1444} loading="lazy"
+                  src="/images/salams-08.webp"
                   alt="Redesigned Onboarding Screen"
                   className="w-full h-auto object-contain rounded-[40px] shadow-2xl"
-                  referrerPolicy="no-referrer"
                 />
               </div>
               {/* Caption */}
@@ -643,11 +653,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             >
               {/* Phone Mockup with direct image link */}
               <div className="relative group transition-transform duration-500 hover:scale-[1.03]">
-                <img
-                  src="https://lh3.googleusercontent.com/d/192GkuuSr2AkPo0B2__xtxoJ4LTUjUkfg"
+                <img width={800} height={1444} loading="lazy"
+                  src="/images/salams-09.webp"
                   alt="Selfie Verification Screen"
                   className="w-full h-auto object-contain rounded-[40px] shadow-2xl"
-                  referrerPolicy="no-referrer"
                 />
               </div>
               {/* Caption */}
@@ -666,11 +675,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             >
               {/* Phone Mockup with direct image link */}
               <div className="relative group transition-transform duration-500 hover:scale-[1.03]">
-                <img
-                  src="https://lh3.googleusercontent.com/d/1-bmwXRuwIGjQ--CR2IAd0VW5mm9coUSw"
+                <img width={800} height={1444} loading="lazy"
+                  src="/images/salams-10.webp"
                   alt="Anti-Ghosting Screen"
                   className="w-full h-auto object-contain rounded-[40px] shadow-2xl"
-                  referrerPolicy="no-referrer"
                 />
               </div>
               {/* Caption */}
@@ -684,7 +692,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
       </section>
 
       {/* 9. WE CONDUCTED USER INTERVIEWS (Vibrant Pink, White Text) */}
-      <section className="bg-[#FF4D8D] text-white py-24 px-6 border-t border-[#121115]/10" id="salams-interviews">
+      <section className="bg-[#D81B60] text-white py-24 px-6 border-t border-[#121115]/10" id="salams-interviews">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
@@ -694,10 +702,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             className="lg:col-span-6 space-y-6"
           >
             <h3 className="text-3xl md:text-5xl lg:text-[44px] leading-tight font-bold tracking-tight text-white">
-              We conducted user interviews, gaining invaluable insights.
+              I ran user interviews to understand what people needed.
             </h3>
             <p className="text-white/90 text-base md:text-lg leading-relaxed font-light">
-              Participants were recruited through surveys and community outreach, helping us identify users across our two main archetypes. We ran usability tests alongside interviews to validate assumptions in real time.
+              Participants were recruited through surveys and community outreach, helping me reach users across the two main archetypes. I ran usability tests alongside interviews to validate assumptions in real time.
             </p>
           </motion.div>
           <motion.div 
@@ -708,11 +716,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             className="lg:col-span-6 flex justify-center lg:justify-end"
           >
             <div className="relative group transition-transform duration-500 hover:scale-[1.02] w-full max-w-[560px]">
-              <img
-                src="https://lh3.googleusercontent.com/d/1wEqCPTfvQJDWUghYiXP6neBHHP36_jah"
+              <img width={1485} height={837} loading="lazy"
+                src="/images/salams-11.webp"
                 alt="User Interview Call Screenshots"
                 className="w-full h-auto object-contain rounded-[24px] shadow-2xl"
-                referrerPolicy="no-referrer"
               />
             </div>
           </motion.div>
@@ -735,7 +742,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             </h2>
 
             <div className="space-y-6">
-              <span className="text-[#FF4D8D] text-lg font-bold tracking-tight block">
+              <span className="text-[#C2185B] text-lg font-bold tracking-tight block">
                 // 1 Onboarding Drop-off
               </span>
               <h3 className="text-xl md:text-2xl font-bold text-[#121115] leading-snug">
@@ -789,15 +796,15 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             transition={{ duration: 0.7 }}
             className="lg:col-span-5 space-y-6"
           >
-            <h3 className="text-3xl md:text-4xl lg:text-[40px] font-bold tracking-tight text-[#FF4D8D] leading-tight">
-              Insights that shaped our approach
+            <h3 className="text-3xl md:text-4xl lg:text-[40px] font-bold tracking-tight text-[#C2185B] leading-tight">
+              Insights that shaped the approach
             </h3>
             <div className="space-y-6 text-[#121115]/80 text-base md:text-lg leading-relaxed font-light">
               <p>
-                With each of the key themes we discovered from our research, we conducted affinity mapping to highlight insights that could guide us towards solutions.
+                For each key theme from the research, I ran affinity mapping to surface the insights that would guide the solutions.
               </p>
               <p>
-                From our insights, we derived solution criteria which acted as design principles: trust must be visible, onboarding must feel effortless, and monetization must always serve the user's goal of marriage, not the platform's goal of revenue extraction.
+                From those insights, I derived solution criteria which acted as design principles: trust must be visible, onboarding must feel effortless, and monetization must always serve the user's goal of marriage, not the platform's goal of revenue extraction.
               </p>
             </div>
           </motion.div>
@@ -809,11 +816,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             className="lg:col-span-7 flex justify-center lg:justify-end"
           >
             <div className="relative group transition-transform duration-500 hover:scale-[1.01] w-full max-w-[680px]">
-              <img
-                src="https://lh3.googleusercontent.com/d/12WN7iALTZr3kx0UBgbV8SoanU0LsKrXg"
+              <img width={2000} height={1447} loading="lazy"
+                src="/images/salams-12.webp"
                 alt="Insights affinity mapping diagram"
                 className="w-full h-auto object-contain rounded-[24px] shadow-xl"
-                referrerPolicy="no-referrer"
               />
             </div>
           </motion.div>
@@ -846,15 +852,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               className="space-y-8 flex flex-col items-start text-left"
             >
               <div className="w-[140px] h-[140px] rounded-full bg-[#FAF8F5] flex items-center justify-center">
-                <img
-                  src="https://lh3.googleusercontent.com/d/1uHz69kzl8_oBPOthzHy6pr9kf9hZE_Ih"
-                  alt="Safety over speed"
-                  className="w-[84px] h-[84px] object-contain"
-                  referrerPolicy="no-referrer"
-                />
+                <ShieldCheck aria-hidden="true" size={64} strokeWidth={1.5} className="text-[#C2185B]" />
               </div>
               <div className="space-y-4">
-                <h3 className="text-2xl md:text-[26px] font-bold text-[#FF4D8D] tracking-tight leading-tight">
+                <h3 className="text-2xl md:text-[26px] font-bold text-[#C2185B] tracking-tight leading-tight">
                   Safety over speed.
                 </h3>
                 <p className="text-base md:text-lg text-[#121115]/80 leading-relaxed font-light">
@@ -872,15 +873,14 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               className="space-y-8 flex flex-col items-start text-left"
             >
               <div className="w-[140px] h-[140px] rounded-full bg-[#FAF8F5] flex items-center justify-center">
-                <img
-                  src="https://lh3.googleusercontent.com/d/1zoF93tbN3kyUm7z3qp1L-ChFxOshSYlw"
+                <img width={200} height={200} loading="lazy"
+                  src="/images/salams-14.webp"
                   alt="Respect is the floor"
                   className="w-[84px] h-[84px] object-contain"
-                  referrerPolicy="no-referrer"
                 />
               </div>
               <div className="space-y-4">
-                <h3 className="text-2xl md:text-[26px] font-bold text-[#FF4D8D] tracking-tight leading-tight">
+                <h3 className="text-2xl md:text-[26px] font-bold text-[#C2185B] tracking-tight leading-tight">
                   Respect is the floor.
                 </h3>
                 <p className="text-base md:text-lg text-[#121115]/80 leading-relaxed font-light">
@@ -898,15 +898,14 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               className="space-y-8 flex flex-col items-start text-left"
             >
               <div className="w-[140px] h-[140px] rounded-full bg-[#FAF8F5] flex items-center justify-center">
-                <img
-                  src="https://lh3.googleusercontent.com/d/1FALRcwO22_I71jN4_nPhPBBQtvo5i1W7"
+                <img width={200} height={200} loading="lazy"
+                  src="/images/salams-15.webp"
                   alt="Your goal is our goal"
                   className="w-[84px] h-[84px] object-contain"
-                  referrerPolicy="no-referrer"
                 />
               </div>
               <div className="space-y-4">
-                <h3 className="text-2xl md:text-[26px] font-bold text-[#FF4D8D] tracking-tight leading-tight">
+                <h3 className="text-2xl md:text-[26px] font-bold text-[#C2185B] tracking-tight leading-tight">
                   Your goal is our goal.
                 </h3>
                 <p className="text-base md:text-lg text-[#121115]/80 leading-relaxed font-light">
@@ -924,7 +923,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
         <div className="max-w-7xl mx-auto space-y-32">
           
           <div className="text-center max-w-2xl mx-auto space-y-4">
-            <span className="text-[#FF4D8D] text-xs font-bold uppercase tracking-widest block">// DELIVERABLES</span>
+            <span className="text-[#C2185B] text-xs font-bold uppercase tracking-widest block">// DELIVERABLES</span>
             <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter">
               Detailed Solution
             </h2>
@@ -939,7 +938,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
           >
             <div className="lg:col-span-6 space-y-6">
-              <span className="text-[#FF4D8D] text-xs font-mono font-bold uppercase tracking-wider block">// REDESIGNED ONBOARDING</span>
+              <span className="text-[#C2185B] text-xs font-mono font-bold uppercase tracking-wider block">// REDESIGNED ONBOARDING</span>
               <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight">Redesigned Onboarding</h3>
               <div className="space-y-4 text-sm md:text-base text-[#121115]/80 leading-relaxed">
                 <p>
@@ -953,11 +952,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             {/* Screen Image with Elegant Phone Frame */}
             <div className="lg:col-span-6 flex justify-center">
               <div className="relative max-w-[280px] w-full group transition-transform duration-500 hover:scale-[1.03]">
-                <img
-                  src="https://lh3.googleusercontent.com/d/1MJmpv238hy_tvO1PL_O5pZ9XLxlohzeU"
+                <img width={800} height={1501} loading="lazy"
+                  src="/images/salams-16.webp"
                   alt="Redesigned Onboarding High Fidelity Screen"
                   className="w-full h-auto object-contain rounded-[40px] border-[8px] border-[#121115] shadow-2xl"
-                  referrerPolicy="no-referrer"
                 />
               </div>
             </div>
@@ -972,7 +970,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center lg:flex-row-reverse"
           >
             <div className="lg:col-span-6 lg:order-2 space-y-6">
-              <span className="text-[#FF4D8D] text-xs font-mono font-bold uppercase tracking-wider block">// SECURITY FLOW</span>
+              <span className="text-[#C2185B] text-xs font-mono font-bold uppercase tracking-wider block">// SECURITY FLOW</span>
               <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight">ID Verification & Trust System</h3>
               <div className="space-y-4 text-sm md:text-base text-[#121115]/80 leading-relaxed">
                 <p>
@@ -986,11 +984,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             {/* Screen Image with Elegant Phone Frame */}
             <div className="lg:col-span-6 lg:order-1 flex justify-center">
               <div className="relative max-w-[280px] w-full group transition-transform duration-500 hover:scale-[1.03]">
-                <img
-                  src="https://lh3.googleusercontent.com/d/1xryN5_Fxx1Ur8MUc3rA5kFjkw5nIm0Ci"
+                <img width={800} height={1501} loading="lazy"
+                  src="/images/salams-17.webp"
                   alt="ID Verification High Fidelity Screen"
                   className="w-full h-auto object-contain rounded-[40px] border-[8px] border-[#121115] shadow-2xl"
-                  referrerPolicy="no-referrer"
                 />
               </div>
             </div>
@@ -1005,7 +1002,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
           >
             <div className="lg:col-span-6 space-y-6">
-              <span className="text-[#FF4D8D] text-xs font-mono font-bold uppercase tracking-wider block">// ENGAGEMENT STRATEGY</span>
+              <span className="text-[#C2185B] text-xs font-mono font-bold uppercase tracking-wider block">// ENGAGEMENT STRATEGY</span>
               <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight">Anti-Ghosting Mechanic</h3>
               <div className="space-y-4 text-sm md:text-base text-[#121115]/80 leading-relaxed">
                 <p>
@@ -1019,11 +1016,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             {/* Screen Image with Elegant Phone Frame */}
             <div className="lg:col-span-6 flex justify-center">
               <div className="relative max-w-[280px] w-full group transition-transform duration-500 hover:scale-[1.03]">
-                <img
-                  src="https://lh3.googleusercontent.com/d/1cxUHrsOABciHZc3puayZuTEcwfS53F5P"
+                <img width={800} height={1501} loading="lazy"
+                  src="/images/salams-18.webp"
                   alt="Anti-Ghosting High Fidelity Screen"
                   className="w-full h-auto object-contain rounded-[40px] border-[8px] border-[#121115] shadow-2xl"
-                  referrerPolicy="no-referrer"
                 />
               </div>
             </div>
@@ -1038,7 +1034,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center lg:flex-row-reverse"
           >
             <div className="lg:col-span-6 lg:order-2 space-y-6">
-              <span className="text-[#FF4D8D] text-xs font-mono font-bold uppercase tracking-wider block">// REVENUE SHIELD</span>
+              <span className="text-[#C2185B] text-xs font-mono font-bold uppercase tracking-wider block">// REVENUE SHIELD</span>
               <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight">Monetization That Doesn't Manipulate</h3>
               <div className="space-y-4 text-sm md:text-base text-[#121115]/80 leading-relaxed">
                 <p>
@@ -1052,11 +1048,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             {/* Screen Image with Elegant Phone Frame */}
             <div className="lg:col-span-6 lg:order-1 flex justify-center">
               <div className="relative max-w-[280px] w-full group transition-transform duration-500 hover:scale-[1.03]">
-                <img
-                  src="https://lh3.googleusercontent.com/d/1qglqoh8VzYQG2DeFWDttZ6hXTUmADSVx"
+                <img width={800} height={1502} loading="lazy"
+                  src="/images/salams-19.webp"
                   alt="Monetization High Fidelity Screen"
                   className="w-full h-auto object-contain rounded-[40px] border-[8px] border-[#121115] shadow-2xl"
-                  referrerPolicy="no-referrer"
                 />
               </div>
             </div>
@@ -1069,11 +1064,11 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
       <section className="bg-[#FF4D8D] text-[#121115] py-24 px-6 md:px-12 border-t border-[#121115]/10" id="salams-design-system">
         <div className="max-w-5xl mx-auto space-y-16">
           <div className="space-y-6">
-            <span className="text-[#121115]/60 text-xs font-bold uppercase tracking-widest block">// DESIGN INFRASTRUCTURE</span>
+            <span className="text-[#121115] text-xs font-bold uppercase tracking-widest block">// DESIGN INFRASTRUCTURE</span>
             <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-tight">
               Building a Design System
             </h2>
-            <p className="text-white text-base md:text-xl font-medium max-w-3xl leading-relaxed">
+            <p className="text-[#121115] text-base md:text-xl font-medium max-w-3xl leading-relaxed">
               Building a design system made the non-linear, iterative process much smoother. Creating color and typography tokens, and reusable components allowed me to make consistent updates across the product.
             </p>
           </div>
@@ -1087,11 +1082,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               transition={{ duration: 0.6 }}
               className="w-full rounded-[24px] md:rounded-[40px] overflow-hidden shadow-xl border border-[#121115]/10"
             >
-              <img 
-                src="https://lh3.googleusercontent.com/d/1BQIRGFtxPtDeJcUMAID_82AShr8ak-Ee" 
+              <img width={2000} height={948} loading="lazy" 
+                src="/images/salams-20.webp" 
                 alt="Salams Design System - Icons & Foundational Tokens" 
                 className="w-full h-auto object-contain select-none bg-white"
-                referrerPolicy="no-referrer"
               />
             </motion.div>
 
@@ -1102,11 +1096,10 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="w-full rounded-[24px] md:rounded-[40px] overflow-hidden shadow-xl border border-[#121115]/10"
             >
-              <img 
-                src="https://lh3.googleusercontent.com/d/1Bw-9N4UuabTtoMx2dU1POwAZabLkNarF" 
+              <img width={2000} height={563} loading="lazy" 
+                src="/images/salams-21.webp" 
                 alt="Salams Design System - Interactive Components & Buttons" 
                 className="w-full h-auto object-contain select-none bg-white"
-                referrerPolicy="no-referrer"
               />
             </motion.div>
 
@@ -1117,16 +1110,17 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="w-full rounded-[24px] md:rounded-[40px] overflow-hidden shadow-xl border border-[#121115]/10"
             >
-              <img 
-                src="https://lh3.googleusercontent.com/d/1S_xZz_kqrva6BLZGJrnVk5eiYZeWIrTj" 
+              <img width={2000} height={488} loading="lazy" 
+                src="/images/salams-22.webp" 
                 alt="Salams Design System - State Tags & Layout Views" 
                 className="w-full h-auto object-contain select-none bg-white"
-                referrerPolicy="no-referrer"
               />
             </motion.div>
           </div>
         </div>
       </section>
+
+      <CaseStudyLeadership content={leadership} accent="#C2185B" />
 
       {/* 15. BRAND SIGNATURE FOOTER (Grey & White gradient, Matches UMER logo from PDF) */}
       <section className="bg-white py-24 px-6 border-t border-[#121115]/5 relative overflow-hidden" id="salams-footer">
@@ -1135,18 +1129,18 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-8">
             {/* Contact Card */}
             <div className="space-y-4">
-              <h4 className="text-xs uppercase font-black tracking-widest text-[#121115]/40">// Contact</h4>
+              <h4 className="text-xs uppercase font-black tracking-widest text-[#121115]/70">// Contact</h4>
               <ul className="space-y-2.5 text-sm">
                 <li className="flex items-center gap-2.5 text-[#121115]/80">
-                  <MapPin size={16} className="text-[#FF4D8D]" />
+                  <MapPin size={16} className="text-[#C2185B]" />
                   <span>Dubai, UAE</span>
                 </li>
                 <li className="flex items-center gap-2.5 text-[#121115]/80">
-                  <Mail size={16} className="text-[#FF4D8D]" />
+                  <Mail size={16} className="text-[#C2185B]" />
                   <a href="mailto:umerkhalid141@gmail.com" className="hover:underline">umerkhalid141@gmail.com</a>
                 </li>
                 <li className="flex items-center gap-2.5 text-[#121115]/80">
-                  <Phone size={16} className="text-[#FF4D8D]" />
+                  <Phone size={16} className="text-[#C2185B]" />
                   <span>+971 52 134 5139</span>
                 </li>
               </ul>
@@ -1154,7 +1148,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
 
             {/* Page Sitemap */}
             <div className="space-y-4">
-              <h4 className="text-xs uppercase font-black tracking-widest text-[#121115]/40">// Case study context</h4>
+              <h4 className="text-xs uppercase font-black tracking-widest text-[#121115]/70">// Case study context</h4>
               <ul className="space-y-2.5 text-sm text-[#121115]/80">
                 <li>Acquisition: Match Group 2023</li>
                 <li>Design Tenure: 5 Years</li>
@@ -1165,8 +1159,8 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             {/* Quick Action */}
             <div className="space-y-4 flex flex-col justify-between">
               <div>
-                <h4 className="text-xs uppercase font-black tracking-widest text-[#121115]/40">// Actions</h4>
-                <p className="text-xs text-[#121115]/60 mt-1">Acquisition strategy, design system tokens, and full UX flow implementation.</p>
+                <h4 className="text-xs uppercase font-black tracking-widest text-[#121115]/70">// Actions</h4>
+                <p className="text-xs text-[#121115]/60 mt-1">Design system tokens and full UX flow implementation.</p>
               </div>
               <button 
                 onClick={onClose}
@@ -1188,7 +1182,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
             >
               // UMER
             </motion.h2>
-            <p className="text-xs text-[#121115]/40 uppercase tracking-[0.3em] mt-4">
+            <p className="text-xs text-[#121115]/70 uppercase tracking-[0.3em] mt-4">
               © 2026 UMER. ALL RIGHTS RESERVED.
             </p>
           </div>

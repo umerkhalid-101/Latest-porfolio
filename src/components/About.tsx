@@ -1,92 +1,80 @@
-import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef } from 'react';
+import { motion } from 'motion/react';
+
+// Titles and dates follow LinkedIn (source of truth).
+const experiences = [
+  {
+    years: "'18 to '19",
+    dates: "Sep 2018 to Nov 2019",
+    role: "UX Designer",
+    roleColor: "bg-[#C62828]",
+    company: "Truebill (now Rocket Money)",
+    description: "Ran 30+ usability and validation studies across account linking, subscription detection, and transactions. Improved financial data accuracy by 22% and reduced account-linking drop-offs by 18%.",
+    logoUrl: "/images/timeline-01.webp"
+  },
+  {
+    years: "'18 to '23",
+    dates: "May 2018 to Sep 2023",
+    role: "Junior UX Designer to Senior Product Designer",
+    roleColor: "bg-[#AD1457]",
+    company: "Salams (acq. Match Group)",
+    description: "Joined as the first design hire on a small team building the app from the ground up, and grew into Senior over five years as it scaled past a million users. Led the full app redesign, ran pricing and feature experiments, and worked with the founders through to the Match Group acquisition in 2023.",
+    logoUrl: "/images/timeline-02.webp"
+  },
+  {
+    years: "'23 to '24",
+    dates: "Sep 2023 to Oct 2024",
+    role: "Senior Product Designer, then Design Manager",
+    roleColor: "bg-[#616161]",
+    company: "Hauraki (Zewst ecosystem)",
+    description: "Managed a team of 2 to 3 designers and set design direction across four products. Shipped Zewst POS to 500+ restaurant merchants, owned the Zewards loyalty platform end to end, and designed Zewst Phone business calling with live transcription.",
+    logoUrl: "/images/timeline-03.webp"
+  },
+  {
+    years: "'24 to '25",
+    dates: "Oct 2024 to Sep 2025",
+    role: "Product Team Lead",
+    roleColor: "bg-[#2E7D32]",
+    company: "Axion Dynamic",
+    description: "Managed a team of 2 to 3 designers. Led product and design for Jobbit, an ERP platform for supply chain operations, from discovery through delivery with the founders and engineering. Built a scalable Figma design system.",
+    logoUrl: "/images/timeline-05.webp"
+  },
+  {
+    years: "'25 to '26",
+    dates: "Oct 2025 to Mar 2026",
+    role: "Product Designer",
+    roleColor: "bg-[#00695C]",
+    company: "Unita Worldwide",
+    description: "Sole designer on a Swiss-headquartered global B2B verified business network with offices in Geneva, Tirana, and Dubai. Owned the design system, the discovery experience, and onboarding, and ran pricing tests with the founders to decide what to launch with.",
+    logoUrl: "/images/timeline-06.webp"
+  },
+  {
+    years: "'26 to now",
+    dates: "Mar 2026 to present",
+    role: "Design Specialist",
+    roleColor: "bg-[#37474F]",
+    company: "MBLM Dubai",
+    description: "Designing bilingual government and enterprise web portals for clients in the UAE, plus an AI product website recognized with two W3 Silver Awards.",
+    logoUrl: null
+  }
+];
 
 export function About() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  // More nuanced scroll: 
-  // 0% - 15%: Heading moves up/off
-  // 15% - 100%: Timeline sweeps across
-  const x = useTransform(scrollYProgress, [0.15, 0.95], ["0%", "-82%"]);
-
-  const experiences = [
-    {
-      years: "'18 — '19",
-      role: "UX DESIGNER",
-      roleColor: "bg-[#E94336]",
-      company: "ROCKET MONEY",
-      description: "Ran 30+ usability and validation studies across key flows. Focused on account linking, subscription detection, and transactions. Improved financial data accuracy by 22%. Reduced account-linking drop-offs by 18%.",
-      logo: "Rocket Money",
-      logoUrl: "https://drive.google.com/thumbnail?id=1gat-SXd5zqD_ptXcoWTb00iS68KIMVCz&sz=w1000"
-    },
-    {
-      years: "'18 — '23 —",
-      role: "SENIOR PRODUCT DESIGNER",
-      roleColor: "bg-[#D91B87]",
-      company: "SALAMS (ACQ. MATCH GROUP)",
-      description: "SALAMS (ACQ. MATCH GROUP) First design hire. Grew into Senior over five years on a Muslim dating app serving millions. Led the full app redesign through the Match Group acquisition in 2023. Owned onboarding, matching, chat, profile cards etc",
-      logo: "Salams",
-      logoUrl: "https://drive.google.com/thumbnail?id=1HK0mt17u_KqSSN1VezhF7ftPrgRKCU6R&sz=w1000"
-    },
-    {
-      years: "'23 — '24",
-      role: "DESIGN MANAGER",
-      roleColor: "bg-[#717171]",
-      company: "HAURAKI (ZEWST ECOSYSTEM)",
-      description: "Shipped Zewst POS to 500+ restaurant merchants. Owned Zewards loyalty platform end-to-end across merchant app, customer wallet, and Apple/Google Wallet. Designed Zewst Phone business comms with live transcription",
-      logo: "Hauraki",
-      logoUrl: "https://drive.google.com/thumbnail?id=1HvoNvX7moDNVvPe7-2pj0Q9s65bxIoe7&sz=w1000"
-    },
-    {
-      years: "'24 — '25",
-      role: "HEAD OF DESIGN",
-      roleColor: "bg-[#2A7B4B]",
-      company: "FOLIONOMICS",
-      description: "Owned design strategy end-to-end for a crypto portfolio platform. Unified wallet view across EVM, Bitcoin, Solana, and 60+ chains. Retention lifted 25% after the unified view shipped.",
-      logo: "Folionomics",
-      logoUrl: "https://drive.google.com/thumbnail?id=1S0DzdRHwxSPF_nC523aXvOQ-4S7sHBGj&sz=w1000"
-    },
-    {
-      years: "2025 —",
-      role: "LEAD PRODUCT DESIGNER",
-      roleColor: "bg-[#009BB8]",
-      company: "AXION DYNAMIC",
-      description: "Led end-to-end design for Jobbit, an ERP platform for supply chain operations. Built a scalable Figma design system and turned complex workflows into clear, usable interfaces.",
-      logo: "Axion Dynamic",
-      logoUrl: "https://drive.google.com/thumbnail?id=1f-buVskYSHUz43of9RL_KCK8v-PqcQVG&sz=w1000"
-    },
-    {
-      years: "'26 — NOW",
-      role: "LEAD PRODUCT MANAGER",
-      roleColor: "bg-[#005E6A]",
-      company: "UNITA",
-      description: "Sole designer on a pre-launch B2B marketplace for UAE/GCC. Shipped design system from scratch with a dark teal and burnt orange language. Owning 10+ modules across 30 to 50 screens.",
-      logo: "Unita",
-      logoUrl: "https://drive.google.com/thumbnail?id=1uDFIVIFQipX_eSOUSPezG6D1ScVNMmUG&sz=w1000"
-    }
-  ];
-
   return (
-    <section id="about" ref={containerRef} className="relative z-40 h-[450vh] bg-white text-black">
-      {/* 1. Header Section - Flows naturally with the scroll at first */}
-      <div className="w-full max-w-[1200px] mx-auto px-6 pt-12 md:pt-24 pb-12">
+    <section id="about" className="relative z-40 bg-white text-black">
+      <div className="w-full max-w-[1200px] mx-auto px-6 pt-12 md:pt-24 pb-16 md:pb-24">
         <div className="flex flex-col lg:flex-row justify-start items-start gap-10 md:gap-24">
-          <div className="w-full md:max-w-[700px]">
+          <div className="w-full md:max-w-[760px]">
             <div className="flex items-center gap-3 mb-6 md:mb-10">
               <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-black" />
               <span className="text-base md:text-xl font-medium tracking-tight">About me</span>
             </div>
-            
+
             <h2 className="font-display text-3xl md:text-[56px] leading-[1.2] md:leading-[1.1] uppercase tracking-tighter text-black">
-              UMER IS <span className="text-[#6F6F6F]">A PRODUCT DESIGNER</span> BUILDING CLEAR, <span className="text-[#6F6F6F]">USABLE INTERFACES</span> FOR EVERY SCREEN USERS ACTUALLY SHOW UP ON.
+              I lead design for <span className="text-[#6F6F6F]">products people actually use:</span> setting direction, growing designers, and <span className="text-[#6F6F6F]">turning business goals into shipped work.</span>
             </h2>
           </div>
 
-          <div className="relative w-32 h-32 md:w-64 md:h-64 flex items-center justify-center shrink-0">
+          <div className="relative w-32 h-32 md:w-64 md:h-64 flex items-center justify-center shrink-0" aria-hidden="true">
             <div className="relative w-full h-full transform scale-90 md:scale-100">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full rotate-[45deg]">
                  <div className="absolute top-[18%] left-1/2 -translate-x-1/2 w-[20%] h-[40%] bg-[#F5F5F5] rounded-full" />
@@ -101,51 +89,57 @@ export function About() {
         </div>
       </div>
 
-      {/* 2. Sticky Horizontal Timeline Section */}
-      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-        <motion.div style={{ x }} className="flex gap-12 md:gap-32 px-[10vw]">
-          {experiences.map((exp, idx) => (
-            <div key={idx} className="w-[280px] md:w-[600px] flex-shrink-0">
-              <div className="mb-6 md:mb-8">
-                <h3 className="font-display text-6xl md:text-[150px] leading-none mb-6 md:mb-10 tracking-tighter">{exp.years}</h3>
-                <div className="flex">
-                  <span className={`${exp.roleColor} text-white text-[10px] md:text-[14px] font-semibold px-4 py-1.5 md:px-6 md:py-2 tracking-widest uppercase inline-block`}>
-                    {exp.role}
-                  </span>
-                </div>
-              </div>
-              
-              <div className="h-[1px] bg-black/10 w-full mb-6 md:mb-10" />
-              
-              <div className="mb-8 md:mb-12 max-w-[480px]">
-                <h4 className="text-[12px] md:text-[16px] font-semibold tracking-[0.05em] mb-2 md:mb-4 uppercase">{exp.company}</h4>
-                <p className="text-[12px] md:text-[15px] leading-[1.6] md:leading-[1.65] text-black/80 font-sans">
+    </section>
+  );
+}
+
+export function Experience() {
+  return (
+    <section id="experience" className="relative z-30 bg-white text-black">
+      <div className="w-full max-w-[1200px] mx-auto px-6 pt-8 pb-20 md:pb-32">
+        <h2 className="font-display text-4xl md:text-[80px] leading-none uppercase tracking-tighter mb-8 md:mb-14">Experience</h2>
+        <ol className="border-t border-black/10">
+          {experiences.map((exp) => (
+            <motion.li
+              key={exp.company}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-1 md:grid-cols-[240px_1fr_160px] gap-4 md:gap-10 py-8 md:py-10 border-b border-black/10 items-start"
+            >
+              <p className="font-display text-4xl md:text-[44px] leading-none tracking-tight uppercase whitespace-nowrap">{exp.years}</p>
+
+              <div>
+                <span className={`${exp.roleColor} text-white text-[10px] md:text-[12px] font-semibold px-3 py-1 md:px-4 md:py-1.5 tracking-widest uppercase inline-block mb-3`}>
+                  {exp.role}
+                </span>
+                <h4 className="text-[14px] md:text-[17px] font-semibold tracking-[0.03em] uppercase">{exp.company}</h4>
+                <p className="text-[12px] md:text-[13px] text-black/60 mb-3">{exp.dates}</p>
+                <p className="text-[14px] md:text-[15px] leading-[1.65] text-black/80 max-w-[640px]">
                   {exp.description}
                 </p>
               </div>
-              
-              <div className="w-full aspect-[16/10] bg-[#EEEEEE] rounded-[30px] md:rounded-[50px] overflow-hidden shadow-[inset_0_2px_10px_rgba(0,0,0,0.02)] group transition-all duration-500 border border-black/[0.03]">
+
+              <div className="hidden md:block w-full aspect-[16/10] bg-[#EEEEEE] rounded-[20px] overflow-hidden border border-black/[0.03]">
                 {exp.logoUrl ? (
-                  <img 
-                    src={exp.logoUrl} 
-                    alt={exp.company} 
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" 
+                  <img
+                    src={exp.logoUrl}
+                    alt={`${exp.company} logo`}
+                    width={476}
+                    height={312}
+                    loading="lazy"
+                    className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center p-12">
-                    <div className="flex flex-col items-center gap-4 opacity-20 group-hover:opacity-40 transition-opacity">
-                       <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-black flex items-center justify-center">
-                          <span className="font-display text-2xl md:text-3xl">{exp.logo.charAt(0)}</span>
-                       </div>
-                       <span className="font-display text-[14px] md:text-[16px] uppercase tracking-widest">{exp.logo}</span>
-                    </div>
+                  <div className="w-full h-full flex items-center justify-center" aria-hidden="true">
+                    <span className="font-display text-[14px] uppercase tracking-widest text-black/40">{exp.company}</span>
                   </div>
                 )}
               </div>
-            </div>
+            </motion.li>
           ))}
-        </motion.div>
+        </ol>
       </div>
     </section>
   );

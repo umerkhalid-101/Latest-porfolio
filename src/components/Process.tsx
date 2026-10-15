@@ -1,10 +1,10 @@
 import { motion } from 'motion/react';
 
 const steps = [
-  { id: '01', title: 'DISCOVER' },
-  { id: '02', title: 'ARCHITECT' },
-  { id: '03', title: 'DESIGN' },
-  { id: '04', title: 'SHIP & LEARN' }
+  { id: '01', title: 'DISCOVER', body: 'Talk to users and stakeholders to find the real problem and what it is worth to the business.' },
+  { id: '02', title: 'ARCHITECT', body: 'Shape the information model, flows, and scope with product and engineering before any pixels.' },
+  { id: '03', title: 'DESIGN', body: 'Prototype, test with users, and build on a shared design system so the team moves fast.' },
+  { id: '04', title: 'SHIP & LEARN', body: 'Stay close to engineering through release, then measure and feed results into the roadmap.' }
 ];
 
 export function Process() {
@@ -17,7 +17,7 @@ export function Process() {
           viewport={{ once: true }}
           className="font-display text-4xl md:text-[80px] uppercase tracking-tighter mb-6 md:mb-8 leading-[1.1] md:leading-[1] text-black"
         >
-          ASSESS, DEPLOY, <br className="hidden md:block" /> AND OPERATE
+          HOW A PROJECT <br className="hidden md:block" /> RUNS
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0 }}
@@ -26,7 +26,7 @@ export function Process() {
           transition={{ delay: 0.2 }}
           className="text-[#6F6F6F] text-base md:text-xl mb-16 md:mb-24 max-w-xl mx-auto font-medium"
         >
-          We’re with you all the way from the pilot to beyond.
+          From the first conversation to the release after launch.
         </motion.p>
 
         {/* Process Visual */}
@@ -39,7 +39,7 @@ export function Process() {
               <div key={idx} className="flex flex-col items-center group">
                 {/* Pentagon Icon */}
                 <div className="relative mb-12 z-10 hidden md:block">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="black">
+                  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="black">
                     <path d="M12 2L21 8.5L17.5 19H6.5L3 8.5L12 2Z" />
                   </svg>
                 </div>
@@ -57,14 +57,17 @@ export function Process() {
                     duration: 0.8,
                     ease: [0.16, 1, 0.3, 1]
                   }}
-                  className="bg-white hover:bg-black rounded-[30px] md:rounded-[40px] p-8 md:p-14 w-full aspect-[4/3] md:aspect-auto md:h-[260px] flex flex-col items-center justify-center shadow-sm transition-all duration-300 cursor-default group"
+                  className="bg-white hover:bg-black rounded-[30px] md:rounded-[40px] p-8 md:p-8 lg:p-10 w-full md:min-h-[300px] flex flex-col items-center justify-start shadow-sm transition-all duration-300 cursor-default group"
                 >
-                  <span className="text-[10px] md:text-[13px] font-semibold tracking-[0.2em] text-[#888888] group-hover:text-white/40 mb-3 md:mb-5 block uppercase transition-colors">
+                  <span className="text-[10px] md:text-[13px] font-semibold tracking-[0.2em] text-[#6F6F6F] group-hover:text-white/70 mb-3 md:mb-5 block uppercase transition-colors">
                     STEP {step.id}
                   </span>
-                  <h3 className="font-display text-xl md:text-[34px] uppercase tracking-tight text-black group-hover:text-white transition-colors duration-300">
+                  <h3 className="font-display text-xl md:text-[24px] lg:text-[30px] uppercase tracking-tight whitespace-nowrap text-black group-hover:text-white transition-colors duration-300 mb-4">
                     {step.title}
                   </h3>
+                  <p className="text-[14px] md:text-[15px] leading-[1.6] text-[#555555] group-hover:text-white/80 transition-colors duration-300">
+                    {step.body}
+                  </p>
                 </motion.div>
               </div>
             ))}

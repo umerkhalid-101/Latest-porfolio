@@ -20,6 +20,8 @@ export default defineConfig(({mode}) => {
         input: {
           main: path.resolve(__dirname, 'index.html'),
           'salams-casestudy': path.resolve(__dirname, 'salams-casestudy.html'),
+          'zewards-casestudy': path.resolve(__dirname, 'zewards-casestudy.html'),
+          'folionomics-casestudy': path.resolve(__dirname, 'folionomics-casestudy.html'),
         },
       },
     },
