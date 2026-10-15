@@ -15,10 +15,9 @@ export function Header() {
   }, []);
 
   const navItems = [
+    { label: 'WORK', href: '#work', hasCircle: true },
     { label: 'ABOUT', href: '#about', hasCircle: true },
     { label: 'HOW I LEAD', href: '#how-i-lead', hasCircle: true },
-    { label: 'WORK', href: '#work', hasCircle: true },
-    { label: 'WHAT I DO', href: '#what-i-do', hasCircle: true },
     { label: 'CONTACT', href: '#contact', hasCircle: true },
   ];
 

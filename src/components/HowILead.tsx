@@ -26,6 +26,13 @@ const cards = [
   }
 ];
 
+const steps = [
+  { title: 'Discover', body: 'Talk to users and stakeholders to find the real problem and what it is worth to the business.' },
+  { title: 'Architect', body: 'Shape the information model, flows, and scope with product and engineering before any pixels.' },
+  { title: 'Design', body: 'Prototype, test with users, and build on a shared design system so the team moves fast.' },
+  { title: 'Ship and learn', body: 'Stay close to engineering through release, then measure and feed results into the roadmap.' }
+];
+
 const outcomes: { value: number | string; prefix?: string; suffix?: string; context: string }[] = [
   { value: 'Acquired', context: 'Salams, through the Match Group acquisition' },
   { value: 500, suffix: '+', context: 'Merchants on Zewst POS' },
@@ -71,7 +78,7 @@ function StackCard({ i, total, progress, className, children }: { i: number; tot
 export function HowILead() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] });
-  const total = cards.length + 1;
+  const total = cards.length + 2;
   const [active, setActive] = useState(0);
   useMotionValueEvent(scrollYProgress, 'change', (v) => setActive(Math.min(total - 1, Math.floor(v * total))));
 
@@ -82,7 +89,7 @@ export function HowILead() {
           <RevealText text="How I" /><br /><RevealText text="lead" className="text-[#FF6B35]" delay={0.1} />
         </h2>
         <p className="text-[15px] md:text-[18px] leading-[1.6] text-white/80 max-w-[380px] md:pb-6">
-          Direction, people, and the decisions in between. Here is what I bring to a design team.
+          Direction, people, and the decisions in between. Here's what I bring to a design team, and how I work day to day.
         </p>
       </div>
 
@@ -113,9 +120,25 @@ export function HowILead() {
           </StackCard>
         ))}
 
-        <StackCard i={cards.length} total={total} progress={scrollYProgress} className="bg-[#141414] text-white border border-white/10">
+        <StackCard i={cards.length} total={total} progress={scrollYProgress} className="bg-white text-black">
           <div className="flex justify-between items-start gap-6">
-            <span className="font-display text-[64px] md:text-[200px] leading-[0.8] tracking-tighter text-[#FF6B35]" aria-hidden="true">04</span>
+            <span className="font-display text-[64px] md:text-[200px] leading-[0.8] tracking-tighter" aria-hidden="true">04</span>
+            <h3 className="font-display text-5xl md:text-[110px] leading-[0.9] uppercase tracking-tighter text-right">How I work</h3>
+          </div>
+          <ol className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-6 md:gap-x-10 mt-10">
+            {steps.map((step, i) => (
+              <li key={step.title} className="border-t border-black/20 pt-5">
+                <p className="text-[12px] font-semibold uppercase tracking-widest text-black/60 mb-2">Step {i + 1}</p>
+                <p className="text-[20px] md:text-[26px] font-bold leading-tight mb-2">{step.title}</p>
+                <p className="text-[14px] md:text-[16px] leading-[1.55] text-black/80">{step.body}</p>
+              </li>
+            ))}
+          </ol>
+        </StackCard>
+
+        <StackCard i={cards.length + 1} total={total} progress={scrollYProgress} className="bg-[#141414] text-white border border-white/10">
+          <div className="flex justify-between items-start gap-6">
+            <span className="font-display text-[64px] md:text-[200px] leading-[0.8] tracking-tighter text-[#FF6B35]" aria-hidden="true">05</span>
             <h3 className="font-display text-5xl md:text-[110px] leading-[0.9] uppercase tracking-tighter text-right">Outcomes</h3>
           </div>
           <ul className="grid grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-8 md:gap-x-10 mt-10">
