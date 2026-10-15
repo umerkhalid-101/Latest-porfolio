@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { ArrowLeft, Mail, MapPin } from 'lucide-react';
 import { useEffect, type MouseEvent, type ReactNode } from 'react';
 import { CaseStudyLeadership, type LeadershipContent } from './CaseStudyLeadership';
+import { scrollToImmediate } from '../lib/smoothScroll';
 
 export interface CaseStudyImage {
   src: string;
@@ -50,7 +51,7 @@ function Img({ image, className = '' }: { image: CaseStudyImage; className?: str
 
 export function CaseStudyPage({ data, onClose }: { data: CaseStudyData; onClose: () => void }) {
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    scrollToImmediate(0);
   }, [data.slug]);
 
   const back = (e: MouseEvent) => {

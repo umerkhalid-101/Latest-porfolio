@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { RevealText } from './RevealText';
 
 const steps = [
   { id: '01', title: 'DISCOVER', body: 'Talk to users and stakeholders to find the real problem and what it is worth to the business.' },
@@ -17,7 +18,7 @@ export function Process() {
           viewport={{ once: true }}
           className="font-display text-4xl md:text-[80px] uppercase tracking-tighter mb-6 md:mb-8 leading-[1.1] md:leading-[1] text-black"
         >
-          HOW A PROJECT <br className="hidden md:block" /> RUNS
+          <RevealText text="HOW I WORK" />
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0 }}
@@ -26,7 +27,7 @@ export function Process() {
           transition={{ delay: 0.2 }}
           className="text-[#6F6F6F] text-base md:text-xl mb-16 md:mb-24 max-w-xl mx-auto font-medium"
         >
-          From the first conversation to the release after launch.
+          The same four steps on every project, from the first conversation to the release after launch.
         </motion.p>
 
         {/* Process Visual */}

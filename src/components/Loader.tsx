@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect, useState } from 'react';
 
-const words = ["CREATIVE", "STRATEGIST", "DESIGNER", "CRAFTER", "UMER"];
+const words = ["DESIGN", "LEAD", "SHIP", "REPEAT", "UMER"];
 
 export function Loader({ onComplete }: { onComplete: () => void, key?: string | number }) {
   const [index, setIndex] = useState(0);
@@ -79,13 +79,13 @@ export function Loader({ onComplete }: { onComplete: () => void, key?: string | 
       {/* Footer Info */}
       <div className="absolute bottom-10 left-10 right-10 flex justify-between items-end border-t border-white/10 pt-6">
         <div className="flex flex-col gap-1">
-          <p className="text-[10px] tracking-widest text-white/70 uppercase font-medium">DESIGN & STRATEGY PORTFOLIO</p>
-          <p className="text-[10px] tracking-widest text-white/70 uppercase font-medium">© 2026 EDITION</p>
+          <p className="text-[10px] tracking-widest text-white/70 uppercase font-medium">PORTFOLIO OF MUHAMMAD UMER</p>
+          <p className="text-[10px] tracking-widest text-white/70 uppercase font-medium">LEAD PRODUCT DESIGNER · DUBAI</p>
         </div>
         
         <div className="flex items-baseline gap-2">
            <span className="font-display text-2xl text-white">{counter}</span>
-           <span className="text-[10px] tracking-widest text-white/70 uppercase font-medium">PROCESS</span>
+           <span className="text-[10px] tracking-widest text-white/70 uppercase font-medium">LOADING</span>
         </div>
       </div>
     </motion.div>

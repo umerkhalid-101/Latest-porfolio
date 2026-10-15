@@ -36,9 +36,15 @@
 
 :root {
   --primary-red: #FE330A;
-  scroll-behavior: smooth;
+}
+
+/* Never scroll sideways, and stop the macOS rubber-band from revealing the page background */
+html,
+body {
+  overflow-x: clip;
+  overscroll-behavior: none;
 }
 
 body {
-  @apply bg-[#FE330A] text-white font-sans antialiased;
+  @apply bg-black text-white font-sans antialiased;
 }

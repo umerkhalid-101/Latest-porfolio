@@ -1,4 +1,14 @@
-import { motion } from 'motion/react';
+import { useEffect, useState } from 'react';
+
+function DubaiTime() {
+  const fmt = () => new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Dubai', hour: '2-digit', minute: '2-digit' }).format(new Date());
+  const [time, setTime] = useState(fmt);
+  useEffect(() => {
+    const id = setInterval(() => setTime(fmt()), 15000);
+    return () => clearInterval(id);
+  }, []);
+  return <time className="tabular-nums">{time}</time>;
+}
 
 export function Footer() {
   return (
@@ -17,7 +27,7 @@ export function Footer() {
           <div className="space-y-6">
             <h3 className="font-bold text-sm tracking-widest uppercase">CONTACT</h3>
             <div className="space-y-2 text-sm opacity-80 font-medium">
-              <p>Dubai, UAE</p>
+              <p>Dubai, UAE · <DubaiTime /> local time</p>
               <p>
                 <a href="mailto:umerkhalid141@gmail.com" className="hover:underline underline-offset-4">
                   umerkhalid141@gmail.com
@@ -65,9 +75,12 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="flex justify-end pt-10 border-t border-white/5">
+        <div className="flex flex-col md:flex-row justify-between gap-4 pt-10 border-t border-white/10">
           <p className="text-[10px] md:text-xs tracking-widest text-white/60 uppercase">
-            © 2026 UMER. ALL RIGHTS RESERVED.
+            Designed and built by me, in Figma and React.
+          </p>
+          <p className="text-[10px] md:text-xs tracking-widest text-white/60 uppercase">
+            © 2026 Muhammad Umer
           </p>
         </div>
       </div>

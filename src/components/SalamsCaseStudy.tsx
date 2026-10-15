@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { useEffect } from 'react';
 import { CaseStudyLeadership, type LeadershipContent } from './CaseStudyLeadership';
+import { scrollToImmediate } from '../lib/smoothScroll';
 
 const leadership: LeadershipContent = {
   roleAndTeam: (
@@ -57,7 +58,7 @@ interface SalamsCaseStudyProps {
 export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
   // Scroll to top when mounting the case study
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    scrollToImmediate(0);
   }, []);
 
   return (

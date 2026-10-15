@@ -19,7 +19,7 @@ export function Header() {
     { label: 'HOW I LEAD', href: '#how-i-lead', hasCircle: true },
     { label: 'WORK', href: '#work', hasCircle: true },
     { label: 'WHAT I DO', href: '#what-i-do', hasCircle: true },
-    { label: 'PROCESS', href: '#process', hasCircle: true },
+    { label: 'CONTACT', href: '#contact', hasCircle: true },
   ];
 
   return (
@@ -28,7 +28,7 @@ export function Header() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 1, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 w-full z-50 px-4 md:px-10 transition-all duration-500 ${isScrolled ? 'bg-black/10 backdrop-blur-xl border-b border-white/5 py-4' : 'bg-transparent py-8 md:py-10'} flex items-center`}
+        className={`fixed top-0 left-0 w-full z-50 px-4 md:px-10 transition-all duration-500 ${isScrolled ? 'bg-black/80 backdrop-blur-xl border-b border-white/10 py-4' : 'bg-transparent py-8 md:py-10'} flex items-center`}
       >
         <div className="flex items-center w-full">
           {/* Logo and first line */}

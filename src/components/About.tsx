@@ -1,145 +1,231 @@
-import { motion } from 'motion/react';
+import { motion, useMotionValue, useMotionValueEvent, useScroll, useTransform } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
+import { RevealText } from './RevealText';
+
+const quickFacts = [
+  { label: "Based in", value: "Dubai, UAE" },
+  { label: "Experience", value: "7+ years" },
+  { label: "Education", value: "BA, Visual Communication Design" },
+  { label: "Languages", value: "English, Urdu" },
+  { label: "Currently", value: "Design Specialist, MBLM" },
+  { label: "Open to", value: "Lead, Design Manager roles" },
+];
 
 // Titles and dates follow LinkedIn (source of truth).
 const experiences = [
   {
-    years: "'18 to '19",
-    dates: "Sep 2018 to Nov 2019",
-    role: "UX Designer",
+    years: "'18–'19",
+    roles: [{ title: "UX Designer", dates: "September 2018 – November 2019" }],
     roleColor: "bg-[#C62828]",
-    company: "Truebill (now Rocket Money)",
+    company: "TRUEBILL (NOW ROCKET MONEY)",
+    current: false,
     description: "Ran 30+ usability and validation studies across account linking, subscription detection, and transactions. Improved financial data accuracy by 22% and reduced account-linking drop-offs by 18%.",
+    logo: "Rocket Money",
     logoUrl: "/images/timeline-01.webp"
   },
   {
-    years: "'18 to '23",
-    dates: "May 2018 to Sep 2023",
-    role: "Junior UX Designer to Senior Product Designer",
-    roleColor: "bg-[#AD1457]",
-    company: "Salams (acq. Match Group)",
-    description: "Joined as the first design hire on a small team building the app from the ground up, and grew into Senior over five years as it scaled past a million users. Led the full app redesign, ran pricing and feature experiments, and worked with the founders through to the Match Group acquisition in 2023.",
+    years: "'18–'23",
+    roles: [
+      { title: "Senior Product Designer", dates: "January 2022 – September 2023" },
+      { title: "User Experience Designer", dates: "September 2019 – December 2021" },
+      { title: "Junior UX Designer", dates: "May 2018 – August 2019" }
+    ],
+    roleColor: "bg-[#D91B87]",
+    company: "SALAMS (ACQ. MATCH GROUP)",
+    current: false,
+    description: "First design hire on a small team building the app from the ground up. Grew into Senior as it scaled past a million users, led the full app redesign, and worked with the founders through the Match Group acquisition in 2023.",
+    logo: "Salams",
     logoUrl: "/images/timeline-02.webp"
   },
   {
-    years: "'23 to '24",
-    dates: "Sep 2023 to Oct 2024",
-    role: "Senior Product Designer, then Design Manager",
-    roleColor: "bg-[#616161]",
-    company: "Hauraki (Zewst ecosystem)",
-    description: "Managed a team of 2 to 3 designers and set design direction across four products. Shipped Zewst POS to 500+ restaurant merchants, owned the Zewards loyalty platform end to end, and designed Zewst Phone business calling with live transcription.",
+    years: "'23–'24",
+    roles: [
+      { title: "Design Manager", dates: "February 2024 – October 2024" },
+      { title: "Senior Product Designer", dates: "September 2023 – February 2024" }
+    ],
+    roleColor: "bg-[#717171]",
+    company: "HAURAKI (ZEWST ECOSYSTEM)",
+    current: false,
+    description: "Managed a team of 2 to 3 designers and set design direction across four products. Shipped Zewst POS to 500+ restaurant merchants and owned the Zewards loyalty platform end to end.",
+    logo: "Hauraki",
     logoUrl: "/images/timeline-03.webp"
   },
   {
-    years: "'24 to '25",
-    dates: "Oct 2024 to Sep 2025",
-    role: "Product Team Lead",
-    roleColor: "bg-[#2E7D32]",
-    company: "Axion Dynamic",
-    description: "Managed a team of 2 to 3 designers. Led product and design for Jobbit, an ERP platform for supply chain operations, from discovery through delivery with the founders and engineering. Built a scalable Figma design system.",
+    years: "'24–'25",
+    roles: [{ title: "Product Team Lead", dates: "October 2024 – September 2025" }],
+    roleColor: "bg-[#2A7B4B]",
+    company: "AXION DYNAMIC",
+    current: false,
+    description: "Managed a team of 2 to 3 designers. Led product and design for Jobbit, an ERP platform for supply chain operations, from discovery through delivery, and built a scalable Figma design system.",
+    logo: "Axion Dynamic",
     logoUrl: "/images/timeline-05.webp"
   },
   {
-    years: "'25 to '26",
-    dates: "Oct 2025 to Mar 2026",
-    role: "Product Designer",
-    roleColor: "bg-[#00695C]",
-    company: "Unita Worldwide",
-    description: "Sole designer on a Swiss-headquartered global B2B verified business network with offices in Geneva, Tirana, and Dubai. Owned the design system, the discovery experience, and onboarding, and ran pricing tests with the founders to decide what to launch with.",
+    years: "'25–'26",
+    roles: [{ title: "Product Designer", dates: "October 2025 – March 2026" }],
+    roleColor: "bg-[#00798F]",
+    company: "UNITA WORLDWIDE",
+    current: false,
+    description: "Sole designer on a Swiss-headquartered B2B verified business network with offices in Geneva, Tirana, and Dubai. Owned the design system, discovery, and onboarding, and ran pricing tests with the founders.",
+    logo: "Unita",
     logoUrl: "/images/timeline-06.webp"
   },
   {
-    years: "'26 to now",
-    dates: "Mar 2026 to present",
-    role: "Design Specialist",
-    roleColor: "bg-[#37474F]",
-    company: "MBLM Dubai",
-    description: "Designing bilingual government and enterprise web portals for clients in the UAE, plus an AI product website recognized with two W3 Silver Awards.",
-    logoUrl: null
+    years: "'26–NOW",
+    roles: [{ title: "Design Specialist", dates: "March 2026 – Present" }],
+    roleColor: "bg-[#005E6A]",
+    company: "MBLM DUBAI",
+    current: true,
+    description: "Designing government and regulated-sector web portals in the UAE, including VARA, plus an AI product website and product UI.",
+    logo: "MBLM",
+    logoUrl: "/images/timeline-07.webp"
   }
 ];
 
 export function About() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  // 0% - 12%: intro scrolls away, 12% - 95%: timeline sweeps across
+  const progress = useTransform(scrollYProgress, [0.16, 0.94], [0, 1], { clamp: true });
+  // Slide exactly far enough for the last card to land in view
+  const trackRef = useRef<HTMLOListElement>(null);
+  // Card i sits at the left edge when progress reaches i / (n - 1)
+  const stops = useRef<number[]>([]);
+  const maxShift = useMotionValue(0);
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const measure = () => {
+      const items = [...track.children] as HTMLElement[];
+      stops.current = items.map((el) => el.offsetLeft - items[0].offsetLeft);
+      maxShift.set(stops.current[stops.current.length - 1] ?? 0);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(track);
+    window.addEventListener("resize", measure);
+    return () => { ro.disconnect(); window.removeEventListener("resize", measure); };
+  }, [maxShift]);
+  const x = useTransform([progress, maxShift], ([v]: number[]) => {
+    const s = stops.current;
+    if (s.length < 2) return 0;
+    const pos = v * (s.length - 1);
+    const i = Math.min(s.length - 2, Math.floor(pos));
+    return -(s[i] + (s[i + 1] - s[i]) * (pos - i));
+  });
+  const fill = useTransform(progress, (v) => `${v * 100}%`);
+  const [active, setActive] = useState(0);
+  useMotionValueEvent(progress, "change", (v) => setActive(Math.min(experiences.length - 1, Math.round(v * (experiences.length - 1)))));
+
   return (
-    <section id="about" className="relative z-40 bg-white text-black">
-      <div className="w-full max-w-[1200px] mx-auto px-6 pt-12 md:pt-24 pb-16 md:pb-24">
-        <div className="flex flex-col lg:flex-row justify-start items-start gap-10 md:gap-24">
-          <div className="w-full md:max-w-[760px]">
-            <div className="flex items-center gap-3 mb-6 md:mb-10">
-              <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-black" />
-              <span className="text-base md:text-xl font-medium tracking-tight">About me</span>
-            </div>
+    <section id="about" ref={containerRef} className="relative z-40 h-[500vh] bg-white text-black overflow-x-clip">
+      {/* 1. Intro */}
+      <div className="w-full max-w-[1300px] mx-auto px-6 md:px-10 pt-16 md:pt-28 pb-16">
+        <div className="flex items-center gap-3 mb-6 md:mb-10">
+          <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-black" />
+          <span className="text-base md:text-xl font-medium tracking-tight">About me</span>
+        </div>
 
-            <h2 className="font-display text-3xl md:text-[56px] leading-[1.2] md:leading-[1.1] uppercase tracking-tighter text-black">
-              I lead design for <span className="text-[#6F6F6F]">products people actually use:</span> setting direction, growing designers, and <span className="text-[#6F6F6F]">turning business goals into shipped work.</span>
-            </h2>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+          <h2 className="lg:col-span-8 font-display text-3xl md:text-[56px] leading-[1.2] md:leading-[1.1] uppercase tracking-tighter text-black">
+            <RevealText text="I lead design for" /> <RevealText text="products people actually use:" className="text-[#6F6F6F]" delay={0.15} /> <RevealText text="setting direction, growing designers, and" delay={0.3} /> <RevealText text="turning business goals into shipped work." className="text-[#6F6F6F]" delay={0.45} />
+          </h2>
 
-          <div className="relative w-32 h-32 md:w-64 md:h-64 flex items-center justify-center shrink-0" aria-hidden="true">
-            <div className="relative w-full h-full transform scale-90 md:scale-100">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full rotate-[45deg]">
-                 <div className="absolute top-[18%] left-1/2 -translate-x-1/2 w-[20%] h-[40%] bg-[#F5F5F5] rounded-full" />
-                 <div className="absolute bottom-[18%] left-1/2 -translate-x-1/2 w-[20%] h-[40%] bg-[#F5F5F5] rounded-full" />
-                 <div className="absolute left-[18%] top-1/2 -translate-y-1/2 w-[40%] h-[20%] bg-[#F5F5F5] rounded-full" />
-                 <div className="absolute right-[18%] top-1/2 -translate-y-1/2 w-[40%] h-[20%] bg-[#F5F5F5] rounded-full" />
-                 <div className="absolute top-[28%] right-[28%] w-[20%] h-[40%] bg-[#FF6B35] rounded-full shadow-lg" />
-                 <div className="absolute bottom-[28%] left-[28%] w-[20%] h-[40%] bg-[#E94336] rounded-full shadow-lg" />
-              </div>
-            </div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-4 space-y-6"
+          >
+            <p className="text-[16px] md:text-[18px] leading-[1.65] text-black/80">
+              I'm Umer, a product designer in Dubai. I started in 2018 as the first design hire at Salams, stayed through its acquisition by Match Group, and have since led small design teams and shipped products for fintech, restaurants, B2B networks, and UAE regulators. I'm still hands-on in Figma and React.
+            </p>
+            <dl className="grid grid-cols-2 gap-x-6 gap-y-4 border-t border-black/10 pt-6 text-[13px]">
+              {quickFacts.map((f) => (
+                <div key={f.label}>
+                  <dt className="text-black/60 uppercase tracking-widest text-[11px] font-semibold mb-1">{f.label}</dt>
+                  <dd className="font-semibold">{f.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </motion.div>
         </div>
       </div>
 
-    </section>
-  );
-}
+      {/* 2. Sticky horizontal timeline */}
+      <div className="sticky top-0 h-[100svh] flex flex-col overflow-hidden">
+        {/* Header bar */}
+        <div className="w-full max-w-[1300px] mx-auto px-6 md:px-10 pt-24 md:pt-28 md:[@media(max-height:860px)]:pt-20 flex items-end justify-between gap-6">
+          <div>
+            <h2 className="font-display text-4xl md:text-[64px] md:[@media(max-height:860px)]:text-[44px] leading-none uppercase tracking-tighter">Experience</h2>
+            <p className="text-[12px] md:text-[13px] font-semibold uppercase tracking-[0.2em] text-black/60 mt-2">2018 to now · {experiences.length} roles</p>
+          </div>
+          <p className="font-display text-3xl md:text-5xl leading-none tabular-nums" aria-hidden="true">
+            {String(active + 1).padStart(2, "0")}<span className="text-black/55"> / {String(experiences.length).padStart(2, "0")}</span>
+          </p>
+        </div>
 
-export function Experience() {
-  return (
-    <section id="experience" className="relative z-30 bg-white text-black">
-      <div className="w-full max-w-[1200px] mx-auto px-6 pt-8 pb-20 md:pb-32">
-        <h2 className="font-display text-4xl md:text-[80px] leading-none uppercase tracking-tighter mb-8 md:mb-14">Experience</h2>
-        <ol className="border-t border-black/10">
-          {experiences.map((exp) => (
-            <motion.li
-              key={exp.company}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-1 md:grid-cols-[240px_1fr_160px] gap-4 md:gap-10 py-8 md:py-10 border-b border-black/10 items-start"
-            >
-              <p className="font-display text-4xl md:text-[44px] leading-none tracking-tight uppercase whitespace-nowrap">{exp.years}</p>
-
-              <div>
-                <span className={`${exp.roleColor} text-white text-[10px] md:text-[12px] font-semibold px-3 py-1 md:px-4 md:py-1.5 tracking-widest uppercase inline-block mb-3`}>
-                  {exp.role}
-                </span>
-                <h4 className="text-[14px] md:text-[17px] font-semibold tracking-[0.03em] uppercase">{exp.company}</h4>
-                <p className="text-[12px] md:text-[13px] text-black/60 mb-3">{exp.dates}</p>
-                <p className="text-[14px] md:text-[15px] leading-[1.65] text-black/80 max-w-[640px]">
-                  {exp.description}
-                </p>
-              </div>
-
-              <div className="hidden md:block w-full aspect-[16/10] bg-[#EEEEEE] rounded-[20px] overflow-hidden border border-black/[0.03]">
-                {exp.logoUrl ? (
-                  <img
-                    src={exp.logoUrl}
-                    alt={`${exp.company} logo`}
-                    width={476}
-                    height={312}
-                    loading="lazy"
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center" aria-hidden="true">
-                    <span className="font-display text-[14px] uppercase tracking-widest text-black/40">{exp.company}</span>
+        {/* Cards */}
+        <div className="flex-1 flex items-center min-h-0 py-6">
+          <motion.ol ref={trackRef} style={{ x }} className="flex w-max gap-8 md:gap-16 px-6 md:px-[max(2.5rem,calc((100vw-1300px)/2+2.5rem))]" aria-label="Experience">
+            {experiences.map((exp, i) => (
+              <li
+                key={exp.company}
+                className="w-[82vw] md:w-[640px] flex-shrink-0"
+              >
+                <div className="mb-4 md:mb-6 md:[@media(max-height:860px)]:mb-3">
+                  <div className="min-w-0">
+                    {exp.current && (
+                      <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest bg-black text-white px-3 py-1.5 rounded-full mb-3">
+                        <span className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse" aria-hidden="true" /> Current
+                      </span>
+                    )}
+                    <p className={`font-display text-[42px] md:text-[96px] md:[@media(max-height:860px)]:text-[64px] leading-none tracking-tighter whitespace-nowrap transition-colors duration-500 ${i === active ? "text-black" : "text-black/55"}`}>{exp.years}</p>
                   </div>
-                )}
-              </div>
-            </motion.li>
-          ))}
-        </ol>
+                </div>
+
+                <h3 className="text-[15px] md:text-[20px] font-bold tracking-[0.02em] uppercase mb-1">{exp.company}</h3>
+                <ul className="mb-4 space-y-0.5">
+                  {exp.roles.map((role) => (
+                    <li key={role.title + role.dates} className="text-[12px] md:text-[14px] text-black/70">
+                      <span className="font-semibold text-black">{role.title}</span> · {role.dates}
+                    </li>
+                  ))}
+                </ul>
+
+                <p className="text-[13px] md:text-[15px] leading-[1.6] text-black/80 mb-5 md:mb-7 md:[@media(max-height:860px)]:mb-4">{exp.description}</p>
+
+                <div className="w-44 md:w-64 md:[@media(max-height:860px)]:w-40 aspect-[16/10] bg-[#EEEEEE] rounded-2xl md:rounded-3xl overflow-hidden border border-black/[0.06] shadow-sm">
+                  <img src={exp.logoUrl} alt={`${exp.logo} logo`} width={476} height={312} className="w-full h-full object-cover" />
+                </div>
+
+              </li>
+            ))}
+          </motion.ol>
+        </div>
+
+        {/* Progress rail with year stops */}
+        <div className="w-full max-w-[1300px] mx-auto px-6 md:px-10 pb-8 md:pb-12 md:[@media(max-height:860px)]:pb-10">
+          <div className="relative h-[2px] bg-black/10">
+            <motion.div className="absolute left-0 top-0 h-full bg-black" style={{ width: fill }} />
+            <ol className="absolute inset-0 flex justify-between" aria-hidden="true">
+              {experiences.map((exp, i) => (
+                <li key={exp.company} className="relative">
+                  <span className={`block w-3 h-3 -mt-[5px] rounded-full border-2 transition-colors duration-300 ${i <= active ? "bg-black border-black" : "bg-white border-black/30"}`} />
+                  <span className={`absolute top-4 whitespace-nowrap text-[10px] md:text-[12px] font-semibold uppercase tracking-widest transition-colors md:left-1/2 md:-translate-x-1/2 ${i === 0 ? "left-0" : i === experiences.length - 1 ? "right-0" : "left-1/2 -translate-x-1/2"} ${i === active ? "text-black" : "hidden md:block text-black/60"}`}>
+                    {exp.logo}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <p className="hidden md:block md:[@media(max-height:860px)]:hidden text-[11px] uppercase tracking-[0.25em] text-black/50 mt-10">Keep scrolling to move through the timeline</p>
+        </div>
       </div>
     </section>
   );
