@@ -43,7 +43,7 @@ export function Header() {
             
             <nav className="hidden lg:flex items-center gap-0 flex-1">
               {navItems.map((item, index) => (
-                <a key={index} href={item.href} className="flex flex-1 items-center gap-4 group cursor-pointer h-10 no-underline">
+                <a key={index} href={item.href} className="flex flex-1 items-center gap-4 group h-10 no-underline">
                   {item.hasCircle && (
                     <div className="w-1.5 h-1.5 rounded-full border-[1px] border-white group-hover:bg-white transition-colors" />
                   )}
@@ -64,7 +64,7 @@ export function Header() {
               onClick={() => setIsMenuOpen(true)}
               aria-label="Open menu"
               aria-expanded={isMenuOpen}
-              className="flex items-center gap-[4px] cursor-pointer group"
+              className="flex items-center gap-[4px] group"
             >
               <div className="w-7 h-[20px] border-r-2 border-white transform skew-x-[-20deg] group-hover:opacity-100 transition-opacity" />
               <div className="w-2 h-[20px] border-r-2 border-white transform skew-x-[-20deg] group-hover:opacity-100 transition-opacity" />

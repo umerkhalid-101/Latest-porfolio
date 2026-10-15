@@ -1,134 +1,193 @@
-import { animate, motion, useInView, useMotionValueEvent, useScroll, useTransform, type MotionValue } from 'motion/react';
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
+import type { ReactNode } from 'react';
 import { RevealText } from './RevealText';
 
-const cards = [
-  {
-    id: '01',
-    title: 'Team leadership',
-    body: 'Managed teams of 2 to 3 designers as Design Manager at Hauraki and Product Team Lead at Axion Dynamic. I run critiques and design reviews, mentor designers, set the quality bar, and give input on hiring.',
-    tags: ['Critique', 'Mentoring', 'Hiring input', 'Quality bar'],
-    className: 'bg-[#FF6B35] text-black'
-  },
-  {
-    id: '02',
-    title: 'Design direction',
-    body: 'Built design systems from scratch at three companies and owned product-level design decisions, including direction across the four-product Zewst ecosystem.',
-    tags: ['Design systems', 'Product vision', 'Standards'],
-    className: 'bg-[#DFFF2B] text-black'
-  },
-  {
-    id: '03',
-    title: 'Partnership',
-    body: 'I work in the room with founders, PMs, and engineering leads to decide what to build, what to test, and what to launch first, then stay close to engineering until it ships as scoped.',
-    tags: ['Founders', 'Product', 'Engineering', 'Experiments'],
-    className: 'bg-[#E5E1DA] text-black'
-  }
-];
+// Every fact here comes from LinkedIn. No invented rituals, numbers or schedules.
+// Styling follows the rest of the site: #FAFAFA panel, white rounded cards that invert to black on hover.
 
-const outcomes: { value: number | string; prefix?: string; suffix?: string; context: string }[] = [
-  { value: 'Acquired', context: 'Salams, through the Match Group acquisition' },
-  { value: 500, suffix: '+', context: 'Merchants on Zewst POS' },
-  { value: 38, prefix: '+', suffix: '%', context: 'Repeat visits on Zewards' },
-  { value: 18, prefix: '−', suffix: '%', context: 'Account-linking drop-offs at Truebill' }
-];
+const EASE = [0.16, 1, 0.3, 1] as const;
 
-function CountUp({ value, prefix = '', suffix = '' }: { value: number; prefix?: string; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
-  const [n, setN] = useState(0);
-  useEffect(() => {
-    if (!inView) return;
-    const controls = animate(0, value, { duration: 1.6, ease: [0.16, 1, 0.3, 1], onUpdate: (v) => setN(Math.round(v)) });
-    return () => controls.stop();
-  }, [inView, value]);
-  return <span ref={ref}>{prefix}{n}{suffix}</span>;
-}
-
-function StackCard({ i, total, progress, className, children }: { i: number; total: number; progress: MotionValue<number>; className: string; children: ReactNode }) {
-  // Earlier cards shrink slightly as later ones stack on top of them
-  const scale = useTransform(progress, [i / total, 1], [1, 1 - (total - 1 - i) * 0.04]);
-  const [stacked, setStacked] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width: 768px)');
-    const update = () => setStacked(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
+/** Four Zewst products merging into one pattern library */
+function LibraryArtifact() {
+  const products = ['Zewst POS', 'Portfolio', 'Zewst Phone', 'Zewards'];
   return (
-    <div className="relative md:sticky md:top-[var(--stack-top)] md:h-[100svh] flex items-center justify-center px-4 md:px-10 mb-4 md:mb-0" style={{ '--stack-top': `${i * 24}px` } as CSSProperties}>
-      <motion.article
-        style={stacked ? { scale } : undefined}
-        className={`relative w-full max-w-[1300px] md:min-h-[72vh] rounded-[30px] md:rounded-[50px] p-7 md:p-16 flex flex-col justify-between origin-top shadow-[0_-20px_60px_rgba(0,0,0,0.35)] ${className}`}
+    <div aria-hidden="true" className="flex flex-col gap-2">
+      <div className="grid grid-cols-2 gap-2">
+        {products.map((p, i) => (
+          <motion.span
+            key={p}
+            initial={{ opacity: 0, y: -8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 + i * 0.08, duration: 0.5, ease: EASE }}
+            className="rounded-full bg-[#F2F2F2] group-hover:bg-white/10 text-black group-hover:text-white text-[11px] font-semibold uppercase tracking-wider px-3 py-2 text-center transition-colors duration-300"
+          >
+            {p}
+          </motion.span>
+        ))}
+      </div>
+      <motion.span
+        initial={{ scaleY: 0 }}
+        whileInView={{ scaleY: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.6, duration: 0.35, ease: EASE }}
+        className="mx-auto w-px h-4 bg-black/20 group-hover:bg-white/40 origin-top transition-colors"
+      />
+      <motion.span
+        initial={{ opacity: 0, scale: 0.92 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.75, duration: 0.5, ease: EASE }}
+        className="rounded-full bg-[#FF6B35] text-white font-display text-[18px] uppercase tracking-tight text-center py-2.5"
       >
-        {children}
-      </motion.article>
+        1 pattern library
+      </motion.span>
     </div>
   );
 }
 
+/** The A/B tests actually run at Salams and Unita */
+function TestsArtifact() {
+  const tests = [
+    { name: 'Pricing models', where: 'Salams' },
+    { name: 'Ghost mode', where: 'Salams' },
+    { name: 'Voice telegrams', where: 'Salams' },
+    { name: 'Pricing + offerings', where: 'Unita' },
+  ];
+  return (
+    <ul aria-hidden="true" className="flex flex-col gap-1.5">
+      {tests.map((t, i) => (
+        <motion.li
+          key={t.name}
+          initial={{ opacity: 0, x: -10 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 + i * 0.08, duration: 0.45, ease: EASE }}
+          className="flex items-center gap-3 rounded-full bg-[#F2F2F2] group-hover:bg-white/10 pl-1.5 pr-4 py-1.5 transition-colors duration-300"
+        >
+          <span className="flex shrink-0">
+            <span className="w-6 h-6 rounded-full bg-black group-hover:bg-white text-white group-hover:text-black text-[10px] font-bold flex items-center justify-center transition-colors">A</span>
+            <span className="w-6 h-6 rounded-full bg-[#FF6B35] text-white text-[10px] font-bold flex items-center justify-center -ml-1.5 ring-2 ring-[#F2F2F2] group-hover:ring-transparent">B</span>
+          </span>
+          <span className="text-[13px] font-semibold text-black group-hover:text-white flex-1 transition-colors">{t.name}</span>
+          <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#6F6F6F] group-hover:text-white/70 transition-colors">{t.where}</span>
+        </motion.li>
+      ))}
+    </ul>
+  );
+}
+
+/** Jobbit's path from discovery to shipped */
+function ShipArtifact() {
+  const steps = ['Stakeholder interviews', 'User flows', 'Rapid prototypes', 'Build with engineering', 'Shipped as scoped'];
+  return (
+    <ol aria-hidden="true" className="relative pl-6">
+      <motion.span
+        initial={{ scaleY: 0 }}
+        whileInView={{ scaleY: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.2, duration: 0.9, ease: EASE }}
+        className="absolute left-[5px] top-3 bottom-3 border-l-[1.5px] border-dashed border-black/20 group-hover:border-white/30 origin-top"
+      />
+      {steps.map((s, i) => {
+        const last = i === steps.length - 1;
+        return (
+          <motion.li
+            key={s}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.25 + i * 0.15, duration: 0.3 }}
+            className={`relative py-1.5 text-[13px] font-semibold transition-colors ${last ? 'text-[#FF6B35]' : 'text-black group-hover:text-white'}`}
+          >
+            <span className={`absolute -left-6 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full ${last ? 'bg-[#FF6B35]' : 'bg-black group-hover:bg-white'} transition-colors`} />
+            {s}
+          </motion.li>
+        );
+      })}
+    </ol>
+  );
+}
+
+const practices: { n: string; title: string; body: string; where: string; artifact: ReactNode }[] = [
+  {
+    n: '01',
+    title: 'One library, four products',
+    body: 'At Hauraki I set one design direction across four Zewst products, all built on a single shared pattern library.',
+    where: 'Hauraki · Design Manager',
+    artifact: <LibraryArtifact />,
+  },
+  {
+    n: '02',
+    title: "Test it, don't argue it",
+    body: 'At Salams and Unita, A/B tests with the founders settled pricing and feature calls, not opinions in a meeting.',
+    where: 'Salams · Unita',
+    artifact: <TestsArtifact />,
+  },
+  {
+    n: '03',
+    title: 'In the room until it ships',
+    body: 'On Jobbit I ran discovery up front, then stayed with engineering through build until it shipped as scoped.',
+    where: 'Axion Dynamic · Team Lead',
+    artifact: <ShipArtifact />,
+  },
+];
+
 export function HowILead() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] });
-  const total = cards.length + 1;
-  const [active, setActive] = useState(0);
-  useMotionValueEvent(scrollYProgress, 'change', (v) => setActive(Math.min(total - 1, Math.floor(v * total))));
+  const reduce = useReducedMotion();
 
   return (
-    <section id="how-i-lead" className="relative z-30 bg-black text-white pb-16">
-      <div className="max-w-[1300px] mx-auto px-6 md:px-10 pt-24 md:pt-40 pb-8 md:pb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
-        <h2 className="font-display text-[18vw] md:text-[180px] leading-[0.85] uppercase tracking-tighter">
-          <RevealText text="How I" /><br /><RevealText text="lead" className="text-[#FF6B35]" delay={0.1} />
-        </h2>
-        <p className="text-[15px] md:text-[18px] leading-[1.6] text-white/80 max-w-[380px] md:pb-6">
-          Direction, people, and the decisions in between. Here is what I bring to a design team.
-        </p>
-      </div>
-
-      <div ref={containerRef} className="relative">
-        {/* Progress rail */}
-        <div className="hidden md:flex sticky top-1/2 z-20 h-0 justify-end pr-3 pointer-events-none" aria-hidden="true">
-          <div className="flex flex-col gap-2 -translate-y-1/2">
-            {Array.from({ length: total }).map((_, i) => (
-              <span key={i} className={`block w-1.5 rounded-full transition-all duration-500 ${i === active ? 'h-8 bg-white' : 'h-1.5 bg-white/40'}`} />
-            ))}
+    <section id="how-i-lead" className="relative z-30 bg-white text-black px-4 py-20 md:py-28 lg:py-0 lg:min-h-[100svh] lg:flex lg:items-center">
+      <div className="max-w-[1400px] w-full mx-auto lg:pt-[80px] lg:pb-5">
+        <div className="bg-[#FAFAFA] border border-black/5 rounded-[40px] md:rounded-[60px] px-6 md:px-12 lg:px-14 py-12 md:py-14 lg:py-[clamp(28px,5vh,56px)]">
+          {/* Header, same pattern as About */}
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-9 lg:mb-[clamp(20px,4vh,44px)]">
+            <div>
+              <div className="flex items-center gap-3 mb-4 md:mb-5">
+                <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-black" />
+                <span className="text-base md:text-xl font-medium tracking-tight">How I lead</span>
+              </div>
+              <h2 className="font-display text-[11vw] md:text-[72px] lg:text-[clamp(44px,7.4vh,80px)] leading-[0.95] uppercase tracking-tighter text-black">
+                <RevealText text="Three habits" /><br />
+                <RevealText text="I bring to every team." className="text-[#6F6F6F]" delay={0.12} />
+              </h2>
+            </div>
+            <p className="text-[15px] md:text-[17px] leading-[1.6] text-[#555555] max-w-[360px] lg:pb-2">
+              Each one comes from a real team, with the company it happened at.
+            </p>
           </div>
+
+          <ol className="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-6">
+            {practices.map((p, i) => (
+              <motion.li
+                key={p.n}
+                initial={reduce ? false : { opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ delay: i * 0.12, duration: 0.8, ease: EASE }}
+                className="group relative overflow-hidden bg-white hover:bg-black rounded-[30px] md:rounded-[40px] p-3 md:p-3.5 shadow-sm transition-colors duration-300 flex flex-col"
+              >
+                {/* Artifact panel: same height on every card so the row lines up */}
+                <div className="rounded-[24px] md:rounded-[30px] bg-[#F4F4F4] group-hover:bg-white/[0.06] h-[200px] lg:h-[clamp(168px,24vh,214px)] px-5 flex items-center justify-center transition-colors duration-300">
+                  <div className="w-full max-w-[300px]">{p.artifact}</div>
+                </div>
+
+                <div className="relative px-4 md:px-5 pt-5 pb-4 lg:pt-[clamp(14px,2.4vh,22px)] flex-1 flex flex-col">
+                  <span aria-hidden="true" className="absolute right-4 md:right-5 top-3 font-display text-[56px] lg:text-[clamp(44px,7vh,64px)] leading-none text-black/[0.07] group-hover:text-white/[0.12] transition-colors">{p.n}</span>
+                  <span className="self-start rounded-full border border-black/10 group-hover:border-white/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-[#6F6F6F] group-hover:text-white/70 transition-colors">
+                    {p.where}
+                  </span>
+                  <h3 className="font-display text-[28px] md:text-[32px] lg:text-[clamp(24px,3.7vh,34px)] leading-[1] uppercase tracking-tight text-black group-hover:text-white mt-3 mb-2.5 transition-colors">
+                    {p.title}
+                  </h3>
+                  <p className="text-[15px] md:text-[16px] lg:text-[clamp(14px,1.9vh,16.5px)] leading-[1.5] text-[#555555] group-hover:text-white/80 transition-colors">
+                    {p.body}
+                  </p>
+                </div>
+              </motion.li>
+            ))}
+          </ol>
         </div>
-
-        {cards.map((card, i) => (
-          <StackCard key={card.id} i={i} total={total} progress={scrollYProgress} className={card.className}>
-            <div className="flex justify-between items-start gap-6">
-              <span className="font-display text-[64px] md:text-[200px] leading-[0.8] tracking-tighter" aria-hidden="true">{card.id}</span>
-              <ul className="hidden md:flex flex-wrap justify-end gap-2 max-w-[420px]">
-                {card.tags.map((t) => (
-                  <li key={t} className="px-4 py-2 rounded-full border border-current text-[12px] font-semibold uppercase tracking-widest">{t}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-16 items-end mt-6 md:mt-10">
-              <h3 className="font-display text-5xl md:text-[110px] leading-[0.9] uppercase tracking-tighter">{card.title}</h3>
-              <p className="text-[16px] md:text-[21px] leading-[1.55] font-medium">{card.body}</p>
-            </div>
-          </StackCard>
-        ))}
-
-        <StackCard i={cards.length} total={total} progress={scrollYProgress} className="bg-[#141414] text-white border border-white/10">
-          <div className="flex justify-between items-start gap-6">
-            <span className="font-display text-[64px] md:text-[200px] leading-[0.8] tracking-tighter text-[#FF6B35]" aria-hidden="true">04</span>
-            <h3 className="font-display text-5xl md:text-[110px] leading-[0.9] uppercase tracking-tighter text-right">Outcomes</h3>
-          </div>
-          <ul className="grid grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-8 md:gap-x-10 mt-10">
-            {outcomes.map((o) => (
-              <li key={o.context} className="border-t border-white/20 pt-5">
-                <p className="font-display text-4xl md:text-6xl xl:text-7xl leading-none mb-3 text-[#FF6B35] whitespace-nowrap">
-                  {typeof o.value === 'number' ? <CountUp value={o.value} prefix={o.prefix} suffix={o.suffix} /> : o.value}
-                </p>
-                <p className="text-[13px] md:text-[15px] leading-[1.5] text-white/85">{o.context}</p>
-              </li>
-            ))}
-          </ul>
-        </StackCard>
       </div>
     </section>
   );

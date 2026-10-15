@@ -58,7 +58,7 @@ export function Process() {
                     duration: 0.8,
                     ease: [0.16, 1, 0.3, 1]
                   }}
-                  className="bg-white hover:bg-black rounded-[30px] md:rounded-[40px] p-8 md:p-8 lg:p-10 w-full md:min-h-[300px] flex flex-col items-center justify-start shadow-sm transition-all duration-300 cursor-default group"
+                  className="bg-white hover:bg-black rounded-[30px] md:rounded-[40px] p-8 md:p-8 lg:p-10 w-full md:min-h-[300px] flex flex-col items-center justify-start shadow-sm transition-all duration-300 group"
                 >
                   <span className="text-[10px] md:text-[13px] font-semibold tracking-[0.2em] text-[#6F6F6F] group-hover:text-white/70 mb-3 md:mb-5 block uppercase transition-colors">
                     STEP {step.id}
