@@ -10,7 +10,7 @@ const testimonials = [
     y: 40
   },
   {
-    text: "He ships. Our retention moved 25% after the redesign. That's not UX theater, that's product impact.",
+    text: "He ships. Our retention moved 25% after the redesign.",
     stars: 5,
     variant: "dark",
     rotate: 2,
@@ -59,7 +59,7 @@ function FeedbackCard({ testimonial, index }: { testimonial: typeof testimonials
         isDark ? 'bg-[#71645C] text-white' : 'bg-white text-black'
       }`}
     >
-      <div className="flex gap-1 mb-8">
+      <div className="flex gap-1 mb-8" aria-hidden="true">
         {[...Array(testimonial.stars)].map((_, i) => (
           <Star 
             key={i} 
@@ -82,16 +82,7 @@ export function ClientFeedback() {
       {/* Heading Container */}
       <div className="max-w-7xl mx-auto mb-20 md:mb-32 relative flex flex-col items-center text-center">
         <h2 className="font-display text-[12vw] md:text-[180px] leading-[0.8] tracking-tighter uppercase relative">
-          CLIENTS FEEDBACK
-          <span className="absolute left-1/4 top-1/2 -translate-y-1/2 -translate-x-1/2">
-             <motion.div 
-               initial={{ rotate: -15, scale: 0.8, opacity: 0 }}
-               whileInView={{ rotate: -6, scale: 1, opacity: 1 }}
-               className="bg-[#FFB13B] text-black text-[8px] md:text-sm font-bold px-4 py-1 md:px-6 md:py-2 uppercase tracking-widest whitespace-nowrap shadow-lg"
-             >
-               5 STAR SERVICES
-             </motion.div>
-          </span>
+          WHAT TEAMS SAY
         </h2>
       </div>
 

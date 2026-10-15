@@ -1,45 +1,49 @@
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { useRef } from 'react';
 
-const projects = [
+const projects: Project[] = [
   {
-    id: 2,
-    title: "Salams",
-    description: "Consumer App Redesign (Match Group) Description: Led the full redesign covering home, explore, matches, chat, events, and a deep profile editing system. Designed onboarding across dozens of screens and the identity attribute system specific to Muslim dating.",
-    image: "https://drive.google.com/thumbnail?id=1XDQGUMSp2hRDLQlCqnv8PK2a8QPOBzBJ&sz=w1000",
-    color: "bg-[#FF4D8D]", // Iconic Salams Pink/Red
-    accentColors: ["bg-white/20", "bg-white/40", "bg-white/60"],
+    slug: "unita",
+    title: "Unita",
+    subtitle: "Global B2B verified business network",
+    description: "Sole designer on a Swiss-headquartered B2B network with offices in Geneva, Tirana, and Dubai. Built the design system from scratch with full token coverage, and designed discovery, company profiles, and onboarding across 10+ modules.",
+    image: "/images/work-04.webp",
+    color: "bg-[#0A2E2E]",
+    accentColors: ["bg-[#FF6B35]", "bg-orange-600", "bg-teal-600"],
     textColor: "text-white"
   },
   {
-    id: 3,
+    slug: "salams",
+    title: "Salams",
+    subtitle: "Consumer app redesign, acquired by Match Group",
+    description: "Led the full redesign across home, explore, matches, chat, events, and profile. Designed onboarding and the identity attribute system specific to Muslim dating.",
+    image: "/images/work-01.webp",
+    color: "bg-[#C2185B]",
+    accentColors: ["bg-white/20", "bg-white/40", "bg-white/60"],
+    textColor: "text-white",
+    href: "/salams-casestudy"
+  },
+  {
+    slug: "zewards",
     title: "Zewst",
-    description: "Restaurant Operating System Description: Restaurant-grade POS scaled to 500+ merchants. Orders, inventory, real-time sales, staff clock-in, and comp items, paired with a BI dashboard for franchise performance and food waste analytics.",
-    image: "https://drive.google.com/thumbnail?id=1PoCTLNPMa2fiyALYCay77uNKEhSgKVzR&sz=w1000",
-    color: "bg-[#A3E635]", // Fresh Green for Restaurant OS
+    subtitle: "Zewards loyalty platform, Zewst ecosystem",
+    description: "As Design Manager, I owned Zewards end to end across the consumer app, business app, and marketing site. Repeat visits rose 38% and first-time activation got 2.3x faster.",
+    image: "/images/work-02.webp",
+    color: "bg-[#A3E635]",
     accentColors: ["bg-green-600", "bg-green-700", "bg-green-800"],
     textColor: "text-black",
-    externalLink: "https://portfolioold-rho.vercel.app/projects/zewards"
+    href: "/zewards-casestudy"
   },
   {
-    id: 4,
+    slug: "folionomics",
     title: "Folionomics",
-    description: "Crypto Portfolio Platform Description: Designed the full product across portfolio dashboard, market assets, wallet explorer, swap flow, and Portfolio AI chat. Unified wallet view across 60+ chains lifted retention by 25%. Tags: Fintech · Data Visualization",
-    image: "https://drive.google.com/thumbnail?id=1_YA_eRt-nstKY2jroczQOcDdzxTsHQlI&sz=w1000",
-    color: "bg-[#0D0D0D]", // Deep Dark Crypto mood
+    subtitle: "Crypto portfolio platform",
+    description: "Reframed a wallet viewer into a strategy-first portfolio product across 60+ chains. The unified wallet view lifted retention by 25%.",
+    image: "/images/work-03.webp",
+    color: "bg-[#0D0D0D]",
     accentColors: ["bg-blue-600", "bg-indigo-600", "bg-cyan-600"],
     textColor: "text-white",
-    externalLink: "https://portfolioold-rho.vercel.app/projects/folionomics"
-  },
-  {
-    id: 1,
-    title: "Unita",
-    description: "B2B Marketplace for UAE/GCC Description: Sole designer on a pre-launch B2B platform. Built the design system from scratch with full token coverage and a dark teal and burnt orange visual language. Shipped 10+ modules across 30 to 50 screens.",
-    image: "https://drive.google.com/thumbnail?id=1nouxdrvItr_1p2vvVUTMSaWma_6SM_5R&sz=w1000",
-    color: "bg-[#0A2E2E]", // Dark Teal mood for Unita
-    accentColors: ["bg-[#FF6B35]", "bg-orange-600", "bg-teal-600"],
-    textColor: "text-white",
-    externalLink: "https://dev.unitaw.com/"
+    href: "/folionomics-casestudy"
   }
 ];
 
@@ -49,15 +53,15 @@ interface FeaturedWorkProps {
 
 export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
   return (
-    <section id="work" className="relative z-30 bg-white pt-24 pb-48 px-6 md:px-20 overflow-hidden">
-      
+    <section id="work" className="relative z-30 bg-white pt-24 pb-24 md:pb-32 px-6 md:px-20 overflow-hidden">
+
       {/* Heading Section */}
       <div className="relative mb-20 md:mb-[15vw] flex flex-col items-center">
         <h2 className="font-display text-[10vw] md:text-[180px] leading-[0.85] text-black uppercase tracking-tighter text-center">
           FEATURED WORKS
         </h2>
         {/* Lime Sticker */}
-        <div className="absolute top-[20%] right-[10%] md:right-[15%] rotate-[8deg] bg-[#DFFF2B] px-4 py-2 md:px-6 md:py-3 shadow-xl">
+        <div className="absolute top-[20%] right-[10%] md:right-[15%] rotate-[8deg] bg-[#DFFF2B] px-4 py-2 md:px-6 md:py-3 shadow-xl" aria-hidden="true">
            <span className="text-black font-display text-[14px] md:text-[24px] uppercase font-bold tracking-tight">DIGITAL SCREENS</span>
         </div>
       </div>
@@ -65,16 +69,7 @@ export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
       {/* Single Column Sequence */}
       <div className="max-w-[1200px] mx-auto flex flex-col gap-32 md:gap-48">
         {projects.map((project) => (
-          <div key={project.id}>
-            <WorkCard 
-              project={project} 
-              onClick={() => {
-                if (project.title.toLowerCase() === 'salams') {
-                  onOpenCaseStudy?.('salams');
-                }
-              }} 
-            />
-          </div>
+          <WorkCard key={project.slug} project={project} onOpen={onOpenCaseStudy} />
         ))}
       </div>
     </section>
@@ -82,30 +77,22 @@ export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
 }
 
 interface Project {
-  id: number;
+  slug: string;
   title: string;
+  subtitle: string;
   description: string;
   image: string;
   color: string;
   accentColors: string[];
-  textColor: string;
-  externalLink?: string;
+  textColor: "text-white" | "text-black";
+  href?: string;
 }
 
-function WorkCard({ project, onClick }: { project: Project; onClick?: () => void }) {
+function WorkCard({ project, onOpen }: { project: Project; onOpen?: (slug: string) => void }) {
   const cardRef = useRef(null);
-  const isSalams = project.title.toLowerCase() === 'salams';
-  const hasExternalLink = Boolean(project.externalLink);
-  const isInteractive = isSalams || hasExternalLink;
+  const isDark = project.textColor === 'text-white';
+  const isInteractive = Boolean(project.href);
 
-  const handleCardClick = () => {
-    if (isSalams) {
-      onClick?.();
-    } else if (project.externalLink) {
-      window.open(project.externalLink, '_blank', 'noopener,noreferrer');
-    }
-  };
-  
   // Reveal on scroll animation
   const { scrollYProgress } = useScroll({
     target: cardRef,
@@ -120,51 +107,49 @@ function WorkCard({ project, onClick }: { project: Project; onClick?: () => void
   const opacity = useSpring(opacityRaw, springConfig);
   const y = useSpring(yRaw, springConfig);
 
+  const buttonBase = `flex items-center gap-4 md:gap-6 px-6 md:px-10 py-3 md:py-5 rounded-full border-2 ${isDark ? 'border-white' : 'border-black'} w-fit`;
+
   return (
-    <motion.div 
+    <motion.article
       ref={cardRef}
       style={{ opacity, y }}
-      onClick={isInteractive ? handleCardClick : undefined}
-      className={`group relative w-full min-h-[550px] md:h-[700px] ${project.color} rounded-[30px] md:rounded-[60px] overflow-hidden flex flex-col md:flex-row shadow-2xl ${isInteractive ? 'cursor-pointer' : 'cursor-default'} py-12 md:py-0`}
+      className={`group relative w-full min-h-[550px] md:h-[700px] ${project.color} rounded-[30px] md:rounded-[60px] overflow-hidden flex flex-col md:flex-row shadow-2xl py-12 md:py-0`}
     >
       {/* Layout Grid */}
       <div className="flex flex-col md:flex-row w-full h-full p-8 md:p-20 relative z-10">
-        
+
         {/* Text Side */}
         <div className="w-full md:w-1/2 flex flex-col justify-center">
-          <h3 className={`font-display text-4xl md:text-8xl ${project.textColor} uppercase tracking-tighter mb-6 md:mb-8 leading-none`}>
+          <h3 className={`font-display text-4xl md:text-8xl ${project.textColor} uppercase tracking-tighter mb-3 md:mb-4 leading-none`}>
             {project.title}
           </h3>
-          <p className={`text-[13px] md:text-[22px] ${project.textColor === 'text-black' ? 'text-black/80' : 'text-white/80'} font-medium max-w-[450px] leading-relaxed mb-10 md:mb-12`}>
+          <p className={`text-[12px] md:text-[14px] font-semibold uppercase tracking-[0.15em] ${project.textColor} mb-5 md:mb-6`}>
+            {project.subtitle}
+          </p>
+          <p className={`text-[14px] md:text-[20px] ${project.textColor} font-medium max-w-[450px] leading-relaxed mb-10 md:mb-12`}>
             {project.description}
           </p>
 
-          {hasExternalLink ? (
-            <a 
-              href={project.externalLink}
-              target="_blank"
-              rel="noopener noreferrer"
+          {project.href ? (
+            <a
+              href={project.href}
               onClick={(e) => {
-                e.stopPropagation();
+                if (onOpen && !e.metaKey && !e.ctrlKey && !e.shiftKey) {
+                  e.preventDefault();
+                  onOpen(project.slug);
+                }
               }}
-              className={`flex items-center gap-4 md:gap-6 px-6 md:px-10 py-3 md:py-5 rounded-full border-2 ${project.textColor === 'text-black' ? 'border-black' : 'border-white'} w-fit group/btn hover:bg-black transition-all duration-300`}
+              className={`${buttonBase} group/btn hover:bg-black transition-all duration-300 after:absolute after:inset-0 after:content-[''] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4`}
             >
-              <div className={`w-8 md:w-10 h-[2px] ${project.textColor === 'text-black' ? 'bg-black' : 'bg-white'} group-hover/btn:bg-white transition-colors`} />
-              <span className={`font-display text-base md:text-xl uppercase tracking-tight ${project.textColor === 'text-black' ? 'text-black' : 'text-white'} group-hover/btn:text-white transition-colors flex items-center gap-1`}>
-                View Project <span className="text-sm md:text-xl leading-none">↗</span>
+              <span aria-hidden="true" className={`w-8 md:w-10 h-[2px] ${isDark ? 'bg-white' : 'bg-black'} group-hover/btn:bg-white transition-colors`} />
+              <span className={`font-display text-base md:text-xl uppercase tracking-tight ${project.textColor} group-hover/btn:text-white transition-colors`}>
+                View case study<span className="sr-only">: {project.title}</span>
               </span>
             </a>
-          ) : isSalams ? (
-            <div className={`flex items-center gap-4 md:gap-6 px-6 md:px-10 py-3 md:py-5 rounded-full border-2 ${project.textColor === 'text-black' ? 'border-black' : 'border-white'} w-fit group/btn hover:bg-black transition-all duration-300`}>
-              <div className={`w-8 md:w-10 h-[2px] ${project.textColor === 'text-black' ? 'bg-black' : 'bg-white'} group-hover/btn:bg-white transition-colors`} />
-              <span className={`font-display text-base md:text-xl uppercase tracking-tight ${project.textColor === 'text-black' ? 'text-black' : 'text-white'} group-hover/btn:text-white transition-colors`}>
-                View Case Study
-              </span>
-            </div>
           ) : (
-            <div className={`flex items-center gap-4 md:gap-6 px-6 md:px-10 py-3 md:py-5 rounded-full border-2 ${project.textColor === 'text-black' ? 'border-black' : 'border-white'} w-fit opacity-60`}>
-              <span className={`font-display text-base md:text-xl uppercase tracking-tight ${project.textColor === 'text-black' ? 'text-black' : 'text-white'}`}>
-                Coming Soon
+            <div className={buttonBase}>
+              <span className={`font-display text-base md:text-xl uppercase tracking-tight ${project.textColor}`}>
+                Case study coming soon
               </span>
             </div>
           )}
@@ -173,18 +158,20 @@ function WorkCard({ project, onClick }: { project: Project; onClick?: () => void
         {/* Visual Side */}
         <div className="w-full md:w-1/2 flex items-center justify-center md:justify-end mt-12 md:mt-0 relative">
           <div className={`relative w-full md:w-[130%] transform ${isInteractive ? 'group-hover:scale-105' : ''} transition-transform duration-700 ease-out translate-x-0 md:translate-x-12`}>
-            <img 
-              src={project.image} 
-              alt={project.title}
-              referrerPolicy="no-referrer"
-              className="w-full h-auto drop-shadow-3xl rounded-xl" 
+            <img
+              src={project.image}
+              alt={`${project.title} product screens`}
+              width={2000}
+              height={2000}
+              loading="lazy"
+              className="w-full h-auto drop-shadow-3xl rounded-xl"
             />
           </div>
         </div>
       </div>
 
       {/* Signature Stacked Borders */}
-      <div className="absolute bottom-0 left-0 w-full flex flex-col z-20">
+      <div className="absolute bottom-0 left-0 w-full flex flex-col z-20" aria-hidden="true">
          <div className="h-4 w-full bg-black/5" />
          <div className={`h-5 w-full ${project.accentColors[0]}`} />
          <div className={`h-5 w-full ${project.accentColors[1]}`} />
@@ -193,6 +180,6 @@ function WorkCard({ project, onClick }: { project: Project; onClick?: () => void
 
       {/* Hover Overlay Gradient */}
       <div className={`absolute inset-0 bg-black/5 opacity-0 ${isInteractive ? 'group-hover:opacity-100' : ''} transition-opacity duration-500 pointer-events-none`} />
-    </motion.div>
+    </motion.article>
   );
 }

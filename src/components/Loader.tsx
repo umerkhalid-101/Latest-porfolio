@@ -68,7 +68,8 @@ export function Loader({ onComplete }: { onComplete: () => void, key?: string | 
         </div>
 
         {/* Massive Progress Number in Background */}
-        <motion.div 
+        <motion.div
+          aria-hidden="true"
           className="absolute -bottom-20 md:-bottom-40 font-display text-[40vw] md:text-[400px] text-white/5 uppercase tracking-tighter whitespace-nowrap pointer-events-none select-none"
         >
           {counter.toString().padStart(3, '0')}
@@ -78,13 +79,13 @@ export function Loader({ onComplete }: { onComplete: () => void, key?: string | 
       {/* Footer Info */}
       <div className="absolute bottom-10 left-10 right-10 flex justify-between items-end border-t border-white/10 pt-6">
         <div className="flex flex-col gap-1">
-          <p className="text-[10px] tracking-widest text-white/40 uppercase font-medium">DESIGN & STRATEGY PORTFOLIO</p>
-          <p className="text-[10px] tracking-widest text-white/40 uppercase font-medium">© 2026 EDITION</p>
+          <p className="text-[10px] tracking-widest text-white/70 uppercase font-medium">DESIGN & STRATEGY PORTFOLIO</p>
+          <p className="text-[10px] tracking-widest text-white/70 uppercase font-medium">© 2026 EDITION</p>
         </div>
         
         <div className="flex items-baseline gap-2">
            <span className="font-display text-2xl text-white">{counter}</span>
-           <span className="text-[10px] tracking-widest text-white/40 uppercase font-medium">PROCESS</span>
+           <span className="text-[10px] tracking-widest text-white/70 uppercase font-medium">PROCESS</span>
         </div>
       </div>
     </motion.div>

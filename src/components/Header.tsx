@@ -16,8 +16,9 @@ export function Header() {
 
   const navItems = [
     { label: 'ABOUT', href: '#about', hasCircle: true },
-    { label: 'WORKS', href: '#work', hasCircle: true },
-    { label: 'SERVICES', href: '#services', hasCircle: true },
+    { label: 'HOW I LEAD', href: '#how-i-lead', hasCircle: true },
+    { label: 'WORK', href: '#work', hasCircle: true },
+    { label: 'WHAT I DO', href: '#what-i-do', hasCircle: true },
     { label: 'PROCESS', href: '#process', hasCircle: true },
   ];
 
@@ -32,7 +33,7 @@ export function Header() {
         <div className="flex items-center w-full">
           {/* Logo and first line */}
           <div className="flex items-center gap-4 min-w-max">
-            <a href="#" className="font-display text-3xl tracking-tighter flex items-center gap-1">
+            <a href="/" aria-label="Umer, home" className="font-display text-3xl tracking-tighter flex items-center gap-1">
               <span>UMER</span>
             </a>
           </div>
@@ -61,6 +62,8 @@ export function Header() {
           <div className="flex items-center pl-4 md:pl-12">
             <button 
               onClick={() => setIsMenuOpen(true)}
+              aria-label="Open menu"
+              aria-expanded={isMenuOpen}
               className="flex items-center gap-[4px] cursor-pointer group"
             >
               <div className="w-7 h-[20px] border-r-2 border-white transform skew-x-[-20deg] group-hover:opacity-100 transition-opacity" />
@@ -83,6 +86,7 @@ export function Header() {
               <span className="font-display text-3xl tracking-tighter text-white">UMER</span>
               <button 
                 onClick={() => setIsMenuOpen(false)}
+                aria-label="Close menu"
                 className="text-white hover:rotate-90 transition-transform duration-300"
               >
                 <X size={32} />
