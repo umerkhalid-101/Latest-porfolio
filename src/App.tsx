@@ -21,11 +21,11 @@ import { Loader } from './components/Loader';
 import { ScrollProgress } from './components/ScrollProgress';
 import { SalamsCaseStudy } from './components/SalamsCaseStudy';
 import { CaseStudyPage } from './components/CaseStudyPage';
-import { zewards, folionomics } from './caseStudies';
+import { zewards, folionomics, unita, vara } from './caseStudies';
 
 const SITE = 'https://www.umerkhalid.co';
 
-type Slug = 'salams' | 'zewards' | 'folionomics';
+type Slug = 'unita' | 'vara' | 'salams' | 'zewards' | 'folionomics';
 
 // Keep in sync with the static <head> in index.html and the per-route HTML files.
 const pageMeta: Record<Slug | 'home', { title: string; description: string; image: string; path: string }> = {
@@ -34,6 +34,18 @@ const pageMeta: Record<Slug | 'home', { title: string; description: string; imag
     description: 'Lead Product Designer in Dubai with 7 years shipping SaaS, fintech, and consumer products, including leading small design teams. Past work includes Salams (acquired by Match Group) and the Zewst restaurant ecosystem.',
     image: `${SITE}/images/og.jpg`,
     path: '/'
+  },
+  unita: {
+    title: 'Unita Case Study | Umer Khalid, Lead Product Designer',
+    description: 'Designing a pre-launch B2B verified business network as the sole designer: discovery, company profiles, onboarding, and a design system built from scratch.',
+    image: `${SITE}/images/og-unita.jpg`,
+    path: '/unita-casestudy'
+  },
+  vara: {
+    title: 'VARA Case Study | Umer Khalid, Lead Product Designer',
+    description: "Designing the web portal for Dubai's Virtual Assets Regulatory Authority at MBLM: homepage, a five-step licensing guide, a reusable UI kit, and a 12-column layout system.",
+    image: `${SITE}/images/og-vara.jpg`,
+    path: '/vara-casestudy'
   },
   salams: {
     title: 'Salams Case Study | Umer Khalid, Lead Product Designer',
@@ -60,7 +72,7 @@ function slugFromLocation(): Slug | null {
   const hash = window.location.hash.replace(/^#\/?/, '');
   const params = new URLSearchParams(window.location.search);
   const query = params.get('p') || params.get('case-study') || params.get('project');
-  for (const slug of ['salams', 'zewards', 'folionomics'] as Slug[]) {
+  for (const slug of ['unita', 'vara', 'salams', 'zewards', 'folionomics'] as Slug[]) {
     if (path === `/${slug}-casestudy` || hash === `${slug}-casestudy` || query === slug || query === `${slug}-casestudy`) {
       return slug;
     }
@@ -114,6 +126,8 @@ export default function App() {
     activeCaseStudy === 'salams' ? <SalamsCaseStudy onClose={closeCaseStudy} /> :
     activeCaseStudy === 'zewards' ? <CaseStudyPage data={zewards} onClose={closeCaseStudy} /> :
     activeCaseStudy === 'folionomics' ? <CaseStudyPage data={folionomics} onClose={closeCaseStudy} /> :
+    activeCaseStudy === 'unita' ? <CaseStudyPage data={unita} onClose={closeCaseStudy} /> :
+    activeCaseStudy === 'vara' ? <CaseStudyPage data={vara} onClose={closeCaseStudy} /> :
     null;
 
   return (

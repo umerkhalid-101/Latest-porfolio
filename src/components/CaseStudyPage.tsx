@@ -29,7 +29,7 @@ export interface CaseStudyData {
   /** Accent for labels on white, must pass 4.5:1 */
   accent: string;
   facts: { label: string; value: string }[];
-  heroImage: CaseStudyImage;
+  heroImage?: CaseStudyImage;
   metrics?: { value: string; label: string; context: string }[];
   sections: CaseStudySection[];
   leadership: LeadershipContent;
@@ -79,7 +79,7 @@ export function CaseStudyPage({ data, onClose }: { data: CaseStudyData; onClose:
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 space-y-8"
+            className={`${data.heroImage ? 'lg:col-span-7' : 'lg:col-span-10'} space-y-8`}
           >
             <h1 className="text-6xl md:text-[110px] leading-none tracking-tight font-serif font-black">{data.title}.</h1>
             <p className="text-xl md:text-[26px] font-medium tracking-tight leading-relaxed max-w-2xl">{data.tagline}</p>
@@ -92,21 +92,23 @@ export function CaseStudyPage({ data, onClose }: { data: CaseStudyData; onClose:
               ))}
             </dl>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5"
-          >
-            <img
-              src={data.heroImage.src}
-              alt={data.heroImage.alt}
-              width={data.heroImage.width}
-              height={data.heroImage.height}
-              fetchPriority="high"
-              className="w-full h-auto rounded-2xl drop-shadow-2xl"
-            />
-          </motion.div>
+          {data.heroImage && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-5"
+            >
+              <img
+                src={data.heroImage.src}
+                alt={data.heroImage.alt}
+                width={data.heroImage.width}
+                height={data.heroImage.height}
+                fetchPriority="high"
+                className="w-full h-auto rounded-2xl drop-shadow-2xl"
+              />
+            </motion.div>
+          )}
         </div>
       </section>
 
