@@ -1,11 +1,19 @@
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef } from 'react';
 import { Linkedin, Instagram } from 'lucide-react';
 
 const NAME = "MUHAMMAD UMER";
 
 export function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+  const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '-25%']);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
   return (
-    <section className="relative z-10 min-h-[100svh] flex flex-col overflow-hidden bg-[#FE330A]">
+    <section ref={ref} className="relative z-10 min-h-[100svh] flex flex-col overflow-hidden bg-[#FE330A]">
 
       {/* 1. Image Layer (Edge-to-Edge) */}
       {/* TODO: replace with a professional portrait once supplied. */}
@@ -15,7 +23,8 @@ export function Hero() {
         transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
         className="absolute inset-0 z-10"
       >
-        <img
+        <motion.img
+          style={{ y: imageY, scale: imageScale }}
           src="/images/hero-01.webp"
           alt="Muhammad Umer"
           width={2000}
@@ -26,7 +35,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-black/10" />
       </motion.div>
 
-      <div className="relative z-30 flex-1 flex flex-col justify-between gap-10 px-6 md:px-14 pt-28 md:pt-36 pb-10 md:pb-14 w-full max-w-[1800px] mx-auto">
+      <motion.div style={{ y: contentY, opacity: contentOpacity }} className="relative z-30 flex-1 flex flex-col justify-between gap-10 px-6 md:px-14 pt-28 md:pt-36 pb-10 md:pb-14 w-full max-w-[1800px] mx-auto">
 
         {/* 2. Name: full text for screen readers and search, animated letters are decorative */}
         <h1
@@ -53,14 +62,23 @@ export function Hero() {
 
         {/* 3. Location and positioning */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
-          <motion.p
+          <motion.div
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.8, duration: 1 }}
-            className="font-display text-[clamp(2rem,5.5vw,6rem)] leading-[1.1] uppercase tracking-tight text-white drop-shadow-lg"
+            className="space-y-5"
           >
-            Based in<br />Dubai, UAE
-          </motion.p>
+            <p className="inline-flex items-center gap-2.5 bg-black/30 backdrop-blur-md border border-white/20 rounded-full pl-3 pr-4 py-2 text-[11px] md:text-[12px] font-semibold uppercase tracking-widest text-white">
+              <span className="relative flex w-2 h-2" aria-hidden="true">
+                <span className="absolute inset-0 rounded-full bg-[#22C55E] animate-ping opacity-75" />
+                <span className="relative w-2 h-2 rounded-full bg-[#22C55E]" />
+              </span>
+              Design Specialist at MBLM · Open to Lead roles
+            </p>
+            <p className="font-display text-[clamp(2rem,5.5vw,6rem)] leading-[1.1] uppercase tracking-tight text-white drop-shadow-lg">
+              Based in<br />Dubai, UAE
+            </p>
+          </motion.div>
 
           <motion.p
             initial={{ x: 100, opacity: 0 }}
@@ -115,7 +133,7 @@ export function Hero() {
             </p>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

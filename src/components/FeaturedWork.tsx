@@ -1,9 +1,11 @@
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { useRef } from 'react';
+import { RevealText } from './RevealText';
 
 const projects: Project[] = [
   {
     slug: "unita",
+    meta: { role: "Sole designer", year: "2025 to 2026", impact: "10+ modules" },
     title: "Unita",
     subtitle: "Global B2B verified business network",
     description: "Sole designer on a Swiss-headquartered B2B network with offices in Geneva, Tirana, and Dubai. Built the design system from scratch with full token coverage, and designed discovery, company profiles, and onboarding across 10+ modules.",
@@ -15,6 +17,7 @@ const projects: Project[] = [
   },
   {
     slug: "vara",
+    meta: { role: "Design Specialist", year: "2026", impact: "5-step licensing guide" },
     title: "VARA",
     subtitle: "Regulator web portal, Dubai",
     description: "Designed the web portal for Dubai's Virtual Assets Regulatory Authority at MBLM, from the homepage to a five-step licensing guide, backed by a reusable UI kit and a 12-column layout system.",
@@ -26,6 +29,7 @@ const projects: Project[] = [
   },
   {
     slug: "salams",
+    meta: { role: "First design hire to Senior", year: "2018 to 2023", impact: "Acquired by Match Group" },
     title: "Salams",
     subtitle: "Consumer app redesign, acquired by Match Group",
     description: "Led the full redesign across home, explore, matches, chat, events, and profile. Designed onboarding and the identity attribute system specific to Muslim dating.",
@@ -37,6 +41,7 @@ const projects: Project[] = [
   },
   {
     slug: "zewards",
+    meta: { role: "Design Manager", year: "2024", impact: "+38% repeat visits" },
     title: "Zewst",
     subtitle: "Zewards loyalty platform, Zewst ecosystem",
     description: "As Design Manager, I owned Zewards end to end across the consumer app, business app, and marketing site. Repeat visits rose 38% and first-time activation got 2.3x faster.",
@@ -45,17 +50,6 @@ const projects: Project[] = [
     accentColors: ["bg-green-600", "bg-green-700", "bg-green-800"],
     textColor: "text-black",
     href: "/zewards-casestudy"
-  },
-  {
-    slug: "folionomics",
-    title: "Folionomics",
-    subtitle: "Crypto portfolio platform",
-    description: "Reframed a wallet viewer into a strategy-first portfolio product across 60+ chains. The unified wallet view lifted retention by 25%.",
-    image: "/images/work-03.webp",
-    color: "bg-[#0D0D0D]",
-    accentColors: ["bg-blue-600", "bg-indigo-600", "bg-cyan-600"],
-    textColor: "text-white",
-    href: "/folionomics-casestudy"
   }
 ];
 
@@ -70,7 +64,7 @@ export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
       {/* Heading Section */}
       <div className="relative mb-20 md:mb-[15vw] flex flex-col items-center">
         <h2 className="font-display text-[10vw] md:text-[180px] leading-[0.85] text-black uppercase tracking-tighter text-center">
-          FEATURED WORKS
+          <RevealText text="FEATURED WORKS" />
         </h2>
         {/* Lime Sticker */}
         <div className="absolute top-[20%] right-[10%] md:right-[15%] rotate-[8deg] bg-[#DFFF2B] px-4 py-2 md:px-6 md:py-3 shadow-xl" aria-hidden="true">
@@ -92,6 +86,7 @@ interface Project {
   slug: string;
   title: string;
   subtitle: string;
+  meta: { role: string; year: string; impact: string };
   description: string;
   /** Product screens; without one the card shows `highlights` instead */
   image?: string;
@@ -127,7 +122,7 @@ function WorkCard({ project, onOpen }: { project: Project; onOpen?: (slug: strin
     <motion.article
       ref={cardRef}
       style={{ opacity, y }}
-      className={`group relative w-full min-h-[550px] md:h-[700px] ${project.color} rounded-[30px] md:rounded-[60px] overflow-hidden flex flex-col md:flex-row shadow-2xl py-12 md:py-0`}
+      className={`group relative w-full min-h-[550px] md:min-h-[700px] ${project.color} rounded-[30px] md:rounded-[60px] overflow-hidden flex flex-col md:flex-row shadow-2xl py-12 md:py-0`}
     >
       {/* Layout Grid */}
       <div className="flex flex-col md:flex-row w-full h-full p-8 md:p-20 relative z-10">
@@ -140,6 +135,14 @@ function WorkCard({ project, onOpen }: { project: Project; onOpen?: (slug: strin
           <p className={`text-[12px] md:text-[14px] font-semibold uppercase tracking-[0.15em] ${project.textColor} mb-5 md:mb-6`}>
             {project.subtitle}
           </p>
+          <dl className={`grid grid-cols-3 gap-4 border-y ${isDark ? 'border-white/25' : 'border-black/25'} py-4 mb-6 md:mb-8 max-w-[460px] ${project.textColor}`}>
+            {([['Role', project.meta.role], ['Year', project.meta.year], ['Impact', project.meta.impact]] as const).map(([k, v]) => (
+              <div key={k}>
+                <dt className="text-[10px] md:text-[11px] font-semibold uppercase tracking-widest opacity-80 mb-1">{k}</dt>
+                <dd className="text-[12px] md:text-[14px] font-semibold leading-snug">{v}</dd>
+              </div>
+            ))}
+          </dl>
           <p className={`text-[14px] md:text-[20px] ${project.textColor} font-medium max-w-[450px] leading-relaxed mb-10 md:mb-12`}>
             {project.description}
           </p>

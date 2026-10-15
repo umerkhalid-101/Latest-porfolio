@@ -1,31 +1,27 @@
 import { motion } from 'motion/react';
-import { Star } from 'lucide-react';
+import { RevealText } from './RevealText';
 
 const testimonials = [
   {
     text: "Umer owned design end-to-end and made the hard calls. Our loyalty platform shipped faster and tighter because he was in the room.",
-    stars: 5,
     variant: "light",
     rotate: -4,
     y: 40
   },
   {
     text: "He ships. Our retention moved 25% after the redesign.",
-    stars: 5,
     variant: "dark",
     rotate: 2,
     y: 0
   },
   {
     text: "The design system he built gave our engineers a real foundation. Consistent, documented, and easy to extend.",
-    stars: 5,
     variant: "light",
     rotate: -1,
     y: 60
   },
   {
     text: "Umer brings research rigor most designers skip. He talked to users, mapped the problem, then shipped the right thing.",
-    stars: 5,
     variant: "dark",
     rotate: 3,
     y: 20
@@ -59,16 +55,7 @@ function FeedbackCard({ testimonial, index }: { testimonial: typeof testimonials
         isDark ? 'bg-[#71645C] text-white' : 'bg-white text-black'
       }`}
     >
-      <div className="flex gap-1 mb-8" aria-hidden="true">
-        {[...Array(testimonial.stars)].map((_, i) => (
-          <Star 
-            key={i} 
-            size={20} 
-            fill={isDark ? "#F59E0B" : "#FF6B35"} 
-            stroke="none" 
-          />
-        ))}
-      </div>
+      <span aria-hidden="true" className={`block font-serif text-7xl leading-[0.6] mb-6 ${isDark ? "text-[#FFB13B]" : "text-[#FF6B35]"}`}>&ldquo;</span>
       <p className="text-[18px] md:text-[20px] leading-[1.4] font-medium">
         {testimonial.text}
       </p>
@@ -82,7 +69,7 @@ export function ClientFeedback() {
       {/* Heading Container */}
       <div className="max-w-7xl mx-auto mb-20 md:mb-32 relative flex flex-col items-center text-center">
         <h2 className="font-display text-[12vw] md:text-[180px] leading-[0.8] tracking-tighter uppercase relative">
-          WHAT TEAMS SAY
+          <RevealText text="KIND WORDS" />
         </h2>
       </div>
 

@@ -7,12 +7,15 @@ import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { About, Experience } from './components/About';
+import { About } from './components/About';
 import { HowILead } from './components/HowILead';
 import { FeaturedWork } from './components/FeaturedWork';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { WhatIDo } from './components/WhatIDo';
-import { SkillsMosaic } from './components/SkillsMosaic';
+import { SkillsSphere } from './components/SkillsSphere';
+import { Cursor } from './components/Cursor';
+import { Marquee } from './components/Marquee';
+import { startSmoothScroll, scrollToIdWhenReady } from './lib/smoothScroll';
 import { ClientFeedback } from './components/ClientFeedback';
 import { CTA } from './components/CTA';
 import { Footer } from './components/Footer';
@@ -21,11 +24,11 @@ import { Loader } from './components/Loader';
 import { ScrollProgress } from './components/ScrollProgress';
 import { SalamsCaseStudy } from './components/SalamsCaseStudy';
 import { CaseStudyPage } from './components/CaseStudyPage';
-import { zewards, folionomics, unita, vara } from './caseStudies';
+import { zewards, unita, vara } from './caseStudies';
 
 const SITE = 'https://www.umerkhalid.co';
 
-type Slug = 'unita' | 'vara' | 'salams' | 'zewards' | 'folionomics';
+type Slug = 'unita' | 'vara' | 'salams' | 'zewards';
 
 // Keep in sync with the static <head> in index.html and the per-route HTML files.
 const pageMeta: Record<Slug | 'home', { title: string; description: string; image: string; path: string }> = {
@@ -58,12 +61,6 @@ const pageMeta: Record<Slug | 'home', { title: string; description: string; imag
     description: 'Leading design as Design Manager for Zewards, a loyalty platform in the Zewst restaurant ecosystem. 38% more repeat visits and 2.3x faster activation.',
     image: `${SITE}/images/og-zewards.jpg`,
     path: '/zewards-casestudy'
-  },
-  folionomics: {
-    title: 'Folionomics Case Study | Umer Khalid, Lead Product Designer',
-    description: 'Redesigning a crypto wallet viewer into a strategy-first portfolio product. User retention rose 25% after the unified wallet view shipped.',
-    image: `${SITE}/images/og-folionomics.jpg`,
-    path: '/folionomics-casestudy'
   }
 };
 
@@ -72,7 +69,7 @@ function slugFromLocation(): Slug | null {
   const hash = window.location.hash.replace(/^#\/?/, '');
   const params = new URLSearchParams(window.location.search);
   const query = params.get('p') || params.get('case-study') || params.get('project');
-  for (const slug of ['unita', 'vara', 'salams', 'zewards', 'folionomics'] as Slug[]) {
+  for (const slug of ['unita', 'vara', 'salams', 'zewards'] as Slug[]) {
     if (path === `/${slug}-casestudy` || hash === `${slug}-casestudy` || query === slug || query === `${slug}-casestudy`) {
       return slug;
     }
@@ -87,6 +84,8 @@ function setMeta(selector: string, attr: string, value: string) {
 export default function App() {
   const [loading, setLoading] = useState(() => slugFromLocation() === null);
   const [activeCaseStudy, setActiveCaseStudy] = useState<Slug | null>(slugFromLocation);
+
+  useEffect(() => startSmoothScroll(), []);
 
   useEffect(() => {
     const handleLocationChange = () => setActiveCaseStudy(slugFromLocation());
@@ -119,13 +118,12 @@ export default function App() {
     window.history.pushState(null, '', '/');
     setActiveCaseStudy(null);
     // Return to the work section the visitor came from
-    if (from) requestAnimationFrame(() => setTimeout(() => document.getElementById('work')?.scrollIntoView(), 600));
+    if (from) scrollToIdWhenReady('work');
   };
 
   const caseStudy =
     activeCaseStudy === 'salams' ? <SalamsCaseStudy onClose={closeCaseStudy} /> :
     activeCaseStudy === 'zewards' ? <CaseStudyPage data={zewards} onClose={closeCaseStudy} /> :
-    activeCaseStudy === 'folionomics' ? <CaseStudyPage data={folionomics} onClose={closeCaseStudy} /> :
     activeCaseStudy === 'unita' ? <CaseStudyPage data={unita} onClose={closeCaseStudy} /> :
     activeCaseStudy === 'vara' ? <CaseStudyPage data={vara} onClose={closeCaseStudy} /> :
     null;
@@ -139,6 +137,7 @@ export default function App() {
       {!loading && (
         <main className="relative">
           <ScrollProgress />
+          <Cursor />
 
           <AnimatePresence mode="wait">
             {caseStudy ? (
@@ -161,14 +160,17 @@ export default function App() {
               >
                 <Header />
                 <Hero />
+                <Marquee
+                  items={['Lead Product Designer', 'Based in Dubai', 'Design leadership', 'Design systems', 'SaaS', 'Fintech', 'Government portals', 'Acquired by Match Group']}
+                  className="bg-black text-white font-display uppercase tracking-tight text-[9vw] md:text-[88px] leading-none py-5 md:py-8 relative z-40"
+                />
                 <About />
                 <HowILead />
                 <FeaturedWork onOpenCaseStudy={openCaseStudy} />
-                <Experience />
                 <Process />
                 <TestimonialsSection />
                 <WhatIDo />
-                <SkillsMosaic />
+                <SkillsSphere />
                 <ClientFeedback />
                 <CTA />
                 <Footer />

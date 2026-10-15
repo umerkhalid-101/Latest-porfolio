@@ -1,17 +1,57 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/salams-casestudy", "destination": "/salams-casestudy.html" },
-    { "source": "/salams-casestudy/", "destination": "/salams-casestudy.html" },
-    { "source": "/unita-casestudy", "destination": "/unita-casestudy.html" },
-    { "source": "/unita-casestudy/", "destination": "/unita-casestudy.html" },
-    { "source": "/vara-casestudy", "destination": "/vara-casestudy.html" },
-    { "source": "/vara-casestudy/", "destination": "/vara-casestudy.html" },
-    { "source": "/zewards-casestudy", "destination": "/zewards-casestudy.html" },
-    { "source": "/zewards-casestudy/", "destination": "/zewards-casestudy.html" },
-    { "source": "/zewst-casestudy", "destination": "/zewards-casestudy.html" },
-    { "source": "/folionomics-casestudy", "destination": "/folionomics-casestudy.html" },
-    { "source": "/folionomics-casestudy/", "destination": "/folionomics-casestudy.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/salams-casestudy",
+      "destination": "/salams-casestudy.html"
+    },
+    {
+      "source": "/salams-casestudy/",
+      "destination": "/salams-casestudy.html"
+    },
+    {
+      "source": "/unita-casestudy",
+      "destination": "/unita-casestudy.html"
+    },
+    {
+      "source": "/unita-casestudy/",
+      "destination": "/unita-casestudy.html"
+    },
+    {
+      "source": "/vara-casestudy",
+      "destination": "/vara-casestudy.html"
+    },
+    {
+      "source": "/vara-casestudy/",
+      "destination": "/vara-casestudy.html"
+    },
+    {
+      "source": "/zewards-casestudy",
+      "destination": "/zewards-casestudy.html"
+    },
+    {
+      "source": "/zewards-casestudy/",
+      "destination": "/zewards-casestudy.html"
+    },
+    {
+      "source": "/zewst-casestudy",
+      "destination": "/zewards-casestudy.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/folionomics-casestudy",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/folionomics-casestudy/",
+      "destination": "/",
+      "permanent": true
+    }
   ]
 }
