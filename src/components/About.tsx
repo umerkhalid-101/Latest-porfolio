@@ -87,7 +87,7 @@ const experiences: Experience[] = [
       { title: "Design Manager", dates: "February 2024 – October 2024", duration: "9 months" },
       { title: "Senior Product Designer", dates: "September 2023 – February 2024", duration: "6 months" }
     ],
-    description: "Managed a team of 2 to 3 designers and set design direction across four products. Shipped Zewst POS to 500+ restaurant merchants and owned the Zewards loyalty platform end to end.",
+    description: "Led the design team and set design direction across four products. Shipped Zewst POS to 500+ restaurant merchants and owned the Zewards loyalty platform end to end.",
     logo: "Hauraki",
     logoUrl: "/images/timeline-03.webp",
     panel: "#A3E635",
@@ -101,7 +101,7 @@ const experiences: Experience[] = [
     code: "AXD", from: "Oct 2024", to: "Sep 2025", span: "1y", path: "Team Lead",
     location: "Lahore, Pakistan",
     roles: [{ title: "Product Team Lead", dates: "October 2024 – September 2025", duration: "1 year" }],
-    description: "Managed a team of 2 to 3 designers. Led product and design for Jobbit, an ERP platform for supply chain operations, from discovery through delivery, and built a scalable Figma design system.",
+    description: "Led product and design for Jobbit, an ERP platform for supply chain operations, from discovery through delivery, and built a scalable Figma design system.",
     logo: "Axion Dynamic",
     logoUrl: "/images/timeline-05.webp",
     panel: "#2A7B4B",

@@ -9,7 +9,7 @@ export const zewards: CaseStudyData = {
   accent: '#6E36A7',
   facts: [
     { label: 'Role', value: 'Design Manager' },
-    { label: 'Team', value: '2 to 3 designers' },
+    { label: 'Scope', value: '4 products' },
     { label: 'Years', value: '2024' },
     { label: 'Product', value: 'B2B2C loyalty' }
   ],
@@ -86,7 +86,7 @@ export const zewards: CaseStudyData = {
   leadership: {
     roleAndTeam: (
       <>
-        <p>I joined Hauraki in September 2023 as Senior Product Designer and became Design Manager in February 2024. I managed a team of 2 to 3 designers and worked directly with the founders and engineering.</p>
+        <p>I joined Hauraki in September 2023 as Senior Product Designer and became Design Manager in February 2024. I led the design team and worked directly with the founders and engineering.</p>
         <p>On Zewards I owned UX strategy, research, flows, information architecture, interaction design, the design system, and handoff.</p>
       </>
     ),
