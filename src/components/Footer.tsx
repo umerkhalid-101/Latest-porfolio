@@ -55,10 +55,11 @@ export function Footer() {
             <h3 className="font-bold text-sm tracking-widest uppercase">SECTIONS</h3>
             <ul className="space-y-3 text-sm opacity-80 font-medium">
               <li><a href="/" className="hover:opacity-100 transition-opacity">HOME</a></li>
-              <li><a href="#work" className="hover:opacity-100 transition-opacity">WORK</a></li>
               <li><a href="#about" className="hover:opacity-100 transition-opacity">ABOUT</a></li>
               <li><a href="#how-i-lead" className="hover:opacity-100 transition-opacity">HOW I LEAD</a></li>
-              <li><a href="#contact" className="hover:opacity-100 transition-opacity">CONTACT</a></li>
+              <li><a href="#work" className="hover:opacity-100 transition-opacity">WORK</a></li>
+              <li><a href="#what-i-do" className="hover:opacity-100 transition-opacity">WHAT I DO</a></li>
+              <li><a href="#process" className="hover:opacity-100 transition-opacity">PROCESS</a></li>
             </ul>
           </div>
 
