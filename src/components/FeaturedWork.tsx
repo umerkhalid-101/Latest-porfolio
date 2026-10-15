@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { useRef } from 'react';
-import { RevealText } from './RevealText';
+import { SectionHeader } from './SectionHeader';
 
 const projects: Project[] = [
   {
@@ -11,7 +11,7 @@ const projects: Project[] = [
     description: "Sole designer on a Swiss-headquartered B2B network with offices in Geneva, Tirana, and Dubai. Built the design system from scratch with full token coverage, and designed discovery, company profiles, and onboarding across 10+ modules.",
     image: "/images/work-04.webp",
     color: "bg-[#0A2E2E]",
-    accentColors: ["bg-[#FF6B35]", "bg-orange-600", "bg-teal-600"],
+    accentColors: ["bg-brand", "bg-orange-600", "bg-teal-600"],
     textColor: "text-white",
     href: "/unita-casestudy"
   },
@@ -59,17 +59,14 @@ interface FeaturedWorkProps {
 
 export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
   return (
-    <section id="work" className="relative z-30 bg-white pt-24 pb-24 md:pb-32 px-6 md:px-20 overflow-hidden">
-
-      {/* Heading Section */}
-      <div className="relative mb-20 md:mb-[15vw] flex flex-col items-center">
-        <h2 className="font-display text-[10vw] md:text-[180px] leading-[0.85] text-black uppercase tracking-tighter text-center">
-          <RevealText text="FEATURED WORKS" />
-        </h2>
-        {/* Lime Sticker */}
-        <div className="absolute top-[20%] right-[10%] md:right-[15%] rotate-[8deg] bg-[#DFFF2B] px-4 py-2 md:px-6 md:py-3 shadow-xl" aria-hidden="true">
-           <span className="text-black font-display text-[14px] md:text-[24px] uppercase font-bold tracking-tight">DIGITAL SCREENS</span>
-        </div>
+    <section id="work" className="relative z-30 bg-white text-black pt-24 md:pt-32 pb-24 md:pb-32 px-6 md:px-14 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto">
+        <SectionHeader
+          label="Work"
+          title="Featured work,"
+          muted="four products I shaped."
+          note="Each one opens a full case study: the problem, my role, the decisions, and what changed."
+        />
       </div>
 
       {/* Single Column Sequence */}

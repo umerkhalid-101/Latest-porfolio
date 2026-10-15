@@ -15,9 +15,7 @@ import { Skills } from './components/Skills';
 import { Marquee } from './components/Marquee';
 import { startSmoothScroll, scrollToIdWhenReady } from './lib/smoothScroll';
 import { KindWords } from './components/KindWords';
-import { CTA } from './components/CTA';
 import { Footer } from './components/Footer';
-import { Process } from './components/Process';
 import { Loader } from './components/Loader';
 import { ScrollProgress } from './components/ScrollProgress';
 import { SalamsCaseStudy } from './components/SalamsCaseStudy';
@@ -127,7 +125,7 @@ export default function App() {
     null;
 
   return (
-    <div className="relative min-h-screen selection:bg-[#FF6B35] selection:text-white">
+    <div className="relative min-h-screen selection:bg-brand selection:text-white">
       <AnimatePresence mode="wait">
         {loading && <Loader key="loader" onComplete={() => setLoading(false)} />}
       </AnimatePresence>
@@ -164,11 +162,9 @@ export default function App() {
                 <About />
                 <HowILead />
                 <FeaturedWork onOpenCaseStudy={openCaseStudy} />
-                <Process />
                 <WhatIDo />
                 <Skills />
                 <KindWords />
-                <CTA />
                 <Footer />
               </motion.div>
             )}

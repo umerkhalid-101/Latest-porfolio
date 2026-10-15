@@ -102,7 +102,7 @@ export function Header() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: index * 0.1 + 0.2 }}
                   onClick={() => setIsMenuOpen(false)}
-                  className="font-display text-5xl md:text-7xl text-white uppercase tracking-tighter hover:text-[#FF6B35] transition-colors"
+                  className="font-display text-5xl md:text-7xl text-white uppercase tracking-tighter hover:text-brand transition-colors"
                 >
                   {item.label}
                 </motion.a>

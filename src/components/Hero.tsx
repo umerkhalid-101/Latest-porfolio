@@ -13,7 +13,7 @@ export function Hero() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} className="relative z-10 min-h-[100svh] flex flex-col overflow-hidden bg-[#FE330A]">
+    <section ref={ref} className="relative z-10 min-h-[100svh] flex flex-col overflow-hidden bg-brand">
 
       {/* 1. Image Layer (Edge-to-Edge) */}
       {/* TODO: replace with a professional portrait once supplied. */}
