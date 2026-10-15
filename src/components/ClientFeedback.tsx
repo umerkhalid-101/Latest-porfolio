@@ -1,6 +1,15 @@
 import { motion } from 'motion/react';
 import { RevealText } from './RevealText';
 
+const logos = [
+  { name: "Salams", url: "/images/logo-01.webp" },
+  { name: "Zewst", url: "/images/logo-02.webp" },
+  { name: "Axion Dynamic", url: "/images/logo-03.webp" },
+  { name: "Mailmunch", url: "/images/logo-04.webp" },
+  { name: "Cayano", url: "/images/logo-05.webp" },
+  { name: "Break Thirty", url: "/images/logo-06.webp" },
+];
+
 const testimonials = [
   {
     text: "Umer owned design end-to-end and made the hard calls. Our loyalty platform shipped faster and tighter because he was in the room.",
@@ -65,19 +74,45 @@ function FeedbackCard({ testimonial, index }: { testimonial: typeof testimonials
 
 export function ClientFeedback() {
   return (
-    <section className="bg-white text-black py-20 md:py-40 px-6 md:px-10 overflow-hidden relative">
+    <section id="kind-words" className="bg-white text-black py-20 md:py-40 px-6 md:px-10 overflow-hidden relative">
       {/* Heading Container */}
-      <div className="max-w-7xl mx-auto mb-20 md:mb-32 relative flex flex-col items-center text-center">
+      <div className="max-w-7xl mx-auto mb-16 md:mb-24 relative flex flex-col items-center text-center">
         <h2 className="font-display text-[12vw] md:text-[180px] leading-[0.8] tracking-tighter uppercase relative">
           <RevealText text="KIND WORDS" />
         </h2>
       </div>
+
+      {/* Lead quote */}
+      <motion.figure
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        className="max-w-4xl mx-auto mb-20 md:mb-32 text-center"
+      >
+        <blockquote className="text-[26px] md:text-[48px] leading-[1.2] md:leading-[1.1] font-medium tracking-tight mb-6 md:mb-10">
+          "He was quick to move, easy to work with, and fully dedicated to shipping our product on time and on scope."
+        </blockquote>
+        <figcaption className="text-[14px] md:text-[17px] text-black/70">Head of Product, SaaS startup</figcaption>
+      </motion.figure>
 
       {/* Cards Container */}
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row flex-wrap justify-center items-center md:items-start gap-8 md:gap-0 md:-space-x-12 min-h-[400px] md:min-h-[500px]">
         {testimonials.map((testimonial, index) => (
           <FeedbackCard key={index} testimonial={testimonial} index={index} />
         ))}
+      </div>
+
+      {/* Teams I've designed with */}
+      <div className="max-w-6xl mx-auto mt-24 md:mt-40">
+        <p className="text-center text-[12px] md:text-[13px] font-semibold uppercase tracking-[0.2em] text-black/60 mb-8 md:mb-10">Teams I've designed with</p>
+        <ul className="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-4">
+          {logos.map((logo) => (
+            <li key={logo.name} className="aspect-square bg-black rounded-2xl flex items-center justify-center p-4 md:p-6">
+              <img src={logo.url} alt={`${logo.name} logo`} width={164} height={164} loading="lazy" className="w-full opacity-80" />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

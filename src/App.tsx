@@ -10,16 +10,12 @@ import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { HowILead } from './components/HowILead';
 import { FeaturedWork } from './components/FeaturedWork';
-import { TestimonialsSection } from './components/TestimonialsSection';
-import { WhatIDo } from './components/WhatIDo';
 import { SkillsSphere } from './components/SkillsSphere';
 import { Cursor } from './components/Cursor';
-import { Marquee } from './components/Marquee';
 import { startSmoothScroll, scrollToIdWhenReady } from './lib/smoothScroll';
 import { ClientFeedback } from './components/ClientFeedback';
 import { CTA } from './components/CTA';
 import { Footer } from './components/Footer';
-import { Process } from './components/Process';
 import { Loader } from './components/Loader';
 import { ScrollProgress } from './components/ScrollProgress';
 import { SalamsCaseStudy } from './components/SalamsCaseStudy';
@@ -160,16 +156,9 @@ export default function App() {
               >
                 <Header />
                 <Hero />
-                <Marquee
-                  items={['Lead Product Designer', 'Based in Dubai', 'Design leadership', 'Design systems', 'SaaS', 'Fintech', 'Government portals', 'Acquired by Match Group']}
-                  className="bg-black text-white font-display uppercase tracking-tight text-[9vw] md:text-[88px] leading-none py-5 md:py-8 relative z-40"
-                />
+                <FeaturedWork onOpenCaseStudy={openCaseStudy} />
                 <About />
                 <HowILead />
-                <FeaturedWork onOpenCaseStudy={openCaseStudy} />
-                <Process />
-                <TestimonialsSection />
-                <WhatIDo />
                 <SkillsSphere />
                 <ClientFeedback />
                 <CTA />
