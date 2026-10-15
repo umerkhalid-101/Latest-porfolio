@@ -11,12 +11,12 @@ const quotes = [
 ] as { text: string; by?: string }[];
 
 const logos = [
-  { name: 'Salams', url: '/images/logo-01.webp' },
-  { name: 'Zewst', url: '/images/logo-02.webp' },
-  { name: 'Axion Dynamic', url: '/images/logo-03.webp' },
-  { name: 'Mailmunch', url: '/images/logo-04.webp' },
-  { name: 'Cayano', url: '/images/logo-05.webp' },
-  { name: 'Break Thirty', url: '/images/logo-06.webp' },
+  { name: 'Salams', url: '/images/team-01.webp' },
+  { name: 'Zwilt', url: '/images/team-02.webp' },
+  { name: 'Axion Dynamic', url: '/images/team-03.webp' },
+  { name: 'Mailmunch', url: '/images/team-04.webp' },
+  { name: 'Cayano', url: '/images/team-05.webp' },
+  { name: 'Break Thirty', url: '/images/team-06.webp' },
 ];
 
 const CYCLE_MS = 6500;
@@ -49,15 +49,15 @@ export function KindWords() {
           <RevealText text="to work with me." className="text-[#6F6F6F]" delay={0.12} />
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
-          {/* Featured quote */}
-          <div
-            className="lg:col-span-8 bg-[#FAFAFA] border border-black/5 rounded-[30px] md:rounded-[40px] p-8 md:p-12 flex flex-col"
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-          >
-            <span aria-hidden="true" className="font-display text-[#FF6B35] text-[96px] md:text-[128px] leading-[0.6] h-[48px] md:h-[64px]">&ldquo;</span>
-            <div className="relative flex-1 min-h-[180px] md:min-h-[220px] mt-6" aria-live="polite">
+        {/* Featured quote, full width */}
+        <div
+          className="bg-[#FAFAFA] border border-black/5 rounded-[30px] md:rounded-[40px] p-8 md:p-12 lg:p-14 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <span aria-hidden="true" className="lg:col-span-1 font-display text-[#FF6B35] text-[96px] md:text-[128px] leading-[0.75]">&ldquo;</span>
+          <div className="lg:col-span-11 flex flex-col">
+            <div className="relative min-h-[170px] md:min-h-[200px]" aria-live="polite">
               <AnimatePresence mode="wait">
                 <motion.blockquote
                   key={i}
@@ -66,7 +66,7 @@ export function KindWords() {
                   exit={reduce ? undefined : { opacity: 0, y: -12 }}
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <p className="text-[24px] md:text-[34px] lg:text-[38px] leading-[1.25] font-medium tracking-tight">{q.text}</p>
+                  <p className="text-[24px] md:text-[36px] lg:text-[44px] leading-[1.2] font-medium tracking-tight max-w-[1000px]">{q.text}</p>
                   {q.by && <footer className="mt-6 text-[13px] font-semibold uppercase tracking-[0.2em] text-[#6F6F6F]">{q.by}</footer>}
                 </motion.blockquote>
               </AnimatePresence>
@@ -98,18 +98,32 @@ export function KindWords() {
               ))}
             </div>
           </div>
+        </div>
 
-          {/* Teams */}
-          <div className="lg:col-span-4 flex flex-col">
-            <p className="text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.2em] text-[#6F6F6F] mb-4">Teams I've designed with</p>
-            <ul className="grid grid-cols-3 lg:grid-cols-2 gap-3 flex-1">
-              {logos.map((l) => (
-                <li key={l.name} className="bg-black rounded-[24px] aspect-square lg:aspect-auto flex items-center justify-center p-5">
-                  <img src={l.url} alt={`${l.name} logo`} width={164} height={164} loading="lazy" className="w-full max-w-[110px] opacity-90" />
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Teams: one quiet row of marks on the page itself */}
+        <div className="mt-12 md:mt-16">
+          <p className="text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.2em] text-[#6F6F6F] mb-5">Teams I've designed with</p>
+          <ul className="grid grid-cols-3 md:grid-cols-6 border-t border-l border-black/10">
+            {logos.map((l, n) => (
+              <motion.li
+                key={l.name}
+                initial={reduce ? false : { opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: n * 0.06, duration: 0.5 }}
+                className="group border-r border-b border-black/10 h-[96px] md:h-[120px] flex items-center justify-center px-5"
+              >
+                <img
+                  src={l.url}
+                  alt={`${l.name} logo`}
+                  width={240}
+                  height={72}
+                  loading="lazy"
+                  className="max-h-[34px] md:max-h-[40px] w-auto max-w-full opacity-45 group-hover:opacity-100 transition-opacity duration-300"
+                />
+              </motion.li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
