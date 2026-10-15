@@ -76,7 +76,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
           <div className="flex items-center gap-4 min-w-max">
             <button 
               onClick={onClose}
-              className="font-display text-3xl tracking-tighter flex items-center gap-1 text-[#121115] hover:text-[#C2185B] transition-colors cursor-pointer"
+              className="font-display text-3xl tracking-tighter flex items-center gap-1 text-[#121115] hover:text-[#C2185B] transition-colors"
             >
               <span>UMER</span>
             </button>
@@ -92,7 +92,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
                 { label: 'RESEARCH', href: '#salams-interviews' },
                 { label: 'ETHOS', href: '#salams-ethos' },
               ].map((item, index) => (
-                <a key={index} href={item.href} className="flex flex-1 items-center gap-4 group cursor-pointer h-10 no-underline">
+                <a key={index} href={item.href} className="flex flex-1 items-center gap-4 group h-10 no-underline">
                   <div className="w-1.5 h-1.5 rounded-full border-[1px] border-[#121115] group-hover:bg-[#FF4D8D] group-hover:border-[#FF4D8D] transition-colors" />
                   <span className="text-[10px] font-bold tracking-[0.25em] text-[#121115]/80 group-hover:text-[#C2185B] transition-colors whitespace-nowrap">
                     {item.label}
@@ -107,7 +107,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
           <div className="flex items-center pl-4 md:pl-12">
             <button 
               onClick={onClose}
-              className="flex items-center gap-2 text-[#121115]/70 hover:text-[#C2185B] transition-colors group cursor-pointer"
+              className="flex items-center gap-2 text-[#121115]/70 hover:text-[#C2185B] transition-colors group"
               id="salams-back-btn"
             >
               <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform" />
@@ -1165,7 +1165,7 @@ export function SalamsCaseStudy({ onClose }: SalamsCaseStudyProps) {
               </div>
               <button 
                 onClick={onClose}
-                className="w-full bg-[#121115] hover:bg-[#FF4D8D] text-white hover:text-white py-3.5 rounded-full text-xs font-black uppercase tracking-widest transition-colors duration-300 flex items-center justify-center gap-2 cursor-pointer mt-4"
+                className="w-full bg-[#121115] hover:bg-[#FF4D8D] text-white hover:text-white py-3.5 rounded-full text-xs font-black uppercase tracking-widest transition-colors duration-300 flex items-center justify-center gap-2 mt-4"
               >
                 <ArrowLeft size={14} /> Back to Portfolio
               </button>

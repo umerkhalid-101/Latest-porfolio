@@ -13,7 +13,6 @@ import { FeaturedWork } from './components/FeaturedWork';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { WhatIDo } from './components/WhatIDo';
 import { SkillsSphere } from './components/SkillsSphere';
-import { Cursor } from './components/Cursor';
 import { Marquee } from './components/Marquee';
 import { startSmoothScroll, scrollToIdWhenReady } from './lib/smoothScroll';
 import { ClientFeedback } from './components/ClientFeedback';
@@ -137,7 +136,6 @@ export default function App() {
       {!loading && (
         <main className="relative">
           <ScrollProgress />
-          <Cursor />
 
           <AnimatePresence mode="wait">
             {caseStudy ? (
