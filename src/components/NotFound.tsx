@@ -36,7 +36,7 @@ export function NotFound() {
 
           <h1 className="t-display-xl">Frame not<br /><span className="text-accent">found.</span></h1>
           <p className="t-body-l text-muted mt-6">
-            Nothing lives at <code className="font-mono text-[0.9em] text-ink bg-ink/5 rounded px-1.5 py-0.5 break-all">{path}</code>. It was deleted, renamed, or never existed. Even the best files have a few of those.
+            Nothing lives at <code className="font-mono text-[0.9em] text-ink bg-ink/5 rounded px-1.5 py-0.5 break-all">{path}</code>. It was deleted, renamed, or never existed. Even the best websites have a few of those.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a href="/" className="inline-flex items-center gap-2 rounded-full bg-ink text-white px-5 py-3 t-label hover:bg-accent hover:text-ink motion-safe:transition-colors">

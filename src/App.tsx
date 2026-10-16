@@ -111,7 +111,7 @@ export default function App() {
     const onVisibility = () => {
       if (document.hidden) {
         saved = document.title;
-        document.title = '👀 Come back, the file is still open';
+        document.title = '👀 Come back, the website misses you';
       } else if (saved) {
         document.title = saved;
         saved = '';
