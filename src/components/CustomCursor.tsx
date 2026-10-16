@@ -28,7 +28,7 @@ const REPLY_MS = 9000;
 function replyTo(text: string) {
   const t = text.toLowerCase();
   if (/hire|hiring|job|role|position|opportunit|work together|interview|recruit/.test(t)) return "Love that, I'm open to Lead and Manager roles.";
-  if (/\b(hi|hey|hello|yo|salam|salaam|sup)\b/.test(t)) return 'Hey! 👋 Thanks for dropping into the file.';
+  if (/\b(hi|hey|hello|yo|salam|salaam|sup)\b/.test(t)) return 'Hey! 👋 Thanks for dropping by the website.';
   if (/nice|love|cool|great|amazing|wow|beautiful|clean|sick|fire|awesome/.test(t)) return 'Thank you! That made my day 🧡';
   if (/\?$/.test(t)) return 'Good question, happy to walk you through it.';
   return 'Got it, thanks for the message 😄';
