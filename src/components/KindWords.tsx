@@ -126,6 +126,7 @@ export function KindWords() {
                   href={p.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-cursor-label=""
                   aria-label={`${p.name}: view live website (opens in a new tab)`}
                   className="group relative h-20 md:h-24 flex items-center justify-center px-5 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset"
                 >
