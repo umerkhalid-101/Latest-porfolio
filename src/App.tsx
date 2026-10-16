@@ -4,19 +4,17 @@
  */
 
 import { useState, useEffect } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, MotionConfig, motion } from 'motion/react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { HowILead } from './components/HowILead';
 import { FeaturedWork } from './components/FeaturedWork';
-import { WhatIDo } from './components/WhatIDo';
-import { Skills } from './components/Skills';
+import { Experience } from './components/Experience';
 import { Marquee } from './components/Marquee';
 import { startSmoothScroll, scrollToIdWhenReady } from './lib/smoothScroll';
 import { KindWords } from './components/KindWords';
 import { Footer } from './components/Footer';
-import { Loader } from './components/Loader';
 import { ScrollProgress } from './components/ScrollProgress';
 import { SalamsCaseStudy } from './components/SalamsCaseStudy';
 import { CaseStudyPage } from './components/CaseStudyPage';
@@ -78,7 +76,6 @@ function setMeta(selector: string, attr: string, value: string) {
 }
 
 export default function App() {
-  const [loading, setLoading] = useState(() => slugFromLocation() === null);
   const [activeCaseStudy, setActiveCaseStudy] = useState<Slug | null>(slugFromLocation);
 
   useEffect(() => startSmoothScroll(), []);
@@ -126,11 +123,7 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen selection:bg-brand selection:text-white">
-      <AnimatePresence mode="wait">
-        {loading && <Loader key="loader" onComplete={() => setLoading(false)} />}
-      </AnimatePresence>
-
-      {!loading && (
+      <MotionConfig reducedMotion="user">
         <main className="relative">
           <ScrollProgress />
 
@@ -160,17 +153,16 @@ export default function App() {
                   className="bg-black text-white font-display uppercase tracking-tight text-[9vw] md:text-[88px] leading-none py-5 md:py-8 relative z-40"
                 />
                 <About />
-                <HowILead />
                 <FeaturedWork onOpenCaseStudy={openCaseStudy} />
-                <WhatIDo />
-                <Skills />
+                <HowILead />
+                <Experience />
                 <KindWords />
                 <Footer />
               </motion.div>
             )}
           </AnimatePresence>
         </main>
-      )}
+      </MotionConfig>
     </div>
   );
 }
