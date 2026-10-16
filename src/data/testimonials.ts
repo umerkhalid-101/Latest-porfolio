@@ -11,30 +11,22 @@ export type Testimonial = {
   photo?: string;
 };
 
-// Entries whose quote still starts with TODO are skipped by the Kind words section.
+// Approved by each person, word for word. Entries whose quote starts with TODO are skipped.
 export const testimonials: Testimonial[] = [
   {
-    quote: 'TODO_REAL_QUOTE',
+    quote: 'Umer brings real product thinking to government work. On VARA he turned a complex regulatory process into a five-step guide people could actually follow, and he built the UI kit that kept the whole portal consistent.',
     name: 'Norton Gomes',
     title: 'Creative Director',
-    company: 'MBLM Dubai',
-    relationship: 'TODO',
+    company: 'MBLM',
+    relationship: 'Worked with Umer at MBLM',
   },
   {
-    quote: 'TODO_REAL_QUOTE',
+    quote: 'Umer led design with clear direction and a steady hand. He set a quality bar the team rose to, worked closely with engineering, and shipped Salams on time and on scope.',
     name: 'Adeel Raza',
-    title: 'TODO',
-    company: 'TODO',
-    relationship: 'TODO',
+    title: 'Serial Entrepreneur',
+    company: '',
+    relationship: 'Worked with Umer on Salams',
   },
-];
-
-/** Shown only until at least one named quote above is real. Remove once one is. */
-export const anonymousQuotes: { quote: string; by?: string }[] = [
-  { quote: 'He was quick to move, easy to work with, and fully dedicated to shipping our product on time and on scope.', by: 'Head of Product, SaaS startup' },
-  { quote: 'Umer owned design end to end and made the hard calls. Our loyalty platform shipped faster and tighter because he was in the room.' },
-  { quote: 'The design system he built gave our engineers a real foundation. Consistent, documented, and easy to extend.' },
-  { quote: 'Umer brings research rigor most designers skip. He talked to users, mapped the problem, then shipped the right thing.' },
 ];
 
 export const namedTestimonials = testimonials.filter((t) => !t.quote.trim().startsWith('TODO'));
