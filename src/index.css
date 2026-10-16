@@ -92,18 +92,16 @@ body {
 }
 
 
-/* The custom cursor (CustomCursor.tsx) takes over on fine pointers; the arrows above stay as the fallback */
-html.has-custom-cursor,
-html.has-custom-cursor * {
-  cursor: none !important;
-}
-
-.cursor-spin {
-  animation: cursor-spin 7s linear infinite;
-}
-.cursor-spin-fast {
-  animation: cursor-spin 1.6s linear infinite;
-}
-@keyframes cursor-spin {
-  to { transform: rotate(360deg); }
+/* With the collaborator layer on (CustomCursor.tsx), the selection frame marks what's clickable,
+   so the pointer stays the orange arrow everywhere, like Figma */
+@media (pointer: fine) {
+  html.has-custom-cursor a,
+  html.has-custom-cursor button,
+  html.has-custom-cursor [role="button"],
+  html.has-custom-cursor [role="radio"],
+  html.has-custom-cursor label,
+  html.has-custom-cursor summary,
+  html.has-custom-cursor select {
+    cursor: inherit;
+  }
 }
