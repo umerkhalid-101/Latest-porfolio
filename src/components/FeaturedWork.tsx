@@ -1,5 +1,5 @@
-import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from 'motion/react';
-import { useRef, useState, type MouseEvent } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
+import type { MouseEvent } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { SectionHeader } from './SectionHeader';
 
@@ -63,9 +63,22 @@ interface FeaturedWorkProps {
   onOpenCaseStudy?: (slug: string) => void;
 }
 
+// Bento layout: Unita leads as the big tile, VARA and Salams sit beside it, Zewst runs across the bottom
+const layout = [
+  'lg:col-span-2 lg:row-span-2',
+  'lg:col-span-1',
+  'lg:col-span-1',
+  'lg:col-span-3',
+];
+
+/** Light brand colors (Zewst lime) need dark text */
+function isLight(hex: string) {
+  const n = parseInt(hex.slice(1), 16);
+  const [r, g, b] = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  return 0.299 * r + 0.587 * g + 0.114 * b > 160;
+}
+
 export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
-  const stackRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: stackRef, offset: ['start start', 'end end'] });
   return (
     <section id="work" className="relative z-30 bg-paper text-ink py-16 md:py-24 px-6 md:px-14">
       <div className="max-w-[1400px] mx-auto">
@@ -75,10 +88,9 @@ export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
           muted="four products I shaped."
           note="Each one opens a full case study: the problem, my role, the decisions, and what changed."
         />
-        {/* Cards pile up as you scroll: each one sticks, then shrinks back under the next */}
-        <div ref={stackRef} className="flex flex-col gap-5 md:gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-[repeat(3,minmax(300px,auto))] gap-4 md:gap-5">
           {projects.map((project, i) => (
-            <ProjectCard key={project.slug} project={project} onOpen={onOpenCaseStudy} index={i} total={projects.length} progress={scrollYProgress} />
+            <Tile key={project.slug} project={project} index={i} total={projects.length} className={layout[i]} onOpen={onOpenCaseStudy} />
           ))}
         </div>
       </div>
@@ -86,22 +98,13 @@ export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
   );
 }
 
-function ProjectCard({ project, onOpen, index, total, progress }: { project: Project; onOpen?: (slug: string) => void; index: number; total: number; progress: MotionValue<number> }) {
+function Tile({ project, index, total, className, onOpen }: { project: Project; index: number; total: number; className: string; onOpen?: (slug: string) => void }) {
   const reduce = useReducedMotion();
-  // Once the next card starts covering this one, push it back and dim it
-  const start = index / total;
-  const scale = useTransform(progress, [start, 1], [1, 1 - (total - 1 - index) * 0.05]);
-  const dim = useTransform(progress, [start, Math.min(1, start + 1 / total)], [0, index === total - 1 ? 0 : 0.45]);
-
-  // The screenshots drift toward the cursor, and a "View" badge follows it over the media panel
-  const mx = useMotionValue(0.5);
-  const my = useMotionValue(0.5);
-  const spring = { stiffness: 150, damping: 20 };
-  const imgX = useSpring(useTransform(mx, [0, 1], [-18, 18]), spring);
-  const imgY = useSpring(useTransform(my, [0, 1], [-14, 14]), spring);
-  const badgeX = useSpring(useTransform(mx, (v) => `${v * 100}%`), { stiffness: 400, damping: 30 });
-  const badgeY = useSpring(useTransform(my, (v) => `${v * 100}%`), { stiffness: 400, damping: 30 });
-  const [hover, setHover] = useState(false);
+  const light = isLight(project.brandColor);
+  const big = index === 0;
+  const wide = index === total - 1;
+  const ink = light ? 'text-ink' : 'text-white';
+  const soft = light ? 'text-ink/70' : 'text-white/70';
 
   const open = (e: MouseEvent) => {
     if (onOpen && !e.metaKey && !e.ctrlKey && !e.shiftKey) {
@@ -111,97 +114,80 @@ function ProjectCard({ project, onOpen, index, total, progress }: { project: Pro
   };
 
   return (
-    <div className="md:sticky" style={{ top: `calc(96px + ${index * 18}px)` }}>
-    <motion.article
-      style={reduce ? undefined : { scale }}
-      className="group relative origin-top bg-ink-soft text-white rounded-3xl md:rounded-[40px] overflow-hidden grid grid-cols-1 md:grid-cols-[5fr_7fr] md:h-[min(80vh,560px)]"
+    <motion.a
+      href={project.href}
+      onClick={open}
+      initial={reduce ? false : { opacity: 0, y: 24, scale: 0.98 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      className={`group relative block overflow-hidden rounded-3xl md:rounded-[32px] min-h-[380px] ${ink} ${className} focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-accent`}
+      style={{ backgroundColor: project.brandColor }}
     >
-      <div className="p-6 md:p-10 lg:p-12 flex flex-col">
-        <div className="flex items-center justify-between t-label text-muted-dark">
-          <span className="flex items-center gap-2.5">
-            <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: project.brandColor }} aria-hidden="true" />
+      <div className={`relative h-full flex ${wide ? 'flex-col md:flex-row' : 'flex-col'}`}>
+        {/* Top bar and title */}
+        <div className={`relative z-10 p-6 md:p-8 flex flex-col ${wide ? 'md:w-[38%] md:justify-between' : ''}`}>
+          <div className={`flex items-center justify-between t-label ${soft}`}>
             <span className="tabular-nums">{String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
-          </span>
-          <span>{project.meta.year}</span>
+            <span>{project.meta.year}</span>
+          </div>
+          <div className={wide ? 'mt-6 md:mt-0' : 'mt-6'}>
+            <h3 className={big ? 't-display-l' : 't-display-m'}>{project.title}</h3>
+            <p className={`t-body-s mt-2 ${soft}`}>{project.subtitle}</p>
+          </div>
+          {wide && <ImpactRow project={project} light={light} className="hidden md:flex" />}
         </div>
 
-        <div className="mt-8 md:mt-auto">
-          <h3 className="t-display-l">{project.title}</h3>
-          <p className="t-body-s text-muted-dark mt-2">{project.subtitle}</p>
+        {/* The work itself */}
+        <div className={`relative flex-1 flex items-center justify-center px-6 ${project.image ? (big ? 'min-h-[260px] lg:min-h-[420px]' : wide ? 'min-h-[220px] md:min-h-[300px]' : 'min-h-[220px]') : ''}`}>
+          {project.image ? (
+            <img
+              src={project.image}
+              alt={`${project.title} product screens`}
+              width={2000}
+              height={2000}
+              loading="lazy"
+              className={`absolute inset-0 w-full h-full object-contain motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out ${big ? 'scale-[1.3] group-hover:scale-[1.38]' : wide ? 'scale-[1.25] group-hover:scale-[1.32]' : 'scale-[1.2] group-hover:scale-[1.28]'} group-hover:-rotate-1`}
+            />
+          ) : (
+            <ol className="w-full flex flex-col gap-2 py-2">
+              {project.highlights?.map((item, n) => (
+                <li
+                  key={item}
+                  className="flex items-center gap-3 rounded-full border border-line-dark px-4 py-2.5 motion-safe:transition-transform motion-safe:duration-500 group-hover:translate-x-2"
+                  style={{ transitionDelay: `${n * 50}ms` }}
+                >
+                  <span className="t-label text-white/60 tabular-nums">{String(n + 1).padStart(2, '0')}</span>
+                  <span className="t-label">{item}</span>
+                </li>
+              ))}
+            </ol>
+          )}
         </div>
 
-        <div className="border-t border-line-dark mt-6 pt-5">
-          <p className="t-label text-muted-dark">Impact</p>
-          <p className="t-display-m mt-2">{project.meta.impact}</p>
-          <p className="t-body-s text-muted-dark mt-2">{project.meta.role}</p>
-        </div>
-
-        <p className="t-body-s text-muted-dark mt-5 md:[@media(max-height:820px)]:hidden">{project.description}</p>
-
-        {project.href && (
-          <a
-            href={project.href}
-            onClick={open}
-            className="self-start mt-6 md:mt-auto inline-flex items-center gap-3 rounded-full bg-white text-ink pl-5 pr-1.5 py-1.5 t-label after:absolute after:inset-0 after:content-[''] md:after:content-none"
-          >
-            View case study<span className="sr-only">: {project.title}</span>
-            <span aria-hidden="true" className="w-9 h-9 rounded-full bg-ink text-white flex items-center justify-center motion-safe:transition-transform group-hover:rotate-45"><ArrowUpRight size={16} /></span>
-          </a>
-        )}
+        {!wide && <ImpactRow project={project} light={light} className="relative z-10 p-6 md:p-8 pt-4 md:pt-4" />}
+        {wide && <ImpactRow project={project} light={light} className="md:hidden relative z-10 p-6 pt-4" />}
       </div>
 
-      {/* Media panel: the only place a project's brand color appears */}
-      <a
-        href={project.href}
-        onClick={open}
-        tabIndex={-1}
-        aria-hidden="true"
-        onPointerMove={(e) => {
-          if (e.pointerType !== 'mouse' || reduce) return;
-          const r = e.currentTarget.getBoundingClientRect();
-          mx.set((e.clientX - r.left) / r.width);
-          my.set((e.clientY - r.top) / r.height);
-        }}
-        onPointerEnter={(e) => { if (e.pointerType === 'mouse') setHover(true); }}
-        onPointerLeave={() => { setHover(false); mx.set(0.5); my.set(0.5); }}
-        className="relative h-[220px] md:h-auto flex items-center justify-center overflow-hidden p-6 md:p-10 md:cursor-none"
-        style={{ backgroundColor: project.brandColor }}
-      >
-        {project.image ? (
-          <motion.img
-            src={project.image}
-            alt=""
-            width={2000}
-            height={2000}
-            loading="lazy"
-            style={reduce ? undefined : { x: imgX, y: imgY }}
-            className="w-full h-full max-h-full object-contain scale-[1.18] motion-safe:transition-[scale] motion-safe:duration-700 group-hover:scale-[1.26]"
-          />
-        ) : (
-          <ol className="w-full max-w-[460px] flex flex-col border-t border-line-dark">
-            {project.highlights?.map((item, n) => (
-              <li key={item} className="flex items-baseline gap-5 py-4 border-b border-line-dark">
-                <span className="t-label text-muted-dark tabular-nums">{String(n + 1).padStart(2, '0')}</span>
-                <span className="t-display-m">{item}</span>
-              </li>
-            ))}
-          </ol>
-        )}
+      {/* Summary slides up on hover (desktop) */}
+      <div className="hidden lg:block absolute inset-x-3 bottom-3 z-20 rounded-2xl bg-ink-soft text-white p-5 translate-y-[120%] group-hover:translate-y-0 group-focus-visible:translate-y-0 motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out">
+        <p className="t-body-s text-muted-dark">{project.description}</p>
+        <p className="t-label mt-3 flex items-center gap-2">View case study <ArrowUpRight size={14} aria-hidden="true" /></p>
+      </div>
+    </motion.a>
+  );
+}
 
-        {/* Cursor badge */}
-        {!reduce && (
-          <motion.span
-            className="hidden md:flex absolute top-0 left-0 w-28 h-28 -ml-14 -mt-14 rounded-full bg-accent text-ink t-label items-center justify-center text-center pointer-events-none"
-            style={{ left: badgeX, top: badgeY }}
-            animate={{ scale: hover ? 1 : 0, rotate: hover ? 0 : -45 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-          >
-            View<br />case study
-          </motion.span>
-        )}
-      </a>
-      {!reduce && <motion.div aria-hidden="true" className="absolute inset-0 bg-ink pointer-events-none hidden md:block" style={{ opacity: dim }} />}
-    </motion.article>
+function ImpactRow({ project, light, className = '' }: { project: Project; light: boolean; className?: string }) {
+  return (
+    <div className={`flex items-end justify-between gap-4 ${className}`}>
+      <div>
+        <p className={`t-label ${light ? 'text-ink/70' : 'text-white/70'}`}>{project.meta.role}</p>
+        <p className="t-heading mt-1">{project.meta.impact}</p>
+      </div>
+      <span aria-hidden="true" className={`shrink-0 w-12 h-12 rounded-full flex items-center justify-center motion-safe:transition-transform motion-safe:duration-300 group-hover:rotate-45 ${light ? 'bg-ink text-white' : 'bg-white text-ink'}`}>
+        <ArrowUpRight size={20} />
+      </span>
     </div>
   );
 }
