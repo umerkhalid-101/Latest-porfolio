@@ -24,6 +24,29 @@ function Letter({ char, index, center, pointer }: { char: string; index: number;
   );
 }
 
+/** A teammate's cursor with a name tag, wandering slowly */
+function Collaborator({ name, tone, className, path, delay }: { name: string; tone: 'ink' | 'white'; className: string; path: { x: number[]; y: number[] }; delay: number }) {
+  const ink = tone === 'ink';
+  return (
+    <motion.div
+      className={`absolute ${className}`}
+      initial={{ opacity: 0, scale: 0.6 }}
+      animate={{ opacity: 1, scale: 1, x: path.x, y: path.y }}
+      transition={{
+        opacity: { delay, duration: 0.4 },
+        scale: { delay, type: 'spring', stiffness: 300, damping: 18 },
+        x: { delay, duration: 9, repeat: Infinity, ease: 'easeInOut' },
+        y: { delay, duration: 9, repeat: Infinity, ease: 'easeInOut' },
+      }}
+    >
+      <svg width="22" height="22" viewBox="0 0 22 22" className="drop-shadow">
+        <path d="M3 2 L3 18 L7.5 13.8 L10.5 20.5 L13.5 19.2 L10.6 12.6 L16.8 12.6 Z" fill={ink ? 'var(--color-ink)' : 'var(--color-white)'} stroke={ink ? 'var(--color-white)' : 'var(--color-ink)'} strokeWidth="1.4" strokeLinejoin="round" />
+      </svg>
+      <span className={`absolute left-4 top-5 whitespace-nowrap rounded-full rounded-tl-sm t-label px-2.5 py-1 ${ink ? 'bg-ink text-white' : 'bg-white text-ink'}`}>{name}</span>
+    </motion.div>
+  );
+}
+
 /**
  * Layered hero: the gradient, the name set huge behind me, and my cutout in front.
  * Layers rise in on load, then drift at different depths with the cursor and the scroll.
@@ -76,7 +99,7 @@ export function Hero() {
       </motion.div>
 
       {/* 2. The name, behind me */}
-      <motion.div style={{ y: nameY, opacity: nameOpacity }} className="absolute inset-x-0 top-[17svh] md:top-[13svh] z-10">
+      <motion.div style={{ y: nameY, opacity: nameOpacity }} className="absolute inset-x-0 top-[17svh] md:top-[9svh] z-10">
         <motion.h1
           aria-label="Muhammad Umer"
           style={{ x: nameX }}
@@ -103,7 +126,7 @@ export function Hero() {
 
       {/* 3. Me, in front of the name */}
       <motion.div
-        className="absolute bottom-0 left-1/2 z-20 h-[64svh] md:h-[66svh] aspect-[777/947] -translate-x-1/2 pointer-events-none"
+        className="absolute bottom-0 left-1/2 z-20 h-[64svh] md:h-[84svh] aspect-[777/947] -translate-x-1/2 pointer-events-none"
         style={{ y: personY, scale: personScale, originY: 1 }}
       >
         <motion.img
@@ -118,7 +141,44 @@ export function Hero() {
           transition={{ type: 'spring', stiffness: 70, damping: 16, delay: 0.55 }}
           className="w-full h-full object-contain object-bottom"
         />
+
       </motion.div>
+
+      {/* Multiplayer cursors drifting in the open space, like teammates in a shared file */}
+      {!reduce && (
+        <div aria-hidden="true" className="hidden md:block absolute inset-0 z-30 pointer-events-none">
+          <Collaborator name="Founder" tone="ink" className="left-[13%] top-[42%]" path={{ x: [0, 40, 10, -20, 0], y: [0, -24, 30, 10, 0] }} delay={1.8} />
+          <Collaborator name="Engineer" tone="white" className="left-[22%] top-[60%]" path={{ x: [0, -36, -8, 22, 0], y: [0, 20, 34, -10, 0] }} delay={2.1} />
+        </div>
+      )}
+
+      {/* Spinning badge: a quick way down to the work */}
+      <motion.a
+        href="#work"
+        aria-label="See my work"
+        className="hidden md:flex absolute right-[9%] top-[40%] z-30 w-36 h-36 lg:w-40 lg:h-40 items-center justify-center group"
+        initial={{ opacity: 0, scale: 0.6, rotate: -90 }}
+        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+        transition={{ delay: 1.6, type: 'spring', stiffness: 120, damping: 14 }}
+      >
+        <motion.svg
+          viewBox="0 0 160 160"
+          className="absolute inset-0 w-full h-full"
+          animate={reduce ? undefined : { rotate: 360 }}
+          transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+          aria-hidden="true"
+        >
+          <defs>
+            <path id="hero-badge-circle" d="M80,80 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0" />
+          </defs>
+          <text className="t-label" fill="var(--color-ink)" style={{ fontSize: 12, letterSpacing: '0.22em' }}>
+            <textPath href="#hero-badge-circle">LEAD PRODUCT DESIGNER ✦ SEE THE WORK ✦ </textPath>
+          </text>
+        </motion.svg>
+        <span className="w-14 h-14 rounded-full bg-ink text-white flex items-center justify-center motion-safe:transition-transform motion-safe:duration-300 group-hover:scale-110 group-hover:rotate-45" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
+        </span>
+      </motion.a>
 
       {/* 4. Details, in front of everything */}
       <motion.div
