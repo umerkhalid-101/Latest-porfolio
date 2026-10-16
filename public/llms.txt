@@ -1,0 +1,34 @@
+# Muhammad Umer, Lead Product Designer and UI/UX Designer in Dubai
+
+> Muhammad Umer (also known as Umer Khalid) is a Lead Product Designer and UI/UX designer based in Dubai, UAE, with 7 years designing web and mobile products for SaaS, fintech, consumer apps, and government. He leads design teams, builds design systems, and works side by side with founders, from first design hire through acquisition. He is open to Lead Product Designer and Design Manager roles in Dubai.
+
+## What he does
+- Product design: end-to-end product design from discovery and research to shipped UI
+- UI/UX design: user experience, interaction design, and interface design for web and mobile apps
+- Web design: marketing websites, government web portals, and SaaS dashboards
+- Design systems: Figma component libraries and design tokens built from scratch
+- Design leadership: leading and growing design teams, setting design direction across multiple products
+
+## Experience
+- MBLM Dubai, Design Specialist (March 2026 to present): government and regulated-sector web portals in the UAE, including VARA (Virtual Assets Regulatory Authority), plus an AI product website and product UI.
+- Unita Worldwide, Product Designer (October 2025 to March 2026): sole designer on a Swiss-headquartered B2B verified business network; owned the design system, discovery, and onboarding.
+- Axion Dynamic, Product Team Lead (October 2024 to September 2025): led the design team on Jobbit, an ERP platform for supply chain operations, and built a scalable Figma design system.
+- Hauraki (Zewst ecosystem), Design Manager and Senior Product Designer (September 2023 to October 2024): led the design team across four products, shipped Zewst POS to 500+ restaurant merchants, and owned the Zewards loyalty platform.
+- Mailmunch, UI/UX Designer (contract, October 2020 to June 2022): web and in-product experiences for a SaaS email marketing platform.
+- Salams, Junior UX Designer to Senior Product Designer (May 2018 to September 2023): first design hire on a Muslim matchmaking app that grew past a million users; led the full app redesign through its acquisition by Match Group in 2023.
+- Truebill (now Rocket Money), UX Designer (contract, September 2018 to November 2019): ran 30+ usability studies; reduced account-linking drop-offs by 18%.
+
+## Case studies
+- [Salams](https://www.umerkhalid.co/salams-casestudy): designing a marriage-focused matchmaking app as its only designer for five years, through the Match Group acquisition.
+- [Zewards](https://www.umerkhalid.co/zewards-casestudy): leading design for a restaurant loyalty platform in the Zewst ecosystem; 38% more repeat visits and 2.3x faster activation.
+- [Unita](https://www.umerkhalid.co/unita-casestudy): a pre-launch B2B verified business network designed by a sole designer, including a design system built from scratch.
+- [VARA at MBLM](https://www.umerkhalid.co/vara-casestudy): the web portal for Dubai's Virtual Assets Regulatory Authority, with a five-step licensing guide, a reusable UI kit, and a 12-column layout system.
+
+## Freelance projects
+Cayano, Break Thirty, Beyondhut, Folionomics, Rivas Pro Detail, and Hims.
+
+## Contact
+- Website: https://www.umerkhalid.co/
+- Email: umerkhalid141@gmail.com
+- LinkedIn: https://www.linkedin.com/in/umar-khalid1/
+- Resume: https://www.umerkhalid.co/Muhammad_Umer_Resume.pdf
