@@ -126,9 +126,9 @@ export function Hero() {
               ))}
             </div>
             <p className="flex flex-col items-start">
-              <span className="font-display text-4xl md:text-6xl leading-none uppercase tracking-tighter text-white">500K+</span>
+              <span className="font-display text-4xl md:text-6xl leading-none uppercase tracking-tighter text-white">1M+</span>
               <span className="text-[9px] md:text-[10px] font-semibold tracking-[0.2em] md:tracking-[0.3em] uppercase text-white leading-tight">
-                Users reached across<br />shipped products
+                Users on products<br />I've designed
               </span>
             </p>
           </motion.div>
