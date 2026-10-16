@@ -18,8 +18,7 @@ const quickFacts = [
   { label: 'Open to', value: 'Lead and Design Manager roles' },
   { label: 'Education', value: 'BA, Visual Communication Design' },
   { label: 'Languages', value: 'English, Urdu' },
-  // TODO: Umer to confirm the visa line before deploy.
-  { label: 'Visa', value: 'Own UAE residence visa' },
+  { label: 'Visa', value: 'Own company residence visa' },
 ];
 
 const toolkit = ['Figma', 'Adobe Suite', 'React', 'Next.js', 'Tailwind', 'Claude API', 'n8n'];
