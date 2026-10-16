@@ -68,11 +68,19 @@ export function Hero() {
             pointer.set((e.clientX - r.left) / r.width);
           }}
           onPointerLeave={() => pointer.set(-1)}
-          className="t-display-xl text-white whitespace-nowrap drop-shadow-2xl flex justify-center overflow-hidden pt-[0.15em] -mt-[0.15em]"
+          className="t-display-xl text-white drop-shadow-2xl flex flex-wrap justify-center gap-x-[0.3em] overflow-hidden pt-[0.15em] -mt-[0.15em]"
         >
-          {NAME.split("").map((char, index, all) => (
-            <Letter key={index} char={char} index={index} center={(index + 0.5) / all.length} pointer={pointer} />
-          ))}
+          {/* Words stay whole; on phones they stack onto two lines */}
+          {NAME.split(" ").map((word, w, words) => {
+            const offset = words.slice(0, w).join(" ").length + (w ? 1 : 0);
+            return (
+              <span key={w} className="flex">
+                {word.split("").map((char, i) => (
+                  <Letter key={i} char={char} index={offset + i} center={(offset + i + 0.5) / NAME.length} pointer={pointer} />
+                ))}
+              </span>
+            );
+          })}
         </h1>
 
         {/* 3. Location and positioning */}

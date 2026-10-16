@@ -13,7 +13,7 @@ export function ScrollProgress() {
       <div className="fixed top-0 left-0 right-0 h-[3px] z-[9999] pointer-events-none">
         {/* Animated Progress Bar */}
         <motion.div
-          className="absolute top-0 left-0 right-0 h-full bg-brand origin-left shadow-[0_0_15px_rgba(254,51,10,0.5)]"
+          className="absolute top-0 left-0 right-0 h-full bg-brand origin-left shadow-[0_0_15px_color-mix(in_srgb,var(--color-accent)_50%,transparent)]"
           style={{ scaleX }}
         />
       </div>
