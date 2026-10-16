@@ -3,13 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 import { SectionHeader } from './SectionHeader';
 
 import { Linkedin } from 'lucide-react';
-import { anonymousQuotes, namedTestimonials, type Testimonial } from '../data/testimonials';
+import { namedTestimonials, type Testimonial } from '../data/testimonials';
 
-// Named quotes replace the anonymous ones as soon as at least one real quote exists.
+// Only named, approved quotes are shown.
 type Slide = { quote: string; by?: string; person?: Testimonial };
-const slides: Slide[] = namedTestimonials.length
-  ? namedTestimonials.map((t) => ({ quote: t.quote, person: t }))
-  : anonymousQuotes;
+const slides: Slide[] = namedTestimonials.map((t) => ({ quote: t.quote, person: t }));
 
 const logos = [
   { name: 'Salams', url: '/images/team-01.webp' },
@@ -66,7 +64,7 @@ export function KindWords() {
                       {q.person.photo && <img src={q.person.photo} alt="" width={48} height={48} className="w-12 h-12 rounded-full object-cover" />}
                       <div>
                         <p className="t-heading">{q.person.name}</p>
-                        <p className="t-body-s text-muted">{q.person.title}, {q.person.company}</p>
+                        <p className="t-body-s text-muted">{[q.person.title, q.person.company].filter(Boolean).join(', ')}</p>
                       </div>
                       {q.person.linkedinUrl && (
                         <a href={q.person.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={`${q.person.name} on LinkedIn`} className="ml-2"><Linkedin size={18} aria-hidden="true" /></a>

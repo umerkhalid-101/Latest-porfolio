@@ -7,7 +7,7 @@ const STATEMENT = 'I lead design for products people actually use: setting direc
 // Facts from LinkedIn and the resume
 const stats = [
   { value: 7, suffix: '+', label: 'Years designing' },
-  { value: 7, suffix: '', label: 'Companies' },
+  { value: 5, suffix: '', label: 'Full-time companies' },
   { value: 10, suffix: '', label: 'Roles, junior to manager' },
   { value: 1, suffix: 'M+', label: "Users on products I've designed" },
 ];
@@ -18,8 +18,7 @@ const quickFacts = [
   { label: 'Open to', value: 'Lead and Design Manager roles' },
   { label: 'Education', value: 'BA, Visual Communication Design' },
   { label: 'Languages', value: 'English, Urdu' },
-  // TODO: Umer to confirm the visa line before deploy.
-  { label: 'Visa', value: 'Own UAE residence visa' },
+  { label: 'Visa', value: 'Own company residence visa' },
 ];
 
 const toolkit = ['Figma', 'Adobe Suite', 'React', 'Next.js', 'Tailwind', 'Claude API', 'n8n'];

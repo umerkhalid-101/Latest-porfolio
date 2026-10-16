@@ -78,8 +78,7 @@ const experiences: Job[] = [
       { title: "Design Manager", dates: "February 2024 to October 2024", duration: "9 months" },
       { title: "Senior Product Designer", dates: "September 2023 to February 2024", duration: "6 months" }
     ],
-    // TODO: Umer to confirm the "three-person design team" wording before deploy.
-    description: "Led a three-person design team and set design direction across four products. Shipped Zewst POS to 500+ restaurant merchants and owned the Zewards loyalty platform end to end.",
+    description: "Led the design team and set design direction across four products. Shipped Zewst POS to 500+ restaurant merchants and owned the Zewards loyalty platform end to end.",
     logo: "Hauraki",
     logoUrl: "/images/timeline-03.webp",
     caseStudy: "/zewards-casestudy"
@@ -91,8 +90,7 @@ const experiences: Job[] = [
     code: "AXD", from: "Oct 2024", to: "Sep 2025", span: "1y", path: "Team Lead",
     location: "Lahore, Pakistan",
     roles: [{ title: "Product Team Lead", dates: "October 2024 to September 2025", duration: "1 year" }],
-    // TODO: Umer to confirm the "three-person design team" wording before deploy.
-    description: "Led a three-person design team on Jobbit, an ERP platform for supply chain operations, from discovery through delivery, and built a scalable Figma design system.",
+    description: "Led the design team on Jobbit, an ERP platform for supply chain operations, from discovery through delivery, and built a scalable Figma design system.",
     logo: "Axion Dynamic",
     logoUrl: "/images/timeline-05.webp",
   },
