@@ -11,6 +11,10 @@ interface Project {
   description: string;
   image?: string;
   highlights?: string[];
+  /** Client cards shown as a grid instead of one screenshot */
+  gallery?: { src: string; alt: string }[];
+  /** Hover label when the link is not this project's own case study */
+  cta?: string;
   /** The project's own color, used only behind its screenshots */
   brandColor: string;
   href?: string;
@@ -29,12 +33,18 @@ const projects: Project[] = [
   },
   {
     slug: "vara",
-    meta: { role: "Design Specialist", year: "2026", impact: "5-step licensing guide" },
-    title: "VARA",
-    subtitle: "Regulator web portal, Dubai",
-    description: "Designed the web portal for Dubai's Virtual Assets Regulatory Authority at MBLM, from the homepage to a five-step licensing guide, backed by a reusable UI kit and a 12-column layout system.",
-    highlights: ["Five-step licensing guide", "Reusable UI kit", "12-column layout system", "Desktop and mobile"],
-    brandColor: "#0B1F3A",
+    meta: { role: "Design Specialist", year: "2026", impact: "4 UAE clients" },
+    title: "MBLM",
+    subtitle: "Government and enterprise work, Dubai",
+    description: "At MBLM Dubai I design web portals and product UI for UAE government and enterprise clients, including VARA, the Financial Intelligence Unit, Dubai World Trade Centre, and allumni.",
+    gallery: [
+      { src: "/images/mblm-vara.webp", alt: "VARA, Virtual Assets Regulatory Authority" },
+      { src: "/images/mblm-fiu.webp", alt: "Financial Intelligence Unit" },
+      { src: "/images/mblm-dwtc.webp", alt: "Dubai World Trade Centre" },
+      { src: "/images/mblm-allumni.webp", alt: "allumni" },
+    ],
+    cta: "View the VARA case study",
+    brandColor: "#1C1C1C",
     href: "/vara-casestudy"
   },
   {
@@ -149,6 +159,18 @@ function Tile({ project, index, total, className, onOpen }: { project: Project; 
               loading="lazy"
               className={`absolute inset-0 w-full h-full object-contain motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out ${big ? 'scale-[1.3] group-hover:scale-[1.38]' : wide ? 'scale-[1.25] group-hover:scale-[1.32]' : 'scale-[1.2] group-hover:scale-[1.28]'} group-hover:-rotate-1`}
             />
+          ) : project.gallery ? (
+            <ul className="w-full grid grid-cols-2 gap-2 py-2">
+              {project.gallery.map((g, n) => (
+                <li
+                  key={g.src}
+                  className="overflow-hidden rounded-xl motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out group-hover:-translate-y-1"
+                  style={{ transitionDelay: `${n * 60}ms` }}
+                >
+                  <img src={g.src} alt={g.alt} width={960} height={540} loading="lazy" className="w-full aspect-video object-cover" />
+                </li>
+              ))}
+            </ul>
           ) : (
             <ol className="w-full flex flex-col gap-2 py-2">
               {project.highlights?.map((item, n) => (
@@ -172,7 +194,7 @@ function Tile({ project, index, total, className, onOpen }: { project: Project; 
       {/* Summary slides up on hover (desktop) */}
       <div className="hidden lg:block absolute inset-x-3 bottom-3 z-20 rounded-2xl bg-ink-soft text-white p-5 translate-y-[120%] group-hover:translate-y-0 group-focus-visible:translate-y-0 motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out">
         <p className="t-body-s text-muted-dark">{project.description}</p>
-        <p className="t-label mt-3 flex items-center gap-2">View case study <ArrowUpRight size={14} aria-hidden="true" /></p>
+        <p className="t-label mt-3 flex items-center gap-2">{project.cta ?? 'View case study'} <ArrowUpRight size={14} aria-hidden="true" /></p>
       </div>
     </motion.a>
   );
