@@ -127,7 +127,7 @@ export function Footer() {
         </p>
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-8 border-t border-white/15 text-[12px] text-white/55">
-          <p>© 2026 Muhammad Umer. Designed in Figma, built in React.</p>
+          <p>© 2026 Muhammad Umer.</p>
           <button
             type="button"
             onClick={() => scrollToSmooth(0)}
