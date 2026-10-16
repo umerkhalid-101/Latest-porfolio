@@ -18,6 +18,7 @@ import { KindWords } from './components/KindWords';
 import { Footer } from './components/Footer';
 import { ScrollProgress } from './components/ScrollProgress';
 import { CustomCursor } from './components/CustomCursor';
+import { NotFound } from './components/NotFound';
 import { SalamsCaseStudy } from './components/SalamsCaseStudy';
 import { CaseStudyPage } from './components/CaseStudyPage';
 import { zewards, unita, vara } from './caseStudies';
@@ -73,23 +74,74 @@ function slugFromLocation(): Slug | null {
   return null;
 }
 
+const KNOWN_PATHS = new Set(['', '/index', '/unita-casestudy', '/vara-casestudy', '/salams-casestudy', '/zewards-casestudy', '/zewst-casestudy']);
+
+// Vercel rewrites every unknown path to the app, so the app decides what's a 404
+function isNotFound() {
+  const path = window.location.pathname.replace(/\/+$/, '').replace(/\.html$/, '');
+  return !KNOWN_PATHS.has(path) && slugFromLocation() === null;
+}
+
+// A hello for anyone who opens dev tools
+let greeted = false;
+function greetInConsole() {
+  if (greeted) return;
+  greeted = true;
+  console.log(
+    '%cHey, you opened the console 👋%c\nSince you are here: this site is React, Motion, Tailwind, and a lot of nudging pixels.\nPress / anywhere on the page to leave a cursor chat. Or just email me: umerkhalid141@gmail.com',
+    'font: 600 16px Inter, sans-serif; color: #FF953F;',
+    'font: 13px Inter, sans-serif; color: inherit; line-height: 1.6;'
+  );
+}
+
 function setMeta(selector: string, attr: string, value: string) {
   document.querySelector(selector)?.setAttribute(attr, value);
 }
 
 export default function App() {
   const [activeCaseStudy, setActiveCaseStudy] = useState<Slug | null>(slugFromLocation);
+  const [notFound, setNotFound] = useState(isNotFound);
 
   useEffect(() => startSmoothScroll(), []);
+  useEffect(greetInConsole, []);
+
+  // When the visitor switches tabs, the tab asks them to come back
+  useEffect(() => {
+    let saved = '';
+    const onVisibility = () => {
+      if (document.hidden) {
+        saved = document.title;
+        document.title = '👀 Come back, the file is still open';
+      } else if (saved) {
+        document.title = saved;
+        saved = '';
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+    return () => document.removeEventListener('visibilitychange', onVisibility);
+  }, []);
 
   useEffect(() => {
-    const handleLocationChange = () => setActiveCaseStudy(slugFromLocation());
+    const handleLocationChange = () => {
+      setActiveCaseStudy(slugFromLocation());
+      setNotFound(isNotFound());
+    };
     window.addEventListener('popstate', handleLocationChange);
     return () => window.removeEventListener('popstate', handleLocationChange);
   }, []);
 
   // Keep document head metadata in sync with the active route
   useEffect(() => {
+    // Keep a 404 out of search results
+    document.querySelector('meta[name="robots"]')?.remove();
+    if (notFound) {
+      document.title = 'Frame not found | Muhammad Umer';
+      const robots = document.createElement('meta');
+      robots.name = 'robots';
+      robots.content = 'noindex';
+      document.head.appendChild(robots);
+      return;
+    }
     const meta = pageMeta[activeCaseStudy ?? 'home'];
     document.title = meta.title;
     setMeta('meta[name="description"]', 'content', meta.description);
@@ -101,10 +153,11 @@ export default function App() {
     setMeta('meta[name="twitter:description"]', 'content', meta.description);
     setMeta('meta[name="twitter:image"]', 'content', meta.image);
     setMeta('link[rel="canonical"]', 'href', SITE + meta.path);
-  }, [activeCaseStudy]);
+  }, [activeCaseStudy, notFound]);
 
   const openCaseStudy = (slug: string) => {
     window.history.pushState(null, '', `/${slug}-casestudy`);
+    setNotFound(false);
     setActiveCaseStudy(slug as Slug);
   };
 
@@ -131,7 +184,11 @@ export default function App() {
           <ScrollProgress />
 
           <AnimatePresence mode="wait">
-            {caseStudy ? (
+            {notFound ? (
+              <motion.div key="not-found" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                <NotFound />
+              </motion.div>
+            ) : caseStudy ? (
               <motion.div
                 key={`case-study-${activeCaseStudy}`}
                 initial={{ opacity: 0, y: 20 }}

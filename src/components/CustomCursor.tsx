@@ -1,55 +1,40 @@
-import { AnimatePresence, motion, useMotionValue, useSpring } from 'motion/react';
+import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * A HUD-style cursor. Idle: an orange dot, a segmented reticle that eases behind it,
- * a soft trail and a coordinate readout. Over anything clickable, corner brackets fly
- * out and lock onto the element, the dot becomes a crosshair and a label decodes in.
+ * The visitor is a collaborator in the file, like the teammates in the hero.
+ * The native orange arrow stays the pointer (zero lag); this layer adds a "You" tag,
+ * a Figma-style selection frame with a size label on anything clickable,
+ * and cursor chat: press / to say something.
  */
 
 const CLICKABLE = 'a, button, [role="button"], [role="radio"], label, summary, select, [data-cursor]';
-const IDLE_BOX = 34;
-const PAD = 8;
-const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/#_<>';
+const PAD = 6;
+const EDGE = 6;
+const HINT_KEY = 'cursor-chat-hint-seen';
 
-function labelFor(el: Element): string {
-  const custom = el.getAttribute('data-cursor-label');
-  if (custom !== null) return custom;
-  if (el.getAttribute('data-cursor') === 'view') return 'View case';
-  const href = el.getAttribute('href') ?? '';
-  if (el.hasAttribute('download') || href.endsWith('.pdf')) return 'Download';
-  if (href.startsWith('mailto:')) return 'Email';
-  if (/^https?:/.test(href) && !href.includes(window.location.host)) return 'Visit';
-  return 'Open';
+type Target = { el: Element; name: string; w: number; h: number };
+type Chat = { mode: 'off' } | { mode: 'typing' } | { mode: 'said'; text: string };
+type Reply = { id: number; x: number; y: number; text: string };
+
+function nameFor(el: Element) {
+  return el.getAttribute('data-cursor-label') ?? '';
 }
 
-/** Decodes text in from random glyphs, left to right */
-function useScramble(text: string) {
-  const [out, setOut] = useState(text);
-  useEffect(() => {
-    let frame = 0;
-    const total = 10;
-    const id = setInterval(() => {
-      frame++;
-      const settled = Math.floor((frame / total) * text.length);
-      setOut(
-        text
-          .split('')
-          .map((c, i) => (i < settled || c === ' ' ? c : GLYPHS[Math.floor(Math.random() * GLYPHS.length)]))
-          .join(''),
-      );
-      if (frame >= total) clearInterval(id);
-    }, 32);
-    return () => clearInterval(id);
-  }, [text]);
-  return out;
+function replyTo(text: string) {
+  const t = text.toLowerCase();
+  if (/hire|hiring|job|role|position|opportunit|work together|interview|recruit/.test(t)) return "Love that. My inbox is open: umerkhalid141@gmail.com";
+  if (/\b(hi|hey|hello|yo|salam|salaam|sup)\b/.test(t)) return 'Hey! 👋 Thanks for dropping into the file.';
+  if (/nice|love|cool|great|amazing|wow|beautiful|clean|sick|fire|awesome/.test(t)) return 'Thank you! That made my day 🧡';
+  if (/\?$/.test(t)) return "Good question. Let's talk, the email's in the footer.";
+  return 'Ha, noted 😄 Say hi in the footer anytime.';
 }
 
-/** Fine pointers only, and only when motion is welcome. Everyone else keeps the native cursor. */
-function useEnabled() {
+/** Fine pointers only. Touch screens keep their native behavior. */
+function useFinePointer() {
   const [on, setOn] = useState(false);
   useEffect(() => {
-    const mq = window.matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)');
+    const mq = window.matchMedia('(pointer: fine)');
     const update = () => setOn(mq.matches);
     update();
     mq.addEventListener('change', update);
@@ -58,31 +43,37 @@ function useEnabled() {
   return on;
 }
 
-export function CustomCursor() {
-  const enabled = useEnabled();
-  const [label, setLabel] = useState<string | null>(null);
-  const [visible, setVisible] = useState(false);
-  const [down, setDown] = useState(false);
-  const [pulses, setPulses] = useState<{ id: number; x: number; y: number }[]>([]);
-  const readout = useRef<HTMLSpanElement>(null);
-  const target = useRef<Element | null>(null);
-  const pointer = useRef({ x: -100, y: -100 });
+function Arrow({ fill, stroke }: { fill: string; stroke: string }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 22 22" className="drop-shadow">
+      <path d="M3 2 L3 18 L7.5 13.8 L10.5 20.5 L13.5 19.2 L10.6 12.6 L16.8 12.6 Z" fill={fill} stroke={stroke} strokeWidth="1.4" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
-  // The dot is exact; everything else eases behind it
+export function CustomCursor() {
+  const enabled = useFinePointer();
+  const reduce = useReducedMotion();
+  const [visible, setVisible] = useState(false);
+  const [target, setTarget] = useState<Target | null>(null);
+  const [labelInside, setLabelInside] = useState(false);
+  const [chat, setChat] = useState<Chat>({ mode: 'off' });
+  const [draft, setDraft] = useState('');
+  const [hint, setHint] = useState(false);
+  const [reply, setReply] = useState<Reply | null>(null);
+  const targetRef = useRef<Element | null>(null);
+  const pointer = useRef({ x: -100, y: -100 });
+  const chatRef = useRef<Chat>(chat);
+  chatRef.current = chat;
+
+  // The tag rides the pointer exactly; the selection frame glides between targets
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
-  const soft = { stiffness: 420, damping: 34, mass: 0.6 };
-  const ringX = useSpring(x, soft);
-  const ringY = useSpring(y, soft);
-  const trailX = useSpring(x, { stiffness: 140, damping: 20, mass: 0.8 });
-  const trailY = useSpring(y, { stiffness: 140, damping: 20, mass: 0.8 });
-
-  // The bracket frame: a box that sits on the cursor, or locks onto the hovered element
-  const lock = { stiffness: 380, damping: 32, mass: 0.7 };
-  const bx = useSpring(-100, lock);
-  const by = useSpring(-100, lock);
-  const bw = useSpring(IDLE_BOX, lock);
-  const bh = useSpring(IDLE_BOX, lock);
+  const glide = reduce ? { stiffness: 2000, damping: 100 } : { stiffness: 520, damping: 42, mass: 0.6 };
+  const fx = useSpring(0, glide);
+  const fy = useSpring(0, glide);
+  const fw = useSpring(0, glide);
+  const fh = useSpring(0, glide);
 
   useEffect(() => {
     if (!enabled) return;
@@ -92,186 +83,214 @@ export function CustomCursor() {
     const retarget = () => {
       const { x: px, y: py } = pointer.current;
       const hit = document.elementFromPoint(px, py)?.closest(CLICKABLE) ?? null;
-      if (hit === target.current) return;
-      target.current = hit;
-      setLabel(hit ? labelFor(hit) : null);
+      if (hit === targetRef.current) return;
+      const fresh = !targetRef.current;
+      targetRef.current = hit;
+      if (!hit) return setTarget(null);
+      const r = hit.getBoundingClientRect();
+      // A fresh selection appears in place; moving between targets glides
+      if (fresh) {
+        fx.jump(r.left - PAD);
+        fy.jump(r.top - PAD);
+        fw.jump(r.width + PAD * 2);
+        fh.jump(r.height + PAD * 2);
+      }
+      setTarget({ el: hit, name: nameFor(hit), w: Math.round(r.width), h: Math.round(r.height) });
     };
 
+    let hinted = false;
     const move = (e: PointerEvent) => {
       if (e.pointerType !== 'mouse') return;
       pointer.current = { x: e.clientX, y: e.clientY };
       x.set(e.clientX);
       y.set(e.clientY);
       setVisible(true);
-      if (readout.current) {
-        readout.current.textContent = `X${String(Math.round(e.clientX)).padStart(4, '0')}  Y${String(Math.round(e.clientY)).padStart(4, '0')}`;
-      }
       retarget();
+      if (!hinted) {
+        hinted = true;
+        let seen = false;
+        try { seen = sessionStorage.getItem(HINT_KEY) === '1'; sessionStorage.setItem(HINT_KEY, '1'); } catch { /* private mode */ }
+        if (!seen) {
+          setTimeout(() => setHint(true), 1200);
+          setTimeout(() => setHint(false), 6200);
+        }
+      }
     };
 
-    // Follow the locked element through scrolls and its own hover animations
+    // Keep the frame on its element through scrolls and hover animations, clamped to the screen
     let raf = 0;
+    let inside = false;
     const tick = () => {
-      const el = target.current;
+      const el = targetRef.current;
       if (el && el.isConnected) {
-        // Lock onto the visible part, so tall cards keep all four corners on screen
         const r = el.getBoundingClientRect();
-        const edge = 6;
-        const left = Math.max(edge, r.left - PAD);
-        const top = Math.max(edge, r.top - PAD);
-        const right = Math.min(window.innerWidth - edge, r.right + PAD);
-        const bottom = Math.min(window.innerHeight - edge, r.bottom + PAD);
-        bx.set(left);
-        by.set(top);
-        bw.set(Math.max(0, right - left));
-        bh.set(Math.max(0, bottom - top));
-      } else {
-        bx.set(pointer.current.x - IDLE_BOX / 2);
-        by.set(pointer.current.y - IDLE_BOX / 2);
-        bw.set(IDLE_BOX);
-        bh.set(IDLE_BOX);
+        const left = Math.max(EDGE, r.left - PAD);
+        const top = Math.max(EDGE, r.top - PAD);
+        const right = Math.min(window.innerWidth - EDGE, r.right + PAD);
+        const bottom = Math.min(window.innerHeight - EDGE, r.bottom + PAD);
+        fx.set(left);
+        fy.set(top);
+        fw.set(Math.max(0, right - left));
+        fh.set(Math.max(0, bottom - top));
+        const nowInside = bottom > window.innerHeight - 34;
+        if (nowInside !== inside) { inside = nowInside; setLabelInside(nowInside); }
       }
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
 
-    let pulseId = 0;
-    const press = (e: PointerEvent) => {
-      if (e.pointerType !== 'mouse') return;
-      setDown(true);
-      const id = ++pulseId;
-      setPulses((p) => [...p, { id, x: e.clientX, y: e.clientY }]);
-      setTimeout(() => setPulses((p) => p.filter((q) => q.id !== id)), 650);
+    // Cursor chat, like Figma: / opens it, Escape closes it
+    const key = (e: KeyboardEvent) => {
+      const typingElsewhere = (e.target as HTMLElement | null)?.closest?.('input, textarea, select, [contenteditable="true"]');
+      if (e.key === '/' && !typingElsewhere && chatRef.current.mode !== 'typing' && !e.metaKey && !e.ctrlKey) {
+        e.preventDefault();
+        setHint(false);
+        setDraft('');
+        setChat({ mode: 'typing' });
+      }
     };
-    const release = () => setDown(false);
-    const leave = () => setVisible(false);
 
+    const leave = () => setVisible(false);
     window.addEventListener('pointermove', move, { passive: true });
     window.addEventListener('scroll', retarget, { passive: true });
-    window.addEventListener('pointerdown', press);
-    window.addEventListener('pointerup', release);
+    window.addEventListener('keydown', key);
     root.addEventListener('pointerleave', leave);
     return () => {
       cancelAnimationFrame(raf);
       root.classList.remove('has-custom-cursor');
       window.removeEventListener('pointermove', move);
       window.removeEventListener('scroll', retarget);
-      window.removeEventListener('pointerdown', press);
-      window.removeEventListener('pointerup', release);
+      window.removeEventListener('keydown', key);
       root.removeEventListener('pointerleave', leave);
     };
-  }, [enabled, x, y, bx, by, bw, bh]);
+  }, [enabled, x, y, fx, fy, fw, fh]);
 
-  const scrambled = useScramble(label ?? '');
+  const send = () => {
+    const text = draft.trim();
+    if (!text) return setChat({ mode: 'off' });
+    setChat({ mode: 'said', text });
+    const { x: px, y: py } = pointer.current;
+    const id = Date.now();
+    // Umer's cursor drops in nearby to answer, staying on screen
+    setTimeout(() => {
+      setReply({
+        id,
+        x: Math.min(px + 70, window.innerWidth - 300),
+        y: Math.min(py + 70, window.innerHeight - 90),
+        text: replyTo(text),
+      });
+    }, 900);
+    setTimeout(() => setChat((c) => (c.mode === 'said' ? { mode: 'off' } : c)), 4500);
+    setTimeout(() => setReply((r) => (r?.id === id ? null : r)), 6500);
+  };
 
   if (!enabled) return null;
 
-  const active = label !== null;
-  const spring = { type: 'spring' as const, stiffness: 320, damping: 26 };
-  // Each blended layer is its own fixed element: a transformed parent would isolate the blend
   const layer = 'pointer-events-none fixed left-0 top-0 z-[9999]';
-  const corner = active ? 12 : 7;
+  const sizeLabel = target ? `${target.name ? `${target.name} · ` : ''}${target.w} × ${target.h}` : '';
 
   return (
-    <div aria-hidden="true" style={{ opacity: visible ? 1 : 0, transition: 'opacity 200ms' }}>
-      {/* Soft trail, 40% */}
-      <motion.div className={`${layer} mix-blend-difference`} style={{ x: trailX, y: trailY }}>
-        <motion.div
-          className="absolute h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white blur-[6px]"
-          animate={{ opacity: active ? 0 : 0.4 }}
-        />
-      </motion.div>
-
-      {/* Lock-on brackets */}
-      <motion.div className={`${layer} mix-blend-difference`} style={{ x: bx, y: by, width: bw, height: bh }}>
-        {[
-          'left-0 top-0 border-l border-t',
-          'right-0 top-0 border-r border-t',
-          'left-0 bottom-0 border-l border-b',
-          'right-0 bottom-0 border-r border-b',
-        ].map((pos) => (
-          <motion.span
-            key={pos}
-            className={`absolute border-white ${pos}`}
-            animate={{ width: corner, height: corner, borderWidth: active ? 2 : 1.5, opacity: active ? 1 : 0.55 }}
-            transition={spring}
-          />
-        ))}
-      </motion.div>
-
-      {/* Segmented reticle */}
-      <motion.div className={`${layer} mix-blend-difference`} style={{ x: ringX, y: ringY }}>
-        <motion.svg
-          width="40"
-          height="40"
-          viewBox="-20 -20 40 40"
-          className="absolute -left-5 -top-5 overflow-visible"
-          animate={{ scale: (active ? 0.55 : 1) * (down ? 0.8 : 1) }}
-          transition={spring}
-        >
-          <g className={active ? 'cursor-spin-fast' : 'cursor-spin'}>
-            <circle r="12" fill="none" stroke="white" strokeWidth="1.5" strokeDasharray="14 4.85" />
-          </g>
-          <g stroke="white" strokeWidth="1.2" opacity={active ? 0 : 0.7}>
-            <path d="M0 -17V-15M0 15V17M-17 0H-15M15 0H17" />
-          </g>
-        </motion.svg>
-      </motion.div>
-
-      {/* Dot, which turns into a crosshair over clickables */}
-      <motion.div className={layer} style={{ x, y }}>
-        <motion.div
-          className="absolute h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent shadow-[0_0_8px_#FF953F]"
-          animate={{ scale: active ? 0 : down ? 0.6 : 1 }}
-          transition={spring}
-        />
-        <motion.svg
-          width="16"
-          height="16"
-          viewBox="-8 -8 16 16"
-          className="absolute -left-2 -top-2"
-          style={{ filter: 'drop-shadow(0 0 3px #FF953F)' }}
-          animate={{ opacity: active ? 1 : 0, scale: active ? 1 : 0.3, rotate: active ? 0 : -90 }}
-          transition={spring}
-        >
-          <path d="M0 -7V-2.5M0 2.5V7M-7 0H-2.5M2.5 0H7" stroke="#FF953F" strokeWidth="1.6" strokeLinecap="round" />
-          <circle r="1" fill="#FF953F" />
-        </motion.svg>
-      </motion.div>
-
-      {/* Readout: coordinates while idle, a decoded label while locked on */}
-      <motion.div className={`${layer} mix-blend-difference`} style={{ x: ringX, y: ringY }}>
-        <div className="absolute left-5 top-4 whitespace-nowrap font-mono text-[10px] uppercase leading-none tracking-[0.12em] text-white">
-          <span ref={readout} className="transition-opacity duration-200" style={{ opacity: active ? 0 : 0.45 }} />
-          {active && label && (
-            <span className="absolute left-0 top-0 flex items-center gap-1.5">
-              <span className="inline-block h-1.5 w-1.5 animate-pulse bg-white" />
-              {scrambled}
+    <>
+      {/* Selection frame */}
+      <AnimatePresence>
+        {target && (
+          <motion.div
+            aria-hidden="true"
+            className={layer}
+            style={{ x: fx, y: fy, width: fw, height: fh }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.12 }}
+          >
+            <div className="absolute inset-0 border-[1.5px] border-accent shadow-[0_0_0_1px_rgba(255,255,255,0.7)]" />
+            {['-left-[4px] -top-[4px]', '-right-[4px] -top-[4px]', '-left-[4px] -bottom-[4px]', '-right-[4px] -bottom-[4px]'].map((pos) => (
+              <span key={pos} className={`absolute h-2 w-2 border-[1.5px] border-accent bg-white ${pos}`} />
+            ))}
+            <span
+              className={`absolute left-1/2 -translate-x-1/2 whitespace-nowrap rounded-[3px] bg-accent px-1.5 py-[3px] font-sans text-[11px] font-medium leading-none tabular-nums text-white ${labelInside ? 'bottom-2' : '-bottom-[26px]'}`}
+            >
+              {sizeLabel}
             </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Your tag, or your chat bubble */}
+      <motion.div className={layer} style={{ x, y, opacity: visible || chat.mode === 'typing' ? 1 : 0 }}>
+        <div className="absolute left-[13px] top-[18px]">
+          {chat.mode === 'typing' ? (
+            <form
+              className="pointer-events-auto"
+              onSubmit={(e) => { e.preventDefault(); send(); }}
+            >
+              <input
+                autoFocus
+                value={draft}
+                maxLength={60}
+                onChange={(e) => setDraft(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Escape') setChat({ mode: 'off' }); }}
+                onBlur={() => { if (!draft.trim()) setChat({ mode: 'off' }); }}
+                placeholder="Say something"
+                aria-label="Cursor chat message, press Enter to send"
+                size={Math.max(12, draft.length + 1)}
+                className="rounded-[14px] rounded-tl-sm bg-accent px-3 py-2 font-sans text-[14px] text-white placeholder:text-white/75 outline-none ring-1 ring-white/70 shadow-lg"
+              />
+            </form>
+          ) : (
+            <motion.div
+              layout
+              aria-hidden={chat.mode !== 'said'}
+              className="w-max max-w-[260px] rounded-[14px] rounded-tl-sm bg-accent px-2.5 py-1 text-white ring-1 ring-white/70 shadow-md"
+              transition={{ type: 'spring', stiffness: 500, damping: 36 }}
+            >
+              {chat.mode === 'said' ? (
+                <span className="block py-1 font-sans text-[14px] leading-snug" role="status">{chat.text}</span>
+              ) : (
+                <span className="t-label whitespace-nowrap">
+                  You
+                  <AnimatePresence>
+                    {hint && (
+                      <motion.span
+                        className="inline-block overflow-hidden align-bottom font-medium normal-case tracking-normal"
+                        initial={{ width: 0, opacity: 0 }}
+                        animate={{ width: 'auto', opacity: 1 }}
+                        exit={{ width: 0, opacity: 0 }}
+                      >
+                        &nbsp;· Press / to chat
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </span>
+              )}
+            </motion.div>
           )}
         </div>
       </motion.div>
 
-      {/* Click pulse */}
+      {/* Umer's reply */}
       <AnimatePresence>
-        {pulses.map((p) => (
-          <motion.div
-            key={p.id}
-            className={`${layer} mix-blend-difference`}
-            style={{ x: p.x, y: p.y }}
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <motion.div
-              className="absolute h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white"
-              initial={{ scale: 0.3 }}
-              animate={{ scale: 1.8 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            />
-          </motion.div>
-        ))}
+        {reply && <ReplyCursor key={reply.id} reply={reply} />}
       </AnimatePresence>
-    </div>
+    </>
+  );
+}
+
+function ReplyCursor({ reply }: { reply: Reply }) {
+  return (
+    <motion.div
+      role="status"
+      className="pointer-events-none fixed left-0 top-0 z-[9998]"
+      initial={{ x: reply.x + 160, y: reply.y + 80, opacity: 0 }}
+      animate={{ x: reply.x, y: reply.y, opacity: 1 }}
+      exit={{ x: reply.x + 120, y: reply.y + 60, opacity: 0 }}
+      transition={{ type: 'spring', stiffness: 160, damping: 20 }}
+    >
+      <Arrow fill="var(--color-ink)" stroke="var(--color-white)" />
+      <div className="absolute left-4 top-5 w-max max-w-[260px] rounded-[14px] rounded-tl-sm bg-ink px-2.5 py-1.5 text-white shadow-lg ring-1 ring-white/30">
+        <span className="t-label block text-muted-dark">Umer</span>
+        <span className="block font-sans text-[14px] leading-snug">{reply.text}</span>
+      </div>
+    </motion.div>
   );
 }
