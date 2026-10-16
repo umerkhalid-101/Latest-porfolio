@@ -2,13 +2,14 @@ import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/rea
 import { useEffect, useRef, useState } from 'react';
 import { SectionHeader } from './SectionHeader';
 
-// One calm testimonial section: a rotating featured quote and the teams I've designed with.
-const quotes = [
-  { text: 'He was quick to move, easy to work with, and fully dedicated to shipping our product on time and on scope.', by: 'Head of Product, SaaS startup' },
-  { text: 'Umer owned design end to end and made the hard calls. Our loyalty platform shipped faster and tighter because he was in the room.' },
-  { text: 'The design system he built gave our engineers a real foundation. Consistent, documented, and easy to extend.' },
-  { text: 'Umer brings research rigor most designers skip. He talked to users, mapped the problem, then shipped the right thing.' },
-] as { text: string; by?: string }[];
+import { Linkedin } from 'lucide-react';
+import { anonymousQuotes, namedTestimonials, type Testimonial } from '../data/testimonials';
+
+// Named quotes replace the anonymous ones as soon as at least one real quote exists.
+type Slide = { quote: string; by?: string; person?: Testimonial };
+const slides: Slide[] = namedTestimonials.length
+  ? namedTestimonials.map((t) => ({ quote: t.quote, person: t }))
+  : anonymousQuotes;
 
 const logos = [
   { name: 'Salams', url: '/images/team-01.webp' },
@@ -31,11 +32,11 @@ export function KindWords() {
 
   useEffect(() => {
     if (!playing) return;
-    const id = setTimeout(() => setI((n) => (n + 1) % quotes.length), CYCLE_MS);
+    const id = setTimeout(() => setI((n) => (n + 1) % slides.length), CYCLE_MS);
     return () => clearTimeout(id);
   }, [i, playing]);
 
-  const q = quotes[i];
+  const q = slides[i];
 
   return (
     <section id="kind-words" className="relative bg-white text-black px-6 md:px-14 py-24 md:py-32">
@@ -59,21 +60,32 @@ export function KindWords() {
                   exit={reduce ? undefined : { opacity: 0, y: -12 }}
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <p className="text-[24px] md:text-[36px] lg:text-[44px] leading-[1.2] font-medium tracking-tight max-w-[1000px]">{q.text}</p>
-                  {q.by && <footer className="mt-6 text-[13px] font-semibold uppercase tracking-[0.2em] text-[#6F6F6F]">{q.by}</footer>}
+                  <p className="text-[24px] md:text-[36px] lg:text-[44px] leading-[1.2] font-medium tracking-tight max-w-[1000px]">{q.quote}</p>
+                  {q.person ? (
+                    <footer className="mt-6 flex items-center gap-4">
+                      {q.person.photo && <img src={q.person.photo} alt="" width={48} height={48} className="w-12 h-12 rounded-full object-cover" />}
+                      <div>
+                        <p className="text-[20px] font-semibold">{q.person.name}</p>
+                        <p className="text-[14px] text-[#6F6F6F]">{q.person.title}, {q.person.company}</p>
+                      </div>
+                      {q.person.linkedinUrl && (
+                        <a href={q.person.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={`${q.person.name} on LinkedIn`} className="ml-2"><Linkedin size={18} aria-hidden="true" /></a>
+                      )}
+                    </footer>
+                  ) : q.by && <footer className="mt-6 text-[13px] font-semibold uppercase tracking-[0.2em] text-[#6F6F6F]">{q.by}</footer>}
                 </motion.blockquote>
               </AnimatePresence>
             </div>
 
             {/* Pager */}
             <div className="flex items-center gap-2 mt-8" role="tablist" aria-label="Choose a quote">
-              {quotes.map((_, n) => (
+              {slides.map((_, n) => (
                 <button
                   key={n}
                   type="button"
                   role="tab"
                   aria-selected={n === i}
-                  aria-label={`Quote ${n + 1} of ${quotes.length}`}
+                  aria-label={`Quote ${n + 1} of ${slides.length}`}
                   onClick={() => { setPaused(true); setI(n); }}
                   className="relative h-2 rounded-full overflow-hidden bg-black/10 transition-all duration-300"
                   style={{ width: n === i ? 48 : 12 }}
