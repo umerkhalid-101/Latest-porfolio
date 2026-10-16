@@ -111,7 +111,7 @@ export function Hero() {
           className="font-display text-[17vw] md:text-[12.6vw] min-[1900px]:text-[240px] uppercase leading-[0.85] tracking-[-0.01em] text-white flex flex-wrap justify-center gap-x-[0.25em] overflow-hidden pt-[0.1em] px-4 select-none"
         >
           {/* The full heading for screen readers and search; the letters below are decorative */}
-          <span className="sr-only">Muhammad Umer, Lead Product Designer and UI/UX Designer in Dubai</span>
+          <span className="sr-only">Muhammad Umer (Umer Khalid), Lead Product Designer and UI/UX Designer in Dubai</span>
           {NAME.split(" ").map((word, w, words) => {
             const offset = words.slice(0, w).join(" ").length + (w ? 1 : 0);
             return (
@@ -132,7 +132,7 @@ export function Hero() {
       >
         <motion.img
           src="/images/hero-person.webp"
-          alt="Muhammad Umer"
+          alt="Muhammad Umer (Umer Khalid)"
           width={777}
           height={947}
           fetchPriority="high"

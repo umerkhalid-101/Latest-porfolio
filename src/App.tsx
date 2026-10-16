@@ -31,31 +31,31 @@ type Slug = 'unita' | 'vara' | 'salams' | 'zewards';
 // Keep in sync with the static <head> in index.html and the per-route HTML files.
 const pageMeta: Record<Slug | 'home', { title: string; description: string; image: string; path: string }> = {
   home: {
-    title: 'Muhammad Umer | Lead Product & UI/UX Designer in Dubai',
-    description: 'Lead Product Designer and UI/UX designer in Dubai with 7 years designing web and mobile products for SaaS, fintech, and government, including Salams (acquired by Match Group).',
+    title: 'Muhammad Umer (Umer Khalid) | Product & UI/UX Designer, Dubai',
+    description: 'Muhammad Umer (Umer Khalid) is a Lead Product Designer and UI/UX designer in Dubai with 7 years designing web and mobile products for SaaS, fintech, and government.',
     image: `${SITE}/images/og.jpg`,
     path: '/'
   },
   unita: {
-    title: 'Unita Case Study | Muhammad Umer, Lead Product Designer',
+    title: 'Unita Case Study | Muhammad Umer (Umer Khalid), Product Designer',
     description: 'Designing a pre-launch B2B verified business network as the sole designer: discovery, company profiles, onboarding, and a design system built from scratch.',
     image: `${SITE}/images/og-unita.jpg`,
     path: '/unita-casestudy'
   },
   vara: {
-    title: 'VARA Case Study | Muhammad Umer, Lead Product Designer',
+    title: 'VARA Case Study | Muhammad Umer (Umer Khalid), Product Designer',
     description: "Designing the web portal for Dubai's Virtual Assets Regulatory Authority at MBLM: homepage, a five-step licensing guide, a reusable UI kit, and a 12-column layout system.",
     image: `${SITE}/images/og-vara.jpg`,
     path: '/vara-casestudy'
   },
   salams: {
-    title: 'Salams Case Study | Muhammad Umer, Lead Product Designer',
+    title: 'Salams Case Study | Muhammad Umer (Umer Khalid), Product Designer',
     description: 'How I designed Salams, a Muslim matchmaking app, as its only designer for five years, through to its acquisition by Match Group in 2023.',
     image: `${SITE}/images/og-salams.jpg`,
     path: '/salams-casestudy'
   },
   zewards: {
-    title: 'Zewards Case Study | Muhammad Umer, Lead Product Designer',
+    title: 'Zewards Case Study | Muhammad Umer (Umer Khalid), Product Designer',
     description: 'Leading design as Design Manager for Zewards, a loyalty platform in the Zewst restaurant ecosystem. 38% more repeat visits and 2.3x faster activation.',
     image: `${SITE}/images/og-zewards.jpg`,
     path: '/zewards-casestudy'
@@ -136,7 +136,7 @@ export default function App() {
     // Keep a 404 out of search results
     document.querySelector('meta[name="robots"]')?.remove();
     if (notFound) {
-      document.title = 'Frame not found | Muhammad Umer';
+      document.title = 'Frame not found | Muhammad Umer (Umer Khalid)';
       const robots = document.createElement('meta');
       robots.name = 'robots';
       robots.content = 'noindex';

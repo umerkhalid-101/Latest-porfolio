@@ -202,7 +202,7 @@ export function Footer() {
         </p>
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-8 border-t border-line-dark t-body-s text-muted-dark">
-          <p>© 2026 Muhammad Umer.</p>
+          <p>© 2026 Muhammad Umer (Umer Khalid).</p>
           <button
             type="button"
             onClick={() => scrollToSmooth(0)}
