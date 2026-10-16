@@ -50,7 +50,7 @@ const columns = [
     title: 'Case studies',
     links: [
       { label: 'Unita', href: '/unita-casestudy' },
-      { label: 'VARA', href: '/vara-casestudy' },
+      { label: 'MBLM', href: '/vara-casestudy' },
       { label: 'Salams', href: '/salams-casestudy' },
       { label: 'Zewards', href: '/zewards-casestudy' },
     ],

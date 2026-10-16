@@ -17,6 +17,7 @@ import { startSmoothScroll, scrollToIdWhenReady } from './lib/smoothScroll';
 import { KindWords } from './components/KindWords';
 import { Footer } from './components/Footer';
 import { ScrollProgress } from './components/ScrollProgress';
+import { CustomCursor } from './components/CustomCursor';
 import { SalamsCaseStudy } from './components/SalamsCaseStudy';
 import { CaseStudyPage } from './components/CaseStudyPage';
 import { zewards, unita, vara } from './caseStudies';
@@ -124,6 +125,7 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen selection:bg-accent selection:text-white">
+      <CustomCursor />
       <MotionConfig reducedMotion="user">
         <main className="relative">
           <ScrollProgress />
