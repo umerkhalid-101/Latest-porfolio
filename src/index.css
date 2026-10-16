@@ -1,5 +1,5 @@
-/* Playfair stays for the case studies until Phase 2 */
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&family=Playfair+Display:wght@700;900&display=swap');
+/* Playfair and Inter 500/700 stay for the case studies until Phase 2 */
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap');
 @import "tailwindcss";
 
 @theme {
