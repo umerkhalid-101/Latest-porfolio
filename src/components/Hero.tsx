@@ -83,12 +83,12 @@ export function Hero() {
             transition={{ delay: 0.8, duration: 1 }}
             className="space-y-5"
           >
-            <p className="inline-flex items-center gap-2.5 bg-black/30 backdrop-blur-md border border-white/20 rounded-full pl-3 pr-4 py-2 t-label text-white">
+            <p className="inline-flex items-center gap-2.5 bg-black/30 backdrop-blur-md border border-white/20 rounded-full pl-2.5 pr-3.5 py-1 t-body-s text-white">
               <span className="relative flex w-2 h-2" aria-hidden="true">
                 <span className="absolute inset-0 rounded-full bg-success motion-safe:animate-ping opacity-75" />
                 <span className="relative w-2 h-2 rounded-full bg-success" />
               </span>
-              Design Specialist at MBLM · Open to Lead and Design Manager roles
+              Open to Lead and Manager roles
             </p>
             <p className="t-display-l text-white drop-shadow-lg">
               Based in<br />Dubai, UAE
