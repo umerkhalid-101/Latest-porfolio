@@ -57,10 +57,10 @@ export function Footer() {
   };
 
   return (
-    <footer id="contact" className="bg-ink text-white px-6 md:px-14 pt-20 md:pt-28 pb-8 overflow-hidden">
+    <footer id="contact" className="bg-ink text-white px-6 md:px-14 pt-16 md:pt-24 pb-8 overflow-hidden">
       <div className="max-w-[1400px] mx-auto">
         {/* Contact */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 pb-14 md:pb-20 border-b border-line-dark">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 pb-12 md:pb-16 border-b border-line-dark">
           <div>
             <p className="flex items-center gap-3 t-label mb-5">
               <span className="relative flex w-2.5 h-2.5" aria-hidden="true">
@@ -90,7 +90,7 @@ export function Footer() {
         </div>
 
         {/* Link columns + local time */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-14 md:py-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-12 md:py-14">
           {columns.map((col) => (
             <nav key={col.title} aria-label={col.title}>
               <h3 className="t-label text-muted-dark mb-5">{col.title}</h3>
@@ -118,7 +118,7 @@ export function Footer() {
         </div>
 
         {/* Wordmark */}
-        <p aria-hidden="true" className="font-display uppercase leading-[0.78] tracking-tighter text-[37vw] lg:text-[min(37vw,560px)] -mx-1 select-none text-white">
+        <p aria-hidden="true" className="font-display uppercase leading-[0.78] tracking-tighter text-[37vw] lg:text-[min(30vw,420px)] -mx-1 select-none text-white">
           UMER<span className="text-accent">.</span>
         </p>
 

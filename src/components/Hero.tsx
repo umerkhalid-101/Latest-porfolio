@@ -13,7 +13,7 @@ export function Hero() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} className="relative z-10 min-h-[100svh] flex flex-col overflow-hidden bg-brand">
+    <section ref={ref} className="relative z-10 min-h-[100svh] flex flex-col overflow-hidden bg-ink">
 
       {/* 1. Image Layer (Edge-to-Edge) */}
       {/* TODO: replace with a professional portrait once supplied. */}
@@ -40,7 +40,7 @@ export function Hero() {
         {/* 2. Name: full text for screen readers and search, animated letters are decorative */}
         <h1
           aria-label="Muhammad Umer"
-          className="font-display text-[clamp(2.25rem,11.5vw,13rem)] leading-none tracking-[-0.04em] uppercase text-white whitespace-nowrap drop-shadow-2xl flex justify-center overflow-hidden"
+          className="t-display-xl text-white whitespace-nowrap drop-shadow-2xl flex justify-center overflow-hidden"
         >
           {NAME.split("").map((char, index) => (
             <motion.span
@@ -68,14 +68,14 @@ export function Hero() {
             transition={{ delay: 0.8, duration: 1 }}
             className="space-y-5"
           >
-            <p className="inline-flex items-center gap-2.5 bg-black/30 backdrop-blur-md border border-white/20 rounded-full pl-3 pr-4 py-2 text-[11px] md:text-[12px] font-semibold uppercase tracking-widest text-white">
+            <p className="inline-flex items-center gap-2.5 bg-black/30 backdrop-blur-md border border-white/20 rounded-full pl-3 pr-4 py-2 t-label text-white">
               <span className="relative flex w-2 h-2" aria-hidden="true">
-                <span className="absolute inset-0 rounded-full bg-[#22C55E] animate-ping opacity-75" />
-                <span className="relative w-2 h-2 rounded-full bg-[#22C55E]" />
+                <span className="absolute inset-0 rounded-full bg-success motion-safe:animate-ping opacity-75" />
+                <span className="relative w-2 h-2 rounded-full bg-success" />
               </span>
               Design Specialist at MBLM · Open to Lead and Design Manager roles
             </p>
-            <p className="font-display text-[clamp(2rem,5.5vw,6rem)] leading-[1.1] uppercase tracking-tight text-white drop-shadow-lg">
+            <p className="t-display-l text-white drop-shadow-lg">
               Based in<br />Dubai, UAE
             </p>
           </motion.div>
@@ -84,7 +84,7 @@ export function Hero() {
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 1 }}
-            className="text-[11px] md:text-[12px] font-medium leading-[1.7] tracking-[0.15em] uppercase text-white max-w-[380px] drop-shadow-md"
+            className="t-body-l text-white max-w-[440px] drop-shadow-md"
           >
             Product design leader in Dubai with 7 years shipping SaaS, fintech, and consumer products. I've led design teams, set direction across multi-product ecosystems, and worked side by side with founders from first design hire through acquisition.
           </motion.p>
@@ -99,8 +99,8 @@ export function Hero() {
             className="flex items-center gap-6"
           >
             <div className="flex items-center gap-4">
-              <span className="text-[10px] md:text-[11px] font-semibold tracking-widest uppercase text-white">Follow</span>
-              <div className="h-[1px] w-8 md:w-12 bg-white/40" aria-hidden="true" />
+              <span className="t-label text-white">Follow</span>
+              <div className="h-px w-8 md:w-12 bg-white/40" aria-hidden="true" />
             </div>
             <div className="flex gap-4">
               <a href="https://www.linkedin.com/in/umar-khalid1/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-white hover:opacity-70 transition-opacity"><Linkedin size={18} aria-hidden="true" /></a>
@@ -126,8 +126,8 @@ export function Hero() {
               ))}
             </div>
             <p className="flex flex-col items-start">
-              <span className="font-display text-4xl md:text-6xl leading-none uppercase tracking-tighter text-white">1M+</span>
-              <span className="text-[9px] md:text-[10px] font-semibold tracking-[0.2em] md:tracking-[0.3em] uppercase text-white leading-tight">
+              <span className="t-display-m text-white">1M+</span>
+              <span className="t-label text-white mt-1">
                 Users on products<br />I've designed
               </span>
             </p>

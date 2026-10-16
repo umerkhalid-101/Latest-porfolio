@@ -151,9 +151,9 @@ export function Experience() {
   };
 
   return (
-    <section id="experience" className="relative bg-paper text-ink py-20 md:py-24">
+    <section id="experience" className="relative bg-paper text-ink py-12 md:py-20">
       <div className="max-w-[1400px] mx-auto px-6 md:px-14 flex items-end justify-between gap-6">
-        <SectionHeader label="Experience" title="May 2018 to present" muted="7 companies · 10 roles" className="!mb-8" />
+        <SectionHeader label="Experience" title="May 2018 to present" note={<span className="t-label text-ink">7 companies · 10 roles</span>} className="!mb-8 flex-1" />
         <div className="hidden md:flex gap-3 mb-8 shrink-0">
           <button type="button" onClick={() => goTo(active - 1)} disabled={active === 0} aria-label="Previous role" className="w-12 h-12 rounded-full border border-ink flex items-center justify-center disabled:opacity-30">
             <ArrowLeft size={18} aria-hidden="true" />
@@ -217,7 +217,7 @@ function Ticket({ exp, index, total }: { exp: Job; index: number; total: number 
   return (
     <article className="relative h-full w-[82vw] max-w-[400px] md:w-[440px] md:max-w-none bg-white rounded-3xl overflow-hidden flex flex-col">
       {/* Stub */}
-      <header className="px-6 pt-5 pb-6 bg-ink-soft text-white">
+      <header className="px-6 pt-5 pb-5 bg-ink-soft text-white">
         <div className="flex items-center justify-between t-label">
           {exp.current ? (
             <span className="inline-flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-success motion-safe:animate-pulse" aria-hidden="true" /> Now boarding</span>
@@ -246,7 +246,7 @@ function Ticket({ exp, index, total }: { exp: Job; index: number; total: number 
       </dl>
 
       {/* Perforation */}
-      <div className="relative my-5" aria-hidden="true">
+      <div className="relative my-4" aria-hidden="true">
         <span className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-paper" />
         <span className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-paper" />
         <div className="mx-6 border-t-2 border-dashed border-line" />
@@ -262,9 +262,9 @@ function Ticket({ exp, index, total }: { exp: Job; index: number; total: number 
         ))}
       </ol>
 
-      <p className="t-body-s text-muted px-6 mt-4">{exp.description}</p>
+      <p className="t-body-s text-muted px-6 mt-3">{exp.description}</p>
 
-      <footer className="mt-auto px-6 pt-5 pb-5 flex items-end justify-between gap-4">
+      <footer className="mt-auto px-6 pt-4 pb-5 flex items-end justify-between gap-4">
         <Barcode seed={exp.code} />
         {exp.caseStudy && (
           <a href={exp.caseStudy} className="group inline-flex items-center gap-2 t-label">

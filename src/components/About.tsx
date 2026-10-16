@@ -21,7 +21,7 @@ export function About() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
-        className="w-full max-w-[1400px] mx-auto px-6 md:px-14 py-20 md:py-28"
+        className="w-full max-w-[1400px] mx-auto px-6 md:px-14 py-12 md:py-20"
       >
         <div className="flex items-center gap-3 mb-6 md:mb-8">
           <span className="w-2.5 h-2.5 rounded-full bg-ink" aria-hidden="true" />
@@ -37,7 +37,7 @@ export function About() {
           </p>
         </div>
 
-        <dl className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6 border-t border-line mt-12 md:mt-16 pt-8">
+        <dl className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6 border-t border-line mt-10 md:mt-12 pt-6">
           {quickFacts.map((f) => (
             <div key={f.label}>
               <dt className="t-label text-muted mb-1.5">{f.label}</dt>
@@ -45,7 +45,7 @@ export function About() {
             </div>
           ))}
         </dl>
-        <p className="border-t border-line mt-8 pt-6 flex flex-col md:flex-row gap-1.5 md:gap-4">
+        <p className="border-t border-line mt-6 pt-5 flex flex-col md:flex-row gap-1.5 md:gap-4">
           <span className="t-label text-muted">Toolkit</span>
           <span className="t-body-s text-ink font-semibold">{toolkit}</span>
         </p>

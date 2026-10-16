@@ -122,7 +122,7 @@ export default function App() {
     null;
 
   return (
-    <div className="relative min-h-screen selection:bg-brand selection:text-white">
+    <div className="relative min-h-screen selection:bg-accent selection:text-white">
       <MotionConfig reducedMotion="user">
         <main className="relative">
           <ScrollProgress />
@@ -150,7 +150,7 @@ export default function App() {
                 <Hero />
                 <Marquee
                   items={['Lead Product Designer', 'Based in Dubai', 'Design leadership', 'Design systems', 'SaaS', 'Fintech', 'Government portals', 'Acquired by Match Group']}
-                  className="bg-black text-white font-display uppercase tracking-tight text-[9vw] md:text-[88px] leading-none py-5 md:py-8 relative z-40"
+                  className="bg-ink text-white t-display-l py-5 md:py-8 relative z-40"
                 />
                 <About />
                 <FeaturedWork onOpenCaseStudy={openCaseStudy} />
