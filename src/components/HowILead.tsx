@@ -113,7 +113,8 @@ const practices: { n: string; title: string; body: string; where: string; artifa
   {
     n: '01',
     title: 'One library, four products',
-    body: 'At Hauraki I set one design direction across four Zewst products, all built on a single shared pattern library.',
+    // TODO: Umer to confirm the "three-person design team" wording before deploy.
+    body: 'At Hauraki I led a three-person design team and set one direction across four Zewst products, all built on a single shared pattern library.',
     where: 'Hauraki · Design Manager',
     artifact: <LibraryArtifact />,
   },

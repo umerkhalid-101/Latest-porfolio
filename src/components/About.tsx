@@ -102,7 +102,8 @@ const experiences: Experience[] = [
       { title: "Design Manager", dates: "February 2024 to October 2024", duration: "9 months" },
       { title: "Senior Product Designer", dates: "September 2023 to February 2024", duration: "6 months" }
     ],
-    description: "Led the design team and set design direction across four products. Shipped Zewst POS to 500+ restaurant merchants and owned the Zewards loyalty platform end to end.",
+    // TODO: Umer to confirm the "three-person design team" wording before deploy.
+    description: "Led a three-person design team and set design direction across four products. Shipped Zewst POS to 500+ restaurant merchants and owned the Zewards loyalty platform end to end.",
     logo: "Hauraki",
     logoUrl: "/images/timeline-03.webp",
     panel: "#A3E635",
@@ -116,7 +117,8 @@ const experiences: Experience[] = [
     code: "AXD", from: "Oct 2024", to: "Sep 2025", span: "1y", path: "Team Lead",
     location: "Lahore, Pakistan",
     roles: [{ title: "Product Team Lead", dates: "October 2024 to September 2025", duration: "1 year" }],
-    description: "Led product and design for Jobbit, an ERP platform for supply chain operations, from discovery through delivery, and built a scalable Figma design system.",
+    // TODO: Umer to confirm the "three-person design team" wording before deploy.
+    description: "Led a three-person design team on Jobbit, an ERP platform for supply chain operations, from discovery through delivery, and built a scalable Figma design system.",
     logo: "Axion Dynamic",
     logoUrl: "/images/timeline-05.webp",
     panel: "#2A7B4B",
@@ -227,7 +229,7 @@ export function About() {
             className="lg:col-span-4 space-y-6"
           >
             <p className="text-[16px] md:text-[18px] leading-[1.65] text-black/80">
-              I'm Umer, a product designer in Dubai. I started in 2018 as the first design hire at Salams, stayed through its acquisition by Match Group, and have since led small design teams and shipped products for fintech, restaurants, B2B networks, and UAE regulators. I'm still hands-on in Figma and React.
+              I'm Umer, a product designer in Dubai. I started in 2018 as the first design hire at Salams and stayed through its acquisition by Match Group. I went on to lead design as Design Manager at Hauraki and Product Team Lead at Axion Dynamic, and I've since shipped products for B2B networks and UAE regulators. I'm still hands-on in Figma and React.
             </p>
             <dl className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4 border-t border-black/10 pt-6 text-[13px]">
               {quickFacts.map((f) => (

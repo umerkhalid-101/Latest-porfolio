@@ -86,7 +86,7 @@ export function Hero() {
             transition={{ delay: 1, duration: 1 }}
             className="text-[11px] md:text-[12px] font-medium leading-[1.7] tracking-[0.15em] uppercase text-white max-w-[380px] drop-shadow-md"
           >
-            Lead Product Designer in Dubai. 7 years shipping SaaS, fintech, and consumer products, including leading small design teams and owning design direction alongside product and business leadership.
+            Product design leader in Dubai with 7 years shipping SaaS, fintech, and consumer products. I've led design teams, set direction across multi-product ecosystems, and worked side by side with founders from first design hire through acquisition.
           </motion.p>
         </div>
 
