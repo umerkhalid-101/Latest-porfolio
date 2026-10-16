@@ -51,9 +51,9 @@ const experiences: Experience[] = [
     years: "2018 to 2019",
     company: "Truebill (now Rocket Money)",
     name: "Truebill", tagline: "Now Rocket Money",
-    code: "TRB", from: "Sep 2018", to: "Nov 2019", span: "1y 3m", path: "UX Designer",
-    location: "California, United States",
-    roles: [{ title: "UX Designer", dates: "September 2018 to November 2019", duration: "1 year 3 months" }],
+    code: "TRB", from: "Sep 2018", to: "Nov 2019", span: "1y 3m", path: "Contract",
+    location: "Remote contract",
+    roles: [{ title: "UX Designer (Contract)", dates: "September 2018 to November 2019", duration: "1 year 3 months" }],
     description: "Ran 30+ usability and validation studies across account linking, subscription detection, and transactions. Improved financial data accuracy by 22% and reduced account-linking drop-offs by 18%.",
     logo: "Rocket Money",
     logoUrl: "/images/timeline-01.webp",
@@ -79,11 +79,24 @@ const experiences: Experience[] = [
     caseStudy: "/salams-casestudy"
   },
   {
+    years: "2020 to 2022",
+    company: "Mailmunch",
+    name: "Mailmunch", tagline: "SaaS email marketing",
+    code: "MMC", from: "Oct 2020", to: "Jun 2022", span: "1y 9m", path: "Contract",
+    location: "Lahore, hybrid contract",
+    roles: [{ title: "UI/UX Designer (Contract)", dates: "October 2020 to June 2022", duration: "1 year 9 months" }],
+    description: "Designed web and in-product experiences for a SaaS email platform, supporting user acquisition, onboarding, and feature adoption.",
+    logo: "Mailmunch",
+    logoUrl: "/images/team-04.webp",
+    panel: "#1C1C1C",
+    tint: "#F4F2EE"
+  },
+  {
     years: "2023 to 2024",
     company: "Hauraki (Zewst ecosystem)",
     name: "Hauraki", tagline: "Zewst ecosystem",
     code: "HRK", from: "Sep 2023", to: "Oct 2024", span: "1y 2m", path: "Senior → Manager",
-    location: "Lahore, Pakistan",
+    location: "Remote",
     total: "1 year 2 months",
     roles: [
       { title: "Design Manager", dates: "February 2024 to October 2024", duration: "9 months" },
