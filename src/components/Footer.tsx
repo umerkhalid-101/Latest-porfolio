@@ -57,7 +57,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-black text-white px-6 md:px-14 pt-20 md:pt-28 pb-8 overflow-hidden">
+    <footer id="contact" className="bg-black text-white px-6 md:px-14 pt-20 md:pt-28 pb-8 overflow-hidden">
       <div className="max-w-[1400px] mx-auto">
         {/* Closing line + email */}
         <div className="flex items-center gap-3 mb-6">
@@ -70,7 +70,7 @@ export function Footer() {
 
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-14 md:pb-20 border-b border-white/15">
           <a href={`mailto:${EMAIL}`} className="group font-display text-[7.4vw] md:text-[6.6vw] lg:text-[clamp(64px,6.6vw,104px)] leading-[0.95] uppercase tracking-tighter whitespace-nowrap">
-            <span className="bg-[linear-gradient(#FF6B35,#FF6B35)] bg-no-repeat bg-[length:0%_6px] bg-[position:0_100%] group-hover:bg-[length:100%_6px] transition-[background-size] duration-500">
+            <span className="bg-[linear-gradient(var(--color-brand),var(--color-brand))] bg-no-repeat bg-[length:0%_6px] bg-[position:0_100%] group-hover:bg-[length:100%_6px] transition-[background-size] duration-500">
               {EMAIL}
             </span>
           </a>
@@ -85,7 +85,7 @@ export function Footer() {
             </button>
             <a
               href={`mailto:${EMAIL}`}
-              className="flex items-center gap-2 rounded-full bg-[#FF6B35] text-black px-5 py-3 text-[12px] font-bold uppercase tracking-widest"
+              className="flex items-center gap-2 rounded-full bg-brand text-black px-5 py-3 text-[12px] font-bold uppercase tracking-widest"
             >
               Email me <ArrowUpRight size={15} aria-hidden="true" />
             </a>
@@ -104,7 +104,7 @@ export function Footer() {
                     <a
                       href={l.href}
                       {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                      className="inline-flex items-center gap-1.5 text-[15px] md:text-[17px] text-white/85 hover:text-[#FF6B35] transition-colors"
+                      className="inline-flex items-center gap-1.5 text-[15px] md:text-[17px] text-white/85 hover:text-brand transition-colors"
                     >
                       {l.label}
                       {l.external && <ArrowUpRight size={14} aria-hidden="true" />}
@@ -123,7 +123,7 @@ export function Footer() {
 
         {/* Wordmark */}
         <p aria-hidden="true" className="font-display uppercase leading-[0.78] tracking-tighter text-[37vw] lg:text-[min(37vw,560px)] -mx-1 select-none text-white">
-          UMER<span className="text-[#FF6B35]">.</span>
+          UMER<span className="text-brand">.</span>
         </p>
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-8 border-t border-white/15 text-[12px] text-white/55">

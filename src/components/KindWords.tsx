@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
-import { RevealText } from './RevealText';
+import { SectionHeader } from './SectionHeader';
 
 // One calm testimonial section: a rotating featured quote and the teams I've designed with.
 const quotes = [
@@ -40,14 +40,7 @@ export function KindWords() {
   return (
     <section id="kind-words" className="relative bg-white text-black px-6 md:px-14 py-24 md:py-32">
       <div ref={ref} className="max-w-[1400px] mx-auto">
-        <div className="flex items-center gap-3 mb-5 md:mb-6">
-          <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-black" />
-          <span className="text-base md:text-xl font-medium tracking-tight">Kind words</span>
-        </div>
-        <h2 className="font-display text-[11vw] md:text-[64px] lg:text-[68px] leading-[0.95] uppercase tracking-tighter mb-12 md:mb-16">
-          <RevealText text="What it's like" /><br />
-          <RevealText text="to work with me." className="text-[#6F6F6F]" delay={0.12} />
-        </h2>
+        <SectionHeader label="Kind words" title="What it's like" muted="to work with me." />
 
         {/* Featured quote, full width */}
         <div
@@ -55,7 +48,7 @@ export function KindWords() {
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          <span aria-hidden="true" className="lg:col-span-1 font-display text-[#FF6B35] text-[96px] md:text-[128px] leading-[0.75]">&ldquo;</span>
+          <span aria-hidden="true" className="lg:col-span-1 font-display text-brand text-[96px] md:text-[128px] leading-[0.75]">&ldquo;</span>
           <div className="lg:col-span-11 flex flex-col">
             <div className="relative min-h-[170px] md:min-h-[200px]" aria-live="polite">
               <AnimatePresence mode="wait">

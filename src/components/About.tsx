@@ -195,7 +195,7 @@ export function About() {
       {/* 1. Intro */}
       <div className="w-full max-w-[1300px] mx-auto px-6 md:px-10 pt-16 md:pt-28 pb-16">
         <div className="flex items-center gap-3 mb-6 md:mb-10">
-          <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-black" />
+          <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-brand" />
           <span className="text-base md:text-xl font-medium tracking-tight">About me</span>
         </div>
 
@@ -232,8 +232,13 @@ export function About() {
         {/* Header bar */}
         <div className={`w-full max-w-[1300px] mx-auto px-6 md:px-10 pt-20 md:pt-28 [@media(max-height:700px)]:pt-[72px] md:[@media(max-height:860px)]:pt-20 flex items-end justify-between gap-6`}>
           <div>
-            <h2 className={`font-display text-4xl md:text-[64px] md:[@media(max-height:860px)]:text-[44px] leading-none uppercase tracking-tighter`}>Experience</h2>
-            <p className="text-[11px] md:text-[13px] font-semibold uppercase tracking-[0.2em] text-black/60 mt-2 [@media(max-height:700px)]:hidden">May 2018 to present · {experiences.length} companies · 9 roles</p>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-brand" aria-hidden="true" />
+              <span className="text-base md:text-xl font-medium tracking-tight">Experience</span>
+            </div>
+            <h2 className="font-display text-[9vw] md:text-[48px] lg:text-[clamp(36px,5.4vh,56px)] leading-[0.95] uppercase tracking-tighter">
+              May 2018 to now <span className="text-[#6F6F6F]">· six companies</span>
+            </h2>
           </div>
           <p className="font-display text-3xl md:text-5xl leading-none tabular-nums whitespace-nowrap" aria-hidden="true">
             {String(active + 1).padStart(2, "0")}<span className="text-black/55"> / {String(experiences.length).padStart(2, "0")}</span>

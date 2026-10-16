@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'motion/react';
 import { useEffect, useState, type KeyboardEvent } from 'react';
-import { RevealText } from './RevealText';
+import { SectionHeader } from './SectionHeader';
 
 // Skills as a tactile keyboard: press a key, the retro screen types out where I used it.
 // Every proof line comes from LinkedIn (experience entries and the summary).
@@ -127,7 +127,7 @@ const rows = [
 const rowIndent = ['lg:pl-0', 'lg:pl-[2%]', 'lg:pl-[4%]', 'lg:pl-[8%]'];
 
 const keyStyle: Record<Kind, { cap: string; edge: string; text: string }> = {
-  accent: { cap: 'bg-[#FF6B35]', edge: '#B8461C', text: 'text-black' },
+  accent: { cap: 'bg-brand', edge: '#B8461C', text: 'text-black' },
   skill: { cap: 'bg-[#EFEBE3]', edge: '#B9B2A4', text: 'text-black' },
   tool: { cap: 'bg-[#2E2E2E]', edge: '#111111', text: 'text-white' },
 };
@@ -155,20 +155,20 @@ function Screen({ skill }: { skill: Skill }) {
   const shown = full.join('\n').slice(0, typed).split('\n');
 
   return (
-    <div className="relative rounded-[24px] md:rounded-[28px] bg-[#0B0B0B] border-[6px] md:border-[8px] border-[#1E1E1E] shadow-[inset_0_0_40px_rgba(255,138,61,0.08),0_20px_40px_-20px_rgba(0,0,0,0.6)] overflow-hidden">
+    <div className="relative rounded-[24px] md:rounded-[28px] bg-[#0B0B0B] border-[6px] md:border-[8px] border-[#1E1E1E] shadow-[inset_0_0_40px_rgba(254,51,10,0.08),0_20px_40px_-20px_rgba(0,0,0,0.6)] overflow-hidden">
       {/* scanlines */}
       <div aria-hidden="true" className="absolute inset-0 pointer-events-none opacity-[0.12]" style={{ backgroundImage: 'repeating-linear-gradient(0deg, rgba(255,255,255,0.6) 0px, rgba(255,255,255,0.6) 1px, transparent 1px, transparent 3px)' }} />
-      <div className="relative px-5 md:px-7 py-5 md:py-6 font-pixel text-[#FF9A52] min-h-[210px] md:min-h-[260px] lg:min-h-[clamp(220px,34vh,320px)]" aria-live="polite">
-        <div className="flex items-center justify-between text-[16px] text-[#FF9A52]/60 mb-3">
+      <div className="relative px-5 md:px-7 py-5 md:py-6 font-pixel text-brand min-h-[210px] md:min-h-[260px] lg:min-h-[clamp(220px,34vh,320px)]" aria-live="polite">
+        <div className="flex items-center justify-between text-[16px] text-brand/60 mb-3">
           <span>umer@portfolio ~ skills</span>
           <span>{skills.indexOf(skill) + 1}/{skills.length}</span>
         </div>
         <p className="sr-only">{skill.name}. {skill.lines.map(([w, t]) => `${w}: ${t}.`).join(' ')}</p>
         <div aria-hidden="true" className="text-[21px] md:text-[25px] leading-[1.25]">
           {shown.map((line, i) => (
-            <p key={i} className={i === 0 ? 'text-[#FFB27A] text-[26px] md:text-[32px] mb-1' : 'whitespace-pre-wrap'}>
+            <p key={i} className={i === 0 ? 'text-brand text-[26px] md:text-[32px] mb-1' : 'whitespace-pre-wrap'}>
               {line}
-              {i === shown.length - 1 && <span className="inline-block w-[0.55em] h-[0.95em] bg-[#FF9A52] align-[-0.12em] ml-0.5 animate-pulse" />}
+              {i === shown.length - 1 && <span className="inline-block w-[0.55em] h-[0.95em] bg-brand align-[-0.12em] ml-0.5 animate-pulse" />}
             </p>
           ))}
         </div>
@@ -192,7 +192,7 @@ function Key({ skill, active, onPress, onKeyNav }: { skill: Skill; active: boole
       animate={{ y: active ? 4 : 0 }}
       whileTap={{ y: 6 }}
       transition={{ type: 'spring', stiffness: 700, damping: 30 }}
-      className={`relative min-w-0 h-[54px] md:h-[64px] lg:h-[clamp(50px,7.6vh,74px)] rounded-[10px] md:rounded-[13px] ${s.cap} ${s.text} text-left px-2 md:px-2.5 pt-1.5 md:pt-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-[#FF6B35]/50`}
+      className={`relative min-w-0 h-[54px] md:h-[64px] lg:h-[clamp(50px,7.6vh,74px)] rounded-[10px] md:rounded-[13px] ${s.cap} ${s.text} text-left px-2 md:px-2.5 pt-1.5 md:pt-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-brand/50`}
       style={{ flex: `${skill.key.length + 3} 1 ${skill.key.length * 7.2 + 22}px`, boxShadow: active ? `0 1px 0 ${s.edge}, inset 0 -2px 0 rgba(0,0,0,0.12)` : `0 6px 0 ${s.edge}, inset 0 -3px 0 rgba(0,0,0,0.12), inset 0 2px 0 rgba(255,255,255,0.35)` }}
     >
       <span className="block text-[9px] md:text-[11px] lg:text-[clamp(9.5px,1.35vh,12px)] font-bold tracking-wide leading-tight whitespace-nowrap">{skill.key}</span>
@@ -230,21 +230,13 @@ export function Skills() {
   return (
     <section id="skills" className="relative bg-black text-white px-6 md:px-14 py-24 md:py-28 lg:py-0 lg:min-h-[100svh] lg:flex lg:items-center">
       <div className="max-w-[1400px] w-full mx-auto lg:pt-[88px] lg:pb-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-10 lg:mb-[clamp(20px,4vh,44px)]">
-          <div>
-            <div className="flex items-center gap-3 mb-5 md:mb-6">
-              <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#FF6B35]" />
-              <span className="text-base md:text-xl font-medium tracking-tight">Skills</span>
-            </div>
-            <h2 className="font-display text-[11vw] md:text-[64px] lg:text-[clamp(40px,6.4vh,68px)] leading-[0.95] uppercase tracking-tighter">
-              <RevealText text="Press a key." /><br />
-              <RevealText text="See where I used it." className="text-white/45" delay={0.12} />
-            </h2>
-          </div>
-          <p className="text-[14px] md:text-[15px] text-white/60 max-w-[300px] md:pb-2">
-            Orange keys are my strongest. Dark keys are the tools I build with. Arrow keys work too.
-          </p>
-        </div>
+        <SectionHeader
+          dark
+          label="Skills"
+          title="Press a key."
+          muted="See where I used it."
+          note="Orange keys are my strongest. Dark keys are the tools I build with. Arrow keys work too."
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           <div className="lg:col-span-4 order-1 lg:order-2">

@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { RevealText } from './RevealText';
+import { SectionHeader } from './SectionHeader';
 
 // Capabilities as an index: each row is backed by a proof card from a real role (facts from LinkedIn).
 const capabilities = [
@@ -171,14 +171,7 @@ export function WhatIDo() {
       <div ref={ref} className="max-w-[1400px] w-full mx-auto lg:pt-[88px] lg:pb-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-stretch">
         {/* Index */}
         <div className="lg:col-span-7 flex flex-col">
-          <div className="flex items-center gap-3 mb-5 md:mb-6">
-            <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-black" />
-            <span className="text-base md:text-xl font-medium tracking-tight">What I do</span>
-          </div>
-          <h2 className="font-display text-[11vw] md:text-[64px] lg:text-[clamp(40px,6.4vh,68px)] leading-[0.95] uppercase tracking-tighter mb-8 lg:mb-[clamp(16px,3.5vh,40px)]">
-            <RevealText text="Five things I do well," /><br />
-            <RevealText text="and where I proved it." className="text-[#6F6F6F]" delay={0.12} />
-          </h2>
+          <SectionHeader label="What I do" title="Five things I do well," muted="and where I proved it." />
 
           <ol className="flex flex-col gap-1.5" onMouseLeave={() => setPaused(false)}>
             {capabilities.map((c, i) => {
@@ -196,7 +189,7 @@ export function WhatIDo() {
                     {isActive && (
                       <motion.span layoutId="what-i-do-pill" className="absolute inset-0 rounded-full bg-black" transition={{ type: 'spring', stiffness: 380, damping: 34 }} aria-hidden="true" />
                     )}
-                    <span className={`relative text-[12px] md:text-[13px] font-semibold tracking-[0.2em] w-7 shrink-0 tabular-nums transition-colors ${isActive ? 'text-[#FF6B35]' : 'text-black/55'}`}>
+                    <span className={`relative text-[12px] md:text-[13px] font-semibold tracking-[0.2em] w-7 shrink-0 tabular-nums transition-colors ${isActive ? 'text-brand' : 'text-black/55'}`}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <span className={`relative font-display text-[8.5vw] md:text-[48px] lg:text-[clamp(30px,5vh,54px)] leading-[1] uppercase tracking-tighter flex-1 transition-colors duration-200 ${isActive ? 'text-white' : 'text-black/55 hover:text-black'}`}>
@@ -204,7 +197,7 @@ export function WhatIDo() {
                     </span>
                     <span className={`relative hidden md:flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.15em] whitespace-nowrap transition-colors ${isActive ? 'text-white/80' : 'text-black/55'}`}>
                       {c.company}
-                      <ArrowUpRight size={16} className={`transition-transform ${isActive ? 'rotate-45 text-[#FF6B35]' : ''}`} aria-hidden="true" />
+                      <ArrowUpRight size={16} className={`transition-transform ${isActive ? 'rotate-45 text-brand' : ''}`} aria-hidden="true" />
                     </span>
                   </button>
 

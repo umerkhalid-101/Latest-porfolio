@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'motion/react';
 import type { ReactNode } from 'react';
-import { RevealText } from './RevealText';
+import { SectionHeader } from './SectionHeader';
 
 // Every fact here comes from LinkedIn. No invented rituals, numbers or schedules.
 // Styling follows the rest of the site: #FAFAFA panel, white rounded cards that invert to black on hover.
@@ -38,7 +38,7 @@ function LibraryArtifact() {
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 0.75, duration: 0.5, ease: EASE }}
-        className="rounded-full bg-[#FF6B35] text-white font-display text-[18px] uppercase tracking-tight text-center py-2.5"
+        className="rounded-full bg-brand text-white font-display text-[18px] uppercase tracking-tight text-center py-2.5"
       >
         1 pattern library
       </motion.span>
@@ -67,7 +67,7 @@ function TestsArtifact() {
         >
           <span className="flex shrink-0">
             <span className="w-6 h-6 rounded-full bg-black group-hover:bg-white text-white group-hover:text-black text-[10px] font-bold flex items-center justify-center transition-colors">A</span>
-            <span className="w-6 h-6 rounded-full bg-[#FF6B35] text-white text-[10px] font-bold flex items-center justify-center -ml-1.5 ring-2 ring-[#F2F2F2] group-hover:ring-transparent">B</span>
+            <span className="w-6 h-6 rounded-full bg-brand text-white text-[10px] font-bold flex items-center justify-center -ml-1.5 ring-2 ring-[#F2F2F2] group-hover:ring-transparent">B</span>
           </span>
           <span className="text-[13px] font-semibold text-black group-hover:text-white flex-1 transition-colors">{t.name}</span>
           <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#6F6F6F] group-hover:text-white/70 transition-colors">{t.where}</span>
@@ -98,9 +98,9 @@ function ShipArtifact() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.25 + i * 0.15, duration: 0.3 }}
-            className={`relative py-1.5 text-[13px] font-semibold transition-colors ${last ? 'text-[#FF6B35]' : 'text-black group-hover:text-white'}`}
+            className={`relative py-1.5 text-[13px] font-semibold transition-colors text-black group-hover:text-white`}
           >
-            <span className={`absolute -left-6 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full ${last ? 'bg-[#FF6B35]' : 'bg-black group-hover:bg-white'} transition-colors`} />
+            <span className={`absolute -left-6 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full ${last ? 'bg-brand' : 'bg-black group-hover:bg-white'} transition-colors`} />
             {s}
           </motion.li>
         );
@@ -137,25 +137,16 @@ export function HowILead() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="how-i-lead" className="relative z-30 bg-white text-black px-4 py-20 md:py-28 lg:py-0 lg:min-h-[100svh] lg:flex lg:items-center">
-      <div className="max-w-[1400px] w-full mx-auto lg:pt-[80px] lg:pb-5">
-        <div className="bg-[#FAFAFA] border border-black/5 rounded-[40px] md:rounded-[60px] px-6 md:px-12 lg:px-14 py-12 md:py-14 lg:py-[clamp(28px,5vh,56px)]">
-          {/* Header, same pattern as About */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-9 lg:mb-[clamp(20px,4vh,44px)]">
-            <div>
-              <div className="flex items-center gap-3 mb-4 md:mb-5">
-                <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-black" />
-                <span className="text-base md:text-xl font-medium tracking-tight">How I lead</span>
-              </div>
-              <h2 className="font-display text-[11vw] md:text-[72px] lg:text-[clamp(44px,7.4vh,80px)] leading-[0.95] uppercase tracking-tighter text-black">
-                <RevealText text="Three habits" /><br />
-                <RevealText text="I bring to every team." className="text-[#6F6F6F]" delay={0.12} />
-              </h2>
-            </div>
-            <p className="text-[15px] md:text-[17px] leading-[1.6] text-[#555555] max-w-[360px] lg:pb-2">
-              Each one comes from a real team, with the company it happened at.
-            </p>
-          </div>
+    <section id="how-i-lead" className="relative z-30 bg-black text-white px-6 md:px-14 py-24 md:py-28 lg:py-0 lg:min-h-[100svh] lg:flex lg:items-center">
+      <div className="max-w-[1400px] w-full mx-auto lg:pt-[88px] lg:pb-10">
+        <div>
+          <SectionHeader
+            dark
+            label="How I lead"
+            title="Three habits"
+            muted="I bring to every team."
+            note="Each one comes from a real team, with the company it happened at."
+          />
 
           <ol className="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-6">
             {practices.map((p, i) => (
@@ -165,7 +156,7 @@ export function HowILead() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ delay: i * 0.12, duration: 0.8, ease: EASE }}
-                className="group relative overflow-hidden bg-white hover:bg-black rounded-[30px] md:rounded-[40px] p-3 md:p-3.5 shadow-sm transition-colors duration-300 flex flex-col"
+                className="group relative overflow-hidden bg-white hover:bg-brand rounded-[30px] md:rounded-[40px] p-3 md:p-3.5 shadow-sm transition-colors duration-300 flex flex-col"
               >
                 {/* Artifact panel: same height on every card so the row lines up */}
                 <div className="rounded-[24px] md:rounded-[30px] bg-[#F4F4F4] group-hover:bg-white/[0.06] h-[200px] lg:h-[clamp(168px,24vh,214px)] px-5 flex items-center justify-center transition-colors duration-300">
