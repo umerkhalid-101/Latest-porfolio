@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { SectionHeader } from './SectionHeader';
+import { RevealText } from './RevealText';
 
 import { Linkedin } from 'lucide-react';
 import { namedTestimonials, type Testimonial } from '../data/testimonials';
@@ -106,8 +107,10 @@ export function KindWords() {
         </div>
 
         {/* Freelance projects: each mark links to the live site */}
-        <div className="mt-10 md:mt-12">
-          <p className="t-label text-muted mb-5">Freelance projects</p>
+        <div className="mt-16 md:mt-24">
+          <h3 className="t-display-l mb-8 md:mb-10">
+            <RevealText text="Freelance projects" />
+          </h3>
           <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 border-t border-l border-line">
             {projects.map((p, n) => (
               <motion.li
@@ -122,7 +125,7 @@ export function KindWords() {
                   href={p.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${p.name}: check out the live website (opens in a new tab)`}
+                  aria-label={`${p.name}: view live website (opens in a new tab)`}
                   className="group relative h-20 md:h-24 flex items-center justify-center px-5 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset"
                 >
                   <img
@@ -135,9 +138,9 @@ export function KindWords() {
                   />
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap t-body-s text-accent opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0 transition-all duration-300"
+                    className="pointer-events-none absolute z-10 top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-ink text-white text-[13px] font-medium px-3.5 py-1.5 shadow-lg opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 group-focus-visible:opacity-100 group-focus-visible:scale-100 transition-all duration-200 ease-out"
                   >
-                    Check out the live website &rarr;
+                    View live website <span className="text-accent">&#8599;</span>
                   </span>
                 </a>
               </motion.li>
