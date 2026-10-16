@@ -124,12 +124,12 @@ const rows = [
   [16, 17, 18, 19, 20, 21, 22],
   [23, 24, 25, 26, 27, 28],
 ];
-const rowIndent = ['lg:pl-0', 'lg:pl-[2%]', 'lg:pl-[4%]', 'lg:pl-[8%]'];
+const rowIndent = ['lg:pl-0', 'lg:pl-4', 'lg:pl-8', 'lg:pl-16'];
 
 const keyStyle: Record<Kind, { cap: string; edge: string; text: string }> = {
-  accent: { cap: 'bg-brand', edge: '#B8461C', text: 'text-black' },
-  skill: { cap: 'bg-[#EFEBE3]', edge: '#B9B2A4', text: 'text-black' },
-  tool: { cap: 'bg-[#2E2E2E]', edge: '#111111', text: 'text-white' },
+  accent: { cap: 'bg-accent', edge: 'color-mix(in srgb, var(--color-accent) 65%, black)', text: 'text-ink' },
+  skill: { cap: 'bg-paper', edge: 'color-mix(in srgb, var(--color-paper) 70%, black)', text: 'text-ink' },
+  tool: { cap: 'bg-ink-soft', edge: 'var(--color-ink)', text: 'text-white' },
 };
 
 /** Types its lines out character by character, restarting whenever the skill changes */
@@ -155,20 +155,20 @@ function Screen({ skill }: { skill: Skill }) {
   const shown = full.join('\n').slice(0, typed).split('\n');
 
   return (
-    <div className="relative rounded-[24px] md:rounded-[28px] bg-[#0B0B0B] border-[6px] md:border-[8px] border-[#1E1E1E] shadow-[inset_0_0_40px_rgba(254,51,10,0.08),0_20px_40px_-20px_rgba(0,0,0,0.6)] overflow-hidden">
+    <div className="relative rounded-3xl bg-ink border-8 border-ink-soft overflow-hidden">
       {/* scanlines */}
-      <div aria-hidden="true" className="absolute inset-0 pointer-events-none opacity-[0.12]" style={{ backgroundImage: 'repeating-linear-gradient(0deg, rgba(255,255,255,0.6) 0px, rgba(255,255,255,0.6) 1px, transparent 1px, transparent 3px)' }} />
-      <div className="relative px-5 md:px-7 py-5 md:py-6 font-pixel text-brand min-h-[210px] md:min-h-[260px] lg:min-h-[clamp(220px,34vh,320px)]" aria-live="polite">
-        <div className="flex items-center justify-between text-[16px] text-brand/60 mb-3">
+      <div aria-hidden="true" className="absolute inset-0 pointer-events-none opacity-60" style={{ backgroundImage: 'repeating-linear-gradient(0deg, var(--color-line-dark) 0px, var(--color-line-dark) 1px, transparent 1px, transparent 3px)' }} />
+      <div className="relative px-5 md:px-7 py-5 md:py-6 text-accent min-h-[220px] md:min-h-[260px]" aria-live="polite">
+        <div className="flex items-center justify-between t-label text-muted-dark mb-4">
           <span>umer@portfolio ~ skills</span>
           <span>{skills.indexOf(skill) + 1}/{skills.length}</span>
         </div>
         <p className="sr-only">{skill.name}. {skill.lines.map(([w, t]) => `${w}: ${t}.`).join(' ')}</p>
-        <div aria-hidden="true" className="text-[21px] md:text-[25px] leading-[1.25]">
+        <div aria-hidden="true" className="t-body-s text-white">
           {shown.map((line, i) => (
-            <p key={i} className={i === 0 ? 'text-brand text-[26px] md:text-[32px] mb-1' : 'whitespace-pre-wrap'}>
+            <p key={i} className={i === 0 ? 't-display-m text-accent mb-3' : 'whitespace-pre-wrap py-0.5'}>
               {line}
-              {i === shown.length - 1 && <span className="inline-block w-[0.55em] h-[0.95em] bg-brand align-[-0.12em] ml-0.5 animate-pulse" />}
+              {i === shown.length - 1 && <span className="inline-block w-[0.55em] h-[0.95em] bg-accent align-middle ml-0.5 motion-safe:animate-pulse" />}
             </p>
           ))}
         </div>
@@ -192,14 +192,11 @@ function Key({ skill, active, onPress, onKeyNav }: { skill: Skill; active: boole
       animate={{ y: active ? 4 : 0 }}
       whileTap={{ y: 6 }}
       transition={{ type: 'spring', stiffness: 700, damping: 30 }}
-      className={`relative min-w-0 h-[54px] md:h-[64px] lg:h-[clamp(50px,7.6vh,74px)] rounded-[10px] md:rounded-[13px] ${s.cap} ${s.text} text-left px-2 md:px-2.5 pt-1.5 md:pt-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-brand/50`}
-      style={{ flex: `${skill.key.length + 3} 1 ${skill.key.length * 7.2 + 22}px`, boxShadow: active ? `0 1px 0 ${s.edge}, inset 0 -2px 0 rgba(0,0,0,0.12)` : `0 6px 0 ${s.edge}, inset 0 -3px 0 rgba(0,0,0,0.12), inset 0 2px 0 rgba(255,255,255,0.35)` }}
+      className={`relative min-w-0 h-14 md:h-16 rounded-xl ${s.cap} ${s.text} text-left px-2.5 pt-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50`}
+      style={{ flex: `${skill.key.length + 3} 1 ${skill.key.length * 9 + 24}px`, boxShadow: active ? `0 1px 0 ${s.edge}, inset 0 -2px 0 var(--color-line)` : `0 6px 0 ${s.edge}, inset 0 -3px 0 var(--color-line)` }}
     >
-      <span className="block text-[9px] md:text-[11px] lg:text-[clamp(9.5px,1.35vh,12px)] font-bold tracking-wide leading-tight whitespace-nowrap">{skill.key}</span>
-      <span className={`absolute left-2 md:left-2.5 bottom-1.5 text-[8px] md:text-[9px] font-semibold uppercase tracking-wider ${skill.kind === 'tool' ? 'text-white/55' : 'text-black/55'}`}>
-        {skill.kind === 'tool' ? 'tool' : `${skill.lines.length} co.`}
-      </span>
-      {active && <span aria-hidden="true" className="absolute right-2.5 top-2.5 w-1.5 h-1.5 rounded-full bg-[#22C55E] shadow-[0_0_6px_#22C55E]" />}
+      <span className="block t-label whitespace-nowrap">{skill.key}</span>
+      {active && <span aria-hidden="true" className="absolute right-2.5 top-2.5 w-1.5 h-1.5 rounded-full bg-success" />}
     </motion.button>
   );
 }
@@ -228,8 +225,8 @@ export function Skills() {
   };
 
   return (
-    <section id="skills" className="relative bg-black text-white px-6 md:px-14 py-24 md:py-28 lg:py-0 lg:min-h-[100svh] lg:flex lg:items-center">
-      <div className="max-w-[1400px] w-full mx-auto lg:pt-[88px] lg:pb-10">
+    <section id="skills" className="relative bg-ink text-white px-6 md:px-14 py-16 md:py-24">
+      <div className="max-w-[1400px] w-full mx-auto">
         <SectionHeader
           dark
           label="Skills"
@@ -244,8 +241,8 @@ export function Skills() {
           </div>
 
           {/* Keyboard */}
-          <div className="lg:col-span-8 order-2 lg:order-1 rounded-[24px] md:rounded-[32px] bg-[#1A1A1A] border border-white/10 p-3 md:p-5 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.06)]">
-            <div role="group" aria-label="Skills keyboard" className="flex flex-col gap-2 md:gap-2.5 lg:gap-[clamp(6px,1.1vh,10px)]">
+          <div className="lg:col-span-8 order-2 lg:order-1 rounded-3xl bg-ink-soft border border-line-dark p-3 md:p-5">
+            <div role="group" aria-label="Skills keyboard" className="flex flex-col gap-2 md:gap-2.5">
               {/* Desktop: staggered rows */}
               {rows.map((row, r) => (
                 <div key={r} className={`hidden lg:flex gap-2 ${rowIndent[r]}`}>
@@ -261,13 +258,13 @@ export function Skills() {
                 ))}
               </div>
               {/* Spacebar: jumps to the work */}
-              <div className="flex gap-2 md:gap-3 lg:px-[15%]">
+              <div className="flex gap-2 md:gap-3 lg:px-24">
                 <motion.a
                   href="#work"
                   whileTap={{ y: 6 }}
                   transition={{ type: 'spring', stiffness: 700, damping: 30 }}
-                  className="flex-1 h-[52px] md:h-[60px] lg:h-[clamp(52px,7vh,66px)] rounded-[12px] md:rounded-[16px] bg-[#EFEBE3] text-black flex items-center justify-center text-[11px] md:text-[13px] font-bold uppercase tracking-[0.25em]"
-                  style={{ boxShadow: '0 6px 0 #B9B2A4, inset 0 -3px 0 rgba(0,0,0,0.12), inset 0 2px 0 rgba(255,255,255,0.35)' }}
+                  className="flex-1 h-14 md:h-16 rounded-xl bg-paper text-ink flex items-center justify-center t-label"
+                  style={{ boxShadow: '0 6px 0 color-mix(in srgb, var(--color-paper) 70%, black), inset 0 -3px 0 var(--color-line)' }}
                 >
                   See my work ↑
                 </motion.a>

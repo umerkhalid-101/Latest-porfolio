@@ -16,9 +16,10 @@ export function Header() {
 
   const navItems = [
     { label: 'ABOUT', href: '#about', hasCircle: true },
-    { label: 'HOW I LEAD', href: '#how-i-lead', hasCircle: true },
     { label: 'WORK', href: '#work', hasCircle: true },
-    { label: 'WHAT I DO', href: '#what-i-do', hasCircle: true },
+    { label: 'HOW I LEAD', href: '#how-i-lead', hasCircle: true },
+    { label: 'EXPERIENCE', href: '#experience', hasCircle: true },
+    { label: 'SKILLS', href: '#skills', hasCircle: true },
     { label: 'CONTACT', href: '#contact', hasCircle: true },
   ];
 
@@ -27,32 +28,32 @@ export function Header() {
       <motion.header 
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 w-full z-50 px-4 md:px-10 transition-all duration-500 ${isScrolled ? 'bg-black/80 backdrop-blur-xl border-b border-white/10 py-4' : 'bg-transparent py-8 md:py-10'} flex items-center`}
+        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed top-0 left-0 w-full z-50 px-4 md:px-10 transition-all duration-500 ${isScrolled ? 'bg-ink/80 backdrop-blur-xl border-b border-line-dark py-4' : 'bg-transparent py-8 md:py-10'} flex items-center`}
       >
         <div className="flex items-center w-full">
           {/* Logo and first line */}
           <div className="flex items-center gap-4 min-w-max">
-            <a href="/" aria-label="Umer, home" className="font-display text-3xl tracking-tighter flex items-center gap-1">
+            <a href="/" aria-label="Umer, home" className="t-display-m flex items-center gap-1">
               <span>UMER</span>
             </a>
           </div>
           
           <div className="flex-1 flex items-center">
-            <div className="h-[1px] bg-white/40 w-full mx-4" />
+            <div className="h-px bg-white/40 w-full mx-4" />
             
             <nav className="hidden lg:flex items-center gap-0 flex-1">
               {navItems.map((item, index) => (
                 <a key={index} href={item.href} className="flex flex-1 items-center gap-4 group h-10 no-underline">
                   {item.hasCircle && (
-                    <div className="w-1.5 h-1.5 rounded-full border-[1px] border-white group-hover:bg-white transition-colors" />
+                    <div className="w-1.5 h-1.5 rounded-full border border-white group-hover:bg-white transition-colors" />
                   )}
                   {item.label && (
-                    <span className="text-[10px] font-bold tracking-[0.25em] text-white/90 group-hover:text-white transition-colors whitespace-nowrap">
+                    <span className="t-label text-white whitespace-nowrap">
                       {item.label}
                     </span>
                   )}
-                  <div className="h-[1px] bg-white/40 flex-1" />
+                  <div className="h-px bg-white/40 flex-1" />
                 </a>
               ))}
             </nav>
@@ -64,10 +65,10 @@ export function Header() {
               onClick={() => setIsMenuOpen(true)}
               aria-label="Open menu"
               aria-expanded={isMenuOpen}
-              className="flex items-center gap-[4px] group"
+              className="flex items-center gap-1 group"
             >
-              <div className="w-7 h-[20px] border-r-2 border-white transform skew-x-[-20deg] group-hover:opacity-100 transition-opacity" />
-              <div className="w-2 h-[20px] border-r-2 border-white transform skew-x-[-20deg] group-hover:opacity-100 transition-opacity" />
+              <div className="w-7 h-5 border-r-2 border-white transform -skew-x-[20deg] group-hover:opacity-100 transition-opacity" />
+              <div className="w-2 h-5 border-r-2 border-white transform -skew-x-[20deg] group-hover:opacity-100 transition-opacity" />
             </button>
           </div>
         </div>
@@ -80,10 +81,10 @@ export function Header() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black flex flex-col p-8"
+            className="fixed inset-0 z-[100] bg-ink flex flex-col p-8"
           >
             <div className="flex justify-between items-center mb-20">
-              <span className="font-display text-3xl tracking-tighter text-white">UMER</span>
+              <span className="t-display-m text-white">UMER</span>
               <button 
                 onClick={() => setIsMenuOpen(false)}
                 aria-label="Close menu"
@@ -102,7 +103,7 @@ export function Header() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: index * 0.1 + 0.2 }}
                   onClick={() => setIsMenuOpen(false)}
-                  className="font-display text-5xl md:text-7xl text-white uppercase tracking-tighter hover:text-brand transition-colors"
+                  className="t-display-l text-white hover:underline"
                 >
                   {item.label}
                 </motion.a>
@@ -110,10 +111,10 @@ export function Header() {
             </nav>
 
             <div className="mt-auto border-t border-white/10 pt-12">
-              <p className="text-white/50 text-xs uppercase tracking-widest mb-6">Let's Connect</p>
+              <p className="t-label text-muted-dark mb-6">Let's Connect</p>
               <div className="flex gap-8">
-                <a href="https://www.linkedin.com/in/umar-khalid1/" target="_blank" rel="noopener noreferrer" className="text-white text-xl font-bold border-b border-white pb-1">LinkedIn</a>
-                <a href="https://www.instagram.com/umar_khalid1" target="_blank" rel="noopener noreferrer" className="text-white text-xl font-bold border-b border-white pb-1">Instagram</a>
+                <a href="https://www.linkedin.com/in/umar-khalid1/" target="_blank" rel="noopener noreferrer" className="t-heading text-white border-b border-white pb-1">LinkedIn</a>
+                <a href="https://www.instagram.com/umar_khalid1" target="_blank" rel="noopener noreferrer" className="t-heading text-white border-b border-white pb-1">Instagram</a>
               </div>
             </div>
           </motion.div>

@@ -4,19 +4,18 @@
  */
 
 import { useState, useEffect } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, MotionConfig, motion } from 'motion/react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { HowILead } from './components/HowILead';
 import { FeaturedWork } from './components/FeaturedWork';
-import { WhatIDo } from './components/WhatIDo';
+import { Experience } from './components/Experience';
 import { Skills } from './components/Skills';
 import { Marquee } from './components/Marquee';
 import { startSmoothScroll, scrollToIdWhenReady } from './lib/smoothScroll';
 import { KindWords } from './components/KindWords';
 import { Footer } from './components/Footer';
-import { Loader } from './components/Loader';
 import { ScrollProgress } from './components/ScrollProgress';
 import { SalamsCaseStudy } from './components/SalamsCaseStudy';
 import { CaseStudyPage } from './components/CaseStudyPage';
@@ -29,31 +28,31 @@ type Slug = 'unita' | 'vara' | 'salams' | 'zewards';
 // Keep in sync with the static <head> in index.html and the per-route HTML files.
 const pageMeta: Record<Slug | 'home', { title: string; description: string; image: string; path: string }> = {
   home: {
-    title: 'Umer Khalid | Lead Product Designer in Dubai',
+    title: 'Muhammad Umer | Lead Product Designer in Dubai',
     description: 'Lead Product Designer in Dubai with 7 years shipping SaaS, fintech, and consumer products, including leading small design teams. Past work includes Salams (acquired by Match Group) and the Zewst restaurant ecosystem.',
     image: `${SITE}/images/og.jpg`,
     path: '/'
   },
   unita: {
-    title: 'Unita Case Study | Umer Khalid, Lead Product Designer',
+    title: 'Unita Case Study | Muhammad Umer, Lead Product Designer',
     description: 'Designing a pre-launch B2B verified business network as the sole designer: discovery, company profiles, onboarding, and a design system built from scratch.',
     image: `${SITE}/images/og-unita.jpg`,
     path: '/unita-casestudy'
   },
   vara: {
-    title: 'VARA Case Study | Umer Khalid, Lead Product Designer',
+    title: 'VARA Case Study | Muhammad Umer, Lead Product Designer',
     description: "Designing the web portal for Dubai's Virtual Assets Regulatory Authority at MBLM: homepage, a five-step licensing guide, a reusable UI kit, and a 12-column layout system.",
     image: `${SITE}/images/og-vara.jpg`,
     path: '/vara-casestudy'
   },
   salams: {
-    title: 'Salams Case Study | Umer Khalid, Lead Product Designer',
+    title: 'Salams Case Study | Muhammad Umer, Lead Product Designer',
     description: 'How I designed Salams, a Muslim matchmaking app, as its only designer for five years, through to its acquisition by Match Group in 2023.',
     image: `${SITE}/images/og-salams.jpg`,
     path: '/salams-casestudy'
   },
   zewards: {
-    title: 'Zewards Case Study | Umer Khalid, Lead Product Designer',
+    title: 'Zewards Case Study | Muhammad Umer, Lead Product Designer',
     description: 'Leading design as Design Manager for Zewards, a loyalty platform in the Zewst restaurant ecosystem. 38% more repeat visits and 2.3x faster activation.',
     image: `${SITE}/images/og-zewards.jpg`,
     path: '/zewards-casestudy'
@@ -78,7 +77,6 @@ function setMeta(selector: string, attr: string, value: string) {
 }
 
 export default function App() {
-  const [loading, setLoading] = useState(() => slugFromLocation() === null);
   const [activeCaseStudy, setActiveCaseStudy] = useState<Slug | null>(slugFromLocation);
 
   useEffect(() => startSmoothScroll(), []);
@@ -125,12 +123,8 @@ export default function App() {
     null;
 
   return (
-    <div className="relative min-h-screen selection:bg-brand selection:text-white">
-      <AnimatePresence mode="wait">
-        {loading && <Loader key="loader" onComplete={() => setLoading(false)} />}
-      </AnimatePresence>
-
-      {!loading && (
+    <div className="relative min-h-screen selection:bg-accent selection:text-white">
+      <MotionConfig reducedMotion="user">
         <main className="relative">
           <ScrollProgress />
 
@@ -157,12 +151,12 @@ export default function App() {
                 <Hero />
                 <Marquee
                   items={['Lead Product Designer', 'Based in Dubai', 'Design leadership', 'Design systems', 'SaaS', 'Fintech', 'Government portals', 'Acquired by Match Group']}
-                  className="bg-black text-white font-display uppercase tracking-tight text-[9vw] md:text-[88px] leading-none py-5 md:py-8 relative z-40"
+                  className="bg-ink text-white t-display-l py-5 md:py-8 relative z-40"
                 />
                 <About />
-                <HowILead />
                 <FeaturedWork onOpenCaseStudy={openCaseStudy} />
-                <WhatIDo />
+                <HowILead />
+                <Experience />
                 <Skills />
                 <KindWords />
                 <Footer />
@@ -170,7 +164,7 @@ export default function App() {
             )}
           </AnimatePresence>
         </main>
-      )}
+      </MotionConfig>
     </div>
   );
 }

@@ -1,8 +1,28 @@
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useMotionValue, useScroll, useSpring, useTransform, useReducedMotion, type MotionValue } from 'motion/react';
 import { useRef } from 'react';
 import { Linkedin, Instagram } from 'lucide-react';
 
 const NAME = "MUHAMMAD UMER";
+
+/** One letter of the name: rises in on load, then stretches up toward the cursor like a wave */
+function Letter({ char, index, center, pointer }: { char: string; index: number; center: number; pointer: MotionValue<number> }) {
+  // 1 when the cursor is right over this letter, falling to 0 a few letters away
+  const near = useTransform(pointer, (p) => (p < 0 ? 0 : Math.max(0, 1 - Math.abs(p - center) * 7)));
+  const lift = useSpring(useTransform(near, [0, 1], [0, -0.14]), { stiffness: 260, damping: 18 });
+  const stretch = useSpring(useTransform(near, [0, 1], [1, 1.22]), { stiffness: 260, damping: 18 });
+  const y = useTransform(lift, (v) => `${v}em`);
+  return (
+    <motion.span
+      aria-hidden="true"
+      initial={{ y: "110%" }}
+      animate={{ y: 0 }}
+      transition={{ duration: 1, delay: 0.3 + index * 0.03, ease: [0.16, 1, 0.3, 1] }}
+      style={{ display: char === " " ? "inline-block" : "block", minWidth: char === " " ? "0.3em" : "auto" }}
+    >
+      <motion.span className="block origin-bottom" style={{ y, scaleY: stretch }}>{char}</motion.span>
+    </motion.span>
+  );
+}
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -11,9 +31,11 @@ export function Hero() {
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '-25%']);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const pointer = useMotionValue(-1);
+  const reduce = useReducedMotion();
 
   return (
-    <section ref={ref} className="relative z-10 min-h-[100svh] flex flex-col overflow-hidden bg-brand">
+    <section ref={ref} className="relative z-10 min-h-[100svh] flex flex-col overflow-hidden bg-ink">
 
       {/* 1. Image Layer (Edge-to-Edge) */}
       {/* TODO: replace with a professional portrait once supplied. */}
@@ -40,23 +62,16 @@ export function Hero() {
         {/* 2. Name: full text for screen readers and search, animated letters are decorative */}
         <h1
           aria-label="Muhammad Umer"
-          className="font-display text-[clamp(2.25rem,11.5vw,13rem)] leading-none tracking-[-0.04em] uppercase text-white whitespace-nowrap drop-shadow-2xl flex justify-center overflow-hidden"
+          onPointerMove={(e) => {
+            if (e.pointerType !== 'mouse' || reduce) return;
+            const r = e.currentTarget.getBoundingClientRect();
+            pointer.set((e.clientX - r.left) / r.width);
+          }}
+          onPointerLeave={() => pointer.set(-1)}
+          className="t-display-xl text-white whitespace-nowrap drop-shadow-2xl flex justify-center overflow-hidden pt-[0.15em] -mt-[0.15em]"
         >
-          {NAME.split("").map((char, index) => (
-            <motion.span
-              key={index}
-              aria-hidden="true"
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{
-                duration: 1,
-                delay: 0.5 + index * 0.03,
-                ease: [0.16, 1, 0.3, 1]
-              }}
-              style={{ display: char === " " ? "inline-block" : "block", minWidth: char === " " ? "0.3em" : "auto" }}
-            >
-              {char}
-            </motion.span>
+          {NAME.split("").map((char, index, all) => (
+            <Letter key={index} char={char} index={index} center={(index + 0.5) / all.length} pointer={pointer} />
           ))}
         </h1>
 
@@ -68,14 +83,14 @@ export function Hero() {
             transition={{ delay: 0.8, duration: 1 }}
             className="space-y-5"
           >
-            <p className="inline-flex items-center gap-2.5 bg-black/30 backdrop-blur-md border border-white/20 rounded-full pl-3 pr-4 py-2 text-[11px] md:text-[12px] font-semibold uppercase tracking-widest text-white">
+            <p className="inline-flex items-center gap-2.5 bg-black/30 backdrop-blur-md border border-white/20 rounded-full pl-2.5 pr-3.5 py-1 t-body-s text-white">
               <span className="relative flex w-2 h-2" aria-hidden="true">
-                <span className="absolute inset-0 rounded-full bg-[#22C55E] animate-ping opacity-75" />
-                <span className="relative w-2 h-2 rounded-full bg-[#22C55E]" />
+                <span className="absolute inset-0 rounded-full bg-success motion-safe:animate-ping opacity-75" />
+                <span className="relative w-2 h-2 rounded-full bg-success" />
               </span>
-              Design Specialist at MBLM · Open to Lead roles
+              Open to Lead and Manager roles
             </p>
-            <p className="font-display text-[clamp(2rem,5.5vw,6rem)] leading-[1.1] uppercase tracking-tight text-white drop-shadow-lg">
+            <p className="t-display-l text-white drop-shadow-lg">
               Based in<br />Dubai, UAE
             </p>
           </motion.div>
@@ -84,9 +99,9 @@ export function Hero() {
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 1 }}
-            className="text-[11px] md:text-[12px] font-medium leading-[1.7] tracking-[0.15em] uppercase text-white max-w-[380px] drop-shadow-md"
+            className="t-body-l text-white max-w-[440px] drop-shadow-md"
           >
-            Lead Product Designer in Dubai. 7 years shipping SaaS, fintech, and consumer products, including leading small design teams and owning design direction alongside product and business leadership.
+            Product design leader in Dubai with 7 years shipping SaaS, fintech, and consumer products. I've led design teams, set direction across multi-product ecosystems, and worked side by side with founders from first design hire through acquisition.
           </motion.p>
         </div>
 
@@ -99,8 +114,8 @@ export function Hero() {
             className="flex items-center gap-6"
           >
             <div className="flex items-center gap-4">
-              <span className="text-[10px] md:text-[11px] font-semibold tracking-widest uppercase text-white">Follow</span>
-              <div className="h-[1px] w-8 md:w-12 bg-white/40" aria-hidden="true" />
+              <span className="t-label text-white">Follow</span>
+              <div className="h-px w-8 md:w-12 bg-white/40" aria-hidden="true" />
             </div>
             <div className="flex gap-4">
               <a href="https://www.linkedin.com/in/umar-khalid1/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-white hover:opacity-70 transition-opacity"><Linkedin size={18} aria-hidden="true" /></a>
@@ -126,9 +141,9 @@ export function Hero() {
               ))}
             </div>
             <p className="flex flex-col items-start">
-              <span className="font-display text-4xl md:text-6xl leading-none uppercase tracking-tighter text-white">500K+</span>
-              <span className="text-[9px] md:text-[10px] font-semibold tracking-[0.2em] md:tracking-[0.3em] uppercase text-white leading-tight">
-                Users reached across<br />shipped products
+              <span className="t-display-m text-white">1M+</span>
+              <span className="t-label text-white mt-1">
+                Users on products<br />I've designed
               </span>
             </p>
           </motion.div>
