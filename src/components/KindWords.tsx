@@ -65,7 +65,7 @@ export function KindWords() {
                   <p className="t-body-l !max-w-none text-ink">{q.quote}</p>
                   {q.person ? (
                     <footer className="mt-6 flex items-center gap-4">
-                      {q.person.photo && <img src={q.person.photo} alt="" width={48} height={48} className="w-12 h-12 rounded-full object-cover" />}
+                      {q.person.photo && <img src={q.person.photo} alt="" width={48} height={48} loading="lazy" className="w-12 h-12 rounded-full object-cover" />}
                       <div>
                         <p className="t-heading">{q.person.name}</p>
                         <p className="t-body-s text-muted">{[q.person.title, q.person.company].filter(Boolean).join(', ')}</p>

@@ -19,6 +19,7 @@ import { Footer } from './components/Footer';
 import { ScrollProgress } from './components/ScrollProgress';
 import { CustomCursor } from './components/CustomCursor';
 import { NotFound } from './components/NotFound';
+import { MARQUEE_ITEMS } from './data/marquee';
 import { SalamsCaseStudy } from './components/SalamsCaseStudy';
 import { CaseStudyPage } from './components/CaseStudyPage';
 import { zewards, unita, vara } from './caseStudies';
@@ -30,8 +31,8 @@ type Slug = 'unita' | 'vara' | 'salams' | 'zewards';
 // Keep in sync with the static <head> in index.html and the per-route HTML files.
 const pageMeta: Record<Slug | 'home', { title: string; description: string; image: string; path: string }> = {
   home: {
-    title: 'Muhammad Umer | Lead Product Designer in Dubai',
-    description: 'Lead Product Designer in Dubai with 7 years shipping SaaS, fintech, and consumer products, including leading small design teams. Past work includes Salams (acquired by Match Group) and the Zewst restaurant ecosystem.',
+    title: 'Muhammad Umer | Lead Product & UI/UX Designer in Dubai',
+    description: 'Muhammad Umer (Umer Khalid) is a Lead Product Designer and UI/UX designer in Dubai with 7 years designing web and mobile products for SaaS, fintech, and government.',
     image: `${SITE}/images/og.jpg`,
     path: '/'
   },
@@ -209,7 +210,7 @@ export default function App() {
                 <Header />
                 <Hero />
                 <Marquee
-                  items={['Lead Product Designer', 'Based in Dubai', 'Design leadership', 'Design systems', 'SaaS', 'Fintech', 'Government portals', 'Acquired by Match Group']}
+                  items={MARQUEE_ITEMS}
                   className="bg-ink text-white t-display-l py-5 md:py-8 relative z-40"
                 />
                 <About />
