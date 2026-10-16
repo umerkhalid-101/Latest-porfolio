@@ -19,6 +19,7 @@ const projects: { name: string; logo: string; href: string; size?: string }[] = 
   { name: 'Beyondhut', logo: '/images/freelance/beyondhut.svg', href: 'https://beyondhut.com/', size: 'max-h-[40px] md:max-h-[48px]' },
   { name: 'Folionomics', logo: '/images/freelance/folionomics.svg', href: 'https://www.folionomics.com/' },
   { name: 'Rivas Pro Detail', logo: '/images/freelance/rivas-pro-detail.svg', href: 'https://www.rivasprodetailvegas.com/' },
+  { name: 'Hims', logo: '/images/freelance/hims.svg', href: 'https://www.hims.com/' },
 ];
 
 const CYCLE_MS = 6500;
@@ -111,7 +112,7 @@ export function KindWords() {
           <h3 className="t-display-l mb-8 md:mb-10">
             <RevealText text="Freelance projects" />
           </h3>
-          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 border-t border-l border-line">
+          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 border-t border-l border-line">
             {projects.map((p, n) => (
               <motion.li
                 key={p.name}
