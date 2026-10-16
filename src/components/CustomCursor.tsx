@@ -21,13 +21,17 @@ function nameFor(el: Element) {
   return el.getAttribute('data-cursor-label') ?? '';
 }
 
+const CALL_LINK = `mailto:umerkhalid141@gmail.com?subject=${encodeURIComponent("Let's set up a call")}`;
+const REPLY_MS = 9000;
+
+/** A short, personal opener. Every reply then ends with the same call to action. */
 function replyTo(text: string) {
   const t = text.toLowerCase();
-  if (/hire|hiring|job|role|position|opportunit|work together|interview|recruit/.test(t)) return "Love that. My inbox is open: umerkhalid141@gmail.com";
+  if (/hire|hiring|job|role|position|opportunit|work together|interview|recruit/.test(t)) return "Love that, I'm open to Lead and Manager roles.";
   if (/\b(hi|hey|hello|yo|salam|salaam|sup)\b/.test(t)) return 'Hey! 👋 Thanks for dropping into the file.';
   if (/nice|love|cool|great|amazing|wow|beautiful|clean|sick|fire|awesome/.test(t)) return 'Thank you! That made my day 🧡';
-  if (/\?$/.test(t)) return "Good question. Let's talk, the email's in the footer.";
-  return 'Ha, noted 😄 Say hi in the footer anytime.';
+  if (/\?$/.test(t)) return 'Good question, happy to walk you through it.';
+  return 'Got it, thanks for the message 😄';
 }
 
 /** Fine pointers only. Touch screens keep their native behavior. */
@@ -63,6 +67,7 @@ export function CustomCursor() {
   const [reply, setReply] = useState<Reply | null>(null);
   const targetRef = useRef<Element | null>(null);
   const pointer = useRef({ x: -100, y: -100 });
+  const replyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const chatRef = useRef<Chat>(chat);
   chatRef.current = chat;
 
@@ -176,12 +181,13 @@ export function CustomCursor() {
       setReply({
         id,
         x: Math.min(px + 70, window.innerWidth - 300),
-        y: Math.min(py + 70, window.innerHeight - 90),
+        y: Math.min(py + 70, window.innerHeight - 130),
         text: replyTo(text),
       });
     }, 900);
     setTimeout(() => setChat((c) => (c.mode === 'said' ? { mode: 'off' } : c)), 4500);
-    setTimeout(() => setReply((r) => (r?.id === id ? null : r)), 6500);
+    clearTimeout(replyTimer.current);
+    replyTimer.current = setTimeout(() => setReply((r) => (r?.id === id ? null : r)), REPLY_MS);
   };
 
   if (!enabled) return null;
@@ -270,13 +276,24 @@ export function CustomCursor() {
 
       {/* Umer's reply */}
       <AnimatePresence>
-        {reply && <ReplyCursor key={reply.id} reply={reply} />}
+        {reply && (
+          <ReplyCursor
+            key={reply.id}
+            reply={reply}
+            // Hovering the reply keeps it open, so there's time to click the email link
+            onHold={() => clearTimeout(replyTimer.current)}
+            onRelease={() => {
+              clearTimeout(replyTimer.current);
+              replyTimer.current = setTimeout(() => setReply(null), 3000);
+            }}
+          />
+        )}
       </AnimatePresence>
     </>
   );
 }
 
-function ReplyCursor({ reply }: { reply: Reply }) {
+function ReplyCursor({ reply, onHold, onRelease }: { reply: Reply; onHold: () => void; onRelease: () => void }) {
   return (
     <motion.div
       role="status"
@@ -287,9 +304,21 @@ function ReplyCursor({ reply }: { reply: Reply }) {
       transition={{ type: 'spring', stiffness: 160, damping: 20 }}
     >
       <Arrow fill="var(--color-ink)" stroke="var(--color-white)" />
-      <div className="absolute left-4 top-5 w-max max-w-[260px] rounded-[14px] rounded-tl-sm bg-ink px-2.5 py-1.5 text-white shadow-lg ring-1 ring-white/30">
+      <div
+        className="pointer-events-auto absolute left-4 top-5 w-max max-w-[280px] rounded-[14px] rounded-tl-sm bg-ink px-3 py-2 text-white shadow-lg ring-1 ring-white/30"
+        onPointerEnter={onHold}
+        onPointerLeave={onRelease}
+      >
         <span className="t-label block text-muted-dark">Umer</span>
         <span className="block font-sans text-[14px] leading-snug">{reply.text}</span>
+        <a
+          href={CALL_LINK}
+          data-cursor-label="Email"
+          className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 font-sans text-[13px] font-medium text-ink hover:bg-white motion-safe:transition-colors"
+        >
+          Email me and let's set up a call
+          <span aria-hidden="true">↗</span>
+        </a>
       </div>
     </motion.div>
   );
