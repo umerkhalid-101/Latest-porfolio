@@ -1,6 +1,8 @@
 import { ArrowUp, ArrowUpRight, Check, Copy } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useInView, useMotionTemplate, useMotionValue, useReducedMotion, useSpring, useTransform, type MotionValue } from 'motion/react';
+import { Marquee } from './Marquee';
+import { Magnetic } from './Magnetic';
 import { scrollToSmooth } from '../lib/smoothScroll';
 
 const EMAIL = 'umerkhalid141@gmail.com';
@@ -13,6 +15,23 @@ function DubaiTime() {
     return () => clearInterval(id);
   }, []);
   return <time className="tabular-nums">{time}</time>;
+}
+
+/** A wordmark letter: drops in on view, then stretches up when the cursor passes over it */
+function WordLetter({ char, index, center, pointer, show, accent = false }: { char: string; index: number; center: number; pointer: MotionValue<number>; show: boolean; accent?: boolean }) {
+  const near = useTransform(pointer, (p) => (p < 0 ? 0 : Math.max(0, 1 - Math.abs(p - center) * 4)));
+  const stretch = useSpring(useTransform(near, [0, 1], [1, 1.18]), { stiffness: 260, damping: 16 });
+  const skew = useSpring(useTransform(pointer, (p) => (p < 0 ? 0 : (center - p) * 14)), { stiffness: 200, damping: 20 });
+  return (
+    <motion.span
+      className={`inline-block ${accent ? 'text-accent' : ''}`}
+      initial={{ y: '-110%', rotate: index % 2 ? 8 : -8 }}
+      animate={show ? { y: 0, rotate: 0 } : undefined}
+      transition={{ type: 'spring', stiffness: 260, damping: 13, delay: index * 0.08 }}
+    >
+      <motion.span className="inline-block origin-bottom" style={{ scaleY: stretch, skewX: skew }}>{char}</motion.span>
+    </motion.span>
+  );
 }
 
 const columns = [
@@ -58,9 +77,54 @@ export function Footer() {
     }
   };
 
+  const reduce = useReducedMotion();
+  // Cursor spotlight across the whole footer
+  const sx = useMotionValue(-1000);
+  const sy = useMotionValue(-1000);
+  const spot = useMotionTemplate`radial-gradient(520px circle at ${sx}px ${sy}px, color-mix(in srgb, var(--color-accent) 22%, transparent), transparent 70%)`;
+  const gridMask = useMotionTemplate`radial-gradient(360px circle at ${sx}px ${sy}px, black, transparent 75%)`;
+  const pointer = useMotionValue(-1);
+  // Observe the wordmark itself: its letters start clipped above it, so they never intersect on their own
+  const markRef = useRef<HTMLParagraphElement>(null);
+  const markIn = useInView(markRef, { once: true, amount: 0.3 });
+
   return (
-    <footer id="contact" className="bg-ink text-white px-6 md:px-14 pt-16 md:pt-24 pb-8 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto">
+    <footer
+      id="contact"
+      className="relative bg-ink text-white pb-8 overflow-hidden"
+      onPointerMove={(e) => {
+        if (e.pointerType !== 'mouse' || reduce) return;
+        const r = e.currentTarget.getBoundingClientRect();
+        sx.set(e.clientX - r.left);
+        sy.set(e.clientY - r.top);
+      }}
+      onPointerLeave={() => { sx.set(-1000); sy.set(-1000); }}
+    >
+      {/* Orange band: the hero color returns to close the page */}
+      <Marquee
+        items={['Open to Lead and Design Manager roles', 'Based in Dubai', "Let's talk"]}
+        baseVelocity={-3}
+        className="bg-accent text-ink t-display-l py-4 md:py-6"
+      />
+
+      {/* Spotlight and a faint grid it reveals */}
+      {!reduce && (
+        <>
+          <motion.div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: spot }} />
+          <motion.div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 opacity-40"
+            style={{
+              backgroundImage: 'linear-gradient(var(--color-line-dark) 1px, transparent 1px), linear-gradient(90deg, var(--color-line-dark) 1px, transparent 1px)',
+              backgroundSize: '56px 56px',
+              WebkitMaskImage: gridMask,
+              maskImage: gridMask,
+            }}
+          />
+        </>
+      )}
+
+      <div className="relative max-w-[1400px] mx-auto px-6 md:px-14 pt-16 md:pt-24">
         {/* Contact */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 pb-12 md:pb-16 border-b border-line-dark">
           <div>
@@ -83,10 +147,12 @@ export function Footer() {
               {copied ? <Check size={15} aria-hidden="true" /> : <Copy size={15} aria-hidden="true" />}
               {copied ? 'Copied' : 'Copy email'}
             </button>
-            <a href={`mailto:${EMAIL}`} className="flex items-center gap-3 rounded-full bg-white text-ink pl-5 pr-1.5 py-1.5 t-label">
-              Email me
-              <span className="w-9 h-9 rounded-full bg-accent text-ink flex items-center justify-center" aria-hidden="true"><ArrowUpRight size={16} /></span>
-            </a>
+            <Magnetic strength={0.35}>
+              <a href={`mailto:${EMAIL}`} className="group flex items-center gap-3 rounded-full bg-white text-ink pl-6 pr-2 py-2 t-label">
+                Email me
+                <span className="w-11 h-11 rounded-full bg-accent text-ink flex items-center justify-center motion-safe:transition-transform group-hover:rotate-45" aria-hidden="true"><ArrowUpRight size={18} /></span>
+              </a>
+            </Magnetic>
             <span className="sr-only" aria-live="polite">{copied ? 'Email address copied' : ''}</span>
           </div>
         </div>
@@ -120,27 +186,19 @@ export function Footer() {
         </div>
 
         {/* Wordmark */}
-        <p aria-hidden="true" className="overflow-hidden font-display uppercase leading-[0.78] tracking-tighter text-[37vw] lg:text-[min(30vw,420px)] -mx-1 select-none text-white">
-          {'UMER'.split('').map((c, i) => (
-            <motion.span
-              key={i}
-              className="inline-block"
-              initial={{ y: '-110%', rotate: i % 2 ? 8 : -8 }}
-              whileInView={{ y: 0, rotate: 0 }}
-              whileHover={{ y: '-6%', rotate: i % 2 ? 3 : -3 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 13, delay: i * 0.08 }}
-            >
-              {c}
-            </motion.span>
+        <p
+          ref={markRef}
+          aria-hidden="true"
+          onPointerMove={(e) => {
+            if (e.pointerType !== 'mouse' || reduce) return;
+            const r = e.currentTarget.getBoundingClientRect();
+            pointer.set((e.clientX - r.left) / r.width);
+          }}
+          onPointerLeave={() => pointer.set(-1)}
+          className="overflow-hidden pt-[0.12em] font-display uppercase leading-[0.78] tracking-tighter text-[37vw] lg:text-[min(30vw,420px)] -mx-1 select-none text-white">
+          {'UMER.'.split('').map((c, i, all) => (
+            <WordLetter key={i} char={c} index={i} center={(i + 0.5) / all.length} pointer={pointer} accent={c === '.'} show={markIn} />
           ))}
-          <motion.span
-            className="inline-block text-accent"
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 10, delay: 0.5 }}
-          >.</motion.span>
         </p>
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-8 border-t border-line-dark t-body-s text-muted-dark">
