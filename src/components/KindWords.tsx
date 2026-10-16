@@ -9,13 +9,15 @@ import { namedTestimonials, type Testimonial } from '../data/testimonials';
 type Slide = { quote: string; by?: string; person?: Testimonial };
 const slides: Slide[] = namedTestimonials.map((t) => ({ quote: t.quote, person: t }));
 
-const logos = [
-  { name: 'Salams', url: '/images/team-01.webp' },
-  { name: 'Zwilt', url: '/images/team-02.webp' },
-  { name: 'Axion Dynamic', url: '/images/team-03.webp' },
-  { name: 'Mailmunch', url: '/images/team-04.webp' },
-  { name: 'Cayano', url: '/images/team-05.webp' },
-  { name: 'Break Thirty', url: '/images/team-06.webp' },
+// Freelance projects. The logo files are white, so they're inverted to sit on the white section.
+// `size` evens out marks whose files carry more or less padding than the rest.
+const defaultSize = 'max-h-[26px] md:max-h-[30px]';
+const projects: { name: string; logo: string; href: string; size?: string }[] = [
+  { name: 'Cayano', logo: '/images/freelance/cayano.svg', href: 'https://cayano.co.uk/', size: 'max-h-[18px] md:max-h-[22px]' },
+  { name: 'Break Thirty', logo: '/images/freelance/break-thirty.svg', href: 'https://www.breakthirty.com/' },
+  { name: 'Beyondhut', logo: '/images/freelance/beyondhut.svg', href: 'https://beyondhut.com/', size: 'max-h-[40px] md:max-h-[48px]' },
+  { name: 'Folionomics', logo: '/images/freelance/folionomics.svg', href: 'https://www.folionomics.com/' },
+  { name: 'Rivas Pro Detail', logo: '/images/freelance/rivas-pro-detail.svg', href: 'https://www.rivasprodetailvegas.com/' },
 ];
 
 const CYCLE_MS = 6500;
@@ -103,27 +105,41 @@ export function KindWords() {
           </div>
         </div>
 
-        {/* Teams: one quiet row of marks on the page itself */}
+        {/* Freelance projects: each mark links to the live site */}
         <div className="mt-10 md:mt-12">
-          <p className="t-label text-muted mb-5">Teams I've designed with</p>
-          <ul className="grid grid-cols-3 md:grid-cols-6 border-t border-l border-line">
-            {logos.map((l, n) => (
+          <p className="t-label text-muted mb-5">Freelance projects</p>
+          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 border-t border-l border-line">
+            {projects.map((p, n) => (
               <motion.li
-                key={l.name}
+                key={p.name}
                 initial={reduce ? false : { opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: n * 0.06, duration: 0.5 }}
-                className="group border-r border-b border-line h-20 md:h-24 flex items-center justify-center px-5"
+                className="border-r border-b border-line"
               >
-                <img
-                  src={l.url}
-                  alt={`${l.name} logo`}
-                  width={240}
-                  height={72}
-                  loading="lazy"
-                  className="max-h-[34px] md:max-h-[40px] w-auto max-w-full opacity-45 group-hover:opacity-100 transition-opacity duration-300"
-                />
+                <a
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${p.name}: check out the live website (opens in a new tab)`}
+                  className="group relative h-20 md:h-24 flex items-center justify-center px-5 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset"
+                >
+                  <img
+                    src={p.logo}
+                    alt=""
+                    width={240}
+                    height={48}
+                    loading="lazy"
+                    className={`${p.size ?? defaultSize} w-auto max-w-full invert opacity-45 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300`}
+                  />
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap t-body-s text-accent opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0 transition-all duration-300"
+                  >
+                    Check out the live website &rarr;
+                  </span>
+                </a>
               </motion.li>
             ))}
           </ul>
