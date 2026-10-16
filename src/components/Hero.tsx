@@ -73,7 +73,7 @@ export function Hero() {
                 <span className="absolute inset-0 rounded-full bg-[#22C55E] animate-ping opacity-75" />
                 <span className="relative w-2 h-2 rounded-full bg-[#22C55E]" />
               </span>
-              Design Specialist at MBLM · Open to Lead roles
+              Design Specialist at MBLM · Open to Lead and Design Manager roles
             </p>
             <p className="font-display text-[clamp(2rem,5.5vw,6rem)] leading-[1.1] uppercase tracking-tight text-white drop-shadow-lg">
               Based in<br />Dubai, UAE

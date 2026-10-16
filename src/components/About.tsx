@@ -14,7 +14,9 @@ const quickFacts = [
   { label: "Education", value: "BA, Visual Communication Design" },
   { label: "Languages", value: "English, Urdu" },
   { label: "Currently", value: "Design Specialist, MBLM" },
-  { label: "Open to", value: "Lead, Design Manager roles" },
+  // TODO: Umer to confirm the visa line before deploy.
+  { label: "Visa", value: "Own UAE residence visa" },
+  { label: "Open to", value: "Lead and Design Manager roles" },
 ];
 
 // Titles, dates, durations and locations follow LinkedIn (source of truth).
@@ -46,12 +48,12 @@ type Experience = {
 
 const experiences: Experience[] = [
   {
-    years: "'18–'19",
+    years: "2018 to 2019",
     company: "Truebill (now Rocket Money)",
     name: "Truebill", tagline: "Now Rocket Money",
     code: "TRB", from: "Sep 2018", to: "Nov 2019", span: "1y 3m", path: "UX Designer",
     location: "California, United States",
-    roles: [{ title: "UX Designer", dates: "September 2018 – November 2019", duration: "1 year 3 months" }],
+    roles: [{ title: "UX Designer", dates: "September 2018 to November 2019", duration: "1 year 3 months" }],
     description: "Ran 30+ usability and validation studies across account linking, subscription detection, and transactions. Improved financial data accuracy by 22% and reduced account-linking drop-offs by 18%.",
     logo: "Rocket Money",
     logoUrl: "/images/timeline-01.webp",
@@ -59,15 +61,15 @@ const experiences: Experience[] = [
     tint: "#F3EEE6"
   },
   {
-    years: "'18–'23",
+    years: "2018 to 2023",
     company: "Salams (acq. Match Group)",
     name: "Salams", tagline: "Acquired by Match Group",
     code: "SLM", from: "May 2018", to: "Sep 2023", span: "5y 5m", path: "Junior → Senior",
     total: "5 years 5 months",
     roles: [
-      { title: "Senior Product Designer", dates: "January 2022 – September 2023", duration: "1 year 9 months" },
-      { title: "User Experience Designer", dates: "September 2019 – December 2021", duration: "2 years 4 months" },
-      { title: "Junior UX Designer", dates: "May 2018 – August 2019", duration: "1 year 4 months" }
+      { title: "Senior Product Designer", dates: "January 2022 to September 2023", duration: "1 year 9 months" },
+      { title: "User Experience Designer", dates: "September 2019 to December 2021", duration: "2 years 4 months" },
+      { title: "Junior UX Designer", dates: "May 2018 to August 2019", duration: "1 year 4 months" }
     ],
     description: "First design hire on a small team building the app from the ground up. Grew into Senior as it scaled past a million users, led the full app redesign, and worked with the founders through the Match Group acquisition.",
     logo: "Salams",
@@ -77,15 +79,15 @@ const experiences: Experience[] = [
     caseStudy: "/salams-casestudy"
   },
   {
-    years: "'23–'24",
+    years: "2023 to 2024",
     company: "Hauraki (Zewst ecosystem)",
     name: "Hauraki", tagline: "Zewst ecosystem",
     code: "HRK", from: "Sep 2023", to: "Oct 2024", span: "1y 2m", path: "Senior → Manager",
     location: "Lahore, Pakistan",
     total: "1 year 2 months",
     roles: [
-      { title: "Design Manager", dates: "February 2024 – October 2024", duration: "9 months" },
-      { title: "Senior Product Designer", dates: "September 2023 – February 2024", duration: "6 months" }
+      { title: "Design Manager", dates: "February 2024 to October 2024", duration: "9 months" },
+      { title: "Senior Product Designer", dates: "September 2023 to February 2024", duration: "6 months" }
     ],
     description: "Led the design team and set design direction across four products. Shipped Zewst POS to 500+ restaurant merchants and owned the Zewards loyalty platform end to end.",
     logo: "Hauraki",
@@ -95,12 +97,12 @@ const experiences: Experience[] = [
     caseStudy: "/zewards-casestudy"
   },
   {
-    years: "'24–'25",
+    years: "2024 to 2025",
     company: "Axion Dynamic",
     name: "Axion Dynamic",
     code: "AXD", from: "Oct 2024", to: "Sep 2025", span: "1y", path: "Team Lead",
     location: "Lahore, Pakistan",
-    roles: [{ title: "Product Team Lead", dates: "October 2024 – September 2025", duration: "1 year" }],
+    roles: [{ title: "Product Team Lead", dates: "October 2024 to September 2025", duration: "1 year" }],
     description: "Led product and design for Jobbit, an ERP platform for supply chain operations, from discovery through delivery, and built a scalable Figma design system.",
     logo: "Axion Dynamic",
     logoUrl: "/images/timeline-05.webp",
@@ -108,12 +110,12 @@ const experiences: Experience[] = [
     tint: "#E9F0EB"
   },
   {
-    years: "'25–'26",
+    years: "2025 to 2026",
     company: "Unita Worldwide",
     name: "Unita Worldwide",
     code: "UNT", from: "Oct 2025", to: "Mar 2026", span: "6m", path: "Product Designer",
     location: "Dubai, United Arab Emirates",
-    roles: [{ title: "Product Designer", dates: "October 2025 – March 2026", duration: "6 months" }],
+    roles: [{ title: "Product Designer", dates: "October 2025 to March 2026", duration: "6 months" }],
     description: "Sole designer on a Swiss-headquartered B2B verified business network with offices in Geneva, Tirana, and Dubai. Owned the design system, discovery, and onboarding, and ran pricing tests with the founders.",
     logo: "Unita",
     logoUrl: "/images/timeline-06.webp",
@@ -122,12 +124,12 @@ const experiences: Experience[] = [
     caseStudy: "/unita-casestudy"
   },
   {
-    years: "'26–Now",
+    years: "2026 to now",
     company: "MBLM Dubai",
     name: "MBLM",
     code: "MBL", from: "Mar 2026", to: "Now", span: "Ongoing", path: "Design Specialist",
     location: "Dubai, United Arab Emirates",
-    roles: [{ title: "Design Specialist", dates: "March 2026 – Present" }],
+    roles: [{ title: "Design Specialist", dates: "March 2026 to Present" }],
     description: "Designing government and regulated-sector web portals in the UAE, including VARA, plus an AI product website and product UI.",
     logo: "MBLM",
     logoUrl: "/images/timeline-07.webp",
@@ -214,7 +216,7 @@ export function About() {
             <p className="text-[16px] md:text-[18px] leading-[1.65] text-black/80">
               I'm Umer, a product designer in Dubai. I started in 2018 as the first design hire at Salams, stayed through its acquisition by Match Group, and have since led small design teams and shipped products for fintech, restaurants, B2B networks, and UAE regulators. I'm still hands-on in Figma and React.
             </p>
-            <dl className="grid grid-cols-2 gap-x-6 gap-y-4 border-t border-black/10 pt-6 text-[13px]">
+            <dl className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4 border-t border-black/10 pt-6 text-[13px]">
               {quickFacts.map((f) => (
                 <div key={f.label}>
                   <dt className="text-black/60 uppercase tracking-widest text-[11px] font-semibold mb-1">{f.label}</dt>
@@ -237,7 +239,7 @@ export function About() {
               <span className="text-base md:text-xl font-medium tracking-tight">Experience</span>
             </div>
             <h2 className="font-display text-[9vw] md:text-[48px] lg:text-[clamp(36px,5.4vh,56px)] leading-[0.95] uppercase tracking-tighter">
-              May 2018 to now <span className="text-[#6F6F6F]">· six companies</span>
+              May 2018 to present <span className="text-[#6F6F6F]">· 7 companies · 10 roles</span>
             </h2>
           </div>
           <p className="font-display text-3xl md:text-5xl leading-none tabular-nums whitespace-nowrap" aria-hidden="true">
