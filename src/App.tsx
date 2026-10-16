@@ -11,6 +11,7 @@ import { About } from './components/About';
 import { HowILead } from './components/HowILead';
 import { FeaturedWork } from './components/FeaturedWork';
 import { Experience } from './components/Experience';
+import { Skills } from './components/Skills';
 import { Marquee } from './components/Marquee';
 import { startSmoothScroll, scrollToIdWhenReady } from './lib/smoothScroll';
 import { KindWords } from './components/KindWords';
@@ -156,6 +157,7 @@ export default function App() {
                 <FeaturedWork onOpenCaseStudy={openCaseStudy} />
                 <HowILead />
                 <Experience />
+                <Skills />
                 <KindWords />
                 <Footer />
               </motion.div>

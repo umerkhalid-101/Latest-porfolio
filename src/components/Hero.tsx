@@ -1,8 +1,28 @@
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useMotionValue, useScroll, useSpring, useTransform, useReducedMotion, type MotionValue } from 'motion/react';
 import { useRef } from 'react';
 import { Linkedin, Instagram } from 'lucide-react';
 
 const NAME = "MUHAMMAD UMER";
+
+/** One letter of the name: rises in on load, then stretches up toward the cursor like a wave */
+function Letter({ char, index, center, pointer }: { char: string; index: number; center: number; pointer: MotionValue<number> }) {
+  // 1 when the cursor is right over this letter, falling to 0 a few letters away
+  const near = useTransform(pointer, (p) => (p < 0 ? 0 : Math.max(0, 1 - Math.abs(p - center) * 7)));
+  const lift = useSpring(useTransform(near, [0, 1], [0, -0.14]), { stiffness: 260, damping: 18 });
+  const stretch = useSpring(useTransform(near, [0, 1], [1, 1.22]), { stiffness: 260, damping: 18 });
+  const y = useTransform(lift, (v) => `${v}em`);
+  return (
+    <motion.span
+      aria-hidden="true"
+      initial={{ y: "110%" }}
+      animate={{ y: 0 }}
+      transition={{ duration: 1, delay: 0.3 + index * 0.03, ease: [0.16, 1, 0.3, 1] }}
+      style={{ display: char === " " ? "inline-block" : "block", minWidth: char === " " ? "0.3em" : "auto" }}
+    >
+      <motion.span className="block origin-bottom" style={{ y, scaleY: stretch }}>{char}</motion.span>
+    </motion.span>
+  );
+}
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -11,6 +31,8 @@ export function Hero() {
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '-25%']);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const pointer = useMotionValue(-1);
+  const reduce = useReducedMotion();
 
   return (
     <section ref={ref} className="relative z-10 min-h-[100svh] flex flex-col overflow-hidden bg-ink">
@@ -40,23 +62,16 @@ export function Hero() {
         {/* 2. Name: full text for screen readers and search, animated letters are decorative */}
         <h1
           aria-label="Muhammad Umer"
-          className="t-display-xl text-white whitespace-nowrap drop-shadow-2xl flex justify-center overflow-hidden"
+          onPointerMove={(e) => {
+            if (e.pointerType !== 'mouse' || reduce) return;
+            const r = e.currentTarget.getBoundingClientRect();
+            pointer.set((e.clientX - r.left) / r.width);
+          }}
+          onPointerLeave={() => pointer.set(-1)}
+          className="t-display-xl text-white whitespace-nowrap drop-shadow-2xl flex justify-center overflow-hidden pt-[0.15em] -mt-[0.15em]"
         >
-          {NAME.split("").map((char, index) => (
-            <motion.span
-              key={index}
-              aria-hidden="true"
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{
-                duration: 1,
-                delay: 0.5 + index * 0.03,
-                ease: [0.16, 1, 0.3, 1]
-              }}
-              style={{ display: char === " " ? "inline-block" : "block", minWidth: char === " " ? "0.3em" : "auto" }}
-            >
-              {char}
-            </motion.span>
+          {NAME.split("").map((char, index, all) => (
+            <Letter key={index} char={char} index={index} center={(index + 0.5) / all.length} pointer={pointer} />
           ))}
         </h1>
 

@@ -1,4 +1,5 @@
-import { motion } from 'motion/react';
+import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react';
+import { useRef } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { SectionHeader } from './SectionHeader';
 
@@ -63,6 +64,8 @@ interface FeaturedWorkProps {
 }
 
 export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
+  const stackRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: stackRef, offset: ['start start', 'end end'] });
   return (
     <section id="work" className="relative z-30 bg-paper text-ink py-16 md:py-24 px-6 md:px-14">
       <div className="max-w-[1400px] mx-auto">
@@ -72,9 +75,10 @@ export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
           muted="four products I shaped."
           note="Each one opens a full case study: the problem, my role, the decisions, and what changed."
         />
-        <div className="flex flex-col gap-5 md:gap-6">
-          {projects.map((project) => (
-            <ProjectCard key={project.slug} project={project} onOpen={onOpenCaseStudy} />
+        {/* Cards pile up as you scroll: each one sticks, then shrinks back under the next */}
+        <div ref={stackRef} className="flex flex-col gap-5 md:gap-6">
+          {projects.map((project, i) => (
+            <ProjectCard key={project.slug} project={project} onOpen={onOpenCaseStudy} index={i} total={projects.length} progress={scrollYProgress} />
           ))}
         </div>
       </div>
@@ -82,14 +86,17 @@ export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
   );
 }
 
-function ProjectCard({ project, onOpen }: { project: Project; onOpen?: (slug: string) => void }) {
+function ProjectCard({ project, onOpen, index, total, progress }: { project: Project; onOpen?: (slug: string) => void; index: number; total: number; progress: MotionValue<number> }) {
+  const reduce = useReducedMotion();
+  // Once the next card starts covering this one, push it back and dim it
+  const start = index / total;
+  const scale = useTransform(progress, [start, 1], [1, 1 - (total - 1 - index) * 0.05]);
+  const dim = useTransform(progress, [start, Math.min(1, start + 1 / total)], [0, index === total - 1 ? 0 : 0.45]);
   return (
+    <div className="md:sticky" style={{ top: `calc(96px + ${index * 18}px)` }}>
     <motion.article
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="group relative bg-ink-soft text-white rounded-3xl md:rounded-[40px] overflow-hidden grid grid-cols-1 md:grid-cols-2 md:h-[min(80vh,540px)]"
+      style={reduce ? undefined : { scale }}
+      className="group relative origin-top bg-ink-soft text-white rounded-3xl md:rounded-[40px] overflow-hidden grid grid-cols-1 md:grid-cols-2 md:h-[min(80vh,540px)]"
     >
       <div className="p-6 md:p-10 lg:p-12 flex flex-col justify-center">
         <h3 className="t-display-l">{project.title}</h3>
@@ -139,6 +146,8 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen?: (slug: st
           </ul>
         )}
       </div>
+      {!reduce && <motion.div aria-hidden="true" className="absolute inset-0 bg-ink pointer-events-none hidden md:block" style={{ opacity: dim }} />}
     </motion.article>
+    </div>
   );
 }

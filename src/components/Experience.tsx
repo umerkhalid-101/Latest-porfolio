@@ -1,5 +1,7 @@
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { motion, useMotionTemplate, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
+import { scrollToSmooth } from '../lib/smoothScroll';
 import { SectionHeader } from './SectionHeader';
 
 // Titles, dates, durations and locations follow LinkedIn (source of truth).
@@ -124,41 +126,91 @@ const experiences: Job[] = [
 export function Experience() {
   const rowRef = useRef<HTMLOListElement>(null);
   const [active, setActive] = useState(0);
+  const [pinned, setPinned] = useState(false);
+  const [distance, setDistance] = useState(0);
+  const pinRef = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+  const progress = useMotionValue(0);
+  const smoothProgress = useSpring(progress, { stiffness: 120, damping: 24 });
+  const planeLeft = useTransform(smoothProgress, (v) => `${v * 100}%`);
 
-  // The dots follow whichever pass is nearest the left edge of the row
+  // Track which pass leads the row, and how far along the row we are
   useEffect(() => {
     const row = rowRef.current;
     if (!row) return;
     const onScroll = () => {
       const items = [...row.children] as HTMLElement[];
       const left = row.scrollLeft;
-      const atEnd = left + row.clientWidth >= row.scrollWidth - 4;
+      const max = row.scrollWidth - row.clientWidth;
+      progress.set(max > 0 ? left / max : 0);
       let best = 0;
       items.forEach((el, i) => { if (Math.abs(el.offsetLeft - row.offsetLeft - left) < Math.abs(items[best].offsetLeft - row.offsetLeft - left)) best = i; });
-      setActive(atEnd ? items.length - 1 : best);
+      setActive(left >= max - 40 ? items.length - 1 : best);
     };
     onScroll();
     row.addEventListener('scroll', onScroll, { passive: true });
-    return () => row.removeEventListener('scroll', onScroll);
-  }, []);
+    window.addEventListener('resize', onScroll);
+    return () => { row.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); };
+  }, [progress]);
+
+  // Desktop: pin the section and let vertical scroll drive the row sideways
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    const measure = () => {
+      const row = rowRef.current;
+      const on = mq.matches && !reduce;
+      setPinned(on);
+      setDistance(on && row ? row.scrollWidth - row.clientWidth : 0);
+    };
+    measure();
+    mq.addEventListener('change', measure);
+    window.addEventListener('resize', measure);
+    return () => { mq.removeEventListener('change', measure); window.removeEventListener('resize', measure); };
+  }, [reduce]);
+  const { scrollYProgress } = useScroll({ target: pinRef, offset: ['start start', 'end end'] });
+  useMotionValueEvent(scrollYProgress, 'change', (v) => {
+    const row = rowRef.current;
+    if (pinned && row) row.scrollLeft = v * (row.scrollWidth - row.clientWidth);
+  });
 
   const goTo = (i: number) => {
     const row = rowRef.current;
     const el = row?.children[Math.max(0, Math.min(experiences.length - 1, i))] as HTMLElement | undefined;
     if (!row || !el) return;
-    const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    row.scrollTo({ left: el.offsetLeft - row.offsetLeft, behavior: smooth ? 'smooth' : 'auto' });
+    const pin = pinRef.current;
+    if (pinned && pin) {
+      const max = row.scrollWidth - row.clientWidth;
+      const t = max > 0 ? Math.min(1, (el.offsetLeft - row.offsetLeft) / max) : 0;
+      scrollToSmooth(pin.getBoundingClientRect().top + window.scrollY + t * (pin.offsetHeight - window.innerHeight));
+      return;
+    }
+    row.scrollTo({ left: el.offsetLeft - row.offsetLeft, behavior: reduce ? 'auto' : 'smooth' });
   };
 
+  const year = experiences[active].from.slice(-4);
+
   return (
-    <section id="experience" className="relative bg-paper text-ink py-12 md:py-20">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-14 flex items-end justify-between gap-6">
-        <SectionHeader label="Experience" title="May 2018 to present" note={<span className="t-label text-ink">7 companies · 10 roles</span>} className="!mb-8 flex-1" />
-        <div className="hidden md:flex gap-3 mb-8 shrink-0">
-          <button type="button" onClick={() => goTo(active - 1)} disabled={active === 0} aria-label="Previous role" className="w-12 h-12 rounded-full border border-ink flex items-center justify-center disabled:opacity-30">
+    <section id="experience" className="relative bg-paper text-ink">
+      <div ref={pinRef} style={{ height: pinned ? `calc(100svh + ${distance}px)` : undefined }}>
+      <div className={`relative overflow-hidden py-12 md:py-0 ${pinned ? 'sticky top-0 h-[100svh] flex flex-col justify-center pt-[84px] [@media(max-height:780px)]:justify-end [@media(max-height:780px)]:pb-2' : ''}`}>
+      {/* The year of the leading pass, huge and quiet behind the row (a pseudo-element, so it stays out of the text flow) */}
+      <motion.span
+        key={year}
+        aria-hidden="true"
+        data-year={year}
+        initial={reduce ? false : { opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute right-0 bottom-0 translate-y-[18%] pointer-events-none select-none font-display leading-none text-ink/[0.05] after:content-[attr(data-year)] text-[38vw] md:text-[30vw]"
+      />
+
+      <div className="relative max-w-[1400px] mx-auto px-6 md:px-14 flex items-end justify-between gap-6">
+        <SectionHeader label="Experience" title="May 2018 to present" note={<span className="t-label text-ink">7 companies · 10 roles</span>} className="!mb-6 [@media(max-height:820px)]:!mb-4 flex-1" />
+        <div className="hidden md:flex gap-3 mb-6 [@media(max-height:820px)]:mb-4 shrink-0">
+          <button type="button" onClick={() => goTo(active - 1)} disabled={active === 0} aria-label="Previous role" className="w-12 h-12 rounded-full border border-ink flex items-center justify-center hover:bg-ink hover:text-white transition-colors disabled:opacity-30 disabled:pointer-events-none">
             <ArrowLeft size={18} aria-hidden="true" />
           </button>
-          <button type="button" onClick={() => goTo(active + 1)} disabled={active === experiences.length - 1} aria-label="Next role" className="w-12 h-12 rounded-full border border-ink flex items-center justify-center disabled:opacity-30">
+          <button type="button" onClick={() => goTo(active + 1)} disabled={active === experiences.length - 1} aria-label="Next role" className="w-12 h-12 rounded-full border border-ink flex items-center justify-center hover:bg-ink hover:text-white transition-colors disabled:opacity-30 disabled:pointer-events-none">
             <ArrowRight size={18} aria-hidden="true" />
           </button>
         </div>
@@ -166,35 +218,92 @@ export function Experience() {
 
       <ol
         ref={rowRef}
-        aria-label="Experience, most recent last"
-        className="flex gap-5 md:gap-6 overflow-x-auto snap-x snap-mandatory scroll-px-6 md:scroll-px-14 px-6 md:px-14 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        aria-label="Experience, oldest first"
+        className={`relative flex gap-5 md:gap-6 overflow-x-auto scroll-px-6 md:scroll-px-14 px-6 md:px-14 pt-2 pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${pinned ? 'overflow-x-hidden' : 'snap-x snap-mandatory'}`}
       >
         {experiences.map((exp, i) => (
-          <li key={exp.company} className="snap-start shrink-0 flex">
-            <Ticket exp={exp} index={i} total={experiences.length} />
-          </li>
+          <motion.li
+            key={exp.company}
+            initial={reduce ? false : { opacity: 0, x: 160, rotate: 6, y: 30 }}
+            whileInView={{ opacity: 1, x: 0, rotate: 0, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ type: 'spring', stiffness: 120, damping: 18, delay: Math.min(i, 3) * 0.09 }}
+            className="snap-start shrink-0 flex [perspective:1200px]"
+          >
+            <motion.div
+              className="flex"
+              animate={{ opacity: i === active || reduce ? 1 : 0.92, y: i === active ? -6 : 0 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 22 }}
+            >
+              <Tilt><Ticket exp={exp} index={i} total={experiences.length} /></Tilt>
+            </motion.div>
+          </motion.li>
         ))}
       </ol>
 
-      {/* Position dots, synced to the row */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-14 mt-6">
-        <ol className="flex items-center gap-2">
-          {experiences.map((exp, i) => (
-            <li key={exp.company}>
-              <button
-                type="button"
-                onClick={() => goTo(i)}
-                aria-label={`Show ${exp.logo}, ${exp.years}`}
-                aria-current={i === active ? 'step' : undefined}
-                className="w-6 h-6 flex items-center justify-center"
-              >
-                <span className={`block h-2.5 rounded-full transition-all duration-300 ${i === active ? 'w-8 bg-accent' : 'w-2.5 bg-ink/25'}`} />
-              </button>
-            </li>
-          ))}
-        </ol>
+      {/* Flight path: a plane flies along the timeline as the row moves; the dots jump to a pass */}
+      <div className="relative max-w-[1400px] mx-auto px-6 md:px-14 mt-2">
+        <div className="relative h-8">
+          <div className="absolute left-3 right-3 top-1/2 border-t-2 border-dashed border-line" aria-hidden="true" />
+          <motion.div className="absolute left-3 right-3 top-1/2 h-0.5 -translate-y-1/2 bg-ink" style={{ scaleX: smoothProgress, originX: 0 }} aria-hidden="true" />
+          <ol className="absolute inset-0 flex items-center justify-between">
+            {experiences.map((exp, i) => (
+              <li key={exp.company}>
+                <button
+                  type="button"
+                  onClick={() => goTo(i)}
+                  aria-label={`Show ${exp.logo}, ${exp.years}`}
+                  aria-current={i === active ? 'step' : undefined}
+                  className="group w-6 h-6 flex items-center justify-center"
+                >
+                  <span className={`block rounded-full transition-all duration-300 group-hover:scale-125 ${i === active ? 'w-3.5 h-3.5 bg-accent ring-4 ring-accent/20' : i < active ? 'w-2.5 h-2.5 bg-ink' : 'w-2.5 h-2.5 bg-paper border-2 border-ink/40'}`} />
+                </button>
+              </li>
+            ))}
+          </ol>
+          <motion.span
+            aria-hidden="true"
+            className="absolute top-1/2 -translate-y-[160%] -translate-x-1/2 text-ink text-xl"
+            style={{ left: planeLeft, marginLeft: 12 }}
+          >
+            ✈
+          </motion.span>
+        </div>
+      </div>
+      </div>
       </div>
     </section>
+  );
+}
+
+/** Tilts its child toward the cursor in 3D, with a soft glare that follows */
+function Tilt({ children }: { children: ReactNode }) {
+  const reduce = useReducedMotion();
+  const px = useMotionValue(0.5);
+  const py = useMotionValue(0.5);
+  const cfg = { stiffness: 220, damping: 20 };
+  const rotateY = useSpring(useTransform(px, [0, 1], [-10, 10]), cfg);
+  const rotateX = useSpring(useTransform(py, [0, 1], [8, -8]), cfg);
+  const gx = useTransform(px, (v) => `${v * 100}%`);
+  const gy = useTransform(py, (v) => `${v * 100}%`);
+  const glare = useMotionTemplate`radial-gradient(circle at ${gx} ${gy}, var(--color-line-dark), transparent 55%)`;
+  if (reduce) return <>{children}</>;
+  return (
+    <motion.div
+      className="relative flex rounded-3xl [transform-style:preserve-3d]"
+      style={{ rotateX, rotateY }}
+      whileHover={{ scale: 1.02 }}
+      onPointerMove={(e) => {
+        if (e.pointerType !== 'mouse') return;
+        const r = e.currentTarget.getBoundingClientRect();
+        px.set((e.clientX - r.left) / r.width);
+        py.set((e.clientY - r.top) / r.height);
+      }}
+      onPointerLeave={() => { px.set(0.5); py.set(0.5); }}
+    >
+      {children}
+      <motion.span aria-hidden="true" className="absolute inset-0 rounded-3xl pointer-events-none mix-blend-overlay" style={{ background: glare }} />
+    </motion.div>
   );
 }
 
@@ -215,9 +324,9 @@ function Barcode({ seed }: { seed: string }) {
 
 function Ticket({ exp, index, total }: { exp: Job; index: number; total: number }) {
   return (
-    <article className="relative h-full w-[82vw] max-w-[400px] md:w-[440px] md:max-w-none bg-white rounded-3xl overflow-hidden flex flex-col">
+    <article className="relative h-full w-[82vw] max-w-[400px] md:w-[460px] md:max-w-none bg-white rounded-3xl overflow-hidden flex flex-col">
       {/* Stub */}
-      <header className="px-6 pt-5 pb-5 bg-ink-soft text-white">
+      <header className="px-6 pt-5 pb-5 md:[@media(max-height:780px)]:pt-4 md:[@media(max-height:780px)]:pb-4 bg-ink-soft text-white">
         <div className="flex items-center justify-between t-label">
           {exp.current ? (
             <span className="inline-flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-success motion-safe:animate-pulse" aria-hidden="true" /> Now boarding</span>
@@ -241,12 +350,12 @@ function Ticket({ exp, index, total }: { exp: Job; index: number; total: number 
       <dl className="grid grid-cols-2 gap-x-4 gap-y-4 px-6 pt-5">
         <div><dt className="t-label text-muted">From</dt><dd className="t-heading mt-1">{exp.from}</dd></div>
         <div className="text-right"><dt className="t-label text-muted">To</dt><dd className="t-heading mt-1">{exp.to}</dd></div>
-        <div><dt className="t-label text-muted">Duration</dt><dd className="t-body-s mt-1">{exp.span}</dd></div>
-        <div className="text-right"><dt className="t-label text-muted">Class</dt><dd className="t-body-s mt-1">{exp.path}</dd></div>
+        <div className="md:[@media(max-height:780px)]:hidden"><dt className="t-label text-muted">Duration</dt><dd className="t-body-s mt-1">{exp.span}</dd></div>
+        <div className="text-right md:[@media(max-height:780px)]:hidden"><dt className="t-label text-muted">Class</dt><dd className="t-body-s mt-1">{exp.path}</dd></div>
       </dl>
 
       {/* Perforation */}
-      <div className="relative my-4" aria-hidden="true">
+      <div className="relative my-4 md:[@media(max-height:780px)]:my-3" aria-hidden="true">
         <span className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-paper" />
         <span className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-paper" />
         <div className="mx-6 border-t-2 border-dashed border-line" />
@@ -262,9 +371,9 @@ function Ticket({ exp, index, total }: { exp: Job; index: number; total: number 
         ))}
       </ol>
 
-      <p className="t-body-s text-muted px-6 mt-3">{exp.description}</p>
+      <p className="t-body-s text-muted px-6 mt-3 md:[@media(max-height:980px)]:hidden">{exp.description}</p>
 
-      <footer className="mt-auto px-6 pt-4 pb-5 flex items-end justify-between gap-4">
+      <footer className="mt-auto px-6 pt-4 pb-5 md:[@media(max-height:780px)]:pb-4 flex items-end justify-between gap-4">
         <Barcode seed={exp.code} />
         {exp.caseStudy && (
           <a href={exp.caseStudy} className="group inline-flex items-center gap-2 t-label">

@@ -19,6 +19,7 @@ export function Header() {
     { label: 'WORK', href: '#work', hasCircle: true },
     { label: 'HOW I LEAD', href: '#how-i-lead', hasCircle: true },
     { label: 'EXPERIENCE', href: '#experience', hasCircle: true },
+    { label: 'SKILLS', href: '#skills', hasCircle: true },
     { label: 'CONTACT', href: '#contact', hasCircle: true },
   ];
 

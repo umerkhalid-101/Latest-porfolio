@@ -1,5 +1,6 @@
 import { ArrowUp, ArrowUpRight, Check, Copy } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { motion } from 'motion/react';
 import { scrollToSmooth } from '../lib/smoothScroll';
 
 const EMAIL = 'umerkhalid141@gmail.com';
@@ -22,6 +23,7 @@ const columns = [
       { label: 'Work', href: '#work' },
       { label: 'How I lead', href: '#how-i-lead' },
       { label: 'Experience', href: '#experience' },
+      { label: 'Skills', href: '#skills' },
       { label: 'Contact', href: '#contact' },
     ],
   },
@@ -118,8 +120,27 @@ export function Footer() {
         </div>
 
         {/* Wordmark */}
-        <p aria-hidden="true" className="font-display uppercase leading-[0.78] tracking-tighter text-[37vw] lg:text-[min(30vw,420px)] -mx-1 select-none text-white">
-          UMER<span className="text-accent">.</span>
+        <p aria-hidden="true" className="overflow-hidden font-display uppercase leading-[0.78] tracking-tighter text-[37vw] lg:text-[min(30vw,420px)] -mx-1 select-none text-white">
+          {'UMER'.split('').map((c, i) => (
+            <motion.span
+              key={i}
+              className="inline-block"
+              initial={{ y: '-110%', rotate: i % 2 ? 8 : -8 }}
+              whileInView={{ y: 0, rotate: 0 }}
+              whileHover={{ y: '-6%', rotate: i % 2 ? 3 : -3 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 13, delay: i * 0.08 }}
+            >
+              {c}
+            </motion.span>
+          ))}
+          <motion.span
+            className="inline-block text-accent"
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 10, delay: 0.5 }}
+          >.</motion.span>
         </p>
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-8 border-t border-line-dark t-body-s text-muted-dark">
