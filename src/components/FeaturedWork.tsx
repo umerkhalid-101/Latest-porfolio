@@ -15,6 +15,9 @@ interface Project {
   gallery?: { src: string; alt: string }[];
   /** Hover label when the link is not this project's own case study */
   cta?: string;
+  /** Extra proof for the wide tile */
+  stats?: { value: string; label: string }[];
+  chips?: string[];
   /** The project's own color, used only behind its screenshots */
   brandColor: string;
   href?: string;
@@ -64,6 +67,12 @@ const projects: Project[] = [
     subtitle: "Zewards loyalty platform, Zewst ecosystem",
     description: "As Design Manager, I owned Zewards end to end across the consumer app, business app, and marketing site. Repeat visits rose 38% and first-time activation got 2.3x faster.",
     image: "/images/work-02.webp",
+    stats: [
+      { value: "+38%", label: "Repeat visits" },
+      { value: "2.3x", label: "Faster activation" },
+      { value: "500+", label: "POS merchants" },
+    ],
+    chips: ["Consumer app", "Business app", "Marketing site"],
     brandColor: "#A3E635",
     href: "/zewards-casestudy"
   }
@@ -136,16 +145,35 @@ function Tile({ project, index, total, className, onOpen }: { project: Project; 
     >
       <div className={`relative h-full flex ${wide ? 'flex-col md:flex-row' : 'flex-col'}`}>
         {/* Top bar and title */}
-        <div className={`relative z-10 p-6 md:p-8 flex flex-col ${wide ? 'md:w-[38%] md:justify-between' : ''}`}>
+        <div className={`relative z-10 p-6 md:p-8 flex flex-col ${wide ? 'md:w-[44%]' : ''}`}>
           <div className={`flex items-center justify-between t-label ${soft}`}>
             <span className="tabular-nums">{String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
             <span>{project.meta.year}</span>
           </div>
-          <div className={wide ? 'mt-6 md:mt-0' : 'mt-6'}>
+          <div className="mt-6">
             <h3 className={big ? 't-display-l' : 't-display-m'}>{project.title}</h3>
             <p className={`t-body-s mt-2 ${soft}`}>{project.subtitle}</p>
           </div>
-          {wide && <ImpactRow project={project} light={light} className="hidden md:flex" />}
+          {wide && project.stats && (
+            <div className="mt-6">
+              <dl className={`grid grid-cols-3 gap-4 border-y py-4 ${light ? 'border-ink/15' : 'border-line-dark'}`}>
+                {project.stats.map((st) => (
+                  <div key={st.label}>
+                    <dt className={`t-label ${soft}`}>{st.label}</dt>
+                    <dd className="t-display-m mt-1.5">{st.value}</dd>
+                  </div>
+                ))}
+              </dl>
+              {project.chips && (
+                <ul className="flex flex-wrap gap-2 mt-4">
+                  {project.chips.map((c) => (
+                    <li key={c} className={`t-label rounded-full border px-3 py-1.5 ${light ? 'border-ink/25' : 'border-line-dark'}`}>{c}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+          {wide && <ImpactRow project={project} light={light} hideImpact className="hidden md:flex mt-6" />}
         </div>
 
         {/* The work itself */}
@@ -200,12 +228,12 @@ function Tile({ project, index, total, className, onOpen }: { project: Project; 
   );
 }
 
-function ImpactRow({ project, light, className = '' }: { project: Project; light: boolean; className?: string }) {
+function ImpactRow({ project, light, hideImpact = false, className = '' }: { project: Project; light: boolean; hideImpact?: boolean; className?: string }) {
   return (
     <div className={`flex items-end justify-between gap-4 ${className}`}>
       <div>
         <p className={`t-label ${light ? 'text-ink/70' : 'text-white/70'}`}>{project.meta.role}</p>
-        <p className="t-heading mt-1">{project.meta.impact}</p>
+        <p className="t-heading mt-1">{hideImpact ? 'View case study' : project.meta.impact}</p>
       </div>
       <span aria-hidden="true" className={`shrink-0 w-12 h-12 rounded-full flex items-center justify-center motion-safe:transition-transform motion-safe:duration-300 group-hover:rotate-45 ${light ? 'bg-ink text-white' : 'bg-white text-ink'}`}>
         <ArrowUpRight size={20} />
