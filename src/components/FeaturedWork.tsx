@@ -149,7 +149,7 @@ function Tile({ project, index, total, className, onOpen }: { project: Project; 
         </div>
 
         {/* The work itself */}
-        <div className={`relative flex-1 flex items-center justify-center px-6 ${project.image ? (big ? 'min-h-[260px] lg:min-h-[420px]' : wide ? 'min-h-[220px] md:min-h-[300px]' : 'min-h-[220px]') : ''}`}>
+        <div className={`relative flex-1 flex items-center justify-center px-6 ${project.image ? (big ? 'min-h-[260px] lg:min-h-[420px]' : wide ? 'min-h-[220px] md:min-h-[300px]' : 'min-h-[260px] lg:min-h-[240px]') : ''}`}>
           {project.image ? (
             <img
               src={project.image}
@@ -157,7 +157,7 @@ function Tile({ project, index, total, className, onOpen }: { project: Project; 
               width={2000}
               height={2000}
               loading="lazy"
-              className={`absolute inset-0 w-full h-full object-contain motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out ${big ? 'scale-[0.96] group-hover:scale-[1.02]' : wide ? 'scale-[1.25] group-hover:scale-[1.32]' : 'scale-[1.2] group-hover:scale-[1.28]'} group-hover:-rotate-1`}
+              className={`absolute inset-0 w-full h-full object-contain motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out ${big ? 'scale-[0.96] group-hover:scale-[1.02]' : wide ? 'scale-[1.25] group-hover:scale-[1.32]' : 'scale-[0.9] group-hover:scale-[0.96]'} group-hover:-rotate-1`}
             />
           ) : project.gallery ? (
             <ul className="w-full grid grid-cols-2 gap-2 py-2">
