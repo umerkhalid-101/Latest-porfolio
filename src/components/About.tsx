@@ -7,7 +7,7 @@ const STATEMENT = 'I lead design for products people actually use: setting direc
 // Facts from LinkedIn and the resume
 const stats = [
   { value: 7, suffix: '+', label: 'Years designing' },
-  { value: 5, suffix: '', label: 'Companies' },
+  { value: 5, suffix: '', label: 'Full-time companies' },
   { value: 10, suffix: '', label: 'Roles, junior to manager' },
   { value: 1, suffix: 'M+', label: "Users on products I've designed" },
 ];
