@@ -35,7 +35,7 @@ const projects: Project[] = [
     href: "/unita-casestudy"
   },
   {
-    slug: "vara",
+    slug: "mblm",
     meta: { role: "Design Specialist", year: "2026", impact: "4 UAE clients" },
     title: "MBLM",
     subtitle: "Government and enterprise work, Dubai",
@@ -46,9 +46,8 @@ const projects: Project[] = [
       { src: "/images/mblm-dwtc.webp", alt: "Dubai World Trade Centre" },
       { src: "/images/mblm-allumni.webp", alt: "allumni" },
     ],
-    cta: "View the VARA case study",
-    brandColor: "#1C1C1C",
-    href: "/vara-casestudy"
+        brandColor: "#1C1C1C",
+    href: "/mblm-casestudy"
   },
   {
     slug: "salams",
@@ -82,7 +81,7 @@ interface FeaturedWorkProps {
   onOpenCaseStudy?: (slug: string) => void;
 }
 
-// Bento layout: Unita leads as the big tile, VARA and Salams sit beside it, Zewst runs across the bottom
+// Bento layout: Unita leads as the big tile, MBLM and Salams sit beside it, Zewst runs across the bottom
 const layout = [
   'lg:col-span-2 lg:row-span-2',
   'lg:col-span-1',

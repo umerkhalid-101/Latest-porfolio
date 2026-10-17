@@ -20,12 +20,12 @@
       "destination": "/unita-casestudy.html"
     },
     {
-      "source": "/vara-casestudy",
-      "destination": "/vara-casestudy.html"
+      "source": "/mblm-casestudy",
+      "destination": "/mblm-casestudy.html"
     },
     {
-      "source": "/vara-casestudy/",
-      "destination": "/vara-casestudy.html"
+      "source": "/mblm-casestudy/",
+      "destination": "/mblm-casestudy.html"
     },
     {
       "source": "/zewards-casestudy",
@@ -53,6 +53,16 @@
     {
       "source": "/folionomics-casestudy/",
       "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/vara-casestudy",
+      "destination": "/mblm-casestudy",
+      "permanent": true
+    },
+    {
+      "source": "/vara-casestudy/",
+      "destination": "/mblm-casestudy",
       "permanent": true
     }
   ]

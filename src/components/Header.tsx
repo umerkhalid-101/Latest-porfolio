@@ -3,11 +3,11 @@ import { motion, AnimatePresence, useMotionValueEvent, useScroll } from 'motion/
 import { ArrowUpRight } from 'lucide-react';
 
 const navItems = [
-  { label: 'About', href: '#about' },
-  { label: 'Work', href: '#work' },
-  { label: 'How I lead', href: '#how-i-lead' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Skills', href: '#skills' },
+  { label: 'About', href: '/#about' },
+  { label: 'Work', href: '/#work' },
+  { label: 'How I lead', href: '/#how-i-lead' },
+  { label: 'Experience', href: '/#experience' },
+  { label: 'Skills', href: '/#skills' },
   { label: 'Contact', href: '#contact' },
 ];
 

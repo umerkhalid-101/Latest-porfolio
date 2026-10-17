@@ -17,7 +17,7 @@ export default defineConfig(() => {
           main: path.resolve(__dirname, 'index.html'),
           'salams-casestudy': path.resolve(__dirname, 'salams-casestudy.html'),
           'unita-casestudy': path.resolve(__dirname, 'unita-casestudy.html'),
-          'vara-casestudy': path.resolve(__dirname, 'vara-casestudy.html'),
+          'mblm-casestudy': path.resolve(__dirname, 'mblm-casestudy.html'),
           'zewards-casestudy': path.resolve(__dirname, 'zewards-casestudy.html'),
         },
       },

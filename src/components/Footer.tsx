@@ -38,21 +38,21 @@ const columns = [
   {
     title: 'Sections',
     links: [
-      { label: 'About', href: '#about' },
-      { label: 'Work', href: '#work' },
-      { label: 'How I lead', href: '#how-i-lead' },
-      { label: 'Experience', href: '#experience' },
-      { label: 'Skills', href: '#skills' },
-      { label: 'Contact', href: '#contact' },
+      { label: 'About', href: '/#about' },
+      { label: 'Work', href: '/#work' },
+      { label: 'How I lead', href: '/#how-i-lead' },
+      { label: 'Experience', href: '/#experience' },
+      { label: 'Skills', href: '/#skills' },
+      { label: 'Contact', href: '/#contact' },
     ],
   },
   {
     title: 'Case studies',
     links: [
       { label: 'Unita', href: '/unita-casestudy' },
-      { label: 'MBLM', href: '/vara-casestudy' },
+      { label: 'MBLM', href: '/mblm-casestudy' },
       { label: 'Salams', href: '/salams-casestudy' },
-      { label: 'Zewards', href: '/zewards-casestudy' },
+      { label: 'Zewst', href: '/zewards-casestudy' },
     ],
   },
   {

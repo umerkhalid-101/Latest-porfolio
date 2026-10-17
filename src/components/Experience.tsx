@@ -117,7 +117,7 @@ const experiences: Job[] = [
     logo: "MBLM",
     logoUrl: "/images/timeline-07.webp",
     current: true,
-    caseStudy: "/vara-casestudy"
+    caseStudy: "/mblm-casestudy"
   }
 ];
 

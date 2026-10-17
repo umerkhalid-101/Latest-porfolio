@@ -12,7 +12,7 @@ const pages = {
   'salams-casestudy.html': 'salams',
   'zewards-casestudy.html': 'zewards',
   'unita-casestudy.html': 'unita',
-  'vara-casestudy.html': 'vara',
+  'mblm-casestudy.html': 'mblm',
 };
 
 // Animations render their starting frame (hidden, offset). Drop those inline styles

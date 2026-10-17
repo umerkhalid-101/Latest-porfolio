@@ -14,21 +14,22 @@ import { Experience } from './components/Experience';
 import { Skills } from './components/Skills';
 import { KindWords } from './components/KindWords';
 import { Footer } from './components/Footer';
-import { SalamsCaseStudy } from './components/SalamsCaseStudy';
 import { CaseStudyPage } from './components/CaseStudyPage';
-import { zewards, unita, vara } from './caseStudies';
+import { CaseStudyTemplate } from './components/CaseStudyTemplate';
+import { unita } from './caseStudies';
+import { salams, zewards, mblm } from './caseStudyData';
 import { MARQUEE_ITEMS } from './data/marquee';
 
-export type Route = 'home' | 'salams' | 'zewards' | 'unita' | 'vara';
+export type Route = 'home' | 'salams' | 'zewards' | 'unita' | 'mblm';
 
 const noop = () => {};
 
 function page(route: Route) {
   switch (route) {
-    case 'salams': return <SalamsCaseStudy onClose={noop} />;
-    case 'zewards': return <CaseStudyPage data={zewards} onClose={noop} />;
+    case 'salams': return <CaseStudyTemplate data={salams} onClose={noop} />;
+    case 'zewards': return <CaseStudyTemplate data={zewards} onClose={noop} />;
     case 'unita': return <CaseStudyPage data={unita} onClose={noop} />;
-    case 'vara': return <CaseStudyPage data={vara} onClose={noop} />;
+    case 'mblm': return <CaseStudyTemplate data={mblm} onClose={noop} />;
     default:
       return (
         <>
