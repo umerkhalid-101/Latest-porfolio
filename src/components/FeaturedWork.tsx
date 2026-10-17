@@ -135,6 +135,7 @@ function Tile({ project, index, total, className, onOpen }: { project: Project; 
     <motion.a
       href={project.href}
       onClick={open}
+      data-cursor-label={project.title}
       initial={reduce ? false : { opacity: 0, y: 24, scale: 0.98 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, amount: 0.2 }}

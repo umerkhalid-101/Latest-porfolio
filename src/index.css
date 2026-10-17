@@ -91,3 +91,17 @@ body {
   }
 }
 
+
+/* With the collaborator layer on (CustomCursor.tsx), the selection frame marks what's clickable,
+   so the pointer stays the orange arrow everywhere, like Figma */
+@media (pointer: fine) {
+  html.has-custom-cursor a,
+  html.has-custom-cursor button,
+  html.has-custom-cursor [role="button"],
+  html.has-custom-cursor [role="radio"],
+  html.has-custom-cursor label,
+  html.has-custom-cursor summary,
+  html.has-custom-cursor select {
+    cursor: inherit;
+  }
+}
