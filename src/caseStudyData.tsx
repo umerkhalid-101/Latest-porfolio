@@ -165,7 +165,8 @@ export const zewards: CaseStudy = {
     { label: 'Years', value: '2023 to 2024' },
     { label: 'Merchants', value: '500+ on POS' },
   ],
-  heroImage: { src: '/images/zewst-pos.webp', alt: 'Zewst point of sale interface', width: 800, height: 785 },
+  heroImage: { src: '/images/work-02.webp', alt: 'Zewst product screens', width: 2000, height: 2000 },
+  heroScale: 1.4,
   context: {
     title: 'Four restaurant products, one design direction.',
     body: (

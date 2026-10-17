@@ -1,8 +1,10 @@
 import { motion } from 'motion/react';
-import { ArrowLeft, Mail, MapPin, Phone, type LucideIcon } from 'lucide-react';
+import { ArrowLeft, type LucideIcon } from 'lucide-react';
 import { useEffect, type CSSProperties, type ReactNode } from 'react';
 import { CaseStudyLeadership, type LeadershipContent } from './CaseStudyLeadership';
 import { scrollToImmediate } from '../lib/smoothScroll';
+import { Footer } from './Footer';
+import { Header } from './Header';
 
 /*
  * One template for every case study, built from the Salams layout.
@@ -36,6 +38,8 @@ export interface CaseStudy {
   };
   roles: { label: string; value: string }[];
   heroImage?: CsImage;
+  /** Enlarge a hero image that has built-in padding */
+  heroScale?: number;
   context?: { title: string; body: ReactNode; highlights?: ReactNode[] };
   problem?: { image?: CsImage; questions: { q: string; a: string }[] };
   mattered?: { label: string; statement: string; note?: string }[];
@@ -113,78 +117,67 @@ export function CaseStudyTemplate({ data, onClose }: { data: CaseStudy; onClose:
     '--cs-tint': t.tint,
   } as CSSProperties;
 
-  const nav = [
-    data.context && { label: 'CONTEXT', href: `#${id('context')}` },
-    (data.gap || data.solutions) && { label: 'SOLUTION', href: `#${id(data.gap ? 'gap' : 'solutions')}` },
-    data.research && { label: 'RESEARCH', href: `#${id('research')}` },
-    data.ethos && { label: 'ETHOS', href: `#${id('ethos')}` },
-    data.designSystem && { label: 'SYSTEM', href: `#${id('design-system')}` },
-  ].filter(Boolean) as { label: string; href: string }[];
 
   return (
     <div style={vars} className="bg-[#FAF8F5] text-[#121115] min-h-screen relative font-sans selection:bg-[var(--cs-accent)] selection:text-white">
-      {/* Fixed navigation */}
-      <motion.header
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 w-full z-50 px-4 md:px-10 bg-[#FAF8F5]/90 backdrop-blur-xl border-b border-[#121115]/5 py-4 flex items-center"
-      >
-        <div className="flex items-center w-full">
-          <button onClick={onClose} className="font-display text-3xl tracking-tighter min-w-max hover:text-[var(--cs-accent)] transition-colors">
-            UMER
-          </button>
-          <div className="flex-1 flex items-center">
-            <div className="h-px bg-[#121115]/20 w-full mx-4" />
-            <nav className="hidden lg:flex items-center flex-1">
-              {nav.map((item) => (
-                <a key={item.href} href={item.href} className="flex flex-1 items-center gap-4 group h-10">
-                  <span className="w-1.5 h-1.5 rounded-full border border-[#121115] group-hover:bg-[var(--cs-accent)] group-hover:border-[var(--cs-accent)] transition-colors" />
-                  <span className="text-xs font-bold tracking-[0.2em] text-[#121115]/80 group-hover:text-[var(--cs-accent)] transition-colors whitespace-nowrap">{item.label}</span>
-                  <span className="h-px bg-[#121115]/20 flex-1" />
-                </a>
-              ))}
-            </nav>
-          </div>
-          <button onClick={onClose} className="flex items-center gap-2 pl-4 md:pl-12 text-[#121115]/70 hover:text-[var(--cs-accent)] transition-colors group">
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-            <span className="text-xs font-bold tracking-[0.2em] uppercase">Back</span>
-          </button>
-        </div>
-      </motion.header>
+      <Header />
 
-      {/* 1. Hero */}
-      <section className="bg-[var(--cs-primary)] text-white pt-32 pb-24 md:pt-40 md:pb-32 px-6 relative overflow-hidden" id={id('hero')}>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      {/* 1. Hero: same language as the homepage hero. The title sits huge, the product rises in front of it */}
+      <section className="relative bg-[var(--cs-primary)] text-white overflow-hidden pt-28 md:pt-32 pb-12 md:pb-16 px-6 md:px-14" id={id('hero')}>
+        <div className="max-w-[1500px] mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className={`${data.heroImage ? 'lg:col-span-7' : 'lg:col-span-12'} space-y-8`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="flex items-center justify-between gap-4 t-label text-white/75"
           >
-            <div className="space-y-4">
-              <h1 className="text-6xl md:text-[110px] leading-none tracking-tight font-serif font-black">{data.title}.</h1>
-              <p className="text-xl md:text-[26px] text-white/95 font-medium tracking-tight leading-relaxed max-w-2xl">{data.tagline}</p>
-            </div>
-            <div className="border border-white/30 rounded-2xl grid grid-cols-2 md:grid-cols-4 overflow-hidden max-w-3xl">
-              {data.roles.map((r, i) => (
-                <div key={r.label} className={`p-5 md:p-6 border-white/20 ${i % 2 === 0 ? 'border-r' : ''} ${i < 2 ? 'border-b md:border-b-0' : ''} ${i === 1 ? 'md:border-r' : ''} ${i === 2 ? 'md:border-r' : ''}`}>
-                  <p className="text-xs font-bold uppercase tracking-widest">{r.label}</p>
-                  <p className="text-sm md:text-lg font-black uppercase mt-1.5">{r.value}</p>
-                </div>
-              ))}
-            </div>
+            <span className="flex items-center gap-2.5"><span className="w-2.5 h-2.5 rounded-full bg-white" aria-hidden="true" />Case study</span>
+            <span>{data.roles.find((r) => /year/i.test(r.label))?.value}</span>
           </motion.div>
-          {data.heroImage && (
+
+          <h1 aria-label={data.title} className="relative z-10 mt-4 font-display uppercase leading-[0.85] tracking-[-0.01em] text-[24vw] md:text-[18vw] min-[1500px]:text-[270px] flex overflow-hidden pt-[0.08em] select-none">
+            {data.title.split('').map((c, i) => (
+              <motion.span
+                key={i}
+                aria-hidden="true"
+                className="block"
+                initial={{ y: '110%' }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1, delay: 0.25 + i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {c === ' ' ? '\u00A0' : c}
+              </motion.span>
+            ))}
+          </h1>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-end mt-6 lg:mt-0">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 15 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-5 flex justify-center items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="relative z-30 lg:col-span-5 order-2 lg:order-1 space-y-8"
             >
-              <img width={data.heroImage.width} height={data.heroImage.height} fetchPriority="high" src={data.heroImage.src} alt={data.heroImage.alt} className="w-full h-auto object-contain max-h-[480px] drop-shadow-2xl select-none" />
+              <p className="t-body-l text-white/90">{data.tagline}</p>
+              <dl className="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/25 pt-6">
+                {data.roles.map((r) => (
+                  <div key={r.label}>
+                    <dt className="t-label text-white/65">{r.label}</dt>
+                    <dd className="t-heading mt-1">{r.value}</dd>
+                  </div>
+                ))}
+              </dl>
             </motion.div>
-          )}
+            {data.heroImage && (
+              <motion.div
+                initial={{ opacity: 0, y: 80 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: 'spring', stiffness: 70, damping: 16, delay: 0.55 }}
+                className="relative z-20 lg:col-span-7 order-1 lg:order-2 lg:-mt-[11vw] min-[1500px]:-mt-[160px] flex justify-center lg:justify-end"
+              >
+                <img width={data.heroImage.width} height={data.heroImage.height} fetchPriority="high" src={data.heroImage.src} alt={data.heroImage.alt} style={{ scale: data.heroScale ?? 1 }} className="w-full max-w-[720px] h-auto max-h-[62svh] object-contain drop-shadow-2xl select-none" />
+              </motion.div>
+            )}
+          </div>
         </div>
       </section>
 
@@ -481,48 +474,7 @@ export function CaseStudyTemplate({ data, onClose }: { data: CaseStudy; onClose:
 
       <CaseStudyLeadership content={data.leadership} accent={t.accent} />
 
-      {/* 15. Footer */}
-      <section className="bg-white py-24 px-6 border-t border-[#121115]/5 relative overflow-hidden" id={id('footer')}>
-        <div className="max-w-7xl mx-auto space-y-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-8">
-            <div className="space-y-4">
-              <h4 className="text-xs uppercase font-black tracking-widest text-[#121115]/70">// Contact</h4>
-              <ul className="space-y-2.5 text-sm text-[#121115]/80">
-                <li className="flex items-center gap-2.5"><MapPin size={16} className="text-[var(--cs-accent)]" /><span>Dubai, UAE</span></li>
-                <li className="flex items-center gap-2.5"><Mail size={16} className="text-[var(--cs-accent)]" /><a href="mailto:umerkhalid141@gmail.com" className="hover:underline">umerkhalid141@gmail.com</a></li>
-                <li className="flex items-center gap-2.5"><Phone size={16} className="text-[var(--cs-accent)]" /><span>+971 52 134 5139</span></li>
-              </ul>
-            </div>
-            <div className="space-y-4">
-              <h4 className="text-xs uppercase font-black tracking-widest text-[#121115]/70">// Case study context</h4>
-              <ul className="space-y-2.5 text-sm text-[#121115]/80">
-                {data.footerFacts.map((f) => <li key={f}>{f}</li>)}
-              </ul>
-            </div>
-            <div className="space-y-4 flex flex-col justify-between">
-              <h4 className="text-xs uppercase font-black tracking-widest text-[#121115]/70">// Actions</h4>
-              <button
-                onClick={onClose}
-                className="w-full bg-[#121115] hover:bg-[var(--cs-accent)] text-white py-3.5 rounded-full text-xs font-black uppercase tracking-widest transition-colors duration-300 flex items-center justify-center gap-2 mt-4"
-              >
-                <ArrowLeft size={14} /> Back to Portfolio
-              </button>
-            </div>
-          </div>
-          <div className="pt-12 text-center relative overflow-hidden">
-            <motion.h2
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[14vw] font-black tracking-tighter text-[#121115]/45 uppercase select-none leading-[0.85]"
-            >
-              // UMER
-            </motion.h2>
-            <p className="text-xs text-[#121115]/70 uppercase tracking-[0.3em] mt-4">© 2026 Muhammad Umer.</p>
-          </div>
-        </div>
-      </section>
+      <Footer />
     </div>
   );
 }
