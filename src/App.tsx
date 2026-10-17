@@ -53,7 +53,7 @@ const pageMeta: Record<Slug | 'home', { title: string; description: string; imag
     path: '/salams-casestudy'
   },
   zewards: {
-    title: 'Zewards Case Study | Muhammad Umer, Lead Product Designer',
+    title: 'Zewst Case Study | Muhammad Umer, Lead Product Designer',
     description: 'Leading design as Design Manager for Zewards, a loyalty platform in the Zewst restaurant ecosystem. 38% more repeat visits and 2.3x faster activation.',
     image: `${SITE}/images/og-zewards.jpg`,
     path: '/zewards-casestudy'
