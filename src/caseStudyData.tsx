@@ -156,96 +156,134 @@ export const salams: CaseStudy = {
 
 export const zewards: CaseStudy = {
   slug: 'zewards',
-  title: 'Zewards',
-  tagline: 'Leading design for a loyalty and cashback platform in the Zewst restaurant ecosystem, built to fit inside a thirty second interaction at the counter.',
-  theme: { primary: '#3E1A6B', accent: '#6E36A7', soft: '#CDB8F0', highlight: '#A3E635', cream: '#F6F1FC', tint: '#EFE7FA' },
+  title: 'Zewst',
+  tagline: 'Setting one design direction across the Zewst restaurant ecosystem as Design Manager, and owning the Zewards loyalty platform end to end.',
+  theme: { primary: '#3E1A6B', accent: '#6E36A7', soft: '#CDB8F0', highlight: '#E9DCFB', cream: '#F6F1FC', tint: '#EFE7FA' },
   roles: [
     { label: 'Role', value: 'Design Manager' },
     { label: 'Scope', value: '4 products' },
-    { label: 'Year', value: '2024' },
-    { label: 'Product', value: 'B2B2C loyalty' },
+    { label: 'Years', value: '2023 to 2024' },
+    { label: 'Merchants', value: '500+ on POS' },
   ],
-  heroImage: { src: '/images/zewards-1.webp', alt: 'Zewards product ecosystem: consumer app, business app, and marketing site', width: 1060, height: 600 },
+  heroImage: { src: '/images/zewst-pos.webp', alt: 'Zewst point of sale interface', width: 800, height: 785 },
   context: {
-    title: 'One product inside a four-product ecosystem.',
+    title: 'Four restaurant products, one design direction.',
     body: (
       <>
-        <p>Hauraki built the Zewst ecosystem of restaurant tech: Zewst POS (500+ merchants), Zewst Portfolio for BI, Zewst Phone for business calling, and Zewards for loyalty. As Design Manager I set design direction across all four and owned Zewards end to end.</p>
-        <p>Zewards rewards real visits instead of generic points. I treated it as one system with three views: a consumer app for people, a business app for operators, and a marketing site for decision makers.</p>
+        <p>Hauraki built the Zewst ecosystem of restaurant tech: Zewst POS for 500+ merchants, Zewst Portfolio for business intelligence, Zewst Phone for business calling, and Zewards for loyalty. I joined as Senior Product Designer in September 2023 and became Design Manager in February 2024.</p>
+        <p>As Design Manager I set design direction across all four products, scaled one shared pattern library, and owned Zewards end to end: a consumer app for people, a business app for operators, and a marketing site for decision makers.</p>
       </>
     ),
     highlights: [
       <><mark className="bg-[#6E36A7]/15 font-bold px-1 rounded">No training time for staff.</mark> They learn it on shift one.</>,
-      <>Signups must fit <mark className="bg-[#6E36A7]/15 font-bold px-1 rounded">inside a single visit</mark> while an order is being made.</>,
-      <>Owners want <mark className="bg-[#6E36A7]/15 font-bold px-1 rounded">repeat visits</mark>, not another analytics product.</>,
+      <>Every flow had to fit <mark className="bg-[#6E36A7]/15 font-bold px-1 rounded">inside a busy service</mark>, while an order is being made.</>,
+      <>Owners want <mark className="bg-[#6E36A7]/15 font-bold px-1 rounded">answers, not dashboards</mark>. Is this working, and what do I change?</>,
     ],
   },
   problem: {
+    image: { src: '/images/zewst-portfolio.webp', alt: 'Zewst Portfolio dashboard', width: 800, height: 785 },
     questions: [
-      { q: 'Why do most loyalty programs fail at the counter?', a: 'Staff have no time to explain complex rules, customers will not download an app they do not understand, and owners stop opening dashboards after the first month. Loyalty felt either outdated or over engineered.' },
-      { q: 'What did the team have to ship it with?', a: 'A small engineering team, so the design system had to be realistic to ship, and every flow had to work for customers, staff, and owners at the same time.' },
+      { q: 'Why do restaurant tools fail during a busy shift?', a: 'Staff have no time to learn complex software, customers will not download an app they do not understand, and owners stop opening dashboards after the first month. Most tools felt either outdated or over engineered.' },
+      { q: 'How do four products feel like one?', a: 'Each Zewst product was growing on its own. Without one direction, merchants would learn four different interfaces, and a small engineering team would build the same components four times.' },
     ],
   },
   mattered: [
-    { label: 'Repeat visits', statement: '38% more repeat visits.', note: 'After improving reward clarity and progress visibility.' },
+    { label: 'Repeat visits', statement: '38% more repeat visits with Zewards.', note: 'After improving reward clarity and progress visibility.' },
     { label: 'Activation', statement: '2.3x faster first-time activation.', note: 'Through a single-decision onboarding flow.' },
     { label: 'Redemption', statement: '54% higher reward redemption.', note: 'Driven by simpler rules and clearer next steps.' },
   ],
+  quote: {
+    label: 'Why does this matter?',
+    text: 'In a restaurant, every extra tap happens while a customer is waiting. Good design here is measured in seconds at the counter.',
+    flow: 'POS → PORTFOLIO → PHONE → ZEWARDS',
+  },
+  problemSpacesTitle: 'The four products I set direction for.',
+  problemSpaceLabel: 'Product',
+  problemSpaces: [
+    { title: 'Zewst POS', image: { src: '/images/zewst-pos-menu.webp', alt: 'Zewst POS menu categories', width: 704, height: 533 }, questions: ['Menu categories organized for fast access', 'Customer preferences and allergies on the order', 'Comp items applied right from the POS'] },
+    { title: 'Zewst Portfolio', image: { src: '/images/zewst-demand.webp', alt: 'Zewst Portfolio demand spike chart', width: 704, height: 533 }, questions: ['Food waste insights to reduce losses', 'Demand spikes surfaced in real time', 'Menu performance and customer satisfaction'] },
+    { title: 'Zewst Phone', image: { src: '/images/zewst-transcript.webp', alt: 'Zewst Phone call transcript', width: 704, height: 533 }, questions: ['Business calling built into the platform', 'Call transcripts linked to orders', 'Contact details one tap away'] },
+    { title: 'Zewards', image: { src: '/images/zewards-5.avif', alt: 'Zewards consumer app onboarding', width: 430, height: 495 }, questions: ['Loyalty that rewards real visits', 'A consumer app, a business app, and a site', 'Owned end to end'] },
+  ],
   gap: {
     lead: 'Reducing everything to one loop led to the solution:',
-    statement: <>Scan once, see progress, and <span className="font-semibold">know what happens next, on every screen</span>, for customers, staff, and owners alike.</>,
+    statement: <>One platform where <span className="font-semibold">every screen answers what happens next</span>, for customers, staff, and owners alike, built on a single shared pattern library.</>,
+    image: { src: '/images/zewards-1.webp', alt: 'Zewards product ecosystem: consumer app, business app, and marketing site', width: 1060, height: 600 },
   },
   strategy: {
-    statement: <><span className="font-extrabold">Zewards</span> is <span className="font-extrabold">one system with three views</span>: a consumer app for people, a business app for operators, and a marketing site for decision makers.</>,
+    wide: true,
+    statement: <><span className="font-extrabold">Zewst</span> gives restaurants <span className="font-extrabold">one connected platform</span> to run service, understand the business, and bring customers back.</>,
     screens: [
-      { image: { src: '/images/zewards-5.avif', alt: 'Zewards consumer app onboarding and wallet setup', width: 430, height: 495 }, caption: 'The consumer app centers on today, progress, and reward details, starting with onboarding and wallet setup.' },
-      { image: { src: '/images/zewards-6.avif', alt: 'Zewards consumer app reward details and progress', width: 430, height: 495 }, caption: 'Reward details and progress show customers exactly what happens next after every scan.' },
+      { image: { src: '/images/zewst-preferences.webp', alt: 'Customer preferences and allergies on a Zewst POS order', width: 704, height: 533 }, caption: 'Customer preferences and allergies travel with the order, so the kitchen gets it right the first time.' },
+      { image: { src: '/images/zewst-waste.webp', alt: 'Zewst Portfolio food waste and demand insights', width: 704, height: 533 }, caption: 'Portfolio turns daily sales into plain answers: what was wasted, what spiked, and why.' },
+      { image: { src: '/images/zewst-calling.webp', alt: 'In-app calling in Zewst', width: 704, height: 533 }, caption: 'Calls happen inside the platform, so orders and conversations stay in one place.' },
     ],
   },
   research: {
-    title: 'I started from how loyalty already works.',
+    title: 'I started from how restaurants already work.',
     body: <p>I interviewed shoppers and owners about punch cards, ad hoc free coffees, and tools they had abandoned, then mapped one visit and one month of the journey for customers, staff, and owners.</p>,
+    image: { src: '/images/zewst-satisfaction.webp', alt: 'Zewst customer satisfaction analytics', width: 704, height: 533 },
   },
   insights: {
     title: 'Testing where friction shows up',
-    body: <p>I tested onboarding, first scan, and first redemption with realistic service scripts, then simplified copy and campaign presets where people hesitated.</p>,
+    body: (
+      <>
+        <p>I tested onboarding, first scan, and first redemption with realistic service scripts, then simplified copy and campaign presets where people hesitated.</p>
+        <p>The same rule carried across the ecosystem: speak in business language like repeat visits and average ticket size, and tune layouts and contrast for shared devices and poor lighting.</p>
+      </>
+    ),
+    image: { src: '/images/zewst-menu.webp', alt: 'Zewst menu engineering view', width: 704, height: 533 },
   },
   solutions: {
     modules: [
-      { tag: 'CONSUMER APP', title: 'Today, progress, rewards', frame: 'screen', image: { src: '/images/zewards-2.avif', alt: 'Zewards consumer app screens', width: 430, height: 495 }, body: (
+      { tag: 'POINT OF SALE', title: 'Zewst POS', frame: 'screen', image: { src: '/images/zewst-pos.webp', alt: 'Zewst POS ordering interface', width: 800, height: 785 }, body: (
+        <p>The point of sale at the center of the ecosystem, used by 500+ merchants. Menu categories are organized for fast access, customer preferences ride along with each order, and comp items apply without leaving the POS.</p>
+      ) },
+      { tag: 'BUSINESS INTELLIGENCE', title: 'Zewst Portfolio', frame: 'screen', image: { src: '/images/zewst-portfolio.webp', alt: 'Zewst Portfolio analytics dashboard', width: 800, height: 785 }, body: (
+        <p>Portfolio gives owners one view of the business: food waste, demand spikes, menu performance, and customer satisfaction, framed as answers rather than raw charts.</p>
+      ) },
+      { tag: 'BUSINESS CALLING', title: 'Zewst Phone', frame: 'screen', image: { src: '/images/zewst-phone.webp', alt: 'Zewst Phone app', width: 800, height: 785 }, body: (
+        <p>Business calling built into the platform, with call history, transcripts, and contact details next to the orders they belong to.</p>
+      ) },
+      { tag: 'LOYALTY, CONSUMER', title: 'Zewards for customers', frame: 'screen', image: { src: '/images/zewards-2.avif', alt: 'Zewards consumer app screens', width: 430, height: 495 }, body: (
         <p>The consumer app centers on today, progress, and reward details. Onboarding became a single decision instead of a form, so a customer can join while their order is being made.</p>
       ) },
-      { tag: 'BUSINESS APP', title: 'Control without overwhelm', frame: 'screen', image: { src: '/images/zewards-4.avif', alt: 'Zewards business app campaign and dashboard views', width: 530, height: 300 }, body: (
+      { tag: 'LOYALTY, BUSINESS', title: 'Zewards for operators', frame: 'screen', image: { src: '/images/zewards-4.avif', alt: 'Zewards business app campaign and dashboard views', width: 530, height: 300 }, body: (
         <ul className="list-disc pl-5 space-y-2">
           <li>Campaign creation framed in business language like repeat visits and average ticket size.</li>
           <li>QR placements organized around how staff actually interact with customers.</li>
           <li>A performance overview that answers one question first: is this worth continuing?</li>
-          <li>Layouts and contrast tuned for shared devices and poor lighting.</li>
         </ul>
       ) },
     ],
   },
   designSystem: {
     title: 'One pattern library for four products',
+    grid: true,
     body: <p>I scaled one pattern library across all four Zewst products and documented components, tokens, and interaction rules for scanning, redemption, and error states, so engineering had one source of truth.</p>,
+    images: [
+      { src: '/images/zewst-shifts.webp', alt: 'Zewst staff shift planning component', width: 704, height: 533 },
+      { src: '/images/zewst-comp.webp', alt: 'Zewst comp item modal', width: 704, height: 533 },
+      { src: '/images/zewst-contact.webp', alt: 'Zewst contact details screen', width: 704, height: 533 },
+    ],
   },
   leadership: {
     roleAndTeam: (
       <>
         <p>I joined Hauraki in September 2023 as Senior Product Designer and became Design Manager in February 2024. I led the design team and worked directly with the founders and engineering.</p>
-        <p>On Zewards I owned UX strategy, research, flows, information architecture, interaction design, the design system, and handoff.</p>
+        <p>Across the ecosystem I set design direction and the shared pattern library. On Zewards I owned UX strategy, research, flows, information architecture, interaction design, the design system, and handoff.</p>
       </>
     ),
-    bet: <p>Merchants already had loyalty tools that were either too simple to drive behavior or too heavy to survive a busy shift. The bet was that a QR-based flow tying real visits to tangible rewards would bring people back on purpose, and give Zewst a reason for merchants to stay in the ecosystem.</p>,
-    hardCall: { pending: 'One decision with tradeoffs, who disagreed, and how it was resolved. A candidate: making onboarding a single decision instead of a form, trading customer data for activation speed.' },
+    bet: <p>Merchants already had tools that were either too simple to drive behavior or too heavy to survive a busy shift. The bet was that one connected platform, with loyalty tying real visits to tangible rewards, would give merchants a reason to stay in the Zewst ecosystem.</p>,
+    hardCall: { pending: 'One decision with tradeoffs, who disagreed, and how it was resolved. A candidate: making Zewards onboarding a single decision instead of a form, trading customer data for activation speed.' },
     howILed: (
       <ul>
         <li>Set the design direction across the four Zewst products and aligned with engineering on shared standards.</li>
         <li>Scaled one pattern library across all four products to reduce design-to-development friction.</li>
-        <li>Documented components, tokens, and interaction rules for scanning, redemption, and error states so engineering had one source of truth.</li>
+        <li>Documented components, tokens, and interaction rules so engineering had one source of truth.</li>
       </ul>
     ),
-    outcome: <p>Repeat visits rose 38%, first-time activation got 2.3x faster, and reward redemption rose 54%. Merchants got a loyalty program they could launch from presets without a playbook.</p>,
+    outcome: <p>On Zewards, repeat visits rose 38%, first-time activation got 2.3x faster, and reward redemption rose 54%. Merchants got a loyalty program they could launch from presets without a playbook.</p>,
     differently: { pending: 'What you would do differently, looking back.' },
   },
   footerFacts: ['Ecosystem: Zewst by Hauraki', 'Merchants on Zewst POS: 500+', 'Role: Design Manager'],

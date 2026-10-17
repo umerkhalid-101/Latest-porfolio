@@ -41,14 +41,17 @@ export interface CaseStudy {
   mattered?: { label: string; statement: string; note?: string }[];
   quote?: { label: string; text: string; flow?: string };
   problemSpaces?: { title: string; image?: CsImage; questions: string[] }[];
+  /** Heading and column label for the problem spaces (defaults match Salams) */
+  problemSpacesTitle?: string;
+  problemSpaceLabel?: string;
   gap?: { lead: string; statement: ReactNode; image?: CsImage };
-  strategy?: { statement: ReactNode; screens: { image: CsImage; caption: string }[] };
+  strategy?: { statement: ReactNode; screens: { image: CsImage; caption: string }[]; wide?: boolean };
   research?: { title: string; body: ReactNode; image?: CsImage };
   synthesis?: { label: string; title: string; points: string[]; quote?: string };
   insights?: { title: string; body: ReactNode; image?: CsImage };
   ethos?: { title: string; principles: { title: string; body: string; icon?: LucideIcon; image?: CsImage }[] };
   solutions?: { modules: { tag: string; title: string; body: ReactNode; image?: CsImage; frame?: 'phone' | 'screen' }[] };
-  designSystem?: { title: string; body: ReactNode; images?: CsImage[] };
+  designSystem?: { title: string; body: ReactNode; images?: CsImage[]; grid?: boolean };
   leadership: LeadershipContent;
   footerFacts: string[];
 }
@@ -278,17 +281,17 @@ export function CaseStudyTemplate({ data, onClose }: { data: CaseStudy; onClose:
         <section className="py-24 md:py-32 px-6 bg-[#FFFCF8]" id={id('problem-space')}>
           <div className="max-w-7xl mx-auto">
             <Reveal x={-20} y={0} className="mb-20">
-              <h2 className="text-3xl md:text-[40px] font-medium tracking-tight">Delving deeper into the problem space.</h2>
+              <h2 className="text-3xl md:text-[40px] font-medium tracking-tight">{data.problemSpacesTitle ?? 'Delving deeper into the problem space.'}</h2>
             </Reveal>
-            <div className={`grid grid-cols-1 gap-12 md:gap-16 ${data.problemSpaces.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
+            <div className={`grid grid-cols-1 gap-12 md:gap-16 ${data.problemSpaces.length === 2 ? 'md:grid-cols-2' : data.problemSpaces.length === 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'}`}>
               {data.problemSpaces.map((p, i) => (
                 <Reveal key={p.title} delay={0.1 * (i + 1)} className="space-y-8 flex flex-col">
                   <div className="flex items-center gap-4">
-                    <span className="text-[var(--cs-accent)] text-sm font-semibold tracking-wider uppercase whitespace-nowrap">Problem space {String(i + 1).padStart(2, '0')}</span>
+                    <span className="text-[var(--cs-accent)] text-sm font-semibold tracking-wider uppercase whitespace-nowrap">{data.problemSpaceLabel ?? 'Problem space'} {String(i + 1).padStart(2, '0')}</span>
                     {i < data.problemSpaces!.length - 1 && <span className="h-px bg-[#121115]/10 flex-grow hidden md:block" />}
                   </div>
                   {p.image && (
-                    <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center md:justify-start hover:scale-105 transition-transform duration-300">
+                    <div className={`${p.image.width > p.image.height ? 'w-full max-w-[320px] rounded-2xl overflow-hidden' : 'w-40 h-40 md:w-44 md:h-44'} flex items-center justify-center md:justify-start hover:scale-105 transition-transform duration-300`}>
                       <img width={p.image.width} height={p.image.height} loading="lazy" src={p.image.src} alt={p.image.alt} className="max-w-full max-h-full object-contain" />
                     </div>
                   )}
@@ -328,7 +331,7 @@ export function CaseStudyTemplate({ data, onClose }: { data: CaseStudy; onClose:
             </Reveal>
             <div className={`grid grid-cols-1 gap-12 lg:gap-16 pt-8 justify-items-center ${data.strategy.screens.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
               {data.strategy.screens.map((s, i) => (
-                <Reveal key={s.image.src} y={40} delay={0.1 * (i + 1)} className="space-y-6 flex flex-col items-center md:items-start max-w-[280px]">
+                <Reveal key={s.image.src} y={40} delay={0.1 * (i + 1)} className={`space-y-6 flex flex-col items-center md:items-start ${data.strategy!.wide ? 'max-w-[380px]' : 'max-w-[280px]'}`}>
                   <img width={s.image.width} height={s.image.height} loading="lazy" src={s.image.src} alt={s.image.alt} className="w-full h-auto object-contain rounded-[40px] shadow-2xl hover:scale-[1.03] transition-transform duration-500" />
                   <p className="text-sm md:text-base leading-relaxed">{s.caption}</p>
                 </Reveal>
@@ -464,7 +467,7 @@ export function CaseStudyTemplate({ data, onClose }: { data: CaseStudy; onClose:
               <div className="text-base md:text-xl font-medium max-w-3xl leading-relaxed">{data.designSystem.body}</div>
             </div>
             {data.designSystem.images && (
-              <div className="space-y-8 md:space-y-12">
+              <div className={data.designSystem.grid ? 'grid grid-cols-1 md:grid-cols-3 gap-6' : 'space-y-8 md:space-y-12'}>
                 {data.designSystem.images.map((img, i) => (
                   <Reveal key={img.src} delay={i * 0.1} className="w-full rounded-[24px] md:rounded-[40px] overflow-hidden shadow-xl border border-[#121115]/10">
                     <img width={img.width} height={img.height} loading="lazy" src={img.src} alt={img.alt} className="w-full h-auto object-contain select-none bg-white" />
