@@ -18,13 +18,13 @@ import { KindWords } from './components/KindWords';
 import { Footer } from './components/Footer';
 import { ScrollProgress } from './components/ScrollProgress';
 import { CaseStudyTemplate } from './components/CaseStudyTemplate';
-import { salams, zewards } from './caseStudyData';
+import { salams, zewards, mblm } from './caseStudyData';
 import { CaseStudyPage } from './components/CaseStudyPage';
-import { unita, vara } from './caseStudies';
+import { unita } from './caseStudies';
 
 const SITE = 'https://www.umerkhalid.co';
 
-type Slug = 'unita' | 'vara' | 'salams' | 'zewards';
+type Slug = 'unita' | 'mblm' | 'salams' | 'zewards';
 
 // Keep in sync with the static <head> in index.html and the per-route HTML files.
 const pageMeta: Record<Slug | 'home', { title: string; description: string; image: string; path: string }> = {
@@ -40,11 +40,11 @@ const pageMeta: Record<Slug | 'home', { title: string; description: string; imag
     image: `${SITE}/images/og-unita.jpg`,
     path: '/unita-casestudy'
   },
-  vara: {
-    title: 'VARA Case Study | Muhammad Umer, Lead Product Designer',
-    description: "Designing the web portal for Dubai's Virtual Assets Regulatory Authority at MBLM: homepage, a five-step licensing guide, a reusable UI kit, and a 12-column layout system.",
+  mblm: {
+    title: 'MBLM Case Study | Muhammad Umer, Lead Product Designer',
+    description: "Designing government and enterprise web portals at MBLM Dubai for VARA, the Financial Intelligence Unit, Dubai World Trade Centre, and allumni.",
     image: `${SITE}/images/og-vara.jpg`,
-    path: '/vara-casestudy'
+    path: '/mblm-casestudy'
   },
   salams: {
     title: 'Salams Case Study | Muhammad Umer, Lead Product Designer',
@@ -61,11 +61,11 @@ const pageMeta: Record<Slug | 'home', { title: string; description: string; imag
 };
 
 function slugFromLocation(): Slug | null {
-  const path = window.location.pathname.replace(/(\.html|\/)$/, '').replace('/zewst-casestudy', '/zewards-casestudy');
+  const path = window.location.pathname.replace(/(\.html|\/)$/, '').replace('/zewst-casestudy', '/zewards-casestudy').replace('/vara-casestudy', '/mblm-casestudy');
   const hash = window.location.hash.replace(/^#\/?/, '');
   const params = new URLSearchParams(window.location.search);
   const query = params.get('p') || params.get('case-study') || params.get('project');
-  for (const slug of ['unita', 'vara', 'salams', 'zewards'] as Slug[]) {
+  for (const slug of ['unita', 'mblm', 'salams', 'zewards'] as Slug[]) {
     if (path === `/${slug}-casestudy` || hash === `${slug}-casestudy` || query === slug || query === `${slug}-casestudy`) {
       return slug;
     }
@@ -120,7 +120,7 @@ export default function App() {
     activeCaseStudy === 'salams' ? <CaseStudyTemplate data={salams} onClose={closeCaseStudy} /> :
     activeCaseStudy === 'zewards' ? <CaseStudyTemplate data={zewards} onClose={closeCaseStudy} /> :
     activeCaseStudy === 'unita' ? <CaseStudyPage data={unita} onClose={closeCaseStudy} /> :
-    activeCaseStudy === 'vara' ? <CaseStudyPage data={vara} onClose={closeCaseStudy} /> :
+    activeCaseStudy === 'mblm' ? <CaseStudyTemplate data={mblm} onClose={closeCaseStudy} /> :
     null;
 
   return (

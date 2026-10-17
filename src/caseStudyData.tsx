@@ -289,3 +289,66 @@ export const zewards: CaseStudy = {
   },
   footerFacts: ['Ecosystem: Zewst by Hauraki', 'Merchants on Zewst POS: 500+', 'Role: Design Manager'],
 };
+
+export const mblm: CaseStudy = {
+  slug: 'mblm',
+  title: 'MBLM',
+  tagline: "Designing government and enterprise web portals in the UAE at MBLM Dubai, led by the portal for VARA, Dubai's Virtual Assets Regulatory Authority.",
+  theme: { primary: '#161616', accent: '#B8572A', soft: '#F2C9A8', highlight: '#F7DCC3', cream: '#FBF3EA', tint: '#F6EDE4' },
+  roles: [
+    { label: 'Role', value: 'Design Specialist' },
+    { label: 'Agency', value: 'MBLM Dubai' },
+    { label: 'Year', value: '2026' },
+    { label: 'Platform', value: 'Desktop and mobile' },
+  ],
+  heroImage: { src: '/images/mblm-vara.webp', alt: 'VARA, Virtual Assets Regulatory Authority', width: 960, height: 540 },
+  context: {
+    title: 'The front door to regulated industries.',
+    body: (
+      <>
+        <p>I joined MBLM Dubai as a Design Specialist in March 2026, designing web portals and product UI for UAE government and enterprise clients, including VARA, the Financial Intelligence Unit, Dubai World Trade Centre, and allumni.</p>
+        <p>The lead project is VARA, which regulates virtual assets in Dubai. Its website is where firms learn the rules and start the licensing process, so clarity has real legal and financial weight. I designed the portal end to end, across desktop and mobile.</p>
+      </>
+    ),
+    highlights: [
+      <>Clarity has <mark className="bg-[#B8572A]/15 font-bold px-1 rounded">real legal and financial weight</mark> on a regulator's website.</>,
+      <>Applicants need to <mark className="bg-[#B8572A]/15 font-bold px-1 rounded">pick up where they left off</mark> in a long licensing process.</>,
+      <>Every page has to <mark className="bg-[#B8572A]/15 font-bold px-1 rounded">hold together at every breakpoint</mark>.</>,
+    ],
+  },
+  problemSpacesTitle: 'Clients I design for at MBLM.',
+  problemSpaceLabel: 'Client',
+  problemSpaces: [
+    { title: 'VARA', image: { src: '/images/mblm-vara.webp', alt: 'VARA, Virtual Assets Regulatory Authority', width: 960, height: 540 }, questions: ['Web portal, desktop and mobile', 'Five-step licensing guide', 'Reusable UI kit'] },
+    { title: 'Financial Intelligence Unit', image: { src: '/images/mblm-fiu.webp', alt: 'Financial Intelligence Unit', width: 960, height: 540 }, questions: [] },
+    { title: 'Dubai World Trade Centre', image: { src: '/images/mblm-dwtc.webp', alt: 'Dubai World Trade Centre', width: 960, height: 540 }, questions: [] },
+    { title: 'allumni', image: { src: '/images/mblm-allumni.webp', alt: 'allumni', width: 960, height: 540 }, questions: [] },
+  ],
+  solutions: {
+    modules: [
+      { tag: 'VARA PORTAL', title: 'Homepage and templates', body: <p>The desktop and mobile homepage and the internal page templates for VARA's website, the starting point for firms entering Dubai's virtual asset industry.</p> },
+      { tag: 'LICENSING', title: 'A five-step licensing guide', body: <p>A five-step licensing guide with continue and recovery states, so applicants can pick up where they left off and get back on track when something goes wrong.</p> },
+      { tag: 'UI KIT', title: 'One reusable UI kit', body: <p>A reusable UI kit covering forms, tables, the step wizard, and search and filters, so new pages reuse proven components.</p> },
+    ],
+  },
+  designSystem: {
+    title: 'A 12-column grid built with engineering',
+    body: <p>I built the VARA layout system on a 12-column grid together with engineering, and set the typography and responsive guidelines that keep pages consistent across every breakpoint. The same foundation now keeps MBLM's other portal projects consistent too.</p>,
+  },
+  leadership: {
+    roleAndTeam: <p>I joined MBLM Dubai as a Design Specialist in March 2026. On VARA I owned the portal design across desktop and mobile, and worked with engineering on the layout system and UI kit.</p>,
+    bet: { pending: "The business problem and why it mattered to VARA, for example what went wrong for applicants before, and what the portal had to fix." },
+    hardCall: { pending: 'One decision with tradeoffs, who disagreed, and how it was resolved. A candidate: how the licensing guide handles continue and recovery states.' },
+    howILed: (
+      <ul>
+        <li>Defined the 12-column layout system with engineering so design and build used the same structure.</li>
+        <li>Set typography and responsive guidelines that every page and breakpoint follows.</li>
+        <li>Built the UI kit once, for forms, tables, the wizard, and search, so new pages reuse proven components.</li>
+      </ul>
+    ),
+    howILedTitle: 'How I worked with engineering',
+    outcome: { pending: 'What changed for VARA: launch status, and any results or feedback you are cleared to share.' },
+    differently: { pending: 'What you would do differently, looking back.' },
+  },
+  footerFacts: ['Agency: MBLM Dubai', 'Lead project: VARA portal', 'Role: Design Specialist'],
+};
