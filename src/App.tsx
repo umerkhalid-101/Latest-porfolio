@@ -17,9 +17,10 @@ import { startSmoothScroll, scrollToIdWhenReady } from './lib/smoothScroll';
 import { KindWords } from './components/KindWords';
 import { Footer } from './components/Footer';
 import { ScrollProgress } from './components/ScrollProgress';
-import { SalamsCaseStudy } from './components/SalamsCaseStudy';
+import { CaseStudyTemplate } from './components/CaseStudyTemplate';
+import { salams, zewards } from './caseStudyData';
 import { CaseStudyPage } from './components/CaseStudyPage';
-import { zewards, unita, vara } from './caseStudies';
+import { unita, vara } from './caseStudies';
 
 const SITE = 'https://www.umerkhalid.co';
 
@@ -116,8 +117,8 @@ export default function App() {
   };
 
   const caseStudy =
-    activeCaseStudy === 'salams' ? <SalamsCaseStudy onClose={closeCaseStudy} /> :
-    activeCaseStudy === 'zewards' ? <CaseStudyPage data={zewards} onClose={closeCaseStudy} /> :
+    activeCaseStudy === 'salams' ? <CaseStudyTemplate data={salams} onClose={closeCaseStudy} /> :
+    activeCaseStudy === 'zewards' ? <CaseStudyTemplate data={zewards} onClose={closeCaseStudy} /> :
     activeCaseStudy === 'unita' ? <CaseStudyPage data={unita} onClose={closeCaseStudy} /> :
     activeCaseStudy === 'vara' ? <CaseStudyPage data={vara} onClose={closeCaseStudy} /> :
     null;
