@@ -18,16 +18,14 @@ import { KindWords } from './components/KindWords';
 import { Footer } from './components/Footer';
 import { ScrollProgress } from './components/ScrollProgress';
 import { CaseStudyTemplate } from './components/CaseStudyTemplate';
-import { salams, zewards, mblm } from './caseStudyData';
+import { salams, zewards, mblm, juno, unita, snapflow } from './caseStudyData';
 import { CustomCursor } from './components/CustomCursor';
 import { NotFound } from './components/NotFound';
 import { MARQUEE_ITEMS } from './data/marquee';
-import { CaseStudyPage } from './components/CaseStudyPage';
-import { unita } from './caseStudies';
 
 const SITE = 'https://www.umerkhalid.co';
 
-type Slug = 'unita' | 'mblm' | 'salams' | 'zewards';
+type Slug = 'unita' | 'mblm' | 'salams' | 'zewards' | 'juno' | 'snapflow';
 
 // Keep in sync with the static <head> in index.html and the per-route HTML files.
 const pageMeta: Record<Slug | 'home', { title: string; description: string; image: string; path: string }> = {
@@ -45,7 +43,7 @@ const pageMeta: Record<Slug | 'home', { title: string; description: string; imag
   },
   mblm: {
     title: 'MBLM Case Study | Muhammad Umer, Lead Product Designer',
-    description: "Designing government and enterprise web portals at MBLM Dubai for VARA, the Financial Intelligence Unit, Dubai World Trade Centre, and allumni.",
+    description: "Designing UAE government websites and portals at MBLM Dubai for VARA, the Financial Intelligence Unit, and Dubai World Trade Centre, plus allumni, MBLM's award-winning in-house AI product.",
     image: `${SITE}/images/og-vara.jpg`,
     path: '/mblm-casestudy'
   },
@@ -60,6 +58,18 @@ const pageMeta: Record<Slug | 'home', { title: string; description: string; imag
     description: 'Leading design as Design Manager for Zewards, a loyalty platform in the Zewst restaurant ecosystem. 38% more repeat visits and 2.3x faster activation.',
     image: `${SITE}/images/og-zewards.jpg`,
     path: '/zewards-casestudy'
+  },
+  juno: {
+    title: 'Juno Case Study | Muhammad Umer, Lead Product Designer',
+    description: 'Turning an abstract AI product into a story buyers get in 30 seconds: the story, design system, and nine-page marketing site for Juno, an AI chief of staff.',
+    image: `${SITE}/images/og-juno.jpg`,
+    path: '/juno-casestudy'
+  },
+  snapflow: {
+    title: 'Snapflow Case Study | Muhammad Umer, Lead Product Designer',
+    description: 'A self-initiated redesign of the Snapflow homepage: an agentic design system, shown precise and in motion, designed and built in English and Spanish.',
+    image: `${SITE}/images/og-snapflow.jpg`,
+    path: '/snapflow-casestudy'
   }
 };
 
@@ -68,7 +78,7 @@ function slugFromLocation(): Slug | null {
   const hash = window.location.hash.replace(/^#\/?/, '');
   const params = new URLSearchParams(window.location.search);
   const query = params.get('p') || params.get('case-study') || params.get('project');
-  for (const slug of ['unita', 'mblm', 'salams', 'zewards'] as Slug[]) {
+  for (const slug of ['unita', 'mblm', 'salams', 'zewards', 'juno', 'snapflow'] as Slug[]) {
     if (path === `/${slug}-casestudy` || hash === `${slug}-casestudy` || query === slug || query === `${slug}-casestudy`) {
       return slug;
     }
@@ -76,7 +86,7 @@ function slugFromLocation(): Slug | null {
   return null;
 }
 
-const KNOWN_PATHS = new Set(['', '/index', '/unita-casestudy', '/vara-casestudy', '/mblm-casestudy', '/salams-casestudy', '/zewards-casestudy', '/zewst-casestudy']);
+const KNOWN_PATHS = new Set(['', '/index', '/unita-casestudy', '/vara-casestudy', '/mblm-casestudy', '/salams-casestudy', '/zewards-casestudy', '/zewst-casestudy', '/juno-casestudy', '/snapflow-casestudy']);
 
 // Vercel rewrites every unknown path to the app, so the app decides what's a 404
 function isNotFound() {
@@ -172,10 +182,12 @@ export default function App() {
   };
 
   const caseStudy =
-    activeCaseStudy === 'salams' ? <CaseStudyTemplate data={salams} onClose={closeCaseStudy} /> :
-    activeCaseStudy === 'zewards' ? <CaseStudyTemplate data={zewards} onClose={closeCaseStudy} /> :
-    activeCaseStudy === 'unita' ? <CaseStudyPage data={unita} onClose={closeCaseStudy} /> :
-    activeCaseStudy === 'mblm' ? <CaseStudyTemplate data={mblm} onClose={closeCaseStudy} /> :
+    activeCaseStudy === 'salams' ? <CaseStudyTemplate data={salams} onClose={closeCaseStudy} onOpen={openCaseStudy} /> :
+    activeCaseStudy === 'zewards' ? <CaseStudyTemplate data={zewards} onClose={closeCaseStudy} onOpen={openCaseStudy} /> :
+    activeCaseStudy === 'unita' ? <CaseStudyTemplate data={unita} onClose={closeCaseStudy} onOpen={openCaseStudy} /> :
+    activeCaseStudy === 'mblm' ? <CaseStudyTemplate data={mblm} onClose={closeCaseStudy} onOpen={openCaseStudy} /> :
+    activeCaseStudy === 'juno' ? <CaseStudyTemplate data={juno} onClose={closeCaseStudy} onOpen={openCaseStudy} /> :
+    activeCaseStudy === 'snapflow' ? <CaseStudyTemplate data={snapflow} onClose={closeCaseStudy} onOpen={openCaseStudy} /> :
     null;
 
   return (

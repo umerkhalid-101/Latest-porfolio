@@ -1,5 +1,5 @@
-import { ShieldCheck } from 'lucide-react';
-import type { CaseStudy } from './components/CaseStudyTemplate';
+import { FileText, Landmark, Layers, Mail, Moon, Play, ShieldCheck, Smile, UserCheck } from 'lucide-react';
+import type { CaseStudy, CsImage } from './components/CaseStudyTemplate';
 
 // Case studies on the shared Salams template. Every fact comes from LinkedIn, the resume, or the earlier case study copy.
 
@@ -7,13 +7,15 @@ export const salams: CaseStudy = {
   slug: 'salams',
   title: 'Salams',
   tagline: 'Designing a marriage-focused matchmaking app from the ground up, across onboarding, trust, retention, and monetization, through to the Match Group acquisition in 2023.',
-  theme: { primary: '#D81B60', accent: '#C2185B', soft: '#FF8FAB', highlight: '#FF4D8D', cream: '#FFFDEE', tint: '#EEF7D2' },
+  // Salams pink for every fill; a deeper shade of it for text on light backgrounds, so it stays readable
+  theme: { primary: '#FF5186', accent: '#D42A60', soft: '#FF8FAB', highlight: '#FF5186', cream: '#FFFDEE', tint: '#EEF7D2' },
   roles: [
     { label: 'Role', value: 'Junior UX Designer to Senior Product Designer' },
     { label: 'Platform', value: 'iOS & Android' },
     { label: 'Years', value: '2018 to 2023' },
     { label: 'Outcome', value: 'Acquired ↗' },
   ],
+  live: { href: 'https://www.salams.app/', label: 'Visit Salams' },
   heroImage: { src: '/images/salams-02.webp', alt: 'Salams mobile screens', width: 704, height: 524 },
   context: {
     title: 'A dating app built for people who are serious about marriage.',
@@ -25,9 +27,9 @@ export const salams: CaseStudy = {
       </>
     ),
     highlights: [
-      <>Users were <mark className="bg-[#FF4D8D]/20 font-bold px-1 rounded">more serious than Tinder users</mark>. They wanted depth, not just swiping. Every interaction carried the weight of a potential life decision.</>,
-      <>Ghosting carried <mark className="bg-[#FF4D8D]/20 font-bold px-1 rounded">real cultural weight</mark>. Being ignored after connecting felt disrespectful in a way that a generic dating app never accounts for.</>,
-      <>Many users had <mark className="bg-[#FF4D8D]/20 font-bold px-1 rounded">family involved in their search</mark>. Trust and legitimacy weren't nice to have features. They were the product itself.</>,
+      <>Users were <mark className="bg-[#FF5186]/20 font-bold px-1 rounded">more serious than Tinder users</mark>. They wanted depth, not just swiping. Every interaction carried the weight of a potential life decision.</>,
+      <>Ghosting carried <mark className="bg-[#FF5186]/20 font-bold px-1 rounded">real cultural weight</mark>. Being ignored after connecting felt disrespectful in a way that a generic dating app never accounts for.</>,
+      <>Many users had <mark className="bg-[#FF5186]/20 font-bold px-1 rounded">family involved in their search</mark>. Trust and legitimacy weren't nice to have features. They were the product itself.</>,
     ],
   },
   problem: {
@@ -158,13 +160,15 @@ export const zewards: CaseStudy = {
   slug: 'zewards',
   title: 'Zewst',
   tagline: 'Setting one design direction across the Zewst restaurant ecosystem as Design Manager, and owning the Zewards loyalty platform end to end.',
-  theme: { primary: '#3E1A6B', accent: '#6E36A7', soft: '#CDB8F0', highlight: '#E9DCFB', cream: '#F6F1FC', tint: '#EFE7FA' },
+  theme: { primary: '#2A1250', accent: '#6E36A7', soft: '#CDB8F0', highlight: '#E9DCFB', cream: '#F6F1FC', tint: '#EFE7FA' },
   roles: [
     { label: 'Role', value: 'Design Manager' },
     { label: 'Scope', value: '4 products' },
     { label: 'Years', value: '2023 to 2024' },
     { label: 'Merchants', value: '500+ on POS' },
   ],
+  live: { href: 'https://www.zewst.com/', label: 'Visit Zewst' },
+  links: [{ href: 'https://www.zewards.com/', label: 'Zewards' }],
   heroImage: { src: '/images/work-02.webp', alt: 'Zewst product screens', width: 2000, height: 2000 },
   heroScale: 1.4,
   context: {
@@ -293,62 +297,539 @@ export const zewards: CaseStudy = {
 export const mblm: CaseStudy = {
   slug: 'mblm',
   title: 'MBLM',
-  tagline: "Designing government and enterprise web portals in the UAE at MBLM Dubai, led by the portal for VARA, Dubai's Virtual Assets Regulatory Authority.",
-  theme: { primary: '#161616', accent: '#B8572A', soft: '#F2C9A8', highlight: '#F7DCC3', cream: '#FBF3EA', tint: '#F6EDE4' },
+  tagline: "Government websites people have to use, and an AI product people choose to. At MBLM Dubai I design portals for VARA, the UAE Financial Intelligence Unit, and Dubai World Trade Centre, plus allumni, MBLM's award-winning AI.",
+  // MBLM's near-black, one copper accent, a pale copper, and two light neutrals
+  theme: { primary: '#161616', accent: '#B8572A', soft: '#F2C9A8', highlight: '#FFFFFF', cream: '#FFFFFF', tint: '#FAF8F5' },
   roles: [
     { label: 'Role', value: 'Design Specialist' },
     { label: 'Agency', value: 'MBLM Dubai' },
     { label: 'Year', value: '2026' },
-    { label: 'Platform', value: 'Desktop and mobile' },
+    { label: 'Work', value: '3 portals, 1 AI product' },
   ],
   heroImage: { src: '/images/mblm-vara.webp', alt: 'VARA, Virtual Assets Regulatory Authority', width: 960, height: 540 },
+  heroCards: [
+    { name: 'VARA', label: 'Website and licensing portal', image: { src: '/images/mblm-vara.webp', alt: 'VARA, Virtual Assets Regulatory Authority', width: 960, height: 540 } },
+    { name: 'Financial Intelligence Unit', label: 'Government portal', image: { src: '/images/mblm-fiu.webp', alt: 'Financial Intelligence Unit', width: 960, height: 540 } },
+    { name: 'Dubai World Trade Centre', label: 'Events and venue website', image: { src: '/images/mblm-dwtc.webp', alt: 'Dubai World Trade Centre', width: 960, height: 540 } },
+    { name: 'allumni', label: "MBLM's in-house AI product", image: { src: '/images/allumni-hero.webp', alt: 'The allumni homepage: The AI marketing advisor, built for brands.', width: 1440, height: 790 } },
+  ],
   context: {
-    title: 'The front door to regulated industries.',
+    title: 'Government websites are the front door to the law.',
     body: (
       <>
-        <p>I joined MBLM Dubai as a Design Specialist in March 2026, designing web portals and product UI for UAE government and enterprise clients, including VARA, the Financial Intelligence Unit, Dubai World Trade Centre, and allumni.</p>
-        <p>The lead project is VARA, which regulates virtual assets in Dubai. Its website is where firms learn the rules and start the licensing process, so clarity has real legal and financial weight. I designed the portal end to end, across desktop and mobile.</p>
+        <p>I joined MBLM Dubai as a Design Specialist in March 2026. Most of my work is for UAE government and regulated-sector clients, where nobody visits for fun. People come because they must: to get licensed, to report, to exhibit. They arrive with a task and a deadline.</p>
+        <p>That changes the job. Every page carries legal weight, has to work in Arabic and English, has to be usable by everyone, and has to pass legal, communications, and leadership review before it ships. My goal on every portal was the same: make a required task feel clear and calm, without cutting a word the law needs.</p>
       </>
     ),
     highlights: [
-      <>Clarity has <mark className="bg-[#B8572A]/15 font-bold px-1 rounded">real legal and financial weight</mark> on a regulator's website.</>,
-      <>Applicants need to <mark className="bg-[#B8572A]/15 font-bold px-1 rounded">pick up where they left off</mark> in a long licensing process.</>,
-      <>Every page has to <mark className="bg-[#B8572A]/15 font-bold px-1 rounded">hold together at every breakpoint</mark>.</>,
+      <>Arabic and English, designed with <mark className="bg-[#B8572A]/10 text-[#B8572A] font-bold px-1 rounded">equal care</mark>.</>,
+      <>Usable by <mark className="bg-[#B8572A]/10 text-[#B8572A] font-bold px-1 rounded">everyone</mark>, not just the average user.</>,
+      <>Signed off by <mark className="bg-[#B8572A]/10 text-[#B8572A] font-bold px-1 rounded">legal, comms, and leadership</mark> before it ships.</>,
     ],
   },
-  problemSpacesTitle: 'Clients I design for at MBLM.',
-  problemSpaceLabel: 'Client',
-  problemSpaces: [
-    { title: 'VARA', image: { src: '/images/mblm-vara.webp', alt: 'VARA, Virtual Assets Regulatory Authority', width: 960, height: 540 }, questions: ['Web portal, desktop and mobile', 'Five-step licensing guide', 'Reusable UI kit'] },
-    { title: 'Financial Intelligence Unit', image: { src: '/images/mblm-fiu.webp', alt: 'Financial Intelligence Unit', width: 960, height: 540 }, questions: [] },
-    { title: 'Dubai World Trade Centre', image: { src: '/images/mblm-dwtc.webp', alt: 'Dubai World Trade Centre', width: 960, height: 540 }, questions: [] },
-    { title: 'allumni', image: { src: '/images/mblm-allumni.webp', alt: 'allumni', width: 960, height: 540 }, questions: [] },
-  ],
-  solutions: {
-    modules: [
-      { tag: 'VARA PORTAL', title: 'Homepage and templates', body: <p>The desktop and mobile homepage and the internal page templates for VARA's website, the starting point for firms entering Dubai's virtual asset industry.</p> },
-      { tag: 'LICENSING', title: 'A five-step licensing guide', body: <p>A five-step licensing guide with continue and recovery states, so applicants can pick up where they left off and get back on track when something goes wrong.</p> },
-      { tag: 'UI KIT', title: 'One reusable UI kit', body: <p>A reusable UI kit covering forms, tables, the step wizard, and search and filters, so new pages reuse proven components.</p> },
+  problem: {
+    questions: [
+      { q: 'Who is the user?', a: 'Never one person. A crypto founder abroad reading Dubai\'s rules for the first time, a compliance officer at a bank filing a report, an exhibitor flying in for a trade show. Each arrives with a job to do, not curiosity.' },
+      { q: 'Why is government design hard?', a: 'The content is dense and legally exact, so I can\'t simplify by cutting words. Instead I simplify the path: what to read first, what to do next, and where you are in the process.' },
+      { q: 'How do you design for many approvers?', a: 'With a shared UI kit and grid that engineering, communications, and the client sign off once, so each new page is assembled from approved parts instead of debated from scratch.' },
+    ],
+  },
+  projects: {
+    title: 'Three portals, three kinds of pressure.',
+    intro: 'Each client had a different audience and a different reason the stakes were high. Scroll through them.',
+    items: [
+      {
+        name: 'VARA',
+        href: 'https://www.vara.ae/en/',
+        full: 'Virtual Assets Regulatory Authority, Dubai',
+        sector: 'Regulator',
+        image: { src: '/images/mblm-vara.webp', alt: 'VARA, Virtual Assets Regulatory Authority', width: 960, height: 540 },
+        challenge: 'Virtual asset firms from all over the world come to VARA to understand Dubai\'s rules and start a licence. The rules are long and exact, the process takes weeks, and one wrong step costs time and money.',
+        moves: [
+          'Redesigned VARA\'s public website, from the homepage to the internal page templates, across desktop and mobile.',
+          'Designed the web portal where firms start and manage their licensing, on the same system as the website.',
+          'Turned licensing into a five-step guide with continue and recovery states, so applicants can pick up where they left off and get back on track when something goes wrong.',
+          'Built a reusable UI kit for forms, tables, the step wizard, and search and filters, so new pages reuse proven parts.',
+          'Defined a 12-column layout system with engineering, so design and build share one structure.',
+        ],
+        tags: ['Website redesign', 'Web portal', 'Five-step licensing guide', 'Reusable UI kit', 'Desktop and mobile'],
+      },
+      {
+        name: 'FIU',
+        href: 'https://uaefiu.gov.ae/en/',
+        full: 'Financial Intelligence Unit, UAE',
+        sector: 'Financial crime',
+        image: { src: '/images/mblm-fiu.webp', alt: 'Financial Intelligence Unit', width: 960, height: 540 },
+        challenge: 'The FIU is where banks, exchange houses, and other reporting entities go to report suspicious transactions and find guidance. The audience is expert and busy, the subject is serious, and finding the right guidance quickly matters.',
+        moves: [
+          'Organised the site around who you are and what you need to do, instead of around the organisation chart.',
+          'Gave reporting a clear, prominent path, so the most important action is never more than a click away.',
+          'Designed a guidance and publications library with filters, so compliance teams find the right document fast.',
+          'Kept the visual tone restrained and high contrast, to match the seriousness of the work.',
+        ],
+        tags: ['Audience-first navigation', 'Guidance library', 'Accessibility'],
+      },
+      {
+        name: 'DWTC',
+        href: 'https://www.dwtc.com/en/',
+        full: 'Dubai World Trade Centre',
+        sector: 'Events and venues',
+        image: { src: '/images/mblm-dwtc.webp', alt: 'Dubai World Trade Centre', width: 960, height: 540 },
+        challenge: 'DWTC serves visitors, exhibitors, and event organisers at once, with a calendar that never stops. Each audience needs something different from the same site, often in a hurry and often on a phone.',
+        moves: [
+          'Split the journeys by audience at the top level, so visitors, exhibitors, and organisers each get a direct route.',
+          'Designed an events calendar with filters by date and sector, built to scan quickly on mobile.',
+          'Made practical information, like getting there and venue details, easy to reach from any event.',
+          'Designed an enquiry path for organisers that asks only what the venue team needs to respond.',
+        ],
+        tags: ['Events calendar', 'Multi-audience', 'Mobile first'],
+      },
+    ],
+  },
+  bilingual: {
+    title: 'Every screen, designed twice.',
+    intro: <p>In the UAE, Arabic isn't a translation layer. It reads right to left, often runs longer, and needs its own type rhythm. I designed key templates in both languages from the start, by three rules.</p>,
+    rules: [
+      { demo: 'mirror', title: 'Mirror the layout, not just the text', text: 'Navigation, progress, and arrows follow reading direction, so the Arabic site feels native rather than flipped.' },
+      { demo: 'length', title: 'Size for the longer language', text: 'Buttons, tabs, and headings are sized for whichever language runs longer, so nothing breaks after translation.' },
+      { demo: 'type', title: 'Give Arabic room to breathe', text: 'Arabic letters have taller ascenders, deeper descenders, and dots, so Arabic text gets its own line height and type scale.' },
+    ],
+  },
+  showcase: {
+    label: "MBLM's in-house product",
+    title: 'allumni',
+    summary: 'An AI marketing advisor that learns a brand, then thinks, writes, and sounds like it. I designed both the website that sells it and the product people work in every day.',
+    facts: [
+      { label: 'My role', value: 'Website and product UI' },
+      { label: 'Platforms', value: 'Website and desktop app' },
+      { label: 'Recognition', value: 'W3 Silver, two categories' },
+    ],
+    color: '#5B3DF5',
+    link: { href: 'https://www.allumni.ai/', label: 'Visit allumni.ai' },
+    chapters: [
+      {
+        tag: 'Website',
+        problem: 'Every AI tool looks like a chat window',
+        title: 'Sell it as a brand first',
+        text: 'A black stage, floating glass shapes, and a giant wordmark. The homepage presents allumni as a brand you would trust with yours, not another chatbot.',
+        image: { src: '/images/allumni-hero.webp', alt: 'The allumni homepage hero: The AI marketing advisor, built for brands, above a giant allumni wordmark on black.', width: 1440, height: 790 },
+      },
+      {
+        tag: 'Product',
+        problem: 'An AI is only as good as the context you give it',
+        title: 'Make context effortless to give',
+        text: 'Brand work runs on documents, images, and decks. I made adding them a single gesture, and kept them visible for the whole conversation, so people always know what allumni is working from.',
+        sequence: [
+          { image: { src: '/images/allumni-app-drop.webp', alt: 'Dragging a file over an allumni conversation shows an Attach File drop target: Add documents for tailored answers.', width: 1040, height: 560 }, caption: 'Drop files anywhere in the conversation.' },
+          { image: { src: '/images/allumni-app-composer.webp', alt: 'The allumni composer holding a grid of attached images, documents, PDFs, and zip files above the prompt.', width: 1040, height: 560 }, caption: 'Review everything before you send.' },
+          { image: { src: '/images/allumni-app-attachments.webp', alt: 'An allumni conversation with an Attachments panel on the right listing the files in use.', width: 1040, height: 560 }, caption: 'Keep it in view while you chat.' },
+        ],
+      },
+      {
+        tag: 'Product',
+        problem: 'A blank prompt is hard to start from',
+        title: 'Start from a task, not a prompt',
+        text: 'Repeat jobs, like campaign plans, reports, and social posts, become shortcuts. Favourites sit on top and can be colour-coded, so a team\'s most common work is one click away.',
+        image: { src: '/images/allumni-app-shortcuts.webp', alt: 'The allumni Shortcuts screen: favourite shortcuts in colour-coded cards above more shortcuts.', width: 2000, height: 1029 },
+      },
+      {
+        tag: 'Product',
+        problem: 'Teams can\'t see what the AI knows',
+        title: 'Turn a brand into a checklist',
+        text: 'The brand model breaks a brand into parts, from promise and mission to personality, each with a clear status. Teams see at a glance what allumni has learned and what is still missing.',
+        image: { src: '/images/allumni-brand-model.webp', alt: 'The allumni brand model screen, listing each brand component with a status check.', width: 738, height: 562 },
+      },
     ],
   },
   designSystem: {
-    title: 'A 12-column grid built with engineering',
-    body: <p>I built the VARA layout system on a 12-column grid together with engineering, and set the typography and responsive guidelines that keep pages consistent across every breakpoint. The same foundation now keeps MBLM's other portal projects consistent too.</p>,
+    title: 'One grid, one kit, every portal',
+    body: <p>On VARA I built a 12-column layout system with engineering, set typography and responsive guidelines for both Arabic and English, and turned recurring patterns into a reusable UI kit. The same foundation now keeps MBLM's other portal projects consistent, so new pages start from approved parts.</p>,
+    chips: ['Forms', 'Tables', 'Step wizard', 'Search and filters', 'Arabic and English type', 'Responsive guidelines'],
+    columns: 12,
   },
   leadership: {
-    roleAndTeam: <p>I joined MBLM Dubai as a Design Specialist in March 2026. On VARA I owned the portal design across desktop and mobile, and worked with engineering on the layout system and UI kit.</p>,
-    bet: { pending: "The business problem and why it mattered to VARA, for example what went wrong for applicants before, and what the portal had to fix." },
-    hardCall: { pending: 'One decision with tradeoffs, who disagreed, and how it was resolved. A candidate: how the licensing guide handles continue and recovery states.' },
+    roleAndTeam: <p>I joined MBLM Dubai as a Design Specialist in March 2026. I own portal design across desktop and mobile for government clients, work with engineering on the layout system and UI kit, and design the website and product UI for allumni.</p>,
+    bet: <p>Government users don't browse, they comply. When a required task is confusing, the cost is real: delayed licences, missed reports, and calls to support. The bet was that a clear path, saved progress, and one shared system would do more for these clients than any visual flourish.</p>,
+    hardCall: <p>Whether to design Arabic as a mirror of English or as an equal. Mirroring is faster, but Arabic runs longer and reads right to left, so mirrored pages break after translation. I pushed to design key templates in both directions from the start. It cost time up front, and saved rework on every page after.</p>,
     howILed: (
       <ul>
         <li>Defined the 12-column layout system with engineering so design and build used the same structure.</li>
-        <li>Set typography and responsive guidelines that every page and breakpoint follows.</li>
-        <li>Built the UI kit once, for forms, tables, the wizard, and search, so new pages reuse proven components.</li>
+        <li>Set typography and responsive guidelines for Arabic and English that every page and breakpoint follows.</li>
+        <li>Built the UI kit once, for forms, tables, the wizard, and search, so new pages reuse approved components.</li>
       </ul>
     ),
     howILedTitle: 'How I worked with engineering',
-    outcome: { pending: 'What changed for VARA: launch status, and any results or feedback you are cleared to share.' },
+    outcome: <p>VARA's portal, licensing guide, and UI kit now set the foundation for MBLM's other government portals, and allumni, MBLM's in-house AI product, went on to win W3 Silver in two categories.</p>,
     differently: { pending: 'What you would do differently, looking back.' },
   },
-  footerFacts: ['Agency: MBLM Dubai', 'Lead project: VARA portal', 'Role: Design Specialist'],
+  footerFacts: ['Agency: MBLM Dubai', 'Clients: VARA, FIU, DWTC', 'In-house product: allumni'],
+};
+
+const junoShot = (name: string, alt: string): CsImage => ({ src: `/images/juno-${name}.webp`, alt, width: 1600, height: 1000 });
+
+export const juno: CaseStudy = {
+  slug: 'juno',
+  title: 'Juno',
+  tagline: 'Every AI assistant site looks the same: a glowing orb, a chat box, and big claims. I made Juno stand out by showing the product doing real work, and rebuilt its story, design system, and all nine pages in one week.',
+  // Juno is dark mode only, so the page sticks to its near-black, one blue, and two light neutrals
+  theme: { primary: '#07090D', accent: '#324CFF', soft: '#8F9DFF', highlight: '#FFFFFF', cream: '#FFFFFF', tint: '#FAF8F5' },
+  roles: [
+    { label: 'Role', value: 'Brand, web design and design system' },
+    { label: 'Industry', value: 'AI and B2B SaaS' },
+    { label: 'Year', value: '2026' },
+    { label: 'Timeline', value: '1 week, 9 pages' },
+  ],
+  // Preview domain until the new site replaces runjuno.ai
+  live: { href: 'https://juno-lovat.vercel.app/', label: 'Visit the live site' },
+  heroImage: junoShot('homepage-hero', 'The Juno homepage hero: a glowing mascot orbited by tasks like Investor update and Triage 6 bugs, above the headline Knows your company. Gets things done.'),
+  context: {
+    title: 'A crowded category where every site makes the same promise.',
+    body: (
+      <>
+        <p>Juno is an AI chief of staff for teams: it connects to a company's tools, builds apps from a sentence, works on a computer of its own, and runs automations on a schedule. But "AI assistant" is one of the most crowded categories on the web, and most sites in it describe the same magic in the same words.</p>
+        <p>Juno's old site was no exception. It opened on the promise, told rather than showed, and gave buyers no reason to trust an AI with real work. My goal wasn't to explain Juno better. It was to make it impossible to mistake for any other AI product, by letting visitors watch it work and see it ask before it acts.</p>
+      </>
+    ),
+    highlights: [
+      <>Explain Juno <mark className="bg-[#324CFF]/10 text-[#324CFF] font-bold px-1 rounded">without jargon</mark>.</>,
+      <>Build trust in an AI that <mark className="bg-[#324CFF]/10 text-[#324CFF] font-bold px-1 rounded">acts on your behalf</mark>.</>,
+      <>Feel premium and confident, <mark className="bg-[#324CFF]/10 text-[#324CFF] font-bold px-1 rounded">not another generic AI landing page</mark>.</>,
+    ],
+  },
+  beforeAfter: {
+    title: 'Same promise. Everything around it changed.',
+    intro: <p>Drag to compare the old homepage with the new one. I kept the promise and changed what visitors see first, how the product proves itself, and how all nine pages hold together.</p>,
+    before: junoShot('before-home', 'Before: the old Juno homepage, the mascot above Knows your company. Gets things done. on a plain dark gradient.'),
+    after: junoShot('homepage-hero', 'After: the new Juno homepage, the mascot orbited by live tasks.'),
+    changes: [
+      { title: 'Pain before pitch', text: 'The old homepage opened on the promise. The new one opens on the overdue alerts every founder recognizes, then makes Juno the answer.' },
+      { title: 'Shown, not told', text: "Apps, Juno's own computer, and automations now run as live UI in one sequence, so visitors watch the product work." },
+      { title: 'One story, nine pages', text: 'One cast and one design system run through every page, where the old site introduced new sample brands section by section.' },
+    ],
+  },
+  story: {
+    title: 'A homepage told as a story, not a feature list.',
+    intro: 'Six beats, from the pain every founder knows to a clear next step. Scroll through them.',
+    beats: [
+      { title: 'Open on the pain', before: 'The old homepage opened straight on the product promise.', now: '"You started a company. Now it runs you." A pile of overdue Slack, Gmail, HubSpot, and Linear alerts makes the pain instantly familiar.', image: junoShot('beat-1-chaos', 'Stacked alert cards from Slack, Gmail, HubSpot and Linear beside the headline You started a company. Now it runs you.') },
+      { title: 'Make Juno the answer', before: 'The product arrived before the problem did.', now: '"What if someone took this off your plate? That\'s Juno." The mascot pulls every tool into one ring.', image: junoShot('beat-2-reveal', 'The Juno mascot at the center of a ring of connected app icons, under the headline Finally, someone has the whole picture.') },
+      { title: 'Show it working', before: "Juno's own computer sat near the end of the page, after the integrations.", now: "Apps built from a sentence, Juno's own computer for tools with no integration, and automations on a schedule, back to back as live UI.", image: junoShot('beat-3-computer', 'Juno working on its own computer, filling in an app store submission with a live activity log beside it.') },
+      { title: 'One stack, one teammate', before: 'I kept this line from the old site.', now: '"Your whole stack. One Juno." Ask in one tool, get it done in another.', image: junoShot('beat-4-integrations', 'Juno connected to Slack, Gmail, Google Drive, Notion, HubSpot, Linear and other tools.') },
+      { title: 'An FAQ that demos', before: 'The old homepage had no FAQ at all.', now: 'Juno answers the questions in a chat, so the FAQ itself demonstrates the product.', image: junoShot('beat-5-faq', 'A list of questions on the left and Juno answering the selected one in a chat card on the right.') },
+      { title: 'Close on action', before: 'It ended on "Imagine having Juno on your team."', now: '"Put Juno to work." One clear request for access.', image: junoShot('beat-6-cta', 'The closing section of the Juno homepage with the headline Put Juno to work and a Request access button.') },
+    ],
+  },
+  ethos: {
+    title: 'Decisions that shaped the site',
+    principles: [
+      { title: 'Dark mode only', icon: Moon, body: 'One confident look, so every page and every product mockup sits in the same world.' },
+      { title: 'Animation that explains', icon: Play, body: 'Live UI instead of screenshots. Motion shows the product working; it never just decorates.' },
+      { title: 'One mascot shape', icon: Smile, body: 'The mascot animates but never changes shape, so it stays recognizable on every page.' },
+      { title: 'Structure first', icon: Layers, body: 'Placeholder logos and testimonials let the structure ship before final content was ready.' },
+    ],
+  },
+  solutions: {
+    modules: [
+      { tag: 'TRUST', title: 'Needs your yes', frame: 'screen', image: { src: '/images/juno-detail-approval-card.webp', alt: "Juno's run log for an app store submission, ending in a Needs your yes card with Approve and Review buttons.", width: 3200, height: 2000 }, body: <p>The biggest fear with an AI that acts for you is that it acts without you. Other sites answer that with a line of copy. I designed an approval card that repeats on every page, so visitors see Juno ask before it submits, sends, or ships anything.</p> },
+      { tag: 'ONE CAST', title: 'One fictional company', frame: 'screen', image: { src: '/images/juno-detail-shared-cast.webp', alt: 'The recurring cast of the Juno site: Maya Chen, Sam Rivera, Leo Park, Priya Shah and the customer Northwind, in Slack, HubSpot, Linear and customer update cards.', width: 3200, height: 2000 }, body: <p>Most product sites use a new fake brand in every mockup, which makes each section feel staged. I wrote one fictional company instead: the same people (Maya, Sam, Leo, Priya), customer (Northwind), and launch (Scheduled Reports) run through all nine pages, so the site reads like one real week at one real company.</p> },
+      { tag: 'LIVE UI', title: 'A command palette, not a grid', frame: 'screen', image: { src: '/images/juno-detail-live-ui.webp', alt: "Juno's live command palette, typing Ask Juno to build a launch page, with 16 features grouped by what they do.", width: 1968, height: 1176 }, body: <p>Every AI site has a features grid. I turned Juno's into a working ⌃⌘J command palette that types itself out, with 16 features grouped by what they do for you, so the page demos the product instead of listing it.</p> },
+      { tag: 'VOICE', title: 'Short, human lines', frame: 'screen', image: { src: '/images/juno-detail-copy-samples.webp', alt: "Short headlines from the Juno site: Knows your company. Gets things done. Off your plate. On Juno's. Keep Juno close. Put Juno to work.", width: 3200, height: 2000 }, body: <p>The category talks in buzzwords: "supercharge", "10x", "agentic". I wrote short, human lines instead, like "Off your plate. On Juno's.", "Keep Juno close.", and "Put Juno to work.", so Juno sounds like a teammate, not a model.</p> },
+    ],
+  },
+  pages: {
+    title: 'Nine pages, one system.',
+    intro: 'After the homepage, the same system rolled out across every page. Hover to pause.',
+    pages: [
+      { name: 'Product', line: 'A full product tour told through one feature launch.', image: junoShot('page-product', 'The Juno product page: Inside Juno.') },
+      { name: 'Features', line: '16 features in a command-palette browser.', image: junoShot('page-features', 'The Juno features page: So much built in.') },
+      { name: 'Automations', line: '12 recurring jobs, framed as worries you can hand off.', image: junoShot('page-automations', "The Juno automations page: Off your plate. On Juno's.") },
+      { name: 'Apps', line: 'Six working mini-apps, including a real ROI calculator.', image: junoShot('page-apps', 'The Juno apps page: The app your team wishes it had.') },
+      { name: 'Download', line: 'The keyboard shortcut is the hero, not the app icon.', image: junoShot('page-download', 'The Juno download page: Keep Juno close.') },
+      { name: 'Contact', line: 'A form styled like writing an email.', image: junoShot('page-contact', "The Juno contact page: Let's talk.") },
+      { name: 'Privacy and Terms', line: 'One readable template with a sticky table of contents.', image: junoShot('page-privacy', 'The Juno privacy policy page.') },
+    ],
+  },
+  designSystem: {
+    title: 'One dark system for every page',
+    body: <p>A near-black surface scale with blue, cyan, and violet accents, Geist for type, four radii, and three motion curves for everything from quick UI responses to story-scale moves. Task cards, approval cards, and chat mockups are the core components every page is built from.</p>,
+    tokens: {
+      colors: [
+        { name: 'Background', value: '#07090d' },
+        { name: 'Surface', value: '#0e1218' },
+        { name: 'Surface 2', value: '#151a22' },
+        { name: 'Text', value: '#f4f6f8' },
+        { name: 'Muted', value: '#9aa6b8' },
+        { name: 'Blue', value: '#324cff' },
+        { name: 'Cyan', value: '#50e5ff' },
+        { name: 'Violet', value: '#8f7cff' },
+        { name: 'Success', value: '#3dd68c' },
+        { name: 'Warning', value: '#ffb547' },
+        { name: 'Danger', value: '#ff6568' },
+      ],
+      font: 'Geist Sans and Geist Mono',
+      type: [
+        { name: 'Display XL', size: '48 to 88px', sample: 'Knows your company.' },
+        { name: 'Display L', size: '40 to 64px', sample: 'Put Juno to work.' },
+        { name: 'Heading 2', size: '28 to 36px', sample: 'Your whole stack.' },
+        { name: 'Heading 3', size: '20px', sample: 'Needs your yes' },
+        { name: 'Body', size: '16 to 18px', sample: 'Juno keeps up with your company.' },
+        { name: 'Eyebrow', size: '12px', sample: "JUNO'S COMPUTER" },
+      ],
+      motion: [
+        { name: 'Snap', curve: 'cubic-bezier(0.3, 0, 0, 1)', use: 'Quick UI responses' },
+        { name: 'Base', curve: 'cubic-bezier(0.2, 0.8, 0.2, 1)', use: 'Most transitions' },
+        { name: 'Calm', curve: 'cubic-bezier(0.16, 1, 0.3, 1)', use: 'Story-scale moves' },
+      ],
+    },
+  },
+  stats: {
+    title: 'Launch-ready in one week.',
+    items: [
+      { value: 1, unit: 'week', label: 'From kickoff to a launch-ready site' },
+      { value: 9, unit: 'pages', label: 'Rebuilt on one design system' },
+      { value: 6, unit: 'beats', label: 'In a homepage told as a story' },
+      { value: 1, unit: 'cast', label: 'Running through every page' },
+    ],
+  },
+  leadership: {
+    roleAndTeam: <p>I owned the design end to end, from tone and design guidelines through the homepage and the rollout across all nine pages, working directly with Juno's team from kickoff to a launch-ready site in one week.</p>,
+    bet: <p>"AI assistant" is a crowded, vague category. The bet was that buyers would trust an AI that acts on their behalf only if they could watch it work, so every page shows the product doing real jobs and asking for approval, instead of describing features.</p>,
+    hardCall: { pending: 'One decision with tradeoffs, who disagreed, and how it was resolved. A candidate: going dark mode only, or shipping with placeholder logos and testimonials.' },
+    howILed: (
+      <ul>
+        <li>Started with tone and design guidelines, so the homepage and every page after it shared one voice and one system.</li>
+        <li>Wrote the homepage as six story beats, from pain to action, before designing any section.</li>
+        <li>Kept one fictional cast and launch across all nine pages, so the site reads as one story.</li>
+      </ul>
+    ),
+    howILedTitle: 'How I approached it',
+    outcome: <p>A launch-ready, nine-page marketing site in one week, built on one design system, with a homepage told in six beats that shows Juno working and earns trust before anyone signs up.</p>,
+    differently: { pending: 'What you would do differently, looking back.' },
+  },
+  footerFacts: ['Client: Juno, AI chief of staff', 'Pages: 9 on one design system', 'Timeline: 1 week'],
+};
+
+const unitaShot = (name: string, alt: string): CsImage => ({ src: `/images/unita-${name}.webp`, alt, width: 1600, height: 1000 });
+
+export const unita: CaseStudy = {
+  slug: 'unita',
+  title: 'Unita',
+  tagline: 'B2B directories all look the same: grey lists of listings nobody can vouch for. As the sole designer, I made Unita stand out on the two things they get wrong, trust and finding, and made a directory feel like an app people want to open.',
+  // Unita's dark teal, one teal accent, a pale teal, and two light neutrals
+  theme: { primary: '#0A2E2E', accent: '#0E7C7B', soft: '#BFEDEA', highlight: '#FFFFFF', cream: '#FFFFFF', tint: '#FAF8F5' },
+  roles: [
+    { label: 'Role', value: 'Sole Product Designer' },
+    { label: 'Industry', value: 'B2B verified business network' },
+    { label: 'Years', value: '2025 to 2026' },
+    { label: 'Scope', value: '10+ modules' },
+  ],
+  live: { href: 'https://unitaw.com/', label: 'Visit the live site' },
+  heroImage: { src: '/images/work-04.webp', alt: 'Unita on desktop and laptop: a verified company profile, the Switzerland market overview, and the homepage.', width: 1870, height: 1289 },
+  context: {
+    title: 'Business directories have a trust problem.',
+    body: (
+      <>
+        <p>Unita's real edge was invisible. Every company on it is checked against national trade registers before it is listed, which no ordinary directory does. But a verified listing and an unverified one look the same on a screen, and buyers had learned to scroll past directories that all felt like spreadsheets.</p>
+        <p>I joined before launch as the only designer, working with the founders across 10+ modules. My job wasn't to describe Unita. It was to make its edge something you could see in the first five seconds, and to make finding a partner feel as easy as searching an app.</p>
+      </>
+    ),
+    highlights: [
+      <>Make verification <mark className="bg-[#0E7C7B]/10 text-[#0E7C7B] font-bold px-1 rounded">visible, not a footnote</mark>.</>,
+      <>Replace ten filters with <mark className="bg-[#0E7C7B]/10 text-[#0E7C7B] font-bold px-1 rounded">one question</mark>.</>,
+      <>Make a directory feel like <mark className="bg-[#0E7C7B]/10 text-[#0E7C7B] font-bold px-1 rounded">an app, not a database</mark>.</>,
+    ],
+  },
+  contrast: {
+    title: 'Where I broke from the category.',
+    intro: <p>I studied how business directories usually look and work, then made a deliberate call wherever Unita should do the opposite.</p>,
+    them: 'A typical B2B directory',
+    us: 'What I designed for Unita',
+    rows: [
+      { topic: 'First screen', them: 'A search form and a wall of filters.', us: 'A promise, "Unita is the business SuperApp", with listing types as photo cards on a phone.' },
+      { topic: 'Trust', them: 'Verification buried on an About page, if it exists at all.', us: 'Verification in the hero line, a badge on every profile, and a joining flow you can see.' },
+      { topic: 'Search', them: 'Category dropdowns, location fields, and keyword boxes.', us: 'One AI-assisted search bar, with tabs for companies, chambers, creators, and countries.' },
+      { topic: 'Profiles', them: 'A logo, an address, and a phone number.', us: 'Tier, badge, real locations on a map, products, documents, ratings, and a button to message.' },
+      { topic: 'Markets', them: 'A country dropdown.', us: 'Country pages with an AI market summary, top industries, and top categories.' },
+      { topic: 'Look', them: 'Grey tables built for data entry.', us: 'Photography-led cards, a calm light interface, and dark teal saved for action.' },
+    ],
+  },
+  flow: {
+    title: 'I designed trust before I designed search.',
+    intro: <p>Most directories ask you to take their listings on faith. I made the vetting a visible, four-step journey and ended it on a badge that travels with the company everywhere it appears.</p>,
+    steps: [
+      { title: 'Apply', icon: FileText, text: 'I kept it to one short submission, so good companies are not scared off before they start.' },
+      { title: 'Checked at the source', icon: Landmark, text: 'Matched against the national trade register. I named the register on screen, so the check feels real.' },
+      { title: 'Reviewed by a person', icon: UserCheck, text: 'A human review, said plainly, because "reviewed by a person" builds more trust than "AI-verified".' },
+      { title: 'Invited by email', icon: Mail, text: 'The invite is a moment, not a form confirmation, so joining feels selective.' },
+    ],
+    result: { label: 'Verified', text: 'The badge sits next to the company name on every card, profile, and search result, so trust is shown where decisions happen.' },
+  },
+  fullPage: {
+    title: 'A homepage that sells trust before it sells search.',
+    intro: <p>Scroll to move through it. I ordered the page as an argument: what Unita is, proof it is everywhere, what you can find, and how to join, before a single form appears.</p>,
+    url: 'unitaw.com',
+    image: { src: '/images/unita-full.webp', alt: 'The full Unita homepage, from the hero to the FAQ.', width: 1200, height: 6750 },
+  },
+  story: {
+    title: 'Six decisions, top to bottom.',
+    intro: 'Each section of the homepage answers one doubt a buyer has about a directory. Keep scrolling to slide through them.',
+    layout: 'horizontal',
+    beats: [
+      { title: 'Lead with a promise', now: 'Directories open on a form. I opened on "Unita is the business SuperApp", with a gradient that borrows from consumer apps and listing types as phone cards, so it reads as a product, not a database.', image: unitaShot('hero', 'The Unita homepage hero: Unita is the business SuperApp, with phone screens of verified listings.') },
+      { title: 'Show reach, don\'t claim it', now: 'Instead of saying "global", I showed every country Unita is live in, so reach is proven at a glance.', image: unitaShot('beat-countries', 'All the countries Unita is present in.') },
+      { title: 'Browse like a shopper', now: 'Big, photographic industry tiles for people who know the field but not the company name, instead of a category dropdown.', image: unitaShot('beat-categories', 'Browse by category on Unita.') },
+      { title: 'Name what you\'ll find', now: 'Companies, chambers, creators, and more, each introduced in plain words, so the directory never feels like a black box.', image: unitaShot('beat-find', 'What you can find on Unita.') },
+      { title: 'Draw the path to a deal', now: 'I laid out how companies go from finding each other to working together, step by step, so the value is clear before signing up.', image: unitaShot('beat-connect', 'How companies connect in Unita.') },
+      { title: 'Give everyone a door', now: '"Three ways into Unita." A clear choice for buyers, businesses, and creators, then the questions people actually ask.', image: unitaShot('beat-ways', 'Three ways into Unita.') },
+    ],
+  },
+  mattered: [
+    { label: 'Why it stands out', statement: 'It looks like an app, not a database.', note: 'Photography, phone cards, and a SuperApp promise make a B2B directory feel worth opening.' },
+    { label: 'Why buyers trust it', statement: 'The proof is on the listing itself.', note: 'The verified badge sits where decisions happen, not on a page nobody reads.' },
+    { label: 'Why it is faster', statement: 'One question replaces ten filters.', note: 'AI-assisted search and clear tabs start every visit with what you want, not how the data is stored.' },
+  ],
+  explorer: {
+    title: 'One system, built to scale.',
+    intro: 'I designed every page type from the same components, so new markets and listing types slot straight in. Pick a tab, or let it play.',
+    url: 'unitaw.com',
+    tabs: [
+      { tag: 'Companies', title: 'Profiles that earn trust', image: unitaShot('page-companies', 'The Unita companies page: This Week on Unita.'), body: <p>I put the badge and tier next to the name and real locations on a map above the fold, so proof comes before the pitch. The companies page reads like an editorial front page, with new companies every week, to give people a reason to come back.</p> },
+      { tag: 'Countries', title: 'Markets, not dropdowns', image: unitaShot('page-country', 'The Unita country page for Switzerland, with an economy snapshot alongside its listings.'), body: <p>A country is a decision, not a filter. Each one gets an AI market summary, top industries, and top categories beside its listings, so buyers understand the market before they pick a partner in it.</p> },
+      { tag: 'Categories', title: 'Scannable at a glance', image: unitaShot('page-categories', 'The Unita categories page, every industry grouped on one page.'), body: <p>Every industry on one page, grouped for scanning rather than nested in menus, so nobody has to guess where a company lives.</p> },
+      { tag: 'Technology', title: 'From industry to shortlist', image: unitaShot('page-technology', 'The Unita Technology category page with top matches.'), body: <p>Category pages open on top matches, from SaaS to cybersecurity, so discovery goes from an industry to a shortlist in one step.</p> },
+      { tag: 'Artists', title: 'New listing type, zero new components', image: unitaShot('page-artists', 'The Unita artists page.'), body: <p>When creators joined the platform, they slotted into the same system as companies. That was the test of the design system: new content, no new components.</p> },
+      { tag: 'Join', title: 'Joining that feels selective', image: unitaShot('page-join', 'The Unita join page: Become part of Unita.'), body: <p>Onboarding, membership tiers, and pricing. One short submission, reviewed by a person, invite by email, so being on Unita means something.</p> },
+    ],
+  },
+  designSystem: {
+    title: 'A visual language that breaks from directory grey',
+    body: <p>I built the design system from scratch with full token coverage: a calm light base so a large directory stays easy to scan, photography-led cards so listings feel human, and dark teal reserved for the things you can act on. Every module ships from one source of truth, which is why engineering could build 10+ modules without the product drifting.</p>,
+    images: [unitaShot('beat-faq', 'The Unita FAQ: questions people ask, built from the same cards, type, and teal as every other page.')],
+  },
+  stats: {
+    title: 'Live, and ready to grow.',
+    items: [
+      { value: 8, unit: 'countries', label: 'Live at launch' },
+      { value: 10, unit: 'modules', label: 'Designed as the sole designer' },
+      { value: 9, unit: 'categories', label: 'To browse by industry' },
+      { value: 1, unit: 'search bar', label: 'Instead of a wall of filters' },
+    ],
+  },
+  leadership: {
+    roleAndTeam: <p>I was the sole designer from October 2025 to March 2026, working directly with the founders and engineering. I owned product direction, scope, and delivery across 10+ modules, from discovery through the design system.</p>,
+    bet: <p>A directory only has value once businesses are on it, and buyers only use it if they trust what they find. The bet was that making verification visible, and making Unita feel like an app instead of a database, would win both sides before launch.</p>,
+    hardCall: { pending: 'One decision with tradeoffs, who disagreed, and how it was resolved. A candidate: what the pricing and dedicated-offering A/B tests showed, and what you chose to launch with.' },
+    howILed: (
+      <ul>
+        <li>Defined product priorities and scope across membership tiers, community surfaces, and pricing flows.</li>
+        <li>Ran A/B tests on pricing and dedicated offerings with the founders to decide what to launch with.</li>
+        <li>Worked directly with founders and engineering to keep product direction and feature priorities aligned.</li>
+      </ul>
+    ),
+    howILedTitle: 'How I worked with the founders',
+    outcome: <p>Unita launched live across eight countries, with trust shown on every listing, search at the center, and a system of profile, category, and country pages ready to grow one verified listing at a time.</p>,
+    differently: { pending: 'What you would do differently, looking back.' },
+  },
+  footerFacts: ['Headquarters: Geneva, Switzerland', 'Live in: 8 countries', 'Role: Sole Product Designer'],
+};
+
+const snapShot = (name: string, alt: string): CsImage => ({ src: `/images/snapflow-${name}.webp`, alt, width: 1600, height: 833 });
+
+export const snapflow: CaseStudy = {
+  slug: 'snapflow',
+  title: 'Snapflow',
+  tagline: "A self-initiated redesign of Snapflow's homepage. Snapflow sells a design system that makes every screen snap into place, so I designed and built a homepage that does the same: precise, in motion, and live in English and Spanish.",
+  // Obsidian glass, one steel-blue accent, and two light neutrals
+  theme: { primary: '#0B0F15', accent: '#4F6B8A', soft: '#C9D6E3', highlight: '#FFFFFF', cream: '#FFFFFF', tint: '#FAF8F5' },
+  roles: [
+    { label: 'Role', value: 'Concept, design and build' },
+    { label: 'Type', value: 'Self-initiated redesign' },
+    { label: 'Year', value: '2026' },
+    { label: 'Built with', value: 'Next.js, GSAP, three.js' },
+  ],
+  live: { href: 'https://snapflow-tau.vercel.app/', label: 'After: see the concept' },
+  links: [{ href: 'https://www.snapflow.design/en/', label: 'Before: live Snapflow site' }],
+  heroImage: { src: '/images/snapflow-after.webp', alt: 'The redesigned Snapflow homepage hero: Your agent already writes UI. Give it a design system, in a Snap, above floating glass UI pieces and a glowing hexagon.', width: 1600, height: 911 },
+  context: {
+    title: 'A precise product on a page that stood still.',
+    body: (
+      <>
+        <p>Snapflow is an agentic design system: tokens, components, and usage rules in React, Vue, and Angular. Teams brand it, and their AI coding agent builds every screen from it, inside their own repo.</p>
+        <p>The live homepage had the right headline, but a flat grey canvas and static isometric cards that never showed the product doing anything. I redesigned and built the homepage as a concept to pitch to Snapflow's founder as a live link. I kept every fact and line of copy from the live site, and changed the story, the look, and the motion.</p>
+      </>
+    ),
+    highlights: [
+      <>Make a design system <mark className="bg-[#4F6B8A]/10 text-[#4F6B8A] font-bold px-1 rounded">feel precise</mark> before anyone reads a word.</>,
+      <>Show the product <mark className="bg-[#4F6B8A]/10 text-[#4F6B8A] font-bold px-1 rounded">moving</mark>, not posed.</>,
+      <>Pitch it as <mark className="bg-[#4F6B8A]/10 text-[#4F6B8A] font-bold px-1 rounded">a working site</mark>, not a mockup.</>,
+    ],
+  },
+  beforeAfter: {
+    title: 'Same headline. A different first impression.',
+    intro: <p>Drag to compare the live homepage with my concept. The words are the same. What changed is how it feels and what it shows.</p>,
+    before: { src: '/images/snapflow-before.webp', alt: 'Before: the live Snapflow homepage on a pale grey canvas with static isometric cards.', width: 1600, height: 911 },
+    after: { src: '/images/snapflow-after.webp', alt: 'After: the redesigned Snapflow homepage on an obsidian glass canvas.', width: 1600, height: 911 },
+    changes: [
+      { title: 'An obsidian lab', text: 'A dark glass canvas, with a white mode one click away, so a precision tool looks precise.' },
+      { title: 'Product in motion', text: 'A 3D glass hexagon and scroll-driven scenes show pieces snapping into place, instead of static cards.' },
+      { title: 'One clear story', text: 'Twelve sections in order: why it matters, what it does, how it gets into your codebase, then governance and pricing.' },
+    ],
+  },
+  reel: {
+    title: 'It shows instead of tells.',
+    intro: <p>Every section gets one animation that proves its point. The reel walks through the concept in motion: the 3D glass hexagon, pieces snapping into place, and scroll-driven scenes, side by side with the live site.</p>,
+    src: '/images/snapflow-reel.mp4',
+    poster: '/images/snapflow-reel-poster.webp',
+  },
+  solutions: {
+    modules: [
+      { tag: 'WHY', title: 'Mirrored, shown not claimed', frame: 'screen', image: snapShot('mirrored', 'Your design and your code, mirrored: a Figma button and a code button sharing one token.'), body: <p>The core promise is that design and code stay the same. Instead of saying it, the section shows a Figma button and a code button sharing one token, then the Figma sync and the web editor for teams without Figma.</p> },
+      { tag: 'WHAT IT DOES', title: 'Capabilities beside a live window', frame: 'screen', image: snapShot('does', 'What Snapflow does: a list of capabilities beside a window showing a sign-up screen and its code in React, Vue, or Angular.'), body: <p>Each capability sits next to a real window: a branded sign-up screen and the same screen as code, switchable between React, Vue, and Angular. One design, three frameworks, in one glance.</p> },
+      { tag: 'INTO YOUR CODEBASE', title: 'What it brings, what you bring', frame: 'screen', image: snapShot('codebase', 'How Snapflow gets into your codebase: Snapflow brings the design system, your repo brings your stack, rules, lint, and types.'), body: <p>Engineers want to know what touches their repo. Two cards joined by a line split it cleanly: Snapflow brings the system, your repo keeps its stack, agent rules, lint, and types. A five-step walkthrough follows.</p> },
+      { tag: 'TOOLS', title: 'One shows, the other edits', frame: 'screen', image: snapShot('editor', 'The Playground and the web editor side by side as real windows.'), body: <p>The Playground and the web editor are easy to confuse, so they sit side by side as real windows, labelled by where they run and what they do: local and shows, cloud and edits.</p> },
+      { tag: 'GOVERNANCE', title: 'A system you can govern', frame: 'screen', image: snapShot('govern', 'Govern your agentic design system: a glowing glass hexagon with roadmap, accessibility, and token badges around it.'), body: <p>Governance is abstract, so the glass hexagon, Snapflow's logo, becomes the center of the system, with roadmap, accessibility, and tokens around it and every team sharing one source.</p> },
+    ],
+  },
+  pages: {
+    title: 'Twelve sections, one story.',
+    intro: 'The rest of the page, in order: where it runs, how you get it, which models it works with, and how to start. Hover to pause.',
+    pages: [
+      { name: 'Surfaces', line: 'From wherever each person works: IDE, CLI, Figma, and more.', image: snapShot('surfaces', 'From wherever each person works: cards for the agent in your IDE, the CLI, and other surfaces.') },
+      { name: 'How it works', line: 'You don\'t build it. You receive it, make it yours, and build.', image: snapShot('receive', 'You don\'t build it. You receive it: three steps, receive, make it yours, design and build.') },
+      { name: 'Models', line: 'Bring any model or tool: Claude, Cursor, Codex, Antigravity.', image: snapShot('models', 'Bring any model or tool to your design system: Claude, Cursor, Codex, and Antigravity orbiting the hexagon.') },
+      { name: 'Teams', line: 'For one team or the whole company.', image: snapShot('teams', 'For one team or the whole company: Snapflow Cloud and the company plan.') },
+      { name: 'Getting started', line: 'From the waitlist to your first governed screen.', image: snapShot('waitlist', 'From the waitlist to your first governed screen, in four steps.') },
+      { name: 'Access', line: 'Fifteen days free, then the footer.', image: snapShot('pricing', 'Fifteen days free: the waitlist form and the footer.') },
+    ],
+  },
+  designSystem: {
+    title: 'Built as a real site, not a mockup',
+    body: <p>A pitch lands harder as a link than as a deck, so I built the concept as a working site: scroll-driven scenes with GSAP ScrollTrigger and Lenis, a three.js glass hand and 3D hexagon, a dark and light theme, and the full page in English and Spanish, checked on mobile.</p>,
+    chips: ['Next.js 15', 'React 19', 'Tailwind CSS 4', 'GSAP ScrollTrigger', 'Lenis', 'three.js', 'Motion', 'English and Spanish', 'Dark and light'],
+  },
+  stats: {
+    title: 'A concept you can click.',
+    items: [
+      { value: 12, unit: 'sections', label: 'Redesigned, top to bottom' },
+      { value: 2, unit: 'languages', label: 'English and Spanish' },
+      { value: 2, unit: 'themes', label: 'Obsidian and white' },
+      { value: 1, unit: 'link', label: 'To pitch with, instead of a deck' },
+    ],
+  },
+  leadership: {
+    roleAndTeam: <p>Self-initiated, solo. I wrote the brief, designed the homepage, and built it end to end, using only facts and copy from Snapflow's live site.</p>,
+    bet: <p>Snapflow sells precision: one token change moving consistently through every screen. The bet was that the strongest pitch was a homepage that feels as precise as the product, built and live, so the founder could click it rather than imagine it.</p>,
+    hardCall: { pending: 'One decision with tradeoffs. A candidate: going dark by default when the live brand is light, or keeping every line of the live copy instead of rewriting it.' },
+    howILed: (
+      <ul>
+        <li>Kept every fact and line of copy from the live site, so the redesign was judged on design, not on new claims.</li>
+        <li>Reordered the page into one story, from why it matters to how it gets into your codebase.</li>
+        <li>Built it as a working site in two languages and two themes, and checked it on mobile.</li>
+      </ul>
+    ),
+    howILedTitle: 'How I approached it',
+    outcome: { pending: 'What happened after the pitch: the founder\'s response, or whether it led to work.' },
+    differently: { pending: 'What you would do differently, looking back.' },
+  },
+  footerFacts: ['Type: self-initiated concept', 'Languages: English and Spanish', 'Built with: Next.js, GSAP, three.js'],
 };

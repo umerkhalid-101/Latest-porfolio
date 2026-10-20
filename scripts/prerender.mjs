@@ -13,6 +13,8 @@ const pages = {
   'zewards-casestudy.html': 'zewards',
   'unita-casestudy.html': 'unita',
   'mblm-casestudy.html': 'mblm',
+  'juno-casestudy.html': 'juno',
+  'snapflow-casestudy.html': 'snapflow',
 };
 
 // Animations render their starting frame (hidden, offset). Drop those inline styles

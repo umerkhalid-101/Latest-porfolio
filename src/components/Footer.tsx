@@ -53,6 +53,8 @@ const columns = [
       { label: 'MBLM', href: '/mblm-casestudy' },
       { label: 'Salams', href: '/salams-casestudy' },
       { label: 'Zewst', href: '/zewards-casestudy' },
+      { label: 'Juno', href: '/juno-casestudy' },
+      { label: 'Snapflow', href: '/snapflow-casestudy' },
     ],
   },
   {
