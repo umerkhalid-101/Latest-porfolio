@@ -35,21 +35,6 @@ const projects: Project[] = [
     href: "/juno-casestudy"
   },
   {
-    slug: "mblm",
-    meta: { role: "Design Specialist", year: "2026", impact: "3 portals, 1 AI product" },
-    title: "MBLM",
-    subtitle: "Government and enterprise work, Dubai",
-    description: "Government websites people have to use: I redesigned VARA's website and licensing portal and designed for the UAE Financial Intelligence Unit and Dubai World Trade Centre, in Arabic and English. Plus allumni, MBLM's award-winning AI product.",
-    gallery: [
-      { src: "/images/mblm-vara.webp", alt: "VARA, Virtual Assets Regulatory Authority" },
-      { src: "/images/mblm-fiu.webp", alt: "Financial Intelligence Unit" },
-      { src: "/images/mblm-dwtc.webp", alt: "Dubai World Trade Centre" },
-      { src: "/images/mblm-allumni.webp", alt: "allumni" },
-    ],
-        brandColor: "#1C1C1C",
-    href: "/mblm-casestudy"
-  },
-  {
     slug: "salams",
     meta: { role: "First design hire to Senior", year: "2018 to 2023", impact: "Acquired by Match Group" },
     title: "Salams",
@@ -87,11 +72,10 @@ const projects: Project[] = [
     description: "As Design Manager, I owned Zewards end to end across the consumer app, business app, and marketing site. Repeat visits rose 38% and first-time activation got 2.3x faster.",
     image: "/images/work-02.webp",
     stats: [
-      { value: "+38%", label: "Repeat visits" },
-      { value: "2.3x", label: "Faster activation" },
-      { value: "500+", label: "POS merchants" },
+      { value: "+38%", label: "Visits" },
+      { value: "2.3x", label: "Activation" },
+      { value: "500+", label: "Merchants" },
     ],
-    chips: ["Consumer app", "Business app", "Marketing site"],
     brandColor: "#2A1250",
     href: "/zewards-casestudy"
   }
@@ -101,14 +85,13 @@ interface FeaturedWorkProps {
   onOpenCaseStudy?: (slug: string) => void;
 }
 
-// Bento layout: Juno leads as the big tile, MBLM and Salams sit beside it, Unita and Snapflow share a row, Zewst runs across the bottom
+// Bento layout: Juno leads as the big tile, Salams and Unita sit beside it, Snapflow and Zewst share the bottom row
 const layout = [
   'lg:col-span-2 lg:row-span-2',
   'lg:col-span-1',
   'lg:col-span-1',
   'lg:col-span-1',
   'lg:col-span-2',
-  'lg:col-span-3',
 ];
 
 /** Light brand colors need dark text */
@@ -125,10 +108,10 @@ export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
         <SectionHeader
           label="Work"
           title="Featured work,"
-          muted="six products I shaped."
+          muted="five products I shaped."
           note="Each one opens a full case study: the problem, my role, the decisions, and what changed."
         />
-        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-[repeat(4,minmax(300px,auto))] gap-4 md:gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-[repeat(3,minmax(300px,auto))] gap-4 md:gap-5">
           {projects.map((project, i) => (
             <Tile key={project.slug} project={project} index={i} total={projects.length} className={layout[i]} onOpen={onOpenCaseStudy} />
           ))}
@@ -207,7 +190,7 @@ function Tile({ project, index, total, className, onOpen }: { project: Project; 
               width={2000}
               height={2000}
               loading="lazy"
-              className={`absolute inset-0 w-full h-full object-contain motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out ${big ? 'scale-[0.96] group-hover:scale-[1.02]' : wide ? 'scale-[1.25] group-hover:scale-[1.32]' : 'scale-[0.9] group-hover:scale-[0.96]'} group-hover:-rotate-1`}
+              className={`absolute inset-0 w-full h-full object-contain motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out ${big ? 'scale-[0.96] group-hover:scale-[1.02]' : wide ? 'scale-100 group-hover:scale-[1.05]' : 'scale-[0.9] group-hover:scale-[0.96]'} group-hover:-rotate-1`}
             />
           ) : project.gallery ? (
             <ul className="w-full grid grid-cols-2 gap-2 py-2">

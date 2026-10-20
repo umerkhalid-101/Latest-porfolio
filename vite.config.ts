@@ -17,7 +17,6 @@ export default defineConfig(() => {
           main: path.resolve(__dirname, 'index.html'),
           'salams-casestudy': path.resolve(__dirname, 'salams-casestudy.html'),
           'unita-casestudy': path.resolve(__dirname, 'unita-casestudy.html'),
-          'mblm-casestudy': path.resolve(__dirname, 'mblm-casestudy.html'),
           'zewards-casestudy': path.resolve(__dirname, 'zewards-casestudy.html'),
           'juno-casestudy': path.resolve(__dirname, 'juno-casestudy.html'),
           'snapflow-casestudy': path.resolve(__dirname, 'snapflow-casestudy.html'),

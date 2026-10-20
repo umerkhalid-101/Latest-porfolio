@@ -116,8 +116,7 @@ const experiences: Job[] = [
     description: "Designing government and regulated-sector web portals in the UAE, including VARA, plus an AI product website and product UI.",
     logo: "MBLM",
     logoUrl: "/images/timeline-07.webp",
-    current: true,
-    caseStudy: "/mblm-casestudy"
+    current: true
   }
 ];
 

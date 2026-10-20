@@ -22,7 +22,6 @@
 - [Salams](https://www.umerkhalid.co/salams-casestudy): designing a marriage-focused matchmaking app as its only designer for five years, through the Match Group acquisition.
 - [Zewst](https://www.umerkhalid.co/zewards-casestudy): setting design direction across the four Zewst restaurant products and owning the Zewards loyalty platform; 38% more repeat visits and 2.3x faster activation.
 - [Unita](https://www.umerkhalid.co/unita-casestudy): a pre-launch B2B verified business network designed by a sole designer, including a design system built from scratch.
-- [MBLM](https://www.umerkhalid.co/mblm-casestudy): UAE government websites and portals at MBLM Dubai: the VARA website redesign and licensing portal (five-step licensing guide, reusable UI kit, 12-column layout system), plus work for the UAE Financial Intelligence Unit and Dubai World Trade Centre, designed in Arabic and English; and allumni, MBLM's in-house AI marketing product, winner of two W3 Silver awards.
 - [Juno](https://www.umerkhalid.co/juno-casestudy): the story, design system, and nine-page marketing site for Juno, an AI chief of staff for teams, rebuilt in one week around showing the product working instead of describing it.
 - [Snapflow](https://www.umerkhalid.co/snapflow-casestudy): a self-initiated redesign concept of the homepage for Snapflow, an agentic design system, designed and built as a working site in English and Spanish with scroll-driven 3D motion.
 
