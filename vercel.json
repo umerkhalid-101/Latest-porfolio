@@ -40,6 +40,22 @@
       "destination": "/zewards-casestudy.html"
     },
     {
+      "source": "/juno-casestudy",
+      "destination": "/juno-casestudy.html"
+    },
+    {
+      "source": "/juno-casestudy/",
+      "destination": "/juno-casestudy.html"
+    },
+    {
+      "source": "/snapflow-casestudy",
+      "destination": "/snapflow-casestudy.html"
+    },
+    {
+      "source": "/snapflow-casestudy/",
+      "destination": "/snapflow-casestudy.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

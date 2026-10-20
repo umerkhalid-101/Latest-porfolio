@@ -25,21 +25,21 @@ interface Project {
 
 const projects: Project[] = [
   {
-    slug: "unita",
-    meta: { role: "Sole designer", year: "2025 to 2026", impact: "10+ modules" },
-    title: "Unita",
-    subtitle: "Global B2B verified business network",
-    description: "Sole designer on a Swiss-headquartered B2B network with offices in Geneva, Tirana, and Dubai. Built the design system from scratch with full token coverage, and designed discovery, company profiles, and onboarding across 10+ modules.",
-    image: "/images/work-04.webp",
-    brandColor: "#0A2E2E",
-    href: "/unita-casestudy"
+    slug: "juno",
+    meta: { role: "Brand, web and design system", year: "2026", impact: "9 pages in 1 week" },
+    title: "Juno",
+    subtitle: "AI chief of staff, marketing site",
+    description: "Every AI assistant site makes the same promise. I made Juno stand out by showing it do real work and ask before it acts, and rebuilt its story, design system, and nine pages in one week.",
+    image: "/images/juno-card.webp",
+    brandColor: "#101B5C",
+    href: "/juno-casestudy"
   },
   {
     slug: "mblm",
-    meta: { role: "Design Specialist", year: "2026", impact: "4 UAE clients" },
+    meta: { role: "Design Specialist", year: "2026", impact: "3 portals, 1 AI product" },
     title: "MBLM",
     subtitle: "Government and enterprise work, Dubai",
-    description: "At MBLM Dubai I design web portals and product UI for UAE government and enterprise clients, including VARA, the Financial Intelligence Unit, Dubai World Trade Centre, and allumni.",
+    description: "Government websites people have to use: I redesigned VARA's website and licensing portal and designed for the UAE Financial Intelligence Unit and Dubai World Trade Centre, in Arabic and English. Plus allumni, MBLM's award-winning AI product.",
     gallery: [
       { src: "/images/mblm-vara.webp", alt: "VARA, Virtual Assets Regulatory Authority" },
       { src: "/images/mblm-fiu.webp", alt: "Financial Intelligence Unit" },
@@ -56,8 +56,28 @@ const projects: Project[] = [
     subtitle: "Consumer app redesign, acquired by Match Group",
     description: "Led the full redesign across home, explore, matches, chat, events, and profile. Designed onboarding and the identity attribute system specific to Muslim dating.",
     image: "/images/work-01.webp",
-    brandColor: "#C2185B",
+    brandColor: "#FF5186",
     href: "/salams-casestudy"
+  },
+  {
+    slug: "unita",
+    meta: { role: "Sole designer", year: "2025 to 2026", impact: "10+ modules" },
+    title: "Unita",
+    subtitle: "Global B2B verified business network",
+    description: "B2B directories look like spreadsheets nobody can vouch for. As the sole designer, I made Unita's verification visible on every listing, replaced filters with one AI search bar, and built the design system from scratch across 10+ modules.",
+    image: "/images/work-04.webp",
+    brandColor: "#0A2E2E",
+    href: "/unita-casestudy"
+  },
+  {
+    slug: "snapflow",
+    meta: { role: "Concept, design and build", year: "2026", impact: "Self-initiated redesign" },
+    title: "Snapflow",
+    subtitle: "Homepage redesign concept, agentic design system",
+    description: "A self-initiated redesign of Snapflow's homepage: same facts and copy, a new story, and the product shown in motion. Designed and built as a working site in English and Spanish, to pitch as a live link.",
+    image: "/images/snapflow-after.webp",
+    brandColor: "#0B0F15",
+    href: "/snapflow-casestudy"
   },
   {
     slug: "zewards",
@@ -72,7 +92,7 @@ const projects: Project[] = [
       { value: "500+", label: "POS merchants" },
     ],
     chips: ["Consumer app", "Business app", "Marketing site"],
-    brandColor: "#A3E635",
+    brandColor: "#2A1250",
     href: "/zewards-casestudy"
   }
 ];
@@ -81,15 +101,17 @@ interface FeaturedWorkProps {
   onOpenCaseStudy?: (slug: string) => void;
 }
 
-// Bento layout: Unita leads as the big tile, MBLM and Salams sit beside it, Zewst runs across the bottom
+// Bento layout: Juno leads as the big tile, MBLM and Salams sit beside it, Unita and Snapflow share a row, Zewst runs across the bottom
 const layout = [
   'lg:col-span-2 lg:row-span-2',
   'lg:col-span-1',
   'lg:col-span-1',
+  'lg:col-span-1',
+  'lg:col-span-2',
   'lg:col-span-3',
 ];
 
-/** Light brand colors (Zewst lime) need dark text */
+/** Light brand colors need dark text */
 function isLight(hex: string) {
   const n = parseInt(hex.slice(1), 16);
   const [r, g, b] = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
@@ -103,10 +125,10 @@ export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
         <SectionHeader
           label="Work"
           title="Featured work,"
-          muted="four products I shaped."
+          muted="six products I shaped."
           note="Each one opens a full case study: the problem, my role, the decisions, and what changed."
         />
-        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-[repeat(3,minmax(300px,auto))] gap-4 md:gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-[repeat(4,minmax(300px,auto))] gap-4 md:gap-5">
           {projects.map((project, i) => (
             <Tile key={project.slug} project={project} index={i} total={projects.length} className={layout[i]} onOpen={onOpenCaseStudy} />
           ))}

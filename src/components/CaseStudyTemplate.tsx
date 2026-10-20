@@ -1,10 +1,12 @@
 import { motion } from 'motion/react';
-import { ArrowLeft, type LucideIcon } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, type LucideIcon } from 'lucide-react';
 import { useEffect, type CSSProperties, type ReactNode } from 'react';
 import { CaseStudyLeadership, type LeadershipContent } from './CaseStudyLeadership';
 import { scrollToImmediate } from '../lib/smoothScroll';
 import { Footer } from './Footer';
 import { Header } from './Header';
+import { nextCaseStudy } from '../caseStudyOrder';
+import { BeforeAfter, Bilingual, NextUp, Reel, type ReelContent, HeroCards, type HeroCard, Contrast, GridDemo, Projects, Showcase, Explorer, Flow, FullPage, HorizontalStory, PagesStrip, Stats, StoryBeats, Tokens, type BeforeAfterContent, type BilingualContent, type ContrastContent, type ProjectsContent, type ShowcaseContent, type ExplorerContent, type FlowContent, type FullPageContent, type PagesContent, type StatsContent, type StoryContent, type TokensContent } from './CaseStudyExtras';
 
 /*
  * One template for every case study, built from the Salams layout.
@@ -37,7 +39,13 @@ export interface CaseStudy {
     tint: string;
   };
   roles: { label: string; value: string }[];
+  /** Link to the shipped product, shown under the hero facts */
+  live?: { href: string; label: string };
+  /** More outbound links beside the main one, e.g. each client site, or before and after */
+  links?: { href: string; label: string }[];
   heroImage?: CsImage;
+  /** A cycling deck of project cards, shown in place of the hero image */
+  heroCards?: HeroCard[];
   /** Enlarge a hero image that has built-in padding */
   heroScale?: number;
   context?: { title: string; body: ReactNode; highlights?: ReactNode[] };
@@ -55,7 +63,31 @@ export interface CaseStudy {
   insights?: { title: string; body: ReactNode; image?: CsImage };
   ethos?: { title: string; principles: { title: string; body: string; icon?: LucideIcon; image?: CsImage }[] };
   solutions?: { modules: { tag: string; title: string; body: ReactNode; image?: CsImage; frame?: 'phone' | 'screen' }[] };
-  designSystem?: { title: string; body: ReactNode; images?: CsImage[]; grid?: boolean };
+  designSystem?: { title: string; body: ReactNode; images?: CsImage[]; grid?: boolean; tokens?: TokensContent; chips?: string[]; columns?: number };
+  /** A muted video reel, shown after the before and after */
+  reel?: ReelContent;
+  /** Drag slider between the old design and the new one, shown after the context */
+  beforeAfter?: BeforeAfterContent;
+  /** Stacking cards, one per project, shown after the problem */
+  projects?: ProjectsContent;
+  /** A screen that flips between English and Arabic, shown after the projects */
+  bilingual?: BilingualContent;
+  /** A bento of another product's screens, shown before the design system */
+  showcase?: ShowcaseContent;
+  /** The category norm against this product, row by row, shown after the context */
+  contrast?: ContrastContent;
+  /** Animated step-by-step process, shown after the context */
+  flow?: FlowContent;
+  /** Tabbed tour of the product's pages, shown after the detailed solution */
+  explorer?: ExplorerContent;
+  /** A whole page scrolled inside a browser frame, shown before the story */
+  fullPage?: FullPageContent;
+  /** Scroll-driven story with a sticky, crossfading screen */
+  story?: StoryContent;
+  /** Endless strip of every page, shown after the detailed solution */
+  pages?: PagesContent;
+  /** Count-up delivery numbers, shown before "Behind the work" */
+  stats?: StatsContent;
   leadership: LeadershipContent;
   footerFacts: string[];
 }
@@ -103,11 +135,14 @@ function Shot({ image, frame = 'phone', className = '' }: { image: CsImage; fram
   );
 }
 
-export function CaseStudyTemplate({ data, onClose }: { data: CaseStudy; onClose: () => void }) {
+export function CaseStudyTemplate({ data, onClose, onOpen }: { data: CaseStudy; onClose: () => void; onOpen?: (slug: string) => void }) {
+  const next = nextCaseStudy(data.slug);
   useEffect(() => { scrollToImmediate(0); }, [data.slug]);
 
   const t = data.theme;
   const id = (s: string) => `${data.slug}-${s}`;
+  // Long names (Snapflow) get a smaller title and no overlap, so the product never covers letters
+  const longTitle = data.title.length > 6;
   const vars = {
     '--cs-primary': t.primary,
     '--cs-accent': t.accent,
@@ -135,7 +170,7 @@ export function CaseStudyTemplate({ data, onClose }: { data: CaseStudy; onClose:
             <span>{data.roles.find((r) => /year/i.test(r.label))?.value}</span>
           </motion.div>
 
-          <h1 aria-label={data.title} className="relative z-10 mt-4 font-display uppercase leading-[0.85] tracking-[-0.01em] text-[24vw] md:text-[18vw] min-[1500px]:text-[270px] flex overflow-hidden pt-[0.08em] select-none">
+          <h1 aria-label={data.title} className={`relative z-10 mt-4 font-display uppercase leading-[0.85] tracking-[-0.01em] ${longTitle ? 'text-[17vw] md:text-[13vw] min-[1500px]:text-[195px]' : 'text-[24vw] md:text-[18vw] min-[1500px]:text-[270px]'} flex overflow-hidden pt-[0.08em] select-none`}>
             {data.title.split('').map((c, i) => (
               <motion.span
                 key={i}
@@ -166,13 +201,54 @@ export function CaseStudyTemplate({ data, onClose }: { data: CaseStudy; onClose:
                   </div>
                 ))}
               </dl>
+              {(data.live || data.links) && (
+                <div className="flex flex-wrap items-center gap-3">
+                  {data.live && (
+                    <a
+                      href={data.live.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-3 rounded-full bg-white text-[#121115] pl-5 pr-1.5 py-1.5 t-label hover:bg-[var(--cs-accent)] hover:text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                    >
+                      {data.live.label}
+                      <span aria-hidden="true" className="w-9 h-9 rounded-full bg-[var(--cs-accent)] text-white flex items-center justify-center group-hover:bg-white group-hover:text-[var(--cs-accent)] group-hover:rotate-45 transition-transform">
+                        <ArrowUpRight size={18} />
+                      </span>
+                      <span className="sr-only">(opens in a new tab)</span>
+                    </a>
+                  )}
+                  {data.links?.map((l) => (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-3 t-label text-white/90 hover:bg-white hover:text-[#121115] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                    >
+                      {l.label}
+                      <ArrowUpRight size={14} aria-hidden="true" className="group-hover:rotate-45 transition-transform" />
+                      <span className="sr-only">(opens in a new tab)</span>
+                    </a>
+                  ))}
+                </div>
+              )}
             </motion.div>
-            {data.heroImage && (
+            {data.heroCards && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="relative z-20 lg:col-span-7 order-1 lg:order-2 flex justify-center lg:justify-end lg:-mt-[6vw] min-[1500px]:-mt-[90px]"
+              >
+                <HeroCards cards={data.heroCards} />
+              </motion.div>
+            )}
+            {!data.heroCards && data.heroImage && (
               <motion.div
                 initial={{ opacity: 0, y: 80 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 70, damping: 16, delay: 0.55 }}
-                className="relative z-20 lg:col-span-7 order-1 lg:order-2 lg:-mt-[11vw] min-[1500px]:-mt-[160px] flex justify-center lg:justify-end"
+                className={`relative z-20 lg:col-span-7 order-1 lg:order-2 ${longTitle ? '' : 'lg:-mt-[11vw] min-[1500px]:-mt-[160px]'} flex justify-center lg:justify-end`}
               >
                 <img width={data.heroImage.width} height={data.heroImage.height} fetchPriority="high" src={data.heroImage.src} alt={data.heroImage.alt} style={{ scale: data.heroScale ?? 1 }} className="w-full max-w-[720px] h-auto max-h-[62svh] object-contain drop-shadow-2xl select-none" />
               </motion.div>
@@ -204,6 +280,13 @@ export function CaseStudyTemplate({ data, onClose }: { data: CaseStudy; onClose:
         </section>
       )}
 
+      {data.contrast && <Contrast data={data.contrast} id={id('contrast')} />}
+      {data.beforeAfter && <BeforeAfter data={data.beforeAfter} id={id('before-after')} />}
+      {data.reel && <Reel data={data.reel} id={id('reel')} />}
+      {data.flow && <Flow data={data.flow} id={id('flow')} />}
+      {data.fullPage && <FullPage data={data.fullPage} id={id('full-page')} />}
+      {data.story && (data.story.layout === 'horizontal' ? <HorizontalStory data={data.story} id={id('story')} /> : <StoryBeats data={data.story} id={id('story')} />)}
+
       {/* 3. Problem definition */}
       {data.problem && (
         <section className="py-24 px-6 bg-white border-t border-b border-[#121115]/5">
@@ -229,6 +312,9 @@ export function CaseStudyTemplate({ data, onClose }: { data: CaseStudy; onClose:
           </div>
         </section>
       )}
+
+      {data.projects && <Projects data={data.projects} id={id('projects')} />}
+      {data.bilingual && <Bilingual data={data.bilingual} id={id('bilingual')} />}
 
       {/* 4. Why it mattered */}
       {data.mattered && (
@@ -450,6 +536,10 @@ export function CaseStudyTemplate({ data, onClose }: { data: CaseStudy; onClose:
         </section>
       )}
 
+      {data.explorer && <Explorer data={data.explorer} id={id('explorer')} />}
+      {data.pages && <PagesStrip data={data.pages} id={id('pages')} />}
+      {data.showcase && <Showcase data={data.showcase} id={id('showcase')} />}
+
       {/* 14. Design system */}
       {data.designSystem && (
         <section className="bg-[var(--cs-highlight)] text-[#121115] py-24 px-6 md:px-12 border-t border-[#121115]/10" id={id('design-system')}>
@@ -459,6 +549,13 @@ export function CaseStudyTemplate({ data, onClose }: { data: CaseStudy; onClose:
               <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-tight">{data.designSystem.title}</h2>
               <div className="text-base md:text-xl font-medium max-w-3xl leading-relaxed">{data.designSystem.body}</div>
             </div>
+            {data.designSystem.chips && (
+              <ul className="flex flex-wrap gap-2">
+                {data.designSystem.chips.map((c) => <li key={c} className="t-label rounded-full bg-white border border-[#121115]/15 px-4 py-2">{c}</li>)}
+              </ul>
+            )}
+            {data.designSystem.columns && <GridDemo columns={data.designSystem.columns} />}
+            {data.designSystem.tokens && <Tokens data={data.designSystem.tokens} />}
             {data.designSystem.images && (
               <div className={data.designSystem.grid ? 'grid grid-cols-1 md:grid-cols-3 gap-6' : 'space-y-8 md:space-y-12'}>
                 {data.designSystem.images.map((img, i) => (
@@ -472,7 +569,15 @@ export function CaseStudyTemplate({ data, onClose }: { data: CaseStudy; onClose:
         </section>
       )}
 
+      {data.stats && <Stats data={data.stats} id={id('stats')} />}
+
       <CaseStudyLeadership content={data.leadership} accent={t.accent} />
+
+      <NextUp
+        next={{ slug: next.slug, title: next.title, tagline: next.tagline, image: next.heroImage, color: next.theme.primary }}
+        onHome={onClose}
+        onOpen={onOpen}
+      />
 
       <Footer />
     </div>

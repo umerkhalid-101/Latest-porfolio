@@ -14,13 +14,11 @@ import { Experience } from './components/Experience';
 import { Skills } from './components/Skills';
 import { KindWords } from './components/KindWords';
 import { Footer } from './components/Footer';
-import { CaseStudyPage } from './components/CaseStudyPage';
 import { CaseStudyTemplate } from './components/CaseStudyTemplate';
-import { unita } from './caseStudies';
-import { salams, zewards, mblm } from './caseStudyData';
+import { salams, zewards, mblm, juno, unita, snapflow } from './caseStudyData';
 import { MARQUEE_ITEMS } from './data/marquee';
 
-export type Route = 'home' | 'salams' | 'zewards' | 'unita' | 'mblm';
+export type Route = 'home' | 'salams' | 'zewards' | 'unita' | 'mblm' | 'juno' | 'snapflow';
 
 const noop = () => {};
 
@@ -28,8 +26,10 @@ function page(route: Route) {
   switch (route) {
     case 'salams': return <CaseStudyTemplate data={salams} onClose={noop} />;
     case 'zewards': return <CaseStudyTemplate data={zewards} onClose={noop} />;
-    case 'unita': return <CaseStudyPage data={unita} onClose={noop} />;
+    case 'unita': return <CaseStudyTemplate data={unita} onClose={noop} />;
     case 'mblm': return <CaseStudyTemplate data={mblm} onClose={noop} />;
+    case 'juno': return <CaseStudyTemplate data={juno} onClose={noop} />;
+    case 'snapflow': return <CaseStudyTemplate data={snapflow} onClose={noop} />;
     default:
       return (
         <>
