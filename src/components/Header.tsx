@@ -132,6 +132,7 @@ export function Header() {
               <div className="flex gap-6">
                 <a href="https://www.linkedin.com/in/umar-khalid1/" target="_blank" rel="noopener noreferrer" className="hover:text-accent">LinkedIn ↗</a>
                 <a href="https://www.instagram.com/umar_khalid1" target="_blank" rel="noopener noreferrer" className="hover:text-accent">Instagram ↗</a>
+                <a href="https://x.com/designsbyumer" target="_blank" rel="noopener noreferrer" className="hover:text-accent">X ↗</a>
               </div>
             </div>
           </motion.div>

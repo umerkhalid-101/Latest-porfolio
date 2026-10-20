@@ -61,6 +61,7 @@ const columns = [
     links: [
       { label: 'LinkedIn', href: 'https://www.linkedin.com/in/umar-khalid1/', external: true },
       { label: 'Instagram', href: 'https://www.instagram.com/umar_khalid1', external: true },
+      { label: 'X', href: 'https://x.com/designsbyumer', external: true },
       { label: 'Email', href: `mailto:${EMAIL}` },
     ],
   },
