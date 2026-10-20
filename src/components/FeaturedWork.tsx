@@ -72,11 +72,10 @@ const projects: Project[] = [
     description: "As Design Manager, I owned Zewards end to end across the consumer app, business app, and marketing site. Repeat visits rose 38% and first-time activation got 2.3x faster.",
     image: "/images/work-02.webp",
     stats: [
-      { value: "+38%", label: "Repeat visits" },
-      { value: "2.3x", label: "Faster activation" },
-      { value: "500+", label: "POS merchants" },
+      { value: "+38%", label: "Visits" },
+      { value: "2.3x", label: "Activation" },
+      { value: "500+", label: "Merchants" },
     ],
-    chips: ["Consumer app", "Business app", "Marketing site"],
     brandColor: "#2A1250",
     href: "/zewards-casestudy"
   }
@@ -191,7 +190,7 @@ function Tile({ project, index, total, className, onOpen }: { project: Project; 
               width={2000}
               height={2000}
               loading="lazy"
-              className={`absolute inset-0 w-full h-full object-contain motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out ${big ? 'scale-[0.96] group-hover:scale-[1.02]' : wide ? 'scale-[1.25] group-hover:scale-[1.32]' : 'scale-[0.9] group-hover:scale-[0.96]'} group-hover:-rotate-1`}
+              className={`absolute inset-0 w-full h-full object-contain motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out ${big ? 'scale-[0.96] group-hover:scale-[1.02]' : wide ? 'scale-100 group-hover:scale-[1.05]' : 'scale-[0.9] group-hover:scale-[0.96]'} group-hover:-rotate-1`}
             />
           ) : project.gallery ? (
             <ul className="w-full grid grid-cols-2 gap-2 py-2">
