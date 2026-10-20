@@ -20,6 +20,7 @@ import { ScrollProgress } from './components/ScrollProgress';
 import { CaseStudyTemplate } from './components/CaseStudyTemplate';
 import { salams, zewards, juno, unita, snapflow } from './caseStudyData';
 import { CustomCursor } from './components/CustomCursor';
+import { CalendlyBadge } from './components/CalendlyBadge';
 import { NotFound } from './components/NotFound';
 import { MARQUEE_ITEMS } from './data/marquee';
 
@@ -186,6 +187,7 @@ export default function App() {
   return (
     <div className="relative min-h-screen selection:bg-accent selection:text-white">
       <CustomCursor />
+      <CalendlyBadge />
       <MotionConfig reducedMotion="user">
         <main className="relative">
           <ScrollProgress />

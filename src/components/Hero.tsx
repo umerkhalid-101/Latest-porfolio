@@ -202,6 +202,7 @@ export function Hero() {
             <div className="flex items-center gap-3 pt-1">
               <a href="https://www.linkedin.com/in/umar-khalid1/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-9 h-9 rounded-full bg-ink text-white flex items-center justify-center hover:bg-white hover:text-ink motion-safe:transition-colors"><Linkedin size={16} aria-hidden="true" /></a>
               <a href="https://www.instagram.com/umar_khalid1" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 rounded-full bg-ink text-white flex items-center justify-center hover:bg-white hover:text-ink motion-safe:transition-colors"><Instagram size={16} aria-hidden="true" /></a>
+              <a href="https://x.com/designsbyumer" target="_blank" rel="noopener noreferrer" aria-label="X" className="w-9 h-9 rounded-full bg-ink text-white flex items-center justify-center hover:bg-white hover:text-ink motion-safe:transition-colors"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
             </div>
           </div>
 
