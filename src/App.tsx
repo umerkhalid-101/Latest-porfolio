@@ -18,14 +18,14 @@ import { KindWords } from './components/KindWords';
 import { Footer } from './components/Footer';
 import { ScrollProgress } from './components/ScrollProgress';
 import { CaseStudyTemplate } from './components/CaseStudyTemplate';
-import { salams, zewards, mblm, juno, unita, snapflow } from './caseStudyData';
+import { salams, zewards, juno, unita, snapflow } from './caseStudyData';
 import { CustomCursor } from './components/CustomCursor';
 import { NotFound } from './components/NotFound';
 import { MARQUEE_ITEMS } from './data/marquee';
 
 const SITE = 'https://www.umerkhalid.co';
 
-type Slug = 'unita' | 'mblm' | 'salams' | 'zewards' | 'juno' | 'snapflow';
+type Slug = 'unita' | 'salams' | 'zewards' | 'juno' | 'snapflow';
 
 // Keep in sync with the static <head> in index.html and the per-route HTML files.
 const pageMeta: Record<Slug | 'home', { title: string; description: string; image: string; path: string }> = {
@@ -40,12 +40,6 @@ const pageMeta: Record<Slug | 'home', { title: string; description: string; imag
     description: 'Designing a pre-launch B2B verified business network as the sole designer: discovery, company profiles, onboarding, and a design system built from scratch.',
     image: `${SITE}/images/og-unita.jpg`,
     path: '/unita-casestudy'
-  },
-  mblm: {
-    title: 'MBLM Case Study | Muhammad Umer, Lead Product Designer',
-    description: "Designing UAE government websites and portals at MBLM Dubai for VARA, the Financial Intelligence Unit, and Dubai World Trade Centre, plus allumni, MBLM's award-winning in-house AI product.",
-    image: `${SITE}/images/og-vara.jpg`,
-    path: '/mblm-casestudy'
   },
   salams: {
     title: 'Salams Case Study | Muhammad Umer, Lead Product Designer',
@@ -74,11 +68,11 @@ const pageMeta: Record<Slug | 'home', { title: string; description: string; imag
 };
 
 function slugFromLocation(): Slug | null {
-  const path = window.location.pathname.replace(/(\.html|\/)$/, '').replace('/zewst-casestudy', '/zewards-casestudy').replace('/vara-casestudy', '/mblm-casestudy');
+  const path = window.location.pathname.replace(/(\.html|\/)$/, '').replace('/zewst-casestudy', '/zewards-casestudy');
   const hash = window.location.hash.replace(/^#\/?/, '');
   const params = new URLSearchParams(window.location.search);
   const query = params.get('p') || params.get('case-study') || params.get('project');
-  for (const slug of ['unita', 'mblm', 'salams', 'zewards', 'juno', 'snapflow'] as Slug[]) {
+  for (const slug of ['unita', 'salams', 'zewards', 'juno', 'snapflow'] as Slug[]) {
     if (path === `/${slug}-casestudy` || hash === `${slug}-casestudy` || query === slug || query === `${slug}-casestudy`) {
       return slug;
     }
@@ -86,7 +80,7 @@ function slugFromLocation(): Slug | null {
   return null;
 }
 
-const KNOWN_PATHS = new Set(['', '/index', '/unita-casestudy', '/vara-casestudy', '/mblm-casestudy', '/salams-casestudy', '/zewards-casestudy', '/zewst-casestudy', '/juno-casestudy', '/snapflow-casestudy']);
+const KNOWN_PATHS = new Set(['', '/index', '/unita-casestudy', '/salams-casestudy', '/zewards-casestudy', '/zewst-casestudy', '/juno-casestudy', '/snapflow-casestudy']);
 
 // Vercel rewrites every unknown path to the app, so the app decides what's a 404
 function isNotFound() {
@@ -185,7 +179,6 @@ export default function App() {
     activeCaseStudy === 'salams' ? <CaseStudyTemplate data={salams} onClose={closeCaseStudy} onOpen={openCaseStudy} /> :
     activeCaseStudy === 'zewards' ? <CaseStudyTemplate data={zewards} onClose={closeCaseStudy} onOpen={openCaseStudy} /> :
     activeCaseStudy === 'unita' ? <CaseStudyTemplate data={unita} onClose={closeCaseStudy} onOpen={openCaseStudy} /> :
-    activeCaseStudy === 'mblm' ? <CaseStudyTemplate data={mblm} onClose={closeCaseStudy} onOpen={openCaseStudy} /> :
     activeCaseStudy === 'juno' ? <CaseStudyTemplate data={juno} onClose={closeCaseStudy} onOpen={openCaseStudy} /> :
     activeCaseStudy === 'snapflow' ? <CaseStudyTemplate data={snapflow} onClose={closeCaseStudy} onOpen={openCaseStudy} /> :
     null;

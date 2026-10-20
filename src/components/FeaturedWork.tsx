@@ -35,21 +35,6 @@ const projects: Project[] = [
     href: "/juno-casestudy"
   },
   {
-    slug: "mblm",
-    meta: { role: "Design Specialist", year: "2026", impact: "3 portals, 1 AI product" },
-    title: "MBLM",
-    subtitle: "Government and enterprise work, Dubai",
-    description: "Government websites people have to use: I redesigned VARA's website and licensing portal and designed for the UAE Financial Intelligence Unit and Dubai World Trade Centre, in Arabic and English. Plus allumni, MBLM's award-winning AI product.",
-    gallery: [
-      { src: "/images/mblm-vara.webp", alt: "VARA, Virtual Assets Regulatory Authority" },
-      { src: "/images/mblm-fiu.webp", alt: "Financial Intelligence Unit" },
-      { src: "/images/mblm-dwtc.webp", alt: "Dubai World Trade Centre" },
-      { src: "/images/mblm-allumni.webp", alt: "allumni" },
-    ],
-        brandColor: "#1C1C1C",
-    href: "/mblm-casestudy"
-  },
-  {
     slug: "salams",
     meta: { role: "First design hire to Senior", year: "2018 to 2023", impact: "Acquired by Match Group" },
     title: "Salams",
@@ -101,14 +86,13 @@ interface FeaturedWorkProps {
   onOpenCaseStudy?: (slug: string) => void;
 }
 
-// Bento layout: Juno leads as the big tile, MBLM and Salams sit beside it, Unita and Snapflow share a row, Zewst runs across the bottom
+// Bento layout: Juno leads as the big tile, Salams and Unita sit beside it, Snapflow and Zewst share the bottom row
 const layout = [
   'lg:col-span-2 lg:row-span-2',
   'lg:col-span-1',
   'lg:col-span-1',
   'lg:col-span-1',
   'lg:col-span-2',
-  'lg:col-span-3',
 ];
 
 /** Light brand colors need dark text */
@@ -125,10 +109,10 @@ export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
         <SectionHeader
           label="Work"
           title="Featured work,"
-          muted="six products I shaped."
+          muted="five products I shaped."
           note="Each one opens a full case study: the problem, my role, the decisions, and what changed."
         />
-        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-[repeat(4,minmax(300px,auto))] gap-4 md:gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-[repeat(3,minmax(300px,auto))] gap-4 md:gap-5">
           {projects.map((project, i) => (
             <Tile key={project.slug} project={project} index={i} total={projects.length} className={layout[i]} onOpen={onOpenCaseStudy} />
           ))}
