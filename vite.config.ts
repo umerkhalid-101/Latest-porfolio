@@ -21,6 +21,7 @@ export default defineConfig(() => {
           'zewards-casestudy': path.resolve(__dirname, 'zewards-casestudy.html'),
           'juno-casestudy': path.resolve(__dirname, 'juno-casestudy.html'),
           'snapflow-casestudy': path.resolve(__dirname, 'snapflow-casestudy.html'),
+          'docsalot-casestudy': path.resolve(__dirname, 'docsalot-casestudy.html'),
         },
       },
     },

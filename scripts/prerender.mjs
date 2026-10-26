@@ -15,6 +15,7 @@ const pages = {
   'mblm-casestudy.html': 'mblm',
   'juno-casestudy.html': 'juno',
   'snapflow-casestudy.html': 'snapflow',
+  'docsalot-casestudy.html': 'docsalot',
 };
 
 // Animations render their starting frame (hidden, offset). Drop those inline styles

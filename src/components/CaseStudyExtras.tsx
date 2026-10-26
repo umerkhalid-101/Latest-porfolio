@@ -28,6 +28,8 @@ export interface StoryContent {
   title: string;
   intro?: string;
   beats: StoryBeat[];
+  /** Smaller changes shown as a compact grid under the beats, so the scroll stays short */
+  more?: { title: string; before: string; now: string }[];
   /** 'sticky' pins a crossfading screen beside the copy; 'horizontal' slides cards sideways as you scroll */
   layout?: 'sticky' | 'horizontal';
 }
@@ -254,6 +256,32 @@ export function StoryBeats({ data, id }: { data: StoryContent; id: string }) {
             {data.beats.map((b, i) => <Beat key={b.title} beat={b} index={i} total={total} onActive={setActive} />)}
           </div>
         </div>
+
+        {data.more && (
+          <div className="mt-16 lg:mt-24 border-t border-[#121115]/10 pt-12 space-y-8">
+            <span className="t-label text-[var(--cs-accent)] block">And {data.more.length} more</span>
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+              {data.more.map((m, i) => (
+                <motion.li
+                  key={m.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
+                  className="rounded-[20px] border border-[#121115]/10 bg-[#FAF8F5] p-6 flex flex-col gap-4"
+                >
+                  <span className="t-label text-[var(--cs-accent)] tabular-nums">{String(total + i + 1).padStart(2, '0')}</span>
+                  <h3 className="text-xl md:text-2xl font-extrabold uppercase tracking-tight leading-none">{m.title}</h3>
+                  <p className="leading-relaxed text-[#121115]/85">{m.now}</p>
+                  <p className="mt-auto flex gap-3 text-sm text-[#121115]/55 border-t border-[#121115]/10 pt-4">
+                    <span className="t-label text-[#121115]/45 pt-0.5 shrink-0">Before</span>
+                    <span>{m.before}</span>
+                  </p>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </section>
   );

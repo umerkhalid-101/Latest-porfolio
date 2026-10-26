@@ -828,3 +828,143 @@ export const snapflow: CaseStudy = {
   },
   footerFacts: ['Type: self-initiated concept', 'Languages: English and Spanish', 'Built with: Next.js, GSAP, three.js'],
 };
+
+const docsShot = (name: string, alt: string): CsImage => ({ src: `/images/docsalot-${name}.webp`, alt, width: 1600, height: 1000 });
+
+export const docsalot: CaseStudy = {
+  slug: 'docsalot',
+  title: 'DocsAlot',
+  tagline: "A redesign concept of DocsAlot's homepage. The live site talked about AI-readable docs; the redesign shows them, flipping the whole page between what people read and what AI agents read.",
+  // DocsAlot's ink and cobalt, its sky band, and two light neutrals
+  theme: { primary: '#0F172A', accent: '#2563EB', soft: '#DCE6FB', highlight: '#FFFFFF', cream: '#FFFFFF', tint: '#FAF8F5' },
+  roles: [
+    { label: 'Role', value: 'Concept, design and build' },
+    { label: 'Type', value: 'Homepage redesign concept' },
+    { label: 'Year', value: '2026' },
+    { label: 'Built with', value: 'Next.js' },
+  ],
+  live: { href: 'https://docs-alot.vercel.app/', label: 'After: see the concept' },
+  links: [{ href: 'https://docsalot.dev/', label: 'Before: live DocsAlot site' }],
+  heroImage: docsShot('hero', 'The redesigned DocsAlot homepage hero: Your docs have two readers now. DocsAlot writes for both., with a Human and Machine switch in the header.'),
+  context: {
+    title: 'A product about showing, on a page that only told.',
+    body: (
+      <>
+        <p>DocsAlot turns scattered help articles, API references, and product notes into one source of truth: hosted docs for people, plus llms.txt, skill.md, clean markdown, and a hosted MCP server for AI agents.</p>
+        <p>The live homepage, fresh off its Product Hunt launch, described all of that without showing any of it. A launch block pushed the headline down, many small cards carried the same weight, up to five buttons competed in every section, and body text was 13px. I redesigned the homepage as a working concept, keeping DocsAlot's blue, fonts, and logo, and rebuilt the story so the product proves itself on the page.</p>
+      </>
+    ),
+    highlights: [
+      <>Land the main idea in <mark className="bg-[#2563EB]/10 text-[#2563EB] font-bold px-1 rounded">the first 3 seconds</mark>.</>,
+      <>Show "agent-readable", <mark className="bg-[#2563EB]/10 text-[#2563EB] font-bold px-1 rounded">don't claim it</mark>.</>,
+      <>One clear path: <mark className="bg-[#2563EB]/10 text-[#2563EB] font-bold px-1 rounded">Try DocsAlot</mark>.</>,
+    ],
+  },
+  beforeAfter: {
+    title: 'A site that talks. A site that shows.',
+    intro: <p>Drag to compare the live homepage with the redesign. Same product, same blue, a different first three seconds.</p>,
+    before: docsShot('before-hero', 'Before: the live DocsAlot homepage, a Product Hunt block above the headline Agent-readable docs for developers and AI agents.'),
+    after: docsShot('hero', 'After: the redesigned DocsAlot homepage, a slim launch bar above the headline Your docs have two readers now.'),
+    changes: [
+      { title: 'The idea, first', text: 'A slim launch bar replaces the Product Hunt block, so the bold headline is the first thing anyone reads.' },
+      { title: 'Proof, not claims', text: 'A Human / Machine switch turns the whole site into the markdown AI agents read.' },
+      { title: 'One main action', text: 'At most two buttons per section, down from five, with "Try DocsAlot" always the main one.' },
+    ],
+  },
+  quote: {
+    label: 'In one line',
+    text: 'Before, a site that talks about AI-readable docs. After, a site that shows it, flipping between the human and agent views of the same page.',
+    flow: 'HUMAN ⇄ MACHINE',
+  },
+  story: {
+    title: 'Eleven changes, before and after.',
+    intro: 'The five biggest changes, one at a time, then six smaller ones at a glance.',
+    beats: [
+      { title: 'First impression', before: 'A Product Hunt block sat on top and pushed a generic headline ("Agent-readable docs…") down, above a static screenshot.', now: 'A slim launch bar and a bold headline, "Your docs have two readers now." A live split view shows the same page for people and for AI. The main idea lands in the first 3 seconds.', image: docsShot('hero', 'The redesigned hero: Your docs have two readers now. DocsAlot writes for both.') },
+      { title: 'Agent-readable, shown', before: 'Mostly claimed in the copy, with a small view toggle tucked into a corner.', now: 'A Human / Machine switch in the header turns the whole site into the markdown AI agents read. It proves the product instead of describing it.', image: docsShot('machine', 'Machine view: the DocsAlot homepage rendered as the markdown an AI agent reads.') },
+      { title: 'The problem, as a story', before: 'Described in text: "stale help-center pages…"', now: 'A scroll story: a rate limit changes, the docs go stale, an AI gives a wrong answer, and one request fixes it everywhere. Visitors watch the pain and the fix happen.', image: docsShot('story-stale', 'A rate limit changes. Watch who finds out: production says 1,000 requests a minute while the docs still say 100.') },
+      { title: 'One source, every surface', before: 'Six static cards.', now: 'An interactive wiring diagram. Visitors edit the product name and rate limit and watch all six outputs rebuild, so "one source, every surface" becomes hands-on.', image: docsShot('surfaces', 'Edit the source: a product name and rate limit slider feeding hosted docs, API reference, llms.txt, skill.md, hosted MCP, and an AI visibility audit.') },
+      { title: 'The benchmark, in numbers', before: 'A link to the leaderboard.', now: 'A live scan scores a demo site 41, then 96 "with DocsAlot", next to real leaderboard rows. The value shows up as a number.', image: docsShot('benchmark', 'Before an agent reads your docs, check the benchmark: a demo site scanned at 41, 96 with DocsAlot, beside leaderboard rows.') },
+    ],
+    more: [
+      { title: 'One clear flow', before: 'Many small, abstract cards with similar weight, so nothing stood out.', now: 'One flow, with animated diagrams: connect your sources, package them for agents, publish everywhere. One story is easier to follow than ten cards.' },
+      { title: 'Logos you recognize', before: 'Integrations as plain text names, with Product Hunt badges tucked into the footer.', now: 'Real logos, from GitHub, Notion, and Zendesk to ChatGPT, Claude, and Cursor, with Product Hunt badges under the hero and in the footer. Faster recognition, stronger credibility.' },
+      { title: 'One main action', before: 'Five competing buttons per section: try, demo, audit, leaderboard, score.', now: 'At most two per section, with one main action, "Try DocsAlot". A clear path and less decision fatigue.' },
+      { title: 'Readable by default', before: '13px body text, in low contrast.', now: '16 to 19px body text under large, confident headings. Easier to read, and it looks more premium.' },
+      { title: 'A section with its own color', before: 'Flat off-white and thin lines, so every section looked the same.', now: "Bold color bands (ink, cobalt, sky, butter), outlined cards, stickers, and motion, keeping DocsAlot's blue, fonts, and logo. Each section has its own identity, and the site feels like a funded product." },
+      { title: 'A close worth remembering', before: 'A dense list of links.', now: 'Organized links, the "for agents" files (llms.txt and index.md), Product Hunt badges, and a giant wordmark. A strong, memorable close.' },
+    ],
+  },
+  pages: {
+    title: 'More of the new homepage.',
+    intro: 'The rest of the redesign, in page order. Hover to pause.',
+    pages: [
+      { name: 'Connect', line: 'Real logos for the tools teams already use.', image: docsShot('connect', 'Connect once: GitHub, OpenAPI, Notion, Intercom, Zendesk, and Confluence logos wired into DocsAlot.') },
+      { name: 'The story opens', line: 'Acme ships a new rate limit, and the docs fall behind.', image: docsShot('story-open', 'The story opens on a changelog: Acme ships a new rate limit.') },
+      { name: 'The fix', line: 'One sentence to an agent updates every page that mentions it.', image: docsShot('story-fix', 'You ask DocsAlot to fix it: one request updates every page that mentions the rate limit.') },
+      { name: 'How it works', line: 'Connect, package, publish: one flow instead of ten cards.', image: docsShot('how', 'Three steps. From scattered to agent-ready: connect, package, publish.') },
+      { name: 'Setup', line: 'Install the CLI, then just ask your agent.', image: docsShot('setup', 'Install the CLI. Then just ask your agent, beside a terminal window.') },
+      { name: 'Team stories', line: 'A butter band, outlined cards, and large type.', image: docsShot('stories', 'Three teams. One source of truth, on a butter band with outlined cards.') },
+      { name: 'Pricing', line: 'Three plans, with the launch offer as a sticker.', image: docsShot('pricing', 'Simple pricing for docs that maintain themselves: Startup, Team, and Enterprise plans.') },
+      { name: 'Questions', line: 'The FAQ technical buyers ask first, in readable type.', image: docsShot('faq', 'Questions technical buyers ask first, in large type on a sky band.') },
+      { name: 'Footer', line: 'Agent files, Product Hunt badges, and a giant wordmark.', image: docsShot('footer', 'The footer: Product Hunt badges above a giant DocsAlot wordmark.') },
+    ],
+  },
+  designSystem: {
+    title: "DocsAlot's blue, with more to say",
+    body: <p>I kept DocsAlot's blue and logo and built around them: four color bands give each section its own identity, outlined cards and stickers add character, larger type makes it easy to read, and a separate dark palette powers the machine view.</p>,
+    tokens: {
+      colors: [
+        { name: 'Ink', value: '#0f172a' },
+        { name: 'Cobalt', value: '#2563eb' },
+        { name: 'Sky', value: '#dce6fb' },
+        { name: 'Butter', value: '#f5e6b3' },
+        { name: 'Canvas', value: '#f9f8f5' },
+        { name: 'Slate', value: '#5e6b80' },
+        { name: 'Pass', value: '#2f7a4d' },
+        { name: 'Fail', value: '#c2352b' },
+        { name: 'Amber', value: '#a8710a' },
+        { name: 'Machine canvas', value: '#0d1117' },
+        { name: 'Machine blue', value: '#6ea1ff' },
+      ],
+      font: 'Geist Sans, Work Sans and JetBrains Mono',
+      type: [
+        { name: 'Display', size: '95px', sample: 'Your docs have two readers now.' },
+        { name: 'Heading 2', size: '54px', sample: 'Connect once.' },
+        { name: 'Heading 3', size: '27px', sample: 'Package for agents.' },
+        { name: 'Body', size: '16 to 19px', sample: 'People get docs they trust.' },
+        { name: 'Mono', size: '12.5px', sample: 'npm install -g docsalot-cli' },
+      ],
+      motion: [
+        { name: 'Snap', curve: 'cubic-bezier(0.2, 0.9, 0.25, 1)', use: 'Quick UI responses' },
+        { name: 'Scan', curve: 'cubic-bezier(0.7, 0, 0.2, 1)', use: 'Scans and sweeps' },
+        { name: 'Standard', curve: 'cubic-bezier(0.4, 0, 0.2, 1)', use: 'Everyday transitions' },
+      ],
+    },
+  },
+  stats: {
+    title: 'Shown, not told.',
+    items: [
+      { value: 11, unit: 'changes', label: 'Before and after, top to bottom' },
+      { value: 2, unit: 'views', label: 'Human and Machine, one page' },
+      { value: 2, unit: 'buttons', label: 'At most per section, down from five' },
+      { value: 19, unit: 'px', label: 'Body text, up from 13px' },
+    ],
+  },
+  leadership: {
+    roleAndTeam: { pending: 'Who the redesign was for, who worked on it with you, and how long it took.' },
+    bet: <p>DocsAlot sells docs that AI agents can actually read. The bet was that the strongest homepage would prove that on the spot: let visitors flip the page into what an agent sees, watch stale docs cause a wrong answer, and watch one request fix it.</p>,
+    hardCall: { pending: 'One decision with tradeoffs. A candidate: moving the Product Hunt block out of the hero during launch week, or cutting each section to two buttons.' },
+    howILed: (
+      <ul>
+        <li>Wrote the homepage as one story, from the problem to the fix, before designing any section.</li>
+        <li>Turned every claim into something visitors can see or try: the machine view, the wiring diagram, and the benchmark scan.</li>
+        <li>Kept DocsAlot's blue, fonts, and logo, so the redesign reads as DocsAlot, only louder.</li>
+      </ul>
+    ),
+    howILedTitle: 'How I approached it',
+    outcome: { pending: "What happened after the redesign: the team's response, or whether it shipped." },
+    differently: { pending: 'What you would do differently, looking back.' },
+  },
+  footerFacts: ['Type: homepage redesign concept', 'Views: Human and Machine', 'Built with: Next.js'],
+};

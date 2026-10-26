@@ -80,6 +80,16 @@ const projects: Project[] = [
     href: "/snapflow-casestudy"
   },
   {
+    slug: "docsalot",
+    meta: { role: "Concept, design and build", year: "2026", impact: "Homepage redesign concept" },
+    title: "DocsAlot",
+    subtitle: "Homepage redesign concept, docs for people and AI",
+    description: "DocsAlot's homepage talked about AI-readable docs. I redesigned it to show them: a Human / Machine switch flips the page into what agents read, a scroll story shows stale docs causing a wrong answer, and one main action per section.",
+    image: "/images/docsalot-hero.webp",
+    brandColor: "#2563EB",
+    href: "/docsalot-casestudy"
+  },
+  {
     slug: "zewards",
     meta: { role: "Design Manager", year: "2024", impact: "+38% repeat visits" },
     title: "Zewst",
@@ -100,13 +110,14 @@ interface FeaturedWorkProps {
   onOpenCaseStudy?: (slug: string) => void;
 }
 
-// Bento layout: Juno leads as the big tile, MBLM and Salams sit beside it, Unita and Snapflow share a row, Zewst runs across the bottom
+// Bento layout: Juno leads as the big tile, MBLM and Salams sit beside it, Unita, Snapflow and DocsAlot share a row, Zewst runs across the bottom
 const layout = [
   'lg:col-span-2 lg:row-span-2',
   'lg:col-span-1',
   'lg:col-span-1',
   'lg:col-span-1',
-  'lg:col-span-2',
+  'lg:col-span-1',
+  'lg:col-span-1',
   'lg:col-span-3',
 ];
 
@@ -124,7 +135,7 @@ export function FeaturedWork({ onOpenCaseStudy }: FeaturedWorkProps) {
         <SectionHeader
           label="Work"
           title="Featured work,"
-          muted="six products I shaped."
+          muted="seven products I shaped."
           note="Each one opens a full case study: the problem, my role, the decisions, and what changed."
         />
         <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-[repeat(4,minmax(300px,auto))] gap-4 md:gap-5">
