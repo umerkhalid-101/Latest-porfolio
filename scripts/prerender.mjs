@@ -12,6 +12,7 @@ const pages = {
   'salams-casestudy.html': 'salams',
   'zewards-casestudy.html': 'zewards',
   'unita-casestudy.html': 'unita',
+  'mblm-casestudy.html': 'mblm',
   'juno-casestudy.html': 'juno',
   'snapflow-casestudy.html': 'snapflow',
 };

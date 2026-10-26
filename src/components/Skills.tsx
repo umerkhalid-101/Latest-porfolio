@@ -52,7 +52,7 @@ const skills: Skill[] = [
     ['Hauraki', 'Scaled one pattern library across four products'],
     ['Axion Dynamic', 'Scalable Figma design system'],
     ['Salams', 'Built the first version of the design system'],
-    ['MBLM', 'VARA layout system and reusable UI kit'],
+    ['MBLM', '12-column layout system and reusable UI kit'],
   ] },
   { key: 'UX RESEARCH', name: 'UX research', kind: 'skill', lines: [
     ['Truebill', '30+ usability and validation studies'],
@@ -88,14 +88,14 @@ const skills: Skill[] = [
     ['MBLM', 'AI product admin dashboard'],
   ] },
   { key: 'WEB PORTALS', name: 'Responsive web portals', kind: 'skill', lines: [
-    ['MBLM', 'VARA portal, desktop and mobile'],
+    ['MBLM', 'Licensing portal, desktop and mobile'],
     ['MBLM', 'Typography and responsive guidelines across breakpoints'],
   ] },
   { key: 'EN / AR', name: 'Bilingual English and Arabic', kind: 'skill', lines: [
     ['MBLM', 'Bilingual portals for government and regulated clients'],
   ] },
   { key: 'GOV', name: 'Government & regulated', kind: 'accent', lines: [
-    ['MBLM', 'VARA portal and five-step licensing guide'],
+    ['MBLM', 'Licensing portal and five-step application guide'],
   ] },
   { key: 'FINTECH', name: 'Fintech', kind: 'skill', lines: [
     ['Truebill', 'Payment and authorization journeys, -18% drop-offs'],

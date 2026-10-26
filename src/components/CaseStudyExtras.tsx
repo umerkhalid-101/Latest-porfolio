@@ -744,7 +744,7 @@ export function Projects({ data, id }: { data: ProjectsContent; id: string }) {
     <section className="bg-[#FAF8F5] py-24 md:py-32 px-6 border-t border-[#121115]/5" id={id}>
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="max-w-3xl space-y-5 mb-14">
-          <Label>The projects</Label>
+          <Label>The work</Label>
           <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight leading-none">{data.title}</h2>
           {data.intro && <p className="text-base md:text-lg text-[#121115]/75 leading-relaxed">{data.intro}</p>}
         </motion.div>
@@ -758,7 +758,7 @@ export function Projects({ data, id }: { data: ProjectsContent; id: string }) {
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="rounded-[24px] md:rounded-[32px] bg-white border border-[#121115]/10 shadow-[0_-12px_40px_-20px_rgba(18,17,21,0.25)] overflow-hidden grid grid-cols-1 lg:grid-cols-12"
               >
-                <div className="lg:col-span-5 bg-[var(--cs-primary)] text-white p-6 md:p-10 flex flex-col gap-8 justify-between">
+                <div className="lg:col-span-6 bg-[var(--cs-primary)] text-white p-6 md:p-8 flex flex-col gap-8 justify-between">
                   <div className="flex items-center justify-between t-label text-white/60">
                     <span className="tabular-nums">{String(i + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
                     <span>{p.sector}</span>
@@ -776,13 +776,13 @@ export function Projects({ data, id }: { data: ProjectsContent; id: string }) {
                     )}
                   </div>
                 </div>
-                <div className="lg:col-span-7 p-6 md:p-10 space-y-8">
+                <div className="lg:col-span-6 p-6 md:p-10 space-y-8 self-center">
                   <div className="space-y-3">
                     <span className="t-label text-[var(--cs-accent)]">The challenge</span>
                     <p className="text-lg md:text-xl leading-relaxed font-medium">{p.challenge}</p>
                   </div>
                   <div className="space-y-3">
-                    <span className="t-label text-[var(--cs-accent)]">What I did</span>
+                    <span className="t-label text-[var(--cs-accent)]">My approach</span>
                     <ul className="space-y-3">
                       {p.moves.map((m) => (
                         <li key={m} className="flex gap-3 text-[#121115]/80 leading-relaxed">
@@ -850,7 +850,7 @@ function MirrorDemo() {
 function LengthDemo() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true });
-  const pairs = [['Licensing guide', 'دليل الترخيص'], ['Virtual asset rules', 'قواعد الأصول الافتراضية']];
+  const pairs = [['Start application', 'ابدأ الطلب'], ['Reporting guidance', 'إرشادات الإبلاغ']];
   return (
     <div ref={ref} className="space-y-4 w-full">
       {pairs.map(([en, ar], i) => (
@@ -1115,14 +1115,17 @@ export function HeroCards({ cards }: { cards: HeroCard[] }) {
             <motion.div
               key={c.name}
               className="absolute left-0 bottom-0 w-[82%] rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+              // Stacking order switches at once, so the outgoing card never ghosts over the new front card
+              style={{ zIndex: n - depth }}
               initial={reduce ? false : { opacity: 0, y: 80, rotate: 0 }}
               animate={{
-                opacity: depth > 3 ? 0 : 1 - depth * 0.12,
+                // Back cards dim instead of fading, so nothing shows through the card in front
+                opacity: depth > 3 ? 0 : 1,
+                filter: `brightness(${1 - depth * 0.15})`,
                 x: `${depth * 7}%`,
                 y: `${-depth * 9}%`,
                 rotate: depth * 3,
                 scale: 1 - depth * 0.05,
-                zIndex: n - depth,
               }}
               transition={{ type: 'spring', stiffness: 120, damping: 20, delay: reduce ? 0 : 0.5 + (n - i) * 0.08 }}
               aria-hidden={depth !== 0}

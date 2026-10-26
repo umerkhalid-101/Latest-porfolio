@@ -15,10 +15,10 @@ import { Skills } from './components/Skills';
 import { KindWords } from './components/KindWords';
 import { Footer } from './components/Footer';
 import { CaseStudyTemplate } from './components/CaseStudyTemplate';
-import { salams, zewards, juno, unita, snapflow } from './caseStudyData';
+import { salams, zewards, mblm, juno, unita, snapflow } from './caseStudyData';
 import { MARQUEE_ITEMS } from './data/marquee';
 
-export type Route = 'home' | 'salams' | 'zewards' | 'unita' | 'juno' | 'snapflow';
+export type Route = 'home' | 'salams' | 'zewards' | 'unita' | 'mblm' | 'juno' | 'snapflow';
 
 const noop = () => {};
 
@@ -27,6 +27,7 @@ function page(route: Route) {
     case 'salams': return <CaseStudyTemplate data={salams} onClose={noop} />;
     case 'zewards': return <CaseStudyTemplate data={zewards} onClose={noop} />;
     case 'unita': return <CaseStudyTemplate data={unita} onClose={noop} />;
+    case 'mblm': return <CaseStudyTemplate data={mblm} onClose={noop} />;
     case 'juno': return <CaseStudyTemplate data={juno} onClose={noop} />;
     case 'snapflow': return <CaseStudyTemplate data={snapflow} onClose={noop} />;
     default:

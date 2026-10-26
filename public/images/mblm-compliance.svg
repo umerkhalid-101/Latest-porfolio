@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <!-- Abstract wireframe: audience-first navigation, a one-click report action and a filterable guidance library, annotated -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E2DDD4"/><stop offset="1" stop-color="#CBC4B8"/></linearGradient>
+    <pattern id="cols" width="80" height="540" patternUnits="userSpaceOnUse"><rect x="8" width="64" height="540" fill="#121115" opacity="0.04"/></pattern>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#121115" flood-opacity="0.25"/></filter>
+    <filter id="pill" x="-20%" y="-40%" width="140%" height="200%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity="0.3"/></filter>
+    <clipPath id="frame"><rect width="960" height="540"/></clipPath>
+    <g id="doc">
+      <path d="M0 0 h18 l8 8 v26 h-26 z" fill="#121115" fill-opacity="0.06" stroke="#121115" stroke-opacity="0.35" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M18 0 v8 h8" fill="none" stroke="#121115" stroke-opacity="0.35" stroke-width="1.5" stroke-linejoin="round"/>
+    </g>
+    <g id="download" fill="none" stroke="#121115" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M0 0 v16"/><path d="M-6 10 l6 6 l6 -6"/><path d="M-8 22 h16"/>
+    </g>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="960" height="540" fill="url(#bg)"/>
+    <rect width="960" height="540" fill="url(#cols)"/>
+
+    <rect x="150" y="78" width="660" height="490" rx="18" fill="#fff" filter="url(#sh)"/>
+    <g fill="#121115" opacity="0.18"><circle cx="174" cy="98" r="6"/><circle cx="194" cy="98" r="6"/><circle cx="214" cy="98" r="6"/></g>
+    <rect x="390" y="88" width="180" height="20" rx="10" fill="#121115" opacity="0.06"/>
+    <rect x="730" y="86" width="62" height="24" rx="12" fill="none" stroke="#121115" stroke-opacity="0.2"/>
+    <text x="749" y="103" font-size="11" font-weight="700" text-anchor="middle" fill="#121115">EN</text>
+    <text x="775" y="104" font-size="13" font-weight="700" text-anchor="middle" fill="#121115" fill-opacity="0.45">ع</text>
+
+    <!-- High-contrast navigation by audience -->
+    <rect x="150" y="118" width="660" height="60" fill="#121115"/>
+    <rect x="174" y="134" width="28" height="28" rx="6" fill="#fff"/>
+    <rect x="212" y="144" width="70" height="8" rx="4" fill="#fff" opacity="0.7"/>
+    <rect x="300" y="133" width="144" height="30" rx="15" fill="#fff"/>
+    <text x="372" y="153" font-size="12" font-weight="700" text-anchor="middle" fill="#121115">Reporting entities</text>
+    <rect x="452" y="133" width="70" height="30" rx="15" fill="none" stroke="#fff" stroke-opacity="0.3"/>
+    <text x="487" y="153" font-size="12" font-weight="600" text-anchor="middle" fill="#fff" fill-opacity="0.8">Public</text>
+    <rect x="530" y="133" width="84" height="30" rx="15" fill="none" stroke="#fff" stroke-opacity="0.3"/>
+    <text x="572" y="153" font-size="12" font-weight="600" text-anchor="middle" fill="#fff" fill-opacity="0.8">Partners</text>
+    <rect x="660" y="131" width="130" height="34" rx="17" fill="#B8572A"/>
+    <text x="725" y="153" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">Submit a report</text>
+
+    <!-- Search -->
+    <rect x="174" y="196" width="612" height="40" rx="20" fill="#F4F2EE"/>
+    <circle cx="196" cy="215" r="7" fill="none" stroke="#121115" stroke-opacity="0.5" stroke-width="2"/>
+    <path d="M201 220 l5 5" stroke="#121115" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round"/>
+    <rect x="214" y="212" width="170" height="8" rx="4" fill="#121115" opacity="0.3"/>
+
+    <!-- Filters -->
+    <text x="174" y="270" font-size="11" font-weight="700" letter-spacing="1.5" fill="#121115" fill-opacity="0.5">FILTER</text>
+    <g fill="#121115"><rect x="174" y="286" width="14" height="14" rx="3"/><rect x="174" y="314" width="14" height="14" rx="3"/></g>
+    <path d="M177.5 293 l2.5 2.5 l4.5 -5 M177.5 321 l2.5 2.5 l4.5 -5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <g fill="none" stroke="#121115" stroke-opacity="0.3" stroke-width="1.5"><rect x="174" y="342" width="14" height="14" rx="3"/><rect x="174" y="370" width="14" height="14" rx="3"/><rect x="174" y="398" width="14" height="14" rx="3"/></g>
+    <g fill="#121115">
+      <rect x="198" y="290" width="90" height="7" rx="3.5" opacity="0.5"/>
+      <rect x="198" y="318" width="104" height="7" rx="3.5" opacity="0.5"/>
+      <rect x="198" y="346" width="70" height="7" rx="3.5" opacity="0.25"/>
+      <rect x="198" y="374" width="96" height="7" rx="3.5" opacity="0.25"/>
+      <rect x="198" y="402" width="80" height="7" rx="3.5" opacity="0.25"/>
+    </g>
+
+    <!-- Results -->
+    <g>
+      <rect x="330" y="256" width="456" height="60" rx="12" fill="#fff" stroke="#121115" stroke-opacity="0.1"/>
+      <use href="#doc" x="346" y="269"/>
+      <rect x="386" y="273" width="200" height="9" rx="4.5" fill="#121115" opacity="0.8"/>
+      <rect x="386" y="291" width="110" height="7" rx="3.5" fill="#121115" opacity="0.25"/>
+      <rect x="650" y="275" width="76" height="22" rx="11" fill="#B8572A" fill-opacity="0.12"/>
+      <text x="688" y="290" font-size="10" font-weight="700" text-anchor="middle" fill="#B8572A">Guidance</text>
+      <use href="#download" x="760" y="272"/>
+    </g>
+    <g>
+      <rect x="330" y="328" width="456" height="60" rx="12" fill="#fff" stroke="#121115" stroke-opacity="0.1"/>
+      <use href="#doc" x="346" y="341"/>
+      <rect x="386" y="345" width="230" height="9" rx="4.5" fill="#121115" opacity="0.8"/>
+      <rect x="386" y="363" width="96" height="7" rx="3.5" fill="#121115" opacity="0.25"/>
+      <rect x="650" y="347" width="76" height="22" rx="11" fill="#121115" fill-opacity="0.07"/>
+      <text x="688" y="362" font-size="10" font-weight="700" text-anchor="middle" fill="#121115" fill-opacity="0.7">Circular</text>
+      <use href="#download" x="760" y="344"/>
+    </g>
+    <g>
+      <rect x="330" y="400" width="456" height="60" rx="12" fill="#fff" stroke="#121115" stroke-opacity="0.1"/>
+      <use href="#doc" x="346" y="413"/>
+      <rect x="386" y="417" width="180" height="9" rx="4.5" fill="#121115" opacity="0.8"/>
+      <rect x="386" y="435" width="130" height="7" rx="3.5" fill="#121115" opacity="0.25"/>
+      <rect x="650" y="419" width="76" height="22" rx="11" fill="#B8572A" fill-opacity="0.12"/>
+      <text x="688" y="434" font-size="10" font-weight="700" text-anchor="middle" fill="#B8572A">Guidance</text>
+      <use href="#download" x="760" y="416"/>
+    </g>
+    <g>
+      <rect x="330" y="472" width="456" height="60" rx="12" fill="#fff" stroke="#121115" stroke-opacity="0.1"/>
+      <use href="#doc" x="346" y="485"/>
+      <rect x="386" y="489" width="210" height="9" rx="4.5" fill="#121115" opacity="0.8"/>
+      <rect x="386" y="507" width="100" height="7" rx="3.5" fill="#121115" opacity="0.25"/>
+      <rect x="650" y="491" width="76" height="22" rx="11" fill="#121115" fill-opacity="0.07"/>
+      <text x="688" y="506" font-size="10" font-weight="700" text-anchor="middle" fill="#121115" fill-opacity="0.7">Report</text>
+      <use href="#download" x="760" y="488"/>
+    </g>
+
+    <!-- Callouts -->
+    <g font-size="20" font-weight="700">
+      <path d="M398 64 L380 124" stroke="#121115" stroke-width="2" stroke-dasharray="4 4"/>
+      <circle cx="378" cy="133" r="7" fill="#121115" stroke="#fff" stroke-width="3"/>
+      <rect x="290" y="20" width="216" height="44" rx="22" fill="#121115" filter="url(#pill)"/>
+      <circle cx="312" cy="42" r="13" fill="#B8572A"/>
+      <text x="312" y="48" font-size="15" text-anchor="middle" fill="#fff">1</text>
+      <text x="334" y="49" fill="#fff">Audience first</text>
+
+      <path d="M800 64 L738 124" stroke="#121115" stroke-width="2" stroke-dasharray="4 4"/>
+      <circle cx="733" cy="131" r="7" fill="#121115" stroke="#fff" stroke-width="3"/>
+      <rect x="680" y="20" width="271" height="44" rx="22" fill="#121115" filter="url(#pill)"/>
+      <circle cx="702" cy="42" r="13" fill="#B8572A"/>
+      <text x="702" y="48" font-size="15" text-anchor="middle" fill="#fff">2</text>
+      <text x="724" y="49" fill="#fff">One click to report</text>
+
+      <path d="M130 432 L174 413" stroke="#121115" stroke-width="2" stroke-dasharray="4 4"/>
+      <circle cx="181" cy="405" r="7" fill="#121115" stroke="#fff" stroke-width="3"/>
+      <rect x="16" y="432" width="271" height="44" rx="22" fill="#121115" filter="url(#pill)"/>
+      <circle cx="38" cy="454" r="13" fill="#B8572A"/>
+      <text x="38" y="460" font-size="15" text-anchor="middle" fill="#fff">3</text>
+      <text x="60" y="461" fill="#fff">Filterable guidance</text>
+    </g>
+  </g>
+</svg>

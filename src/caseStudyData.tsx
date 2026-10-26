@@ -297,28 +297,29 @@ export const zewards: CaseStudy = {
 export const mblm: CaseStudy = {
   slug: 'mblm',
   title: 'MBLM',
-  tagline: "Government websites people have to use, and an AI product people choose to. At MBLM Dubai I design portals for VARA, the UAE Financial Intelligence Unit, and Dubai World Trade Centre, plus allumni, MBLM's award-winning AI.",
+  tagline: "Government websites people have to use, and an AI product people choose to. At MBLM Dubai, I designed public portals for government and regulated-sector clients in the UAE, plus allumni, MBLM's award-winning AI marketing advisor.",
   // MBLM's near-black, one copper accent, a pale copper, and two light neutrals
   theme: { primary: '#161616', accent: '#B8572A', soft: '#F2C9A8', highlight: '#FFFFFF', cream: '#FFFFFF', tint: '#FAF8F5' },
   roles: [
     { label: 'Role', value: 'Design Specialist' },
     { label: 'Agency', value: 'MBLM Dubai' },
     { label: 'Year', value: '2026' },
-    { label: 'Work', value: '3 portals, 1 AI product' },
+    { label: 'Work', value: 'Government portals, 1 AI product' },
   ],
-  heroImage: { src: '/images/mblm-vara.webp', alt: 'VARA, Virtual Assets Regulatory Authority', width: 960, height: 540 },
+  // Client work is shown as abstract wireframes, never screenshots or links
+  heroImage: { src: '/images/mblm-regulation.svg', alt: 'Abstract wireframe of a five-step application with saved progress', width: 960, height: 540 },
   heroCards: [
-    { name: 'VARA', label: 'Website and licensing portal', image: { src: '/images/mblm-vara.webp', alt: 'VARA, Virtual Assets Regulatory Authority', width: 960, height: 540 } },
-    { name: 'Financial Intelligence Unit', label: 'Government portal', image: { src: '/images/mblm-fiu.webp', alt: 'Financial Intelligence Unit', width: 960, height: 540 } },
-    { name: 'Dubai World Trade Centre', label: 'Events and venue website', image: { src: '/images/mblm-dwtc.webp', alt: 'Dubai World Trade Centre', width: 960, height: 540 } },
-    { name: 'allumni', label: "MBLM's in-house AI product", image: { src: '/images/allumni-hero.webp', alt: 'The allumni homepage: The AI marketing advisor, built for brands.', width: 1440, height: 790 } },
+    { name: 'Regulation', label: 'Website and licensing portal', image: { src: '/images/mblm-regulation.svg', alt: 'Abstract wireframe of a five-step application with saved progress and an error state', width: 960, height: 540 } },
+    { name: 'Compliance', label: 'Reporting and guidance portal', image: { src: '/images/mblm-compliance.svg', alt: 'Abstract wireframe of audience tabs, a report button, and a filterable guidance library', width: 960, height: 540 } },
+    { name: 'Events', label: 'Events and venue website', image: { src: '/images/mblm-events.svg', alt: 'Abstract wireframe of a mobile events calendar and an enquiry form', width: 960, height: 540 } },
+    { name: 'allumni', label: "MBLM's in-house AI product", image: { src: '/images/mblm-allumni.svg', alt: 'Abstract composition of glass shapes and a giant allumni wordmark on black', width: 960, height: 540 } },
   ],
   context: {
     title: 'Government websites are the front door to the law.',
     body: (
       <>
-        <p>I joined MBLM Dubai as a Design Specialist in March 2026. Most of my work is for UAE government and regulated-sector clients, where nobody visits for fun. People come because they must: to get licensed, to report, to exhibit. They arrive with a task and a deadline.</p>
-        <p>That changes the job. Every page carries legal weight, has to work in Arabic and English, has to be usable by everyone, and has to pass legal, communications, and leadership review before it ships. My goal on every portal was the same: make a required task feel clear and calm, without cutting a word the law needs.</p>
+        <p>Most of my work at MBLM was for government and regulated-sector clients, where nobody visits for fun. People come because they must: to get licensed, to report, to take part. They arrive with a task and a deadline.</p>
+        <p>That changes the job. Every page carries legal weight, has to work in Arabic and English, has to be usable by everyone, and has to pass legal, communications, and leadership review before it ships. My goal on every project was the same: make a required task feel clear and calm, without cutting a word the law needs.</p>
       </>
     ),
     highlights: [
@@ -328,69 +329,62 @@ export const mblm: CaseStudy = {
     ],
   },
   problem: {
+    image: { src: '/images/mblm-users.svg', alt: 'Three people who arrive with a job to do: a founder abroad who needs a licence, a compliance officer filing a report, and an event visitor planning a trip', width: 800, height: 880 },
     questions: [
-      { q: 'Who is the user?', a: 'Never one person. A crypto founder abroad reading Dubai\'s rules for the first time, a compliance officer at a bank filing a report, an exhibitor flying in for a trade show. Each arrives with a job to do, not curiosity.' },
-      { q: 'Why is government design hard?', a: 'The content is dense and legally exact, so I can\'t simplify by cutting words. Instead I simplify the path: what to read first, what to do next, and where you are in the process.' },
+      { q: 'Who is the user?', a: 'Never one person. A founder abroad reading local regulations for the first time, a compliance officer filing a report, a visitor planning a trip to an event. Each arrives with a job to do, not curiosity.' },
+      { q: 'Why is government design hard?', a: 'The content is dense and legally exact, so I couldn’t simplify by cutting words. Instead, I simplified the path: what to read first, what to do next, and where you are in the process.' },
       { q: 'How do you design for many approvers?', a: 'With a shared UI kit and grid that engineering, communications, and the client sign off once, so each new page is assembled from approved parts instead of debated from scratch.' },
     ],
   },
   projects: {
-    title: 'Three portals, three kinds of pressure.',
-    intro: 'Each client had a different audience and a different reason the stakes were high. Scroll through them.',
+    title: 'Three kinds of pressure.',
+    intro: 'Each project had a different audience and a different reason the stakes were high.',
     items: [
       {
-        name: 'VARA',
-        href: 'https://www.vara.ae/en/',
-        full: 'Virtual Assets Regulatory Authority, Dubai',
+        name: 'Regulation',
+        full: 'Website and licensing portal',
         sector: 'Regulator',
-        image: { src: '/images/mblm-vara.webp', alt: 'VARA, Virtual Assets Regulatory Authority', width: 960, height: 540 },
-        challenge: 'Virtual asset firms from all over the world come to VARA to understand Dubai\'s rules and start a licence. The rules are long and exact, the process takes weeks, and one wrong step costs time and money.',
+        image: { src: '/images/mblm-regulation.svg', alt: 'Abstract wireframe of a five-step application with saved progress and an error state', width: 960, height: 540 },
+        challenge: 'Businesses from around the world needed to understand complex rules and start a long, high-stakes application. One wrong step costs time and money.',
         moves: [
-          'Redesigned VARA\'s public website, from the homepage to the internal page templates, across desktop and mobile.',
-          'Designed the web portal where firms start and manage their licensing, on the same system as the website.',
-          'Turned licensing into a five-step guide with continue and recovery states, so applicants can pick up where they left off and get back on track when something goes wrong.',
-          'Built a reusable UI kit for forms, tables, the step wizard, and search and filters, so new pages reuse proven parts.',
-          'Defined a 12-column layout system with engineering, so design and build share one structure.',
+          'Turn dense regulation into a guided path, with clear progress, the ability to pick up where you left off, and a way back on track when something goes wrong.',
+          'Build every page from a shared kit of forms, tables, and filters so the experience stays consistent.',
         ],
-        tags: ['Website redesign', 'Web portal', 'Five-step licensing guide', 'Reusable UI kit', 'Desktop and mobile'],
+        tags: ['Guided journeys', 'Reusable UI kit', 'Desktop and mobile'],
       },
       {
-        name: 'FIU',
-        href: 'https://uaefiu.gov.ae/en/',
-        full: 'Financial Intelligence Unit, UAE',
-        sector: 'Financial crime',
-        image: { src: '/images/mblm-fiu.webp', alt: 'Financial Intelligence Unit', width: 960, height: 540 },
-        challenge: 'The FIU is where banks, exchange houses, and other reporting entities go to report suspicious transactions and find guidance. The audience is expert and busy, the subject is serious, and finding the right guidance quickly matters.',
+        name: 'Compliance',
+        full: 'Reporting and guidance portal',
+        sector: 'Regulated sector',
+        image: { src: '/images/mblm-compliance.svg', alt: 'Abstract wireframe of audience tabs, a report button, and a filterable guidance library', width: 960, height: 540 },
+        challenge: 'An expert, busy audience needed to complete serious reporting tasks and find the right guidance fast.',
         moves: [
-          'Organised the site around who you are and what you need to do, instead of around the organisation chart.',
-          'Gave reporting a clear, prominent path, so the most important action is never more than a click away.',
-          'Designed a guidance and publications library with filters, so compliance teams find the right document fast.',
-          'Kept the visual tone restrained and high contrast, to match the seriousness of the work.',
+          'Organize the experience around who you are and what you need to do, not around the org chart.',
+          'Keep the most important action one click away, and make guidance easy to filter.',
+          'Keep the visual tone restrained and high contrast to match the seriousness of the work.',
         ],
         tags: ['Audience-first navigation', 'Guidance library', 'Accessibility'],
       },
       {
-        name: 'DWTC',
-        href: 'https://www.dwtc.com/en/',
-        full: 'Dubai World Trade Centre',
+        name: 'Events',
+        full: 'Events and venue website',
         sector: 'Events and venues',
-        image: { src: '/images/mblm-dwtc.webp', alt: 'Dubai World Trade Centre', width: 960, height: 540 },
-        challenge: 'DWTC serves visitors, exhibitors, and event organisers at once, with a calendar that never stops. Each audience needs something different from the same site, often in a hurry and often on a phone.',
+        image: { src: '/images/mblm-events.svg', alt: 'Abstract wireframe of a mobile events calendar and an enquiry form', width: 960, height: 540 },
+        challenge: 'Visitors, exhibitors, and organizers all needed different things from the same experience, often in a hurry and often on a phone.',
         moves: [
-          'Split the journeys by audience at the top level, so visitors, exhibitors, and organisers each get a direct route.',
-          'Designed an events calendar with filters by date and sector, built to scan quickly on mobile.',
-          'Made practical information, like getting there and venue details, easy to reach from any event.',
-          'Designed an enquiry path for organisers that asks only what the venue team needs to respond.',
+          'Split journeys by audience at the top level.',
+          'Design a fast-scanning, filterable events calendar for mobile, and keep practical info one tap away.',
+          'Design enquiry flows that ask only what the team needs to respond.',
         ],
-        tags: ['Events calendar', 'Multi-audience', 'Mobile first'],
+        tags: ['Multi-audience', 'Events calendar', 'Mobile first'],
       },
     ],
   },
   bilingual: {
     title: 'Every screen, designed twice.',
-    intro: <p>In the UAE, Arabic isn't a translation layer. It reads right to left, often runs longer, and needs its own type rhythm. I designed key templates in both languages from the start, by three rules.</p>,
+    intro: <p>In the UAE, Arabic isn't a translation layer. It reads right to left, often runs longer, and needs its own type rhythm. I designed key templates in both languages from the start, guided by three rules.</p>,
     rules: [
-      { demo: 'mirror', title: 'Mirror the layout, not just the text', text: 'Navigation, progress, and arrows follow reading direction, so the Arabic site feels native rather than flipped.' },
+      { demo: 'mirror', title: 'Mirror the layout, not just the text', text: 'Navigation, progress, and arrows follow reading direction, so the Arabic experience feels native rather than flipped.' },
       { demo: 'length', title: 'Size for the longer language', text: 'Buttons, tabs, and headings are sized for whichever language runs longer, so nothing breaks after translation.' },
       { demo: 'type', title: 'Give Arabic room to breathe', text: 'Arabic letters have taller ascenders, deeper descenders, and dots, so Arabic text gets its own line height and type scale.' },
     ],
@@ -405,50 +399,51 @@ export const mblm: CaseStudy = {
       { label: 'Recognition', value: 'W3 Silver, two categories' },
     ],
     color: '#5B3DF5',
-    link: { href: 'https://www.allumni.ai/', label: 'Visit allumni.ai' },
+    // No public link or product screenshots until MBLM signs off; the visuals are abstract
     chapters: [
       {
         tag: 'Website',
         problem: 'Every AI tool looks like a chat window',
         title: 'Sell it as a brand first',
-        text: 'A black stage, floating glass shapes, and a giant wordmark. The homepage presents allumni as a brand you would trust with yours, not another chatbot.',
-        image: { src: '/images/allumni-hero.webp', alt: 'The allumni homepage hero: The AI marketing advisor, built for brands, above a giant allumni wordmark on black.', width: 1440, height: 790 },
+        text: 'A black stage, floating glass shapes, and a giant wordmark present allumni as a brand you’d trust with yours, not another chatbot.',
+        image: { src: '/images/mblm-allumni.svg', alt: 'Abstract composition: glass shapes floating on a black stage above a giant allumni wordmark.', width: 960, height: 540 },
       },
       {
         tag: 'Product',
         problem: 'An AI is only as good as the context you give it',
         title: 'Make context effortless to give',
-        text: 'Brand work runs on documents, images, and decks. I made adding them a single gesture, and kept them visible for the whole conversation, so people always know what allumni is working from.',
+        text: 'Adding documents, images, and decks became a single gesture, and they stay visible for the whole conversation, so people always know what allumni is working from.',
         sequence: [
-          { image: { src: '/images/allumni-app-drop.webp', alt: 'Dragging a file over an allumni conversation shows an Attach File drop target: Add documents for tailored answers.', width: 1040, height: 560 }, caption: 'Drop files anywhere in the conversation.' },
-          { image: { src: '/images/allumni-app-composer.webp', alt: 'The allumni composer holding a grid of attached images, documents, PDFs, and zip files above the prompt.', width: 1040, height: 560 }, caption: 'Review everything before you send.' },
-          { image: { src: '/images/allumni-app-attachments.webp', alt: 'An allumni conversation with an Attachments panel on the right listing the files in use.', width: 1040, height: 560 }, caption: 'Keep it in view while you chat.' },
+          { image: { src: '/images/allumni-abstract-drop.svg', alt: 'Abstract wireframe: a file dragged over a conversation shows a drop target.', width: 1040, height: 560 }, caption: 'Drop files anywhere in the conversation.' },
+          { image: { src: '/images/allumni-abstract-composer.svg', alt: 'Abstract wireframe: attached images, documents, and files held above the prompt.', width: 1040, height: 560 }, caption: 'Review everything before you send.' },
+          { image: { src: '/images/allumni-abstract-attachments.svg', alt: 'Abstract wireframe: a conversation with an attachments panel on the right.', width: 1040, height: 560 }, caption: 'Keep it in view while you chat.' },
         ],
       },
       {
         tag: 'Product',
         problem: 'A blank prompt is hard to start from',
         title: 'Start from a task, not a prompt',
-        text: 'Repeat jobs, like campaign plans, reports, and social posts, become shortcuts. Favourites sit on top and can be colour-coded, so a team\'s most common work is one click away.',
-        image: { src: '/images/allumni-app-shortcuts.webp', alt: 'The allumni Shortcuts screen: favourite shortcuts in colour-coded cards above more shortcuts.', width: 2000, height: 1029 },
+        text: 'Repeat jobs like campaign plans, reports, and social posts became shortcuts, with favorites on top and color coding, so a team’s most common work is one click away.',
+        image: { src: '/images/allumni-abstract-shortcuts.svg', alt: 'Abstract wireframe: color-coded favorite shortcuts above more shortcuts.', width: 960, height: 540 },
       },
       {
         tag: 'Product',
-        problem: 'Teams can\'t see what the AI knows',
+        problem: 'Teams couldn’t see what the AI knew',
         title: 'Turn a brand into a checklist',
-        text: 'The brand model breaks a brand into parts, from promise and mission to personality, each with a clear status. Teams see at a glance what allumni has learned and what is still missing.',
-        image: { src: '/images/allumni-brand-model.webp', alt: 'The allumni brand model screen, listing each brand component with a status check.', width: 738, height: 562 },
+        text: 'The brand model breaks a brand into parts, from promise and mission to personality, each with a clear status, so teams see at a glance what’s learned and what’s missing.',
+        image: { src: '/images/allumni-abstract-brand-model.svg', alt: 'Abstract wireframe: brand parts listed with learned or missing status.', width: 960, height: 540 },
       },
     ],
   },
   designSystem: {
-    title: 'One grid, one kit, every portal',
-    body: <p>On VARA I built a 12-column layout system with engineering, set typography and responsive guidelines for both Arabic and English, and turned recurring patterns into a reusable UI kit. The same foundation now keeps MBLM's other portal projects consistent, so new pages start from approved parts.</p>,
+    title: 'One grid, one kit, every portal.',
+    body: <p>I built a 12-column layout system with engineering, set typography and responsive guidelines for Arabic and English, and turned recurring patterns into a reusable UI kit. That foundation kept MBLM's portal projects consistent, so new pages started from approved parts.</p>,
     chips: ['Forms', 'Tables', 'Step wizard', 'Search and filters', 'Arabic and English type', 'Responsive guidelines'],
     columns: 12,
+    images: [{ src: '/images/mblm-ui-kit.svg', alt: 'Abstract UI kit sheet: buttons in English and Arabic, input states, the step wizard, a status table, search and filters, and Latin and Arabic type', width: 1600, height: 1000 }],
   },
   leadership: {
-    roleAndTeam: <p>I joined MBLM Dubai as a Design Specialist in March 2026. I own portal design across desktop and mobile for government clients, work with engineering on the layout system and UI kit, and design the website and product UI for allumni.</p>,
+    roleAndTeam: <p>I joined MBLM Dubai as a Design Specialist in March 2026. I owned portal design across desktop and mobile for government clients, worked with engineering on the layout system and UI kit, and designed the website and product UI for allumni.</p>,
     bet: <p>Government users don't browse, they comply. When a required task is confusing, the cost is real: delayed licences, missed reports, and calls to support. The bet was that a clear path, saved progress, and one shared system would do more for these clients than any visual flourish.</p>,
     hardCall: <p>Whether to design Arabic as a mirror of English or as an equal. Mirroring is faster, but Arabic runs longer and reads right to left, so mirrored pages break after translation. I pushed to design key templates in both directions from the start. It cost time up front, and saved rework on every page after.</p>,
     howILed: (
@@ -459,10 +454,10 @@ export const mblm: CaseStudy = {
       </ul>
     ),
     howILedTitle: 'How I worked with engineering',
-    outcome: <p>VARA's portal, licensing guide, and UI kit now set the foundation for MBLM's other government portals, and allumni, MBLM's in-house AI product, went on to win W3 Silver in two categories.</p>,
+    outcome: <p>The guided application, UI kit, and grid became the foundation for MBLM's other government portals, and allumni, MBLM's in-house AI product, went on to win W3 Silver in two categories.</p>,
     differently: { pending: 'What you would do differently, looking back.' },
   },
-  footerFacts: ['Agency: MBLM Dubai', 'Clients: VARA, FIU, DWTC', 'In-house product: allumni'],
+  footerFacts: ['Agency: MBLM Dubai', 'Clients: government and regulated sector', 'In-house product: allumni'],
 };
 
 const junoShot = (name: string, alt: string): CsImage => ({ src: `/images/juno-${name}.webp`, alt, width: 1600, height: 1000 });
