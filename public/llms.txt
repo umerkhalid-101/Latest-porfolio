@@ -25,6 +25,7 @@
 - [MBLM](https://www.umerkhalid.co/mblm-casestudy): public portals for government and regulated-sector clients in the UAE at MBLM Dubai (a guided licensing journey, a reporting and guidance portal, and a mobile-first events site), designed in Arabic and English on a shared 12-column grid and UI kit; and allumni, MBLM's in-house AI marketing advisor, winner of two W3 Silver awards.
 - [Juno](https://www.umerkhalid.co/juno-casestudy): the story, design system, and nine-page marketing site for Juno, an AI chief of staff for teams, rebuilt in one week around showing the product working instead of describing it.
 - [Snapflow](https://www.umerkhalid.co/snapflow-casestudy): a self-initiated redesign concept of the homepage for Snapflow, an agentic design system, designed and built as a working site in English and Spanish with scroll-driven 3D motion.
+- [DocsAlot](https://www.umerkhalid.co/docsalot-casestudy): a redesign concept of the homepage for DocsAlot, a platform for docs that people and AI agents can read: a Human / Machine switch that turns the page into the markdown agents read, a scroll story about stale docs, an interactive output diagram, and a live benchmark scan, designed and built as a working site.
 
 ## Freelance projects
 Cayano, Break Thirty, Beyondhut, Folionomics, Rivas Pro Detail, and Hims.

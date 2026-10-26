@@ -55,6 +55,7 @@ const columns = [
       { label: 'Zewst', href: '/zewards-casestudy' },
       { label: 'Juno', href: '/juno-casestudy' },
       { label: 'Snapflow', href: '/snapflow-casestudy' },
+      { label: 'DocsAlot', href: '/docsalot-casestudy' },
     ],
   },
   {
