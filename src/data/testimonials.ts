@@ -14,7 +14,7 @@ export type Testimonial = {
 // Approved by each person, word for word. Entries whose quote starts with TODO are skipped.
 export const testimonials: Testimonial[] = [
   {
-    quote: 'Umer brings real product thinking to government work. On VARA he turned a complex regulatory process into a five-step guide people could actually follow, and he built the UI kit that kept the whole portal consistent.',
+    quote: 'Umer brings real product thinking to government work. On one portal he turned a complex regulatory process into a five-step guide people could actually follow, and he built the UI kit that kept the whole portal consistent.',
     name: 'Norton Gomes',
     title: 'Creative Director',
     company: 'MBLM',

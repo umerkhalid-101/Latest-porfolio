@@ -20,6 +20,14 @@
       "destination": "/unita-casestudy.html"
     },
     {
+      "source": "/mblm-casestudy",
+      "destination": "/mblm-casestudy.html"
+    },
+    {
+      "source": "/mblm-casestudy/",
+      "destination": "/mblm-casestudy.html"
+    },
+    {
       "source": "/zewards-casestudy",
       "destination": "/zewards-casestudy.html"
     },
@@ -65,23 +73,13 @@
     },
     {
       "source": "/vara-casestudy",
-      "destination": "/",
-      "permanent": false
+      "destination": "/mblm-casestudy",
+      "permanent": true
     },
     {
       "source": "/vara-casestudy/",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/mblm-casestudy",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/mblm-casestudy/",
-      "destination": "/",
-      "permanent": false
+      "destination": "/mblm-casestudy",
+      "permanent": true
     }
   ]
 }

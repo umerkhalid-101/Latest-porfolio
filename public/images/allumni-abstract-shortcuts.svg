@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <!-- Abstract wireframe: task shortcuts, with color-coded favorites on top -->
+  <defs>
+    <path id="star" d="M0,-10 L2.9,-4 L9.5,-3.1 L4.7,1.5 L5.9,8.1 L0,5 L-5.9,8.1 L-4.7,1.5 L-9.5,-3.1 L-2.9,-4 Z"/>
+  </defs>
+  <rect width="960" height="540" fill="#F6F5FB"/>
+  <text x="60" y="78" font-size="30" font-weight="800" fill="#1A1530">Shortcuts</text>
+  <rect x="740" y="52" width="160" height="38" rx="19" fill="#5B3DF5"/>
+  <text x="820" y="77" font-size="15" font-weight="700" text-anchor="middle" fill="#fff">+ New shortcut</text>
+
+  <text x="60" y="130" font-size="13" font-weight="700" letter-spacing="2" fill="#1A1530" fill-opacity="0.5">FAVORITES</text>
+  <g>
+    <rect x="60" y="148" width="270" height="160" rx="20" fill="#EDE8FF"/>
+    <circle cx="100" cy="188" r="20" fill="#5B3DF5"/>
+    <use href="#star" x="296" y="182" fill="#5B3DF5"/>
+    <text x="84" y="262" font-size="21" font-weight="700" fill="#1A1530">Campaign plan</text>
+    <rect x="84" y="276" width="150" height="9" rx="4.5" fill="#1A1530" opacity="0.25"/>
+  </g>
+  <g>
+    <rect x="345" y="148" width="270" height="160" rx="20" fill="#FFE6DC"/>
+    <circle cx="385" cy="188" r="20" fill="#E2622F"/>
+    <use href="#star" x="581" y="182" fill="#E2622F"/>
+    <text x="369" y="262" font-size="21" font-weight="700" fill="#1A1530">Monthly report</text>
+    <rect x="369" y="276" width="130" height="9" rx="4.5" fill="#1A1530" opacity="0.25"/>
+  </g>
+  <g>
+    <rect x="630" y="148" width="270" height="160" rx="20" fill="#DDF3EA"/>
+    <circle cx="670" cy="188" r="20" fill="#1F9D6B"/>
+    <use href="#star" x="866" y="182" fill="#1F9D6B"/>
+    <text x="654" y="262" font-size="21" font-weight="700" fill="#1A1530">Social posts</text>
+    <rect x="654" y="276" width="140" height="9" rx="4.5" fill="#1A1530" opacity="0.25"/>
+  </g>
+
+  <text x="60" y="358" font-size="13" font-weight="700" letter-spacing="2" fill="#1A1530" fill-opacity="0.5">MORE SHORTCUTS</text>
+  <g font-size="17" font-weight="600" fill="#1A1530">
+    <rect x="60" y="376" width="199" height="116" rx="18" fill="#fff" stroke="#1A1530" stroke-opacity="0.1"/>
+    <circle cx="94" cy="410" r="16" fill="#1A1530" fill-opacity="0.1"/>
+    <text x="78" y="458">Press release</text>
+    <rect x="273" y="376" width="199" height="116" rx="18" fill="#fff" stroke="#1A1530" stroke-opacity="0.1"/>
+    <circle cx="307" cy="410" r="16" fill="#1A1530" fill-opacity="0.1"/>
+    <text x="291" y="458">Brand audit</text>
+    <rect x="486" y="376" width="199" height="116" rx="18" fill="#fff" stroke="#1A1530" stroke-opacity="0.1"/>
+    <circle cx="520" cy="410" r="16" fill="#1A1530" fill-opacity="0.1"/>
+    <text x="504" y="458">Email copy</text>
+    <rect x="699" y="376" width="201" height="116" rx="18" fill="#fff" stroke="#1A1530" stroke-opacity="0.1"/>
+    <circle cx="733" cy="410" r="16" fill="#1A1530" fill-opacity="0.1"/>
+    <text x="717" y="458">Ad concepts</text>
+  </g>
+</svg>

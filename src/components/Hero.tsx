@@ -1,9 +1,13 @@
-import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from 'motion/react';
-import { useRef } from 'react';
+import { AnimatePresence, motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
 import { Linkedin, Instagram } from 'lucide-react';
 
 const NAME = "MUHAMMAD UMER";
 const EASE = [0.16, 1, 0.3, 1] as const;
+
+// What the teammates in the hero say, one line at a time, taking turns
+const FOUNDER_LINES = ['Can we ship this Friday?', 'Users finally get it 🙌', 'This flow feels so clear'];
+const ENGINEER_LINES = ['Specs are clear, building now 👌', 'Components match the kit', 'Shipped to staging 🚀'];
 
 /** One letter of the name: rises in on load, then stretches up toward the cursor like a wave */
 function Letter({ char, index, center, pointer }: { char: string; index: number; center: number; pointer: MotionValue<number> }) {
@@ -24,9 +28,27 @@ function Letter({ char, index, center, pointer }: { char: string; index: number;
   );
 }
 
-/** A teammate's cursor with a name tag, wandering slowly */
-function Collaborator({ name, tone, className, path, delay }: { name: string; tone: 'ink' | 'white'; className: string; path: { x: number[]; y: number[] }; delay: number }) {
+/** A teammate's cursor with a name tag, wandering slowly; now and then the tag opens into a short comment */
+function Collaborator({ name, tone, className, path, delay, comments, firstComment }: { name: string; tone: 'ink' | 'white'; className: string; path: { x: number[]; y: number[] }; delay: number; comments: string[]; firstComment: number }) {
   const ink = tone === 'ink';
+  const [comment, setComment] = useState<string | null>(null);
+
+  // Speak for a few seconds, stay quiet for longer, then say the next line
+  useEffect(() => {
+    let i = 0;
+    let timer: ReturnType<typeof setTimeout>;
+    const speak = () => {
+      setComment(comments[i % comments.length]);
+      i += 1;
+      timer = setTimeout(() => {
+        setComment(null);
+        timer = setTimeout(speak, 7000);
+      }, 3600);
+    };
+    timer = setTimeout(speak, (delay + firstComment) * 1000);
+    return () => clearTimeout(timer);
+  }, [comments, delay, firstComment]);
+
   return (
     <motion.div
       className={`absolute ${className}`}
@@ -42,7 +64,27 @@ function Collaborator({ name, tone, className, path, delay }: { name: string; to
       <svg width="22" height="22" viewBox="0 0 22 22" className="drop-shadow">
         <path d="M3 2 L3 18 L7.5 13.8 L10.5 20.5 L13.5 19.2 L10.6 12.6 L16.8 12.6 Z" fill={ink ? 'var(--color-ink)' : 'var(--color-white)'} stroke={ink ? 'var(--color-white)' : 'var(--color-ink)'} strokeWidth="1.4" strokeLinejoin="round" />
       </svg>
-      <span className={`absolute left-4 top-5 whitespace-nowrap rounded-full rounded-tl-sm t-label px-2.5 py-1 ${ink ? 'bg-ink text-white' : 'bg-white text-ink'}`}>{name}</span>
+      <motion.div
+        layout
+        transition={{ type: 'spring', stiffness: 500, damping: 36 }}
+        className={`absolute left-4 top-5 w-max max-w-[240px] rounded-[14px] rounded-tl-sm px-2.5 py-1 shadow-md ${ink ? 'bg-ink text-white' : 'bg-white text-ink'}`}
+      >
+        <motion.span layout="position" className="t-label block whitespace-nowrap">{name}</motion.span>
+        <AnimatePresence initial={false}>
+          {comment && (
+            <motion.span
+              key={comment}
+              className="block overflow-hidden font-sans text-[14px] leading-snug normal-case tracking-normal"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <span className="block pt-0.5 pb-1">{comment}</span>
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </motion.div>
     </motion.div>
   );
 }
@@ -66,11 +108,10 @@ export function Hero() {
   const personRot = useSpring(useTransform(mx, (v) => v * 2.5), soft);
   const pointer = useMotionValue(-1);
 
-  // Scroll: the name sinks and fades, I rise and grow slightly, the details fade out
+  // Scroll: the name sinks and fades, I grow slightly from the bottom edge (so the cutout never lifts off the marquee), the details fade out
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const nameY = useTransform(scrollYProgress, [0, 1], ['0%', '60%']);
   const nameOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  const personY = useTransform(scrollYProgress, [0, 1], ['0%', '-10%']);
   const personScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
   const detailsOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
 
@@ -128,7 +169,7 @@ export function Hero() {
       {/* 3. Me, in front of the name */}
       <motion.div
         className="absolute bottom-0 left-1/2 z-20 h-[64svh] md:h-[84svh] aspect-[777/947] -translate-x-1/2 pointer-events-none"
-        style={{ y: personY, scale: personScale, originY: 1 }}
+        style={{ scale: personScale, originY: 1 }}
       >
         <motion.img
           src="/images/hero-person.webp"
@@ -148,8 +189,8 @@ export function Hero() {
       {/* Multiplayer cursors drifting in the open space, like teammates in a shared file */}
       {!reduce && (
         <div aria-hidden="true" className="hidden md:block absolute inset-0 z-30 pointer-events-none">
-          <Collaborator name="Founder" tone="ink" className="left-[13%] top-[42%]" path={{ x: [0, 40, 10, -20, 0], y: [0, -24, 30, 10, 0] }} delay={1.8} />
-          <Collaborator name="Engineer" tone="white" className="left-[22%] top-[60%]" path={{ x: [0, -36, -8, 22, 0], y: [0, 20, 34, -10, 0] }} delay={2.1} />
+          <Collaborator name="Founder" tone="ink" className="left-[13%] top-[42%]" path={{ x: [0, 40, 10, -20, 0], y: [0, -24, 30, 10, 0] }} delay={1.8} firstComment={1.5} comments={FOUNDER_LINES} />
+          <Collaborator name="Engineer" tone="white" className="left-[22%] top-[60%]" path={{ x: [0, -36, -8, 22, 0], y: [0, 20, 34, -10, 0] }} delay={2.1} firstComment={6.5} comments={ENGINEER_LINES} />
         </div>
       )}
 

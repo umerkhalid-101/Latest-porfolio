@@ -113,10 +113,11 @@ const experiences: Job[] = [
     code: "MBL", from: "Mar 2026", to: "Now", span: "Ongoing", path: "Design Specialist",
     location: "Dubai, United Arab Emirates",
     roles: [{ title: "Design Specialist", dates: "March 2026 to Present" }],
-    description: "Designing government and regulated-sector web portals in the UAE, including VARA, plus an AI product website and product UI.",
+    description: "Designing government and regulated-sector web portals in the UAE, plus an AI product website and product UI.",
     logo: "MBLM",
     logoUrl: "/images/timeline-07.webp",
-    current: true
+    current: true,
+    caseStudy: "/mblm-casestudy"
   }
 ];
 

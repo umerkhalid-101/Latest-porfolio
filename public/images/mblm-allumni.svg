@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <!-- Abstract stage: black backdrop, floating glass shapes, and a giant wordmark -->
+  <defs>
+    <clipPath id="frame"><rect width="960" height="540"/></clipPath>
+    <radialGradient id="orb" cx="35%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#B9A8FF"/>
+      <stop offset="0.55" stop-color="#5B3DF5"/>
+      <stop offset="1" stop-color="#1B0F66"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0.03"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#5B3DF5" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#5B3DF5" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="960" height="540" fill="#000"/>
+    <ellipse cx="560" cy="230" rx="420" ry="260" fill="url(#glow)"/>
+
+    <!-- Nav -->
+    <text x="48" y="56" font-size="18" font-weight="800" fill="#fff" letter-spacing="-0.5">allumni</text>
+    <g fill="#fff" opacity="0.45">
+      <rect x="600" y="46" width="52" height="6" rx="3"/>
+      <rect x="668" y="46" width="52" height="6" rx="3"/>
+      <rect x="736" y="46" width="52" height="6" rx="3"/>
+    </g>
+    <rect x="816" y="36" width="96" height="26" rx="13" fill="#fff"/>
+    <rect x="836" y="46" width="56" height="6" rx="3" fill="#000" opacity="0.7"/>
+
+    <!-- Headline as bars -->
+    <rect x="48" y="118" width="300" height="16" rx="8" fill="#fff" opacity="0.9"/>
+    <rect x="48" y="144" width="230" height="16" rx="8" fill="#fff" opacity="0.9"/>
+    <rect x="48" y="176" width="200" height="8" rx="4" fill="#fff" opacity="0.35"/>
+
+    <!-- Glass shapes -->
+    <circle cx="690" cy="190" r="118" fill="url(#orb)"/>
+    <circle cx="690" cy="190" r="118" fill="url(#glass)" stroke="#fff" stroke-opacity="0.25"/>
+    <rect x="420" y="96" width="150" height="150" rx="44" transform="rotate(-18 495 171)" fill="url(#glass)" stroke="#fff" stroke-opacity="0.3"/>
+    <circle cx="850" cy="300" r="46" fill="url(#glass)" stroke="#fff" stroke-opacity="0.3"/>
+    <rect x="540" y="250" width="110" height="70" rx="35" transform="rotate(12 595 285)" fill="#5B3DF5" fill-opacity="0.35" stroke="#fff" stroke-opacity="0.25"/>
+
+    <!-- Giant wordmark -->
+    <text x="480" y="560" font-size="250" font-weight="800" letter-spacing="-10" text-anchor="middle" fill="#fff">allumni</text>
+  </g>
+</svg>
