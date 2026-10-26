@@ -96,15 +96,25 @@ export function CustomCursor() {
       }
     };
 
+    // Hide the tag whenever the pointer is no longer on the page, so it never gets stranded:
+    // leaving the window (pointerleave alone misses fast exits), switching apps, or hiding the tab
     const leave = () => setVisible(false);
+    const out = (e: PointerEvent) => { if (!e.relatedTarget) leave(); };
+    const hidden = () => { if (document.hidden) leave(); };
     window.addEventListener('pointermove', move, { passive: true });
     window.addEventListener('keydown', key);
     root.addEventListener('pointerleave', leave);
+    document.addEventListener('pointerout', out);
+    window.addEventListener('blur', leave);
+    document.addEventListener('visibilitychange', hidden);
     return () => {
       root.classList.remove('has-custom-cursor');
       window.removeEventListener('pointermove', move);
       window.removeEventListener('keydown', key);
       root.removeEventListener('pointerleave', leave);
+      document.removeEventListener('pointerout', out);
+      window.removeEventListener('blur', leave);
+      document.removeEventListener('visibilitychange', hidden);
     };
   }, [enabled, x, y]);
 
